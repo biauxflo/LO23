@@ -11,7 +11,7 @@ namespace Server
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            Console.ReadLine(); // wait until press Return
+            _ = Console.ReadLine(); // wait until press Return to close console
         }
     }
 }
