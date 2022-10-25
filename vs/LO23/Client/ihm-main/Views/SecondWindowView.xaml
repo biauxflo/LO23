@@ -1,0 +1,26 @@
+﻿<Window x:Class="Client.ihm_main.Views.SecondWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client.ihm_main.Views"
+        mc:Ignorable="d"
+        Title="SecondWindowView" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="2" Grid.Row="2" Content="Quitter" Command="{Binding Path=CloseWindow}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+    </Grid>
+</Window>
