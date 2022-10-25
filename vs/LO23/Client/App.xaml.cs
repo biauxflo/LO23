@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Client.ihm_game;
+using Client.ihm_main.Views;
+using Client.ihm_main.ViewModel;
 
 namespace Client
 {
@@ -21,6 +23,7 @@ namespace Client
 
         private void App_Startup(object sender, StartupEventArgs e)
         {
+            base.OnStartup(e);
             this.dataCore = new DataCore();
             CommClient cli = new CommClient();
 			cli.Start("127.0.0.1", 10000);
@@ -28,6 +31,10 @@ namespace Client
 				1, "","", "", true, "Test", "Test", 12));
 
 			gameCore = new IhmGameCore();
-		}
+
+            MainWindow window = new MainWindow();
+            window.DataContext = new MainWindowViewModel();
+            window.Show();
+        }
     }
 }
