@@ -25,11 +25,11 @@ namespace network_test
                 {
                     this.clientSocket.Connect(ip, port);
                 }
-                catch (SocketException e)
+                catch(SocketException e)
                 {
                     Console.WriteLine(e.Message);
                 }
-            } while (!this.clientSocket.Connected);
+            } while(!this.clientSocket.Connected);
 
             //listen to server
             Thread tcpListenerThread = new Thread(receiveMessage);
@@ -43,12 +43,13 @@ namespace network_test
                 try
                 {
                     sendMessage(text);
-                }catch (Exception e)
+                }
+                catch(Exception e)
                 {
                     Console.WriteLine(e.Message);
                     text = "/quit";
                 }
-            } while (text != "/quit");
+            } while(text != "/quit");
 
             //quit
             //Console.ReadLine();
@@ -66,7 +67,7 @@ namespace network_test
 
         private void receiveMessage()
         {
-            while (true)
+            while(true)
             {
                 try
                 {
@@ -76,7 +77,7 @@ namespace network_test
                     Message resp = JsonConvert.DeserializeObject<Message>(Encoding.ASCII.GetString(bytesToRead, 0, bytesRead));
                     resp.print();
                 }
-                catch (Exception e)
+                catch(Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }

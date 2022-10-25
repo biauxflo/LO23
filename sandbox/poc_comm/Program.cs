@@ -13,9 +13,9 @@ namespace network_test
             {
                 Console.WriteLine("s : server\nc : client\n");
                 choice = Console.ReadLine();
-            } while (choice != "c" && choice != "s");
+            } while(choice != "c" && choice != "s");
 
-            if (choice == "s")
+            if(choice == "s")
             {
                 Server server = new Server();
                 server.run(ip, port);

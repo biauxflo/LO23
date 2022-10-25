@@ -34,18 +34,18 @@ namespace network_test
             };
 
             //listen to new clients
-            while (true)
+            while(true)
             {
                 client = listener.AcceptTcpClient();
                 //start new Thread
-                    clients.Add(new ClientHandler(client, this.currentId++, this));
+                clients.Add(new ClientHandler(client, this.currentId++, this));
 
             }
         }
 
         public void broadcast(Message msg)
         {
-            foreach (var client in this.clients)
+            foreach(var client in this.clients)
             {
                 client.sendMessage(msg);
             }
@@ -70,7 +70,7 @@ namespace network_test
 
         private void handling()
         {
-            while (true)
+            while(true)
             {
                 try
                 {
@@ -80,7 +80,7 @@ namespace network_test
                     msg.print();
                     this.server.broadcast(msg);
                 }
-                catch (Exception)
+                catch(Exception)
                 {
                     Console.WriteLine("Client " + this.id + " disconnected");
                     break;
@@ -104,7 +104,8 @@ namespace network_test
                 NetworkStream nwStream = this.client.GetStream();
                 byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(JsonConvert.SerializeObject(msg));
                 nwStream.Write(bytesToSend, 0, bytesToSend.Length);
-            }catch (Exception e)
+            }
+            catch(Exception e)
             {
                 Console.WriteLine(e.Message);
             }
