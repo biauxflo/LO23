@@ -80,12 +80,10 @@ namespace Client.ihm_main.ViewModels
 			core.TryAuthenticate(Username, Password);
 
 		}
-
         /// <summary>
         /// Mécansime de fermeture de l'application.
         /// </summary>
         private void OnQuitClick()
-        {
             // Récupère la fenêtre principale de l'application.
             Window view = Application.Current.MainWindow;
 
@@ -93,7 +91,6 @@ namespace Client.ihm_main.ViewModels
             MessageBoxResult result = MessageBox.Show(view, "Voulez-vous quitter l'application ?", "Quitter l'application ?", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
             if(result == MessageBoxResult.OK)
-            {
                 view.Close();
             }
         }
