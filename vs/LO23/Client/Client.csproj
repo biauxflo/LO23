@@ -75,6 +75,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ihm-main\Views\ConnectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
     <Page Include="ihm-game\Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +92,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="comm\Class1.cs" />
+    <Compile Include="data\Class1.cs" />
+    <Compile Include="ihm-game\Class1.cs" />
+    <Compile Include="ihm-main\DTO\User.cs" />
+    <Compile Include="ihm-main\ViewModels\ConnectionViewModel.cs" />
+    <Compile Include="ihm-main\Views\ConnectionView.xaml.cs">
+      <DependentUpon>ConnectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
     <Compile Include="ihm-game\IhmGameCore.cs" />
     <Compile Include="ihm-game\ViewModels\GameViewModel.cs" />
     <Compile Include="ihm-game\ViewModels\MainWindowViewModel.cs" />
@@ -131,6 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ihm-main\Views\images\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ihm-game\Views\images\config.png">
