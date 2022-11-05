@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ihm-main\Views\ConnectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,7 +70,11 @@
     <Compile Include="comm\Class1.cs" />
     <Compile Include="data\Class1.cs" />
     <Compile Include="ihm-game\Class1.cs" />
-    <Compile Include="ihm-main\Class1.cs" />
+    <Compile Include="ihm-main\DTO\User.cs" />
+    <Compile Include="ihm-main\ViewModels\ConnectionViewModel.cs" />
+    <Compile Include="ihm-main\Views\ConnectionView.xaml.cs">
+      <DependentUpon>ConnectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -98,7 +106,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ihm-main\Views\images\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{deedb05f-755c-4573-a317-e84f11529284}</Project>
