@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Client.ihm_main.Views
+namespace Client
 {
     /// <summary>
-    /// Logique d'interaction pour SecondWindowView.xaml
+    /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class SecondWindowView : Window
+    public partial class MainWindow : Window
     {
-        public SecondWindowView()
+        public MainWindow()
         {
             InitializeComponent();
         }
