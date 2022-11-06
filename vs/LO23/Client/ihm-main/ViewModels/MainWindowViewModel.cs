@@ -1,17 +1,11 @@
-﻿using Client.ihm_main.Views.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Client.ihm_main.ViewModels
 {
-    class MainWindowViewModel
+    internal class MainWindowViewModel
     {
         /// <summary>
-        /// Page a afficher au sein de la fenêtre
+        /// Page à afficher au sein de la fenêtre.
         /// </summary>
         private Page activePage;
         public Page ActivePage

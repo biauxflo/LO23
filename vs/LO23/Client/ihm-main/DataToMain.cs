@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shared.interfaces;
-using System.Threading;
+﻿using Shared.interfaces;
 
 namespace Client.ihm_main
 {
-    class DataToMain : IDataToMain
+    internal class DataToMain : IDataToMain
     {
         /// <summary>
-        /// Controleur de l'IHM-Main
+        /// Controleur de l'IHM-Main.
         /// </summary>
-        private IhmMainCore core;
+        private readonly IhmMainCore core;
 
         public DataToMain(IhmMainCore core)
         {

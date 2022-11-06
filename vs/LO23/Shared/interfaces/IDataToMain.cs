@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shared.interfaces
+﻿namespace Shared.interfaces
 {
     public interface IDataToMain
     {
@@ -16,7 +10,7 @@ namespace Shared.interfaces
         /// <summary>
         /// Connecte l'utilisateur à l'application.
         /// </summary>
-        /// <param name="username">Nom de l'utilisateur</param>
+        /// <param name="username">Nom de l'utilisateur.</param>
         // TODO : Mettre les bons paramètres
         void ConnectionSucceed(string username);
     }
