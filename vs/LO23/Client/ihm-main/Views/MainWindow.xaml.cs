@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Client
+namespace Client.ihm_main.Views
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
