@@ -138,7 +138,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="bin\Debug\Client.exe.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -148,9 +147,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ihm-main\Views\images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="ihm-game\Views\images\config.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -170,15 +167,10 @@
       <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="bin\Debug\Client.exe" />
-    <Content Include="bin\Debug\Client.pdb" />
-    <Content Include="bin\Debug\Shared.dll" />
-    <Content Include="bin\Debug\Shared.pdb" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ihm-game\Views\images\Enchere.png" />
+    <Resource Include="ihm-main\Views\images\poker.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
