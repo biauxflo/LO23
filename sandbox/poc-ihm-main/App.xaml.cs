@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Client
+namespace poc_ihm_main
 {
     /// <summary>
     /// Logique d'interaction pour App.xaml
