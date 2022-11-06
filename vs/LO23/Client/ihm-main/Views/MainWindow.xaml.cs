@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Client
+namespace Client.ihm_main.Views
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
