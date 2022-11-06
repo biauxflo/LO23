@@ -1,3 +1,4 @@
+using Client.ihm_main;
 using Client.data;
 using Client.comm;
 using System;
@@ -18,6 +19,17 @@ namespace Client
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// Controleur principal de l'IHM-Main
+        /// </summary>
+        private IhmMainCore mainCore;
+        
+        /// <summary>
+        /// Interface de communication de Data vers IHM-Main
+        /// </summary>
+        private DataToMain dataToMain;
+
+
         private IhmGameCore gameCore;
         private DataCore dataCore;
 
@@ -30,11 +42,11 @@ namespace Client
 			cli.DataToComm.announceUser(new Shared.data.User(
 				1, "","", "", true, "Test", "Test", 12));
 
-			gameCore = new IhmGameCore();
+            dataToMain = new DataToMain(mainCore);
+			
+            gameCore = new IhmGameCore();
 
-            MainWindow window = new MainWindow();
-            window.DataContext = new MainWindowViewModel();
-            window.Show();
+            mainCore = new IhmMainCore();
         }
     }
 }

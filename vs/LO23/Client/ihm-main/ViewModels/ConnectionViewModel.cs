@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Client.ihm_main.DTO;
-using GalaSoft.MvvmLight.Command;
+using Client.ihm_main.Views;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Client.ihm_main.ViewModels
 {
@@ -36,11 +38,12 @@ namespace Client.ihm_main.ViewModels
         {
             user2 = new User("utilisateur", "utilisateur123");
             ConnectionCommand = new RelayCommand(OnConnectionClick, true);
-            QuitCommand = new RelayCommand<object>(OnQuitClick, true);
+            QuitCommand = new RelayCommand(OnQuitClick, true);
         }
 
         private void OnConnectionClick()
         {
+            // TODO : Mettre en place l'appel au module Data
             string messageBoxText = string.Empty;
             MessageBoxImage icon = MessageBoxImage.None;
             string windowCaption = "Résultat de connexion";
@@ -60,18 +63,9 @@ namespace Client.ihm_main.ViewModels
             MessageBox.Show(messageBoxText, windowCaption, button, icon, MessageBoxResult.OK);
         }
 
-        private void OnQuitClick(object obj)
+        private void OnQuitClick()
         {
-            Window view;
-
-            if (obj.GetType() == typeof(MainWindow))
-            {
-                view = (Window) obj;
-            }
-            else
-            {
-                return;
-            }
+            Window view = Application.Current.MainWindow;
             
             var result = MessageBox.Show(view, "Voulez-vous quitter l'application ?", "Quitter l'application ?", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
