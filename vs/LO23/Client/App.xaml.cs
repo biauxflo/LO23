@@ -23,7 +23,7 @@ namespace Client
         /// Controleur principal de l'IHM-Main
         /// </summary>
         private IhmMainCore mainCore;
-        
+
         /// <summary>
         /// Interface de communication de Data vers IHM-Main
         /// </summary>

@@ -1,21 +1,21 @@
-﻿using Client.ihm_main.Views;
+﻿using Client.ihm_main.ViewModels;
+using Client.ihm_main.Views;
 using Client.ihm_main.Views.Pages;
-using Client.ihm_main.ViewModels;
-using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Client.ihm_main
 {
-    class IhmMainCore
+    internal class IhmMainCore
     {
         /// <summary>
-        /// Vue principale de l'application
+        /// Vue principale de l'application.
         /// </summary>
         private readonly MainWindow mainWindow = new MainWindow();
 
-        private MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
+        private readonly MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
 
-#region Déclaration des pages et de leurs viewModels
+        #region Déclaration des pages et de leurs viewModels
 
         /// <summary>
         /// Page de connection
@@ -25,11 +25,9 @@ namespace Client.ihm_main
         /// <summary>
         /// View Model de la page de connexion
         /// </summary>
-        private ConnectionViewModel connectionViewModel= new ConnectionViewModel();
+        private readonly ConnectionViewModel connectionViewModel = new ConnectionViewModel();
 
-#endregion
-
-
+        #endregion
 
         public IhmMainCore()
         {
@@ -48,17 +46,17 @@ namespace Client.ihm_main
         public void ConnectionFailed()
         {
             // TODO : Mettre en place le vrai mécanisme de connexion
-            MessageBox.Show((Window)mainWindow, "Erreur", "Connexion refusée", MessageBoxButton.OK);
+            MessageBox.Show(mainWindow, "Erreur", "Connexion refusée", MessageBoxButton.OK);
         }
 
         /// <summary>
         /// Connecte l'utilisateur à l'application.
         /// </summary>
-        /// <param name="username">Nom de l'utilisateur</param>
+        /// <param name="username">Nom de l'utilisateur.</param>
         public void ConnectionSucceed(string username)
         {
             // TODO : Mettre en place le vrai mécanisme de connexion
-            MessageBox.Show((Window)mainWindow, "OK", $"Connexion réussie : Bonjour {username}" , MessageBoxButton.OK);
+            MessageBox.Show(mainWindow, "OK", $"Connexion réussie : Bonjour {username}", MessageBoxButton.OK);
         }
     }
 }

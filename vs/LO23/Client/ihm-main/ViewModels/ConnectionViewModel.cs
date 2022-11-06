@@ -1,15 +1,15 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using Client.ihm_main.DTO;
-using Client.ihm_main.Views;
+﻿using Client.ihm_main.DTO;
 using GalaSoft.MvvmLight.CommandWpf;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Client.ihm_main.ViewModels
 {
-    class ConnectionViewModel
-   {
+    internal class ConnectionViewModel
+    {
+        /// <summary>
+        /// Utilisateur essaynt de se connecter.
+        /// </summary>
         private User user1 = new User();
         public User User1
         {
@@ -20,6 +20,9 @@ namespace Client.ihm_main.ViewModels
             }
         }
 
+        /// <summary>
+        /// Utilisateur test (pour verifier que le mecanisme de connexion fonctionne).
+        /// </summary>
         private User user2;
         public User User2
         {
@@ -30,8 +33,14 @@ namespace Client.ihm_main.ViewModels
             }
         }
 
+        /// <summary>
+        /// Commande liée au bouton de connexion.
+        /// </summary>
         public ICommand ConnectionCommand { get; set; }
 
+        /// <summary>
+        /// Commande liée au bouton "Quitter".
+        /// </summary>
         public ICommand QuitCommand { get; set; }
 
         public ConnectionViewModel()
@@ -41,6 +50,9 @@ namespace Client.ihm_main.ViewModels
             QuitCommand = new RelayCommand(OnQuitClick, true);
         }
 
+        /// <summary>
+        /// Mécanisme de connexion.
+        /// </summary>
         private void OnConnectionClick()
         {
             // TODO : Mettre en place l'appel au module Data
@@ -63,13 +75,18 @@ namespace Client.ihm_main.ViewModels
             MessageBox.Show(messageBoxText, windowCaption, button, icon, MessageBoxResult.OK);
         }
 
+        /// <summary>
+        /// Mécansime de fermeture de l'application.
+        /// </summary>
         private void OnQuitClick()
         {
+            // Récupère la fenêtre principale de l'application.
             Window view = Application.Current.MainWindow;
-            
-            var result = MessageBox.Show(view, "Voulez-vous quitter l'application ?", "Quitter l'application ?", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
-            if (result == MessageBoxResult.OK)
+            // Demande la confirmation avant de fermer l'application.
+            MessageBoxResult result = MessageBox.Show(view, "Voulez-vous quitter l'application ?", "Quitter l'application ?", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+            if(result == MessageBoxResult.OK)
             {
                 view.Close();
             }
