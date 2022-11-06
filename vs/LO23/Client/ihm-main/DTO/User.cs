@@ -1,14 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Client.ihm_main.DTO
 {
-    class User
+    /// <summary>
+    /// Utilisateur de l'application.
+    /// </summary>
+    internal class User
     {
-        private string login;
+        /// <summary>
+        /// Login de l'utilisateur.
+        /// </summary>
+        private string login = string.Empty;
         public string Login
         {
             get => login;
@@ -17,7 +19,11 @@ namespace Client.ihm_main.DTO
                 login = value;
             }
         }
-        private string password;
+
+        /// <summary>
+        /// Mot de passe de l'utilisateur.
+        /// </summary>
+        private string password = string.Empty;
         public string Password
         {
             get => password;
@@ -27,27 +33,40 @@ namespace Client.ihm_main.DTO
             }
         }
 
-        public User(string log, string pass) {
+        /// <summary>
+        /// Constructeur
+        /// </summary>
+        /// <param name="log">Login de l'utilisateur à créer.</param>
+        /// <param name="pass">Mot de passe de l'utilisateur à construire.</param>
+        public User(string log, string pass)
+        {
+
             login = log;
             password = pass;
         }
 
-        public User() {
-            login = string.Empty;
-            password = string.Empty;
+        public User()
+        {
+
         }
 
         public override bool Equals(object obj)
         {
-            if (obj.GetType() != this.GetType())
+
+            if(obj.GetType() != GetType())
             {
                 throw new Exception("Le type testé n'est pas un utilisateur");
             }
             else
             {
                 User user = (User)obj;
-                return this.login == user.login && this.password == user.password;
+                return login == user.login && password == user.password;
             }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
