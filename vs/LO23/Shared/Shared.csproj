@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="data\Class1.cs" />
-    <Compile Include="interfaces\IInterface1.cs" />
+    <Compile Include="interfaces\IDataToMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

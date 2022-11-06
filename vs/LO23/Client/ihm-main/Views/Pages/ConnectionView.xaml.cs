@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Client
+namespace Client.ihm_main.Views.Pages
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour ConnectionView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ConnectionView : Page
     {
-        public MainWindow()
+        public ConnectionView()
         {
             InitializeComponent();
         }
