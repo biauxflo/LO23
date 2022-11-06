@@ -23,16 +23,16 @@ namespace Client.ihm_main
 		internal DataToMain dataToMain;
 
 
-        #region Déclaration des pages et de leurs viewModels
+#region Déclaration des pages et de leurs viewModels
 
         /// <summary>
         /// Page de connection.
         /// </summary>
         private readonly Page connectionPage = new ConnectionView();
 
-		/// <summary>
+        /// <summary>
 		/// View Model de la page de connexion.
-		/// </summary>
+        /// </summary>
 		private readonly ConnectionViewModel connectionViewModel;
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Client.ihm_main
         /// </summary>
         private readonly HomeViewModel homeViewModel;
 
-		#endregion
+#endregion
 
 		#region Interfaces des autres modules
 
@@ -65,7 +65,7 @@ namespace Client.ihm_main
 
 		#endregion
 
-		public IhmMainCore()
+        public IhmMainCore()
         {
 			// Instanciation des views models.
             gameCreationViewModel = new GameCreationViewModel(this);
@@ -172,9 +172,9 @@ namespace Client.ihm_main
 		}
 
 		internal void Run()
-		{
+        {
 			// Afficher la fenêtre.
 			mainWindow.Show();
-		}
-	}
+        }
+    }
 }

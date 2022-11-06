@@ -119,6 +119,7 @@
     <Compile Include="ihm-game\MainToGame.cs" />
     <Compile Include="ihm-main\DataToMain.cs" />
     <Compile Include="ihm-main\IhmMainCore.cs" />
+    <Compile Include="ihm-main\IhmMainCore.cs" />
     <Compile Include="ihm-main\ViewModels\ConnectionViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\HomeViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\GameCreationViewModel.cs" />
@@ -164,6 +165,9 @@
     <Compile Include="ihm-game\Views\GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ihm-main\Views\Pages\ConnectionView.xaml.cs">
+      <DependentUpon>ConnectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
