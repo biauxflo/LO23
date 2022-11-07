@@ -1,16 +1,16 @@
 ﻿using System;
 using System.IO;
 using System.Net.Sockets;
+using Shared.data;
 using Shared.comm;
 using Shared.interfaces;
 using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
-using Shared.data;
 
 namespace Client.comm
 {
-    public class CommClient : IDataToComm
+	public class CommClient : IDataToComm
 	{
 		/// <summary>
 		/// Socket de connexion avec le serveur.
@@ -31,7 +31,7 @@ namespace Client.comm
 		/// Envoie un message au serveur.
 		/// </summary>
 		private void sendMessage(MessageToServer msg)
-        {
+		{
 			string data = JsonConvert.SerializeObject(msg, Formatting.Indented, new JsonSerializerSettings
 			{
 				TypeNameHandling = TypeNameHandling.All
@@ -45,8 +45,8 @@ namespace Client.comm
 		/// Réceptionne un message du serveur.
 		/// </summary>
 		private void receiveMessage()
-        {
-			while (true)
+		{
+			while(true)
 			{
 				try
 				{
@@ -60,7 +60,7 @@ namespace Client.comm
 					});
 					msg.handle();
 				}
-				catch (Exception e)
+				catch(Exception e)
 				{
 					//TODO : handle exception
 				}
@@ -71,7 +71,7 @@ namespace Client.comm
 		/// Initie la connexion et l'écoute.
 		/// </summary>
 		public void start(string ip, int port)
-        {
+		{
 			//try to connect
 			do
 			{
@@ -79,11 +79,11 @@ namespace Client.comm
 				{
 					this.clientSocket.Connect(ip, port);
 				}
-				catch (SocketException e)
+				catch(SocketException e)
 				{
 					//TODO : Connection fail
 				}
-			} while (!this.clientSocket.Connected);
+			} while(!this.clientSocket.Connected);
 
 			//listen to server
 			this.tcpListenerThread = new Thread(this.receiveMessage);
@@ -91,20 +91,20 @@ namespace Client.comm
 		}
 
 		/// <summary>
-        /// Termine la connexion et l'écoute.
-        /// </summary>
+		/// Termine la connexion et l'écoute.
+		/// </summary>
 		private void end()
-        {
+		{
 			this.tcpListenerThread.Abort();
 			this.clientSocket.Close();
 		}
 
 		/// <summary>
-        /// 
-        /// </summary>
-        /// <param name="username"></param>
+		/// 
+		/// </summary>
+		/// <param name="username"></param>
 		public void announceUser(string username)
-        {
+		{
 			AnnounceUserMessage msg = new AnnounceUserMessage();
 			this.sendMessage(msg);
 		}
@@ -113,7 +113,6 @@ namespace Client.comm
 		{
 			throw new NotImplementedException();
 		}
-
 		void IDataToComm.unannounce(Guid userId)
 		{
 			throw new NotImplementedException();
@@ -158,5 +157,6 @@ namespace Client.comm
 		{
 			throw new NotImplementedException();
 		}
+
 	}
 }

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-
 namespace Client.Data
 {   
     public class Comm_calls_Data_Client_impl : Shared.interfaces.Interface_Comm_calls_Data_Client
