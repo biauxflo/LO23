@@ -2,11 +2,14 @@
 using System.IO;
 using System.Net.Sockets;
 using Shared.comm;
+using Shared.interfaces;
 using System.Text;
+using System.Threading;
+using Newtonsoft.Json;
 
 namespace Client.comm
 {
-    class Client : IDataToComm
+    public class CommClient : IDataToComm
 	{
 		/// <summary>
 		/// Socket de connexion avec le serveur.
@@ -16,7 +19,7 @@ namespace Client.comm
 		/// <summary>
 		/// Socket de connexion avec le serveur.
 		/// </summary>
-		private Thread tcpListenerThread = new Thread();
+		private Thread tcpListenerThread = default;
 
 		/// <summary>
 		/// Interface avec les données du client.
@@ -65,7 +68,7 @@ namespace Client.comm
 		/// <summary>
 		/// Initie la connexion et l'écoute.
 		/// </summary>
-		private void start(string ip, int port)
+		public void start(string ip, int port)
         {
 			//try to connect
 			do
@@ -92,6 +95,17 @@ namespace Client.comm
         {
 			tcpListenerThread.Abort();
 			this.clientSocket.Close();
+		}
+
+		/// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+		public void announceUser(string username)
+        {
+			AnnounceUserMessage msg = new AnnounceUserMessage();
+			this.sendMessage(msg);
+			Console.WriteLine("message send");
 		}
 	}
 }

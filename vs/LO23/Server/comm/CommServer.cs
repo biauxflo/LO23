@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Server.comm
 {
-	class Server
+	public class CommServer
 	{
 		/// <summary>
         /// Listen to new client
@@ -18,7 +19,7 @@ namespace Server.comm
 		/// <summary>
 		/// Ensemble des clients connectés.
 		/// </summary>
-		private Dictionary<string, ClientHandler> clientHandlers = new Dictionary<string, ClientHandler>;
+		private Dictionary<string, ClientHandler> clientHandlers = new Dictionary<string, ClientHandler>();
 
 		/// <summary>
         /// Interface avec les données du serveur.
@@ -28,17 +29,17 @@ namespace Server.comm
 		/// <summary>
         /// Initie l'écoute.
         /// </summary>
-		private void run(string ip, int port)
+		public void run(string ip, int port)
         {
 			//setup server
 			this.newClientListener = new TcpListener(IPAddress.Parse(ip), port);
 			TcpClient client = default;
-			listener.Start();
+			this.newClientListener.Start();
 
 			//listen to new clients
 			while (true)
 			{
-				client = listener.AcceptTcpClient();
+				client = this.newClientListener.AcceptTcpClient();
 				//start new Thread
 				string id = Guid.NewGuid().ToString();
 				clientHandlers.Add(id, new ClientHandler(id, client, this));
