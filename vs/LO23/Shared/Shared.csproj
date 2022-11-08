@@ -42,7 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="data\Class1.cs" />
+    <Compile Include="data\LigthUser.cs" />
+    <Compile Include="data\User.cs" />
     <Compile Include="interfaces\IInterface1.cs" />
+    <Compile Include="interfaces\Interface_Comm_calls_Data_Client.cs" />
+    <Compile Include="interfaces\Interface_Comm_calls_Data_Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
