@@ -85,6 +85,7 @@
     <Compile Include="ihm-main\DTO\User.cs" />
     <Compile Include="ihm-main\IhmMainCore.cs" />
     <Compile Include="ihm-main\ViewModels\ConnectionViewModel.cs" />
+    <Compile Include="ihm-main\ViewModels\GameCreationViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ihm-main\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -94,10 +95,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ihm-main\Views\Pages\GameCreationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ihm-main\Views\Pages\ConnectionView.xaml.cs">
       <DependentUpon>ConnectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ihm-main\Views\Pages\GameCreationView.xaml.cs">
+      <DependentUpon>GameCreationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
