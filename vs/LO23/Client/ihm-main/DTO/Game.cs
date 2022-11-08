@@ -43,19 +43,28 @@ namespace Client.ihm_main.DTO
         public Game()
         {
 
-        }
+            }
 
         public Game(string name, int gameStatus)
-        {
+            {
             Name = name;
             GameStatus = gameStatus;
         }
-
+        public Game(string name, int joueurs,int jeutons, bool spec,bool chat_spec)
+        {
+            nom = name;
+            nbJoueurs = joueurs;
+            nbJoueurs = jeutons;
+            spectateurs = spec;
+            chat_spectateurs = chat_spec;
+            
         public Game(string name, int gameStatus, int nbPeople)
         {
             Name = name;
             GameStatus = gameStatus;
             NbPeople = nbPeople;
         }
+
+
     }
 }
