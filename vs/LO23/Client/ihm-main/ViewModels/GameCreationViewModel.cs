@@ -59,7 +59,7 @@ namespace Client.ihm_main.ViewModels
 		}
 
         private void OnCancelClick()
-        {
+    {
 			GameInCreation = new GameOptions(String.Empty, 2000, true, true, 100, 4, 0, 10);
             core.BackToHomePage();
         }
