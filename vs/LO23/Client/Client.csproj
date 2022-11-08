@@ -109,6 +109,7 @@
     <Compile Include="ihm-main\IhmMainCore.cs" />
     <Compile Include="ihm-main\ViewModels\ConnectionViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\HomeViewModel.cs" />
+    <Compile Include="ihm-main\ViewModels\GameCreationViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ihm-main\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -130,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ihm-main\Views\Pages\GameCreationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ihm-main\Views\Pages\HomeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -144,6 +149,9 @@
     </Compile>
     <Compile Include="ihm-main\Views\Pages\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ihm-main\Views\Pages\GameCreationView.xaml.cs">
+      <DependentUpon>GameCreationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

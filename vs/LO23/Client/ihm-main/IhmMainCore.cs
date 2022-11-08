@@ -20,19 +20,24 @@ namespace Client.ihm_main
         #region Déclaration des pages et de leurs viewModels
 
         /// <summary>
-        /// Page de connection
+        /// Page de connection.
         /// </summary>
         private readonly Page connectionPage = new ConnectionView();
 
-        internal void GameListUpdated(Game game)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
-        /// View Model de la page de connexion
+        /// View Model de la page de connexion.
         /// </summary>
         private readonly ConnectionViewModel connectionViewModel = new ConnectionViewModel();
+
+        /// <summary>
+        /// Page de creation de Partie.
+        /// </summary>
+        private readonly Page gameCreationPage = new GameCreationView();
+
+        /// <summary>
+        /// View Model de creation de Partie.
+        /// </summary>
+        private readonly GameCreationViewModel gameCreationViewModel = new GameCreationViewModel();
 
         /// <summary>
         /// Page d'acceuil une fois connecté.
@@ -51,6 +56,7 @@ namespace Client.ihm_main
             //Association des vues et de leur view model
             mainWindow.DataContext = mainWindowViewModel;
             connectionPage.DataContext = connectionViewModel;
+            gameCreationPage.DataContext = gameCreationViewModel;
             homePage.DataContext = homeViewModel;
 
             // Page active de la fenetre
