@@ -8,5 +8,6 @@ namespace Client.ihm_main
 {
     class Class1
     {
+
     }
 }
