@@ -1,6 +1,6 @@
 ﻿namespace Shared.interfaces
 {
-	interface ICOmmToData
+	interface IDataToComm
 	{
 		/// <summary>
 		///

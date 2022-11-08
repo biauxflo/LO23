@@ -1,6 +1,6 @@
 namespace Shared.comm
 {
-	abstract class MessageToClient
+	public abstract class MessageToClient
 	{
 		/// <summary>
 		/// Operates the process of the message.
