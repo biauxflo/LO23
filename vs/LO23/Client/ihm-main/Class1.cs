@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.ihm_main
+namespace Client.ihm_game
 {
     class Class1
     {
+
     }
 }
