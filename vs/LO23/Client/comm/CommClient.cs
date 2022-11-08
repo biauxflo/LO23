@@ -106,7 +106,6 @@ namespace Client.comm
         {
 			AnnounceUserMessage msg = new AnnounceUserMessage();
 			this.sendMessage(msg);
-			Console.WriteLine("message send");
 		}
 	}
 }

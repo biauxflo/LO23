@@ -39,7 +39,6 @@ namespace Server.comm
 			this.server = server;
 			this.thread = new Thread(this.receiveMessage);
 			this.thread.Start();
-			Console.WriteLine("new client");
 		}
 
 		/// <summary>
