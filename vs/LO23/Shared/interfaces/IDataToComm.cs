@@ -1,11 +1,11 @@
 ﻿namespace Shared.interfaces
 {
-	interface IDataToComm
+	public interface IDataToComm
 	{
 		/// <summary>
 		///
 		/// </summary>
-		/// public void announceUser(String username);
+		void announceUser(string username);
 
 		/// <summary>
 		///
