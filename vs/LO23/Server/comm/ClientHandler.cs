@@ -1,6 +1,11 @@
+using Newtonsoft.Json;
+using Shared.comm;
+using System;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Server.comm
@@ -20,14 +25,14 @@ namespace Server.comm
 		/// <summary>
 		/// Serveur auquel le ClientHandler apparitent.
 		/// </summary>
-		private Server server;
+		private CommServer server;
 
 		/// <summary>
 		/// Thread d'écoute du client.
 		/// </summary>
 		private Thread thread;
 
-		ClientHandler(string id, TcpClient client, Server server)
+		public ClientHandler(string id, TcpClient client, CommServer server)
         {
 			this.id = id;
 			this.client = client;
@@ -45,8 +50,8 @@ namespace Server.comm
 			{
 				try
 				{
-					byte[] bytesToRead = new byte[this.clientSocket.ReceiveBufferSize];
-					NetworkStream nwStream = this.clientSocket.GetStream();
+					byte[] bytesToRead = new byte[this.client.ReceiveBufferSize];
+					NetworkStream nwStream = this.client.GetStream();
 					StreamReader sr = new StreamReader(nwStream, Encoding.UTF8);
 					MessageToServer msg = JsonConvert.DeserializeObject<MessageToServer>(sr.ReadToEnd(), new JsonSerializerSettings
 					{
@@ -70,7 +75,7 @@ namespace Server.comm
 			{
 				TypeNameHandling = TypeNameHandling.All
 			});
-			NetworkStream nwStream = this.clientSocket.GetStream();
+			NetworkStream nwStream = this.client.GetStream();
 			StreamWriter sw = new StreamWriter(nwStream, Encoding.UTF8);
 			sw.Write(data);
 		}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.comm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            CommServer s = new CommServer();
+			s.run("127.0.0.1", 10000);
             _ = Console.ReadLine(); // wait until press Return to close console
         }
     }
