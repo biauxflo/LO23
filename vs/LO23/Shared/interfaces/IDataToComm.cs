@@ -1,55 +1,57 @@
-﻿namespace Shared.interfaces
+﻿using System;
+
+namespace Shared.interfaces
 {
 	public interface IDataToComm
 	{
 		/// <summary>
 		///
 		/// </summary>
-		void announceUser(string username);
+		void announceUser(User user);
 
 		/// <summary>
 		///
 		/// </summary>
-		/// public void unannounce(GID);
+		void unannounce(Guid userId);
 
 		/// <summary>
 		///
 		/// </summary>
-		/// public void sendMessage(Message);
+		void sendMessage(ChatMessage chatMsg);
 
 		/// <summary>
 		///
 		/// </summary>
-		/// public void requestStopGame(GID GameID, GID PlayerID);
+		void requestStopGame(Guid gameId, Guid playerId);
 
 		/// <summary>
 		///
 		/// </summary>
-		/// public void requestLeaveGame(GID GameID, GID PlayerID);
+		void requestLeaveGame(Guid gameId, Guid playerId);
 
 		/// <summary>
 		///
 		/// </summary>
-		/// public void requestPlayRound(Action);
+		void requestPlayRound(GameAction gameAction);
 
 		/// <summary>
 		///
 		/// </summary>
-		/// public void requestWatchGame(GID GameID, GID PlayerID);
+		void requestWatchGame(Guid gameId, Guid playerId);
 
 		/// <summary>
 		///
 		/// </summary>
-		/// public void requestPlayGame(GID GameID, GID PlayerID);
+		void requestPlayGame(Guid gameId, Guid playerId);
 
 		/// <summary>
 		///
 		/// </summary>
-		/// public void createNewGame(Game);
+		void createNewGame(Game game);
 
 		/// <summary>
 		///
 		/// </summary>
-		/// public void getProfile(GID PlayerId);
+		void getProfile(Guid playerId);
 	}
 }
