@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.ihm_game
+namespace Client.ihm_main
 {
     class Class1
     {
