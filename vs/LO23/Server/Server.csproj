@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="comm\Class1.cs" />
     <Compile Include="data\Class1.cs" />
+    <Compile Include="data\Comm_calls_Data_Server_Impl.cs" />
+    <Compile Include="data\Data_Server_ctrl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
