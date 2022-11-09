@@ -22,7 +22,7 @@ public class IHM_Main_calls_Data_Client_Impl : Data_Client_ctrl
     }
     User getLigthUser(logint string)
     {
-        user= getLigthUserdeUser(login) 
+        user = getLigthUserdeUser(login); 
     }
 
     
