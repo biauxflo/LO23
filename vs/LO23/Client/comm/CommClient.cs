@@ -14,7 +14,7 @@ namespace Client.comm
 		/// <summary>
 		/// Socket de connexion avec le serveur.
 		/// </summary>
-		private TcpClient clientSocket = new TcpClient();
+		private readonly TcpClient clientSocket = new TcpClient();
 
 		/// <summary>
 		/// Socket de connexion avec le serveur.
@@ -85,7 +85,7 @@ namespace Client.comm
 			} while (!this.clientSocket.Connected);
 
 			//listen to server
-			this.tcpListenerThread = new Thread(receiveMessage);
+			this.tcpListenerThread = new Thread(this.receiveMessage);
 			this.tcpListenerThread.Start();
 		}
 
@@ -94,7 +94,7 @@ namespace Client.comm
         /// </summary>
 		private void end()
         {
-			tcpListenerThread.Abort();
+			this.tcpListenerThread.Abort();
 			this.clientSocket.Close();
 		}
 

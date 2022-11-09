@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared.comm
 {
-	public class UserAnnoucedMessage : MessageToClient
+	public class UserAnnouncedMessage : MessageToClient
 	{
 		/// <summary>
 		/// Operates the process of the message.

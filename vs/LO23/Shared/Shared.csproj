@@ -41,8 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="comm\AnnouceUserMessage.cs" />
-    <Compile Include="comm\UserAnnoucedMessage.cs" />
+    <Compile Include="comm\AnnounceUserMessage.cs" />
+    <Compile Include="comm\UserAnnouncedMessage.cs" />
     <Compile Include="comm\MessageToClient.cs" />
     <Compile Include="comm\MessageToServer.cs" />
     <Compile Include="data\Class1.cs" />
