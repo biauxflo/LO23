@@ -65,6 +65,11 @@
     </Compile>
     <Compile Include="comm\Class1.cs" />
     <Compile Include="data\Class1.cs" />
+    <Compile Include="data\DataCore.cs" />
+    <Compile Include="data\Comm_calls_Data_Client_Impl.cs" />
+    <Compile Include="data\Data_Client_ctrl.cs" />
+    <Compile Include="data\IHM_Main_calls_Data_Client_Impl.cs" />
+    <Compile Include="data\Programtest.cs" />
     <Compile Include="ihm-game\Class1.cs" />
     <Compile Include="ihm-main\Class1.cs" />
     <Compile Include="MainWindow.xaml.cs">
