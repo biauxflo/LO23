@@ -1,29 +1,33 @@
 ﻿using System;
-using LigthUser;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Shared.data;
 
-//à faire hériter de ligth user
+namespace Shared.data {
 
-public class User : LightUser
-{
-    public login: string
-    public password: string
-    public status: enum
-    public firstname : string
-    public age: int
-
-
- 
-    public User(int idt = 1, string userNamet = "usernametest", string imaget = "imagetest",string logint, string passwordt, string statust, string firstnamet, int aget)
+    public class User : LigthUser
     {
-        id = idt;
-        userName = userNamet;
-        image = imaget;
-        
-        login = logint;
-        password = passwordt;
-        status = statust;
-        firstname = firstnamet;
-        age = aget;
-    }
+        public string password;
 
+        public bool status;
+        public string firstname;
+        public int age;
+
+
+
+        public User(int idt ,string imaget , string userNamet, string passwordt, bool statust, string firstnamet, int aget)
+        {
+            id = idt;
+            image = imaget;
+
+            userName = userNamet;
+            password = passwordt;
+            status = statust;
+            firstname = firstnamet;
+            age = aget;
+        }
+
+    }
 }

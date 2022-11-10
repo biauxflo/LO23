@@ -41,10 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="data\Class1.cs" />
+    <Compile Include="data\Game.cs" />
+    <Compile Include="data\LightGame.cs" />
+    <Compile Include="data\Round.cs" />
+    <Compile Include="data\GameAction.cs" />
     <Compile Include="data\LigthUser.cs" />
+    <Compile Include="data\Phase.cs" />
+    <Compile Include="data\Card.cs" />
+    <Compile Include="data\ChatMessage.cs" />
+    <Compile Include="data\Deck.cs" />
+    <Compile Include="data\Player.cs" />
     <Compile Include="data\User.cs" />
-    <Compile Include="interfaces\IInterface1.cs" />
     <Compile Include="interfaces\Interface_Comm_calls_Data_Client.cs" />
     <Compile Include="interfaces\Interface_Comm_calls_Data_Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
