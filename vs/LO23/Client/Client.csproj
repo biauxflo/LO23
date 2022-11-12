@@ -188,7 +188,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\Shared.dll" />
+    <Content Include="bin\Debug\Shared.pdb" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="ihm-game\Views\images\config.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
