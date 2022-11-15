@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared.data
 {
-    class Game
+    public class Game
     {
         Round[] rounds { get; set; }
         int turn { set; get; }

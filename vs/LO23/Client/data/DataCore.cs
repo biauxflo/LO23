@@ -23,7 +23,7 @@ namespace Client.data
         {
             //Association des vues et de leur view model
            
-            mainWindow.Show();
+            Console.WriteLine("hello bor");
         }
 
     }

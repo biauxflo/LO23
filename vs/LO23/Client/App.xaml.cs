@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.data;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,11 @@ namespace Client
     /// </summary>
     public partial class App : Application
     {
+        private DataCore dataCore;
+
+        private void App_Startup(object sender, StartupEventArgs e)
+        {
+            dataCore = new DataCore();
+        }
     }
 }
