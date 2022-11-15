@@ -58,9 +58,7 @@
     <Compile Include="comm\UserAnnouncedMessage.cs" />
     <Compile Include="comm\MessageToClient.cs" />
     <Compile Include="comm\MessageToServer.cs" />
-    <Compile Include="data\Class1.cs" />
     <Compile Include="interfaces\IDataToComm.cs" />
-    <Compile Include="interfaces\IInterface1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
