@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Shared.data;
 
 namespace Shared.data {
 
-    public class User : LigthUser
+    public class User : LightUser
     {
         public string password;
 

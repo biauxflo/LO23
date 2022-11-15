@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 namespace Shared.data
 {
 
-    public class LigthUser
+    public class LightUser
 
     {
-        public int id;
+        public int id { get; set; }
         public string userName;// userName et login c'est la même chose 
         public string image;
 
-        public LigthUser(int idt = 1, string userNamet = "usernametest", string imaget = "imagetest")
+        public LightUser(int idt = 1, string userNamet = "usernametest", string imaget = "imagetest")
         {
             if (idt == 1) { id = idt; }
             else

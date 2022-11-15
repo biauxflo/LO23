@@ -18,9 +18,6 @@ namespace Shared.data
     public class Phase
     {
         GameAction[] actions { set; get; }
-
-
-
     }
 
 }
