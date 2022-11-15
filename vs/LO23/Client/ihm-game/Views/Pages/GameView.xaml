@@ -33,17 +33,36 @@
         </Grid.RowDefinitions>
 
         <Button Name="BT_parameter"  Grid.Row="0" Grid.Column="0"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=ParamCommand}">
-            <Image Source="config.png"/>
-        </Button> <!-- Changer la taille du bouton, de la même taille que la taille de l'image-->
-        
-        
+            <Image Source="/Client;component/ihm-game/Views/images/config.png"/>
+        </Button>
+        <!-- Changer la taille du bouton, de la même taille que la taille de l'image-->
 
-        <TextBlock Text="Bouton 1" Grid.Column="1" Grid.Row="7" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="Bouton 2" Grid.Column="4" Grid.Row="7" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="Bouton 3" Grid.Column="7" Grid.Row="7" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image Source="main_verso.png"  Grid.Column="2" Grid.Row="3"/>
+        <Image Source="main_verso.png"  Grid.Column="5" Grid.Row="1"/>
+        <Image Source="main_verso.png"  Grid.Column="8" Grid.Row="3"/>
+
+        <Button Name="BT_seCoucher"  Grid.Column="1" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=FoldCommand}">
+            <Image Source="/Client;component/ihm-game/Views/images/coucher.png"/>
+        </Button>
+
+        <Button Name="BT_egaler"  Grid.Column="4" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=CallCommand}">
+            <Image Source="/Client;component/ihm-game/Views/images/egaler.png"/>
+        </Button>
+
+        <Button Name="BT_doubler"  Grid.Column="7" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=RaiseCommand}">
+            <Image Source="/Client;component/ihm-game/Views/images/doubler.png"/>
+        </Button>
+        <Viewbox Grid.Column="4" Grid.Row="7" StretchDirection="DownOnly">
+            <TextBlock Text="20" Name="TBlock_call" Background="Transparent" MaxHeight="50" MaxWidth="50"/>
+        </Viewbox>
+        <!-- Pour relier le contenu du texte au code, mettre le champs Text="{Binding <Game.callValue>}"   puis dans le code relier avec un setter-->
+
+        <TextBlock Text="test" Grid.Column="7" Grid.Row="7" Name="TB_raise" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <!-- <Image Source="Enchere.png" Grid.Column="3" Grid.Row="3"/> positionner l'image et ajouter textblock-->
+
 
         <TextBlock Text="User 1" Grid.Column="1" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="Cards 1" Grid.Column="2" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Text="Mise 1" Grid.Column="3" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <TextBlock Text="User 2" Grid.Column="4" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -51,11 +70,10 @@
         <TextBlock Text="Mise 2" Grid.Column="4" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <TextBlock Text="User 3" Grid.Column="4" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="Cards 3" Grid.Column="5" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Text="Mise 3" Grid.Column="4" Grid.Row="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <TextBlock Text="Mise 4" Grid.Column="7" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="Cards 4" Grid.Column="8" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
         <TextBlock Text="User 4" Grid.Column="9" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <TextBlock Text="Pot" Grid.Column="5" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>

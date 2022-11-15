@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using Client.ihm_game;
 
-
 namespace Client
 {
     /// <summary>

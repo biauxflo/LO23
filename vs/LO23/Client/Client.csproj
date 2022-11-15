@@ -142,7 +142,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ihm-game\Views\Pages\config.png" />
+    <Resource Include="ihm-game\Views\Pages\main_verso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ihm-game\Views\images\Enchere.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

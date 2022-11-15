@@ -19,8 +19,6 @@ namespace Client.ihm_game
         private readonly MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
 
 
-
-
         private readonly Page gamePage = new GameView();
 
         private readonly GameViewModel gameViewModel = new GameViewModel();
