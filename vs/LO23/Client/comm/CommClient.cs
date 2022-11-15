@@ -6,6 +6,7 @@ using Shared.interfaces;
 using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
+using Shared.data;
 
 namespace Client.comm
 {
@@ -106,6 +107,56 @@ namespace Client.comm
         {
 			AnnounceUserMessage msg = new AnnounceUserMessage();
 			this.sendMessage(msg);
+		}
+
+		void IDataToComm.announceUser(User user)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IDataToComm.unannounce(Guid userId)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IDataToComm.sendMessage(ChatMessage chatMsg)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IDataToComm.requestStopGame(Guid gameId, Guid playerId)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IDataToComm.requestLeaveGame(Guid gameId, Guid playerId)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IDataToComm.requestPlayRound(GameAction gameAction)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IDataToComm.requestWatchGame(Guid gameId, Guid playerId)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IDataToComm.requestPlayGame(Guid gameId, Guid playerId)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IDataToComm.createNewGame(Game game)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IDataToComm.getProfile(Guid playerId)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

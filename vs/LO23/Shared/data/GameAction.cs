@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared.data
 {
-    enum TypeAction : ushort
+    public enum TypeAction : ushort
     {
         call = 1,
         rise = 2,
@@ -15,7 +15,7 @@ namespace Shared.data
     }
 
 
-    class GameAction
+    public class GameAction
     {
 
         private int id { get; set; }
