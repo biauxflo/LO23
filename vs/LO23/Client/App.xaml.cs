@@ -1,4 +1,4 @@
-﻿using Client.comm;
+using Client.data;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,11 +14,14 @@ namespace Client
     /// </summary>
     public partial class App : Application
     {
-		private void App_Startup(object sender, StartupEventArgs e)
-		{
-			CommClient cli = new CommClient();
+        private DataCore dataCore;
+
+        private void App_Startup(object sender, StartupEventArgs e)
+        {
+            dataCore = new DataCore();
+            CommClient cli = new CommClient();
 			cli.start("127.0.0.1", 10000);
 			cli.announceUser("Bonjour");
-		}
+        }
     }
 }

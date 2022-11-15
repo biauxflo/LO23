@@ -3,7 +3,7 @@
 namespace network_test
 {
     class Program
-    {
+    {/*
         static void Main(string[] args)
         {
             
@@ -20,7 +20,7 @@ namespace network_test
                 Console.WriteLine("hello nina ");
 
             }   
-            s
-        }
+            
+        }*/
     }
 }

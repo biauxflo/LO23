@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared.data
 {
-    enum GameStatus : ushort
+   public enum GameStatus : ushort
     {
         lobby = 0,
         running = 1,
@@ -14,7 +14,7 @@ namespace Shared.data
         finished = 3
     }
 
-    class LightGame
+   public class LightGame
     {
         int id { get; set; }
         GameStatus status { get; set; }

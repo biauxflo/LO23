@@ -46,7 +46,7 @@
     <Compile Include="data\LightGame.cs" />
     <Compile Include="data\Round.cs" />
     <Compile Include="data\GameAction.cs" />
-    <Compile Include="data\LigthUser.cs" />
+    <Compile Include="data\LightUser.cs" />
     <Compile Include="data\Phase.cs" />
     <Compile Include="data\Card.cs" />
     <Compile Include="data\ChatMessage.cs" />
