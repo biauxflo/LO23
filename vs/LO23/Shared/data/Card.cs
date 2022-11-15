@@ -1,10 +1,13 @@
 ﻿using System;
 
-public class Card
+namespace Shared.data
 {
-    private int index;
-    private char color;
-    private int value;
-    private bool isInHand;
-    private bool isHidden;
+    public class Card
+    {
+        private int index;
+        private char color;
+        private int value;
+        private bool isInHand;
+        private bool isHidden;
+    }
 }

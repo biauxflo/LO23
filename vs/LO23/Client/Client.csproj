@@ -65,9 +65,10 @@
     </Compile>
     <Compile Include="comm\Class1.cs" />
     <Compile Include="data\Class1.cs" />
+    <Compile Include="data\Data_Client_ctrl.cs" />
     <Compile Include="data\DataCore.cs" />
     <Compile Include="data\Comm_calls_Data_Client_Impl.cs" />
-    <Compile Include="data\Data_Client_ctrl.cs" />
+    <Compile Include="data\2.cs" />
     <Compile Include="data\IHM_Main_calls_Data_Client_Impl.cs" />
     <Compile Include="data\Programtest.cs" />
     <Compile Include="ihm-game\Class1.cs" />
@@ -95,6 +96,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="bin\Debug\Client.exe.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -103,12 +105,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{deedb05f-755c-4573-a317-e84f11529284}</Project>
       <Name>Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\Client.exe" />
+    <Content Include="bin\Debug\Client.pdb" />
+    <Content Include="bin\Debug\Shared.dll" />
+    <Content Include="bin\Debug\Shared.pdb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

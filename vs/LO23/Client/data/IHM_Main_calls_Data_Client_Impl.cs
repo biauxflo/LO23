@@ -1,4 +1,5 @@
 ﻿using System;
+using Client.data;
 //using user1;
 
 public class IHM_Main_calls_Data_Client_Impl : Data_Client_ctrl
@@ -8,7 +9,7 @@ public class IHM_Main_calls_Data_Client_Impl : Data_Client_ctrl
 
 
 	}
-
+    /*
     Boolean authenticate(logint string, passwordt string)
     {
         int i = 0;
@@ -25,6 +26,6 @@ public class IHM_Main_calls_Data_Client_Impl : Data_Client_ctrl
         user = getLigthUserdeUser(login); 
     }
 
-    
+    */
 
     }

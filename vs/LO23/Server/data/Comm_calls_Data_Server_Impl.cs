@@ -14,11 +14,6 @@ namespace Server.Data
 
         public Comm_calls_Data_Server_Impl()
         {
-
-        }
-
-        public Comm_calls_Data_Server_Impl()
-        {
             this.user = new LightUser();
             registerUser(user);
         }
@@ -39,7 +34,7 @@ namespace Server.Data
         {
             foreach(LightUser user in users)
             {
-                if(user.getIdJoueur() == idJoueur)
+                if(user.id == idJoueur)
                 {
                     users.Remove(user);
                     break;
