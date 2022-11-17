@@ -55,10 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="ihm-game\Views\MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -69,10 +65,7 @@
     </Compile>
     <Compile Include="comm\Class1.cs" />
     <Compile Include="data\Class1.cs" />
-    <Compile Include="ihm-game\IHM-Game-Core.cs" />
-    <Compile Include="ihm-game\Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ihm-game\Class1.cs" />
     <Compile Include="ihm-main\Class1.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -105,10 +98,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ihm-game\ViewModels\" />
-    <Folder Include="ihm-game\Views\Pages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{deedb05f-755c-4573-a317-e84f11529284}</Project>
