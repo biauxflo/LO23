@@ -37,9 +37,9 @@
         </Button>
         
 
-        <Image Source="main_verso.png"  Grid.Column="2" Grid.Row="3"/>
-        <Image Source="main_verso.png"  Grid.Column="5" Grid.Row="1"/>
-        <Image Source="main_verso.png"  Grid.Column="8" Grid.Row="3"/>
+        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="2" Grid.Row="3"/>
+        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="5" Grid.Row="1"/>
+        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="8" Grid.Row="3"/>
 
         <Button Name="BT_seCoucher"  Grid.Column="1" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=FoldCommand}">
             <Image Source="/Client;component/ihm-game/Views/images/coucher.png"/>
