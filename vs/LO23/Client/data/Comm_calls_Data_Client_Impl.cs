@@ -5,8 +5,8 @@ using System.Data;
 
 namespace Client.Data
 {   
-    public class Comm_calls_Data_Client_impl : Shared.interfaces.Interface_Comm_calls_Data_Client
-    {
+    public class Comm_calls_Data_Client_impl : Shared.interfaces.ICommToData
+	{
         private List<LightUser> users = new List<LightUser>();
         private List<LightGame> games = new List<LightGame>();
         public Comm_calls_Data_Client_impl(){}

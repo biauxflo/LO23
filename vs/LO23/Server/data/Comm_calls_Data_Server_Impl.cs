@@ -6,7 +6,7 @@ using System.Data;
 
 namespace Server.Data
 {
-    public class Comm_calls_Data_Server_Impl : Shared.interfaces.Interface_Comm_calls_Data_Server
+    public class Comm_calls_Data_Server_Impl : Shared.interfaces.ICommToDataServer
     {
         private LightUser user;
         private static List<LightUser> users = new List<LightUser>();

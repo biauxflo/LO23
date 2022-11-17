@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Shared.comm;
+using Shared.interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,45 +13,54 @@ namespace Server.comm
 {
 	public class CommServer
 	{
-		/// <summary>
-		/// Listen to new client
-		/// </summary>
+		/// <summary>Interface fournie par DataServer</summary>
+		public ICommToDataServer CommToDataServer {get; set; }
+
+		/// <summary>Recepteur de nouveaux cliens</summary>
 		private TcpListener newClientListener = default;
 
-		/// <summary>
-		/// Ensemble des clients connectés.
-		/// </summary>
-		private readonly Dictionary<string, ClientHandler> clientHandlers = new Dictionary<string, ClientHandler>();
+		/// <summary>Ensemble des clients connectés.</summary>
+		private readonly Dictionary<string, TcpClientHandler<MessageToClient, MessageToServer>> 
+			tcpClientHandlers = new Dictionary<string, TcpClientHandler<MessageToClient, MessageToServer>>();
 
-		/// <summary>
-		/// Interface avec les données du serveur.
-		/// </summary>
-		/// private IDataToComm
 
 		/// <summary>
 		/// Initie l'écoute.
 		/// </summary>
-		public void run(string ip, int port)
+		public void Run(string ip, int port)
 		{
 			//setup server
 			this.newClientListener = new TcpListener(IPAddress.Parse(ip), port);
-			TcpClient client;
 			this.newClientListener.Start();
 
 			//listen to new clients
 			while(true)
 			{
-				client = this.newClientListener.AcceptTcpClient();
-				//start new Thread
+				TcpClient client = this.newClientListener.AcceptTcpClient();
 				string id = Guid.NewGuid().ToString();
-				this.clientHandlers.Add(id, new ClientHandler(id, client, this));
 
+				void action(MessageToServer msg)
+				{
+					this.OnReceiveFrom(msg, id);
+				}
+
+				this.tcpClientHandlers.Add(
+					id,
+					new TcpClientHandler<MessageToClient, MessageToServer>(client, action)
+				);
 			}
 		}
 
-		private void stop()
+		private void OnReceiveFrom(MessageToServer msg, string id)
 		{
-			this.newClientListener.Stop();
+			msg.Handle(id, this.CommToDataServer, this.SendTo);
 		}
+
+		public void SendTo(MessageToClient msg, string id)
+		{
+			this.tcpClientHandlers[id].Send(msg);
+		}
+		
+		// TODO : clean stop or destroy
 	}
 }
