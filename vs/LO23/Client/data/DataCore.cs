@@ -15,7 +15,6 @@ namespace Client.data
 		/// Vue principale de l'application.
 		/// </summary>
 		private readonly MainWindow mainWindow = new MainWindow();
-        
 
         public DataCore()
         {
@@ -23,6 +22,5 @@ namespace Client.data
            
             Console.WriteLine("Running DataCore class");
         }
-
     }
 }

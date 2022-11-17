@@ -12,7 +12,6 @@ namespace Shared.interfaces
         LightUser getUser();
         List<LightUser> registerUser(LightUser lightUser);
         void removeUser(int idJoueur);
-
     }
 }
 

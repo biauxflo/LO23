@@ -22,7 +22,7 @@ namespace Shared.data
 		public bool CanSpecChat { get; set; }
 		public string Name { get;set; }
 		public int NbPlayers { get;set; }
-		public int NbTokens { get;set;
+		public int NbTokens { get;set; }
 		}
 
 		public Game(int smallBlind, int bingBLind)
