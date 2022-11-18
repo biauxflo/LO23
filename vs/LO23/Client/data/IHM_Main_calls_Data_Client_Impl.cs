@@ -7,7 +7,6 @@ public class IHM_Main_calls_Data_Client_Impl : Data_Client_ctrl
 	public IHM_Main_calls_Data_Client_Impl()
 	{
 
-
 	}
     /*
     Boolean authenticate(logint string, passwordt string)
@@ -28,4 +27,4 @@ public class IHM_Main_calls_Data_Client_Impl : Data_Client_ctrl
 
     */
 
-    }
+}

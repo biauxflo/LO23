@@ -8,24 +8,28 @@ namespace Shared.data {
 
     public class User : LightUser
     {
-        public string password;
+        public string password { get; set; }
+        public bool status { get; set; }
+        public string firstname { get; private set; }   // Once creted the user should not be able to change his firstname
+        public string lastname { get; private set; }    // Once creted the user should not be able to change his lastname
+        public int age { get; private set; }    // Once creted the user should not be able to change his age
 
-        public bool status;
-        public string firstname;
-        public int age;
-
-
-
-        public User(int idt ,string imaget , string userNamet, string passwordt, bool statust, string firstnamet, int aget)
+        public User(
+            int id,
+            string username,
+            string image,
+            string password,
+            bool status,
+            string firstname,
+            string lastname,
+            int age
+        ) : base(id, username, image) 
         {
-            id = idt;
-            image = imaget;
-
-            userName = userNamet;
-            password = passwordt;
-            status = statust;
-            firstname = firstnamet;
-            age = aget;
+            this.password = password;
+            this.status = status;
+            this.firstname = firstname;
+            this.lastname = lastname;
+            this.age = age;
         }
 
     }
