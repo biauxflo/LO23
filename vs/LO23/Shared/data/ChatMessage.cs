@@ -4,18 +4,21 @@ namespace Shared.data
 {
     public class ChatMessage
     {
-        private DateTime date;
-        private string sender; // username sera passé en paramètre
-        private string text;
-        private int idGame;
+        public DateTime date { get; private set; }
+        public string sender { get; private set; } // username sera passé en paramètre
+        public string text { get; private set; }
+        public int idGame { get; private set; }
 
-        /* public Message(DateTime datet, string sendert, string textt, int idGamet)
-         {
-             date = datet;
-             sender = sendert;
-             text = textt;
-             idGame = idGamet; 
-         }*/
-
+        public ChatMessage(
+            DateTime date,
+            string sender,
+            string text,
+            int idGame
+        ) {
+            this.date = date;
+            this.sender = sender;
+            this.text = text;
+            this.idGame = idGame;
+        }
     }
 }

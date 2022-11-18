@@ -6,31 +6,31 @@ using System.Threading.Tasks;
 
 namespace Shared.data
 {
-   public enum GameStatus : ushort
+   public enum GameStatus
     {
-        lobby = 0,
-        running = 1,
-        paused = 2,
-        finished = 3
+        lobby,
+        running,
+        paused,
+        finished,
     }
 
    public class LightGame
     {
-        int id { get; set; }
-        GameStatus status { get; set; }
-        int indexRound { get; set; }
-        Player[] players { get; set; }
-        User[] spectators { get; set; }
-        User[] lobby { get; set; }
+        public int id { get; set; }
+        public string status { get; set; }
+        public int indexRound { get; set; }
+        public List<Player> players { get; set; }
+        public List<User> spectators { get; set; }
+        public List<User> lobby { get; set; }
 
-        public LightGame(int id, GameStatus status, int indexRound, Player[] players, User[] spectators, User[] lobby)
+        public LightGame(int id)
         {
             this.id = id;
-            this.status = status;
-            this.indexRound = indexRound;
-            this.players = players;
-            this.spectators = spectators;
-            this.lobby = lobby;
+            this.status = GameStatus.lobby.ToString();
+            this.indexRound = 0;
+            this.players = new List<Player>();
+            this.spectators = new List<User>();
+            this.lobby = new List<User>();
         }
     }
 }

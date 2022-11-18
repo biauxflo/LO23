@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Shared.data
 {
-    class Round
+    public class Round
     {
-        Phase[] phases { get; set; }
+        public List<Phase> phases { get; set; }
 
-        public Round(Phase[] phases)
+        public Round()
         {
-            this.phases = phases;
+            this.phases = new List<Phase>();
         }
     }
 }

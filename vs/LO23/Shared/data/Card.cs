@@ -4,10 +4,24 @@ namespace Shared.data
 {
     public class Card
     {
-        private int index;
-        private char color;
-        private int value;
-        private bool isInHand;
-        private bool isHidden;
+        public int index { get; set; }
+        public char color { get; set; }
+        public int value { get; set; }
+        public bool isInHand { get; set; }
+        public bool isHidden { get; set; }
+
+        public Card(
+            int index,
+            char color,
+            int value,
+            bool isInHand,
+            bool isHidden
+        ) {
+            this.index = index;
+            this.color = color;
+            this.value = value;
+            this.isInHand = isInHand;
+            this.isHidden = isHidden;
+        }
     }
 }
