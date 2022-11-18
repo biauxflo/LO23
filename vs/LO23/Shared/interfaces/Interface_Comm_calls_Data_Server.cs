@@ -14,4 +14,3 @@ namespace Shared.interfaces
         void removeUser(int idJoueur);
     }
 }
-
