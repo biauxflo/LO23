@@ -70,6 +70,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="comm\CommClient.cs" />
+    <Compile Include="comm\IDataToCommImpl.cs" />
     <Compile Include="data\Class1.cs" />
     <Compile Include="data\Data_Client_ctrl.cs" />
     <Compile Include="data\DataCore.cs" />

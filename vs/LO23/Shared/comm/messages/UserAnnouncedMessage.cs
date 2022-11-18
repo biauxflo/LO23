@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shared.interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +12,9 @@ namespace Shared.comm
 		/// <summary>
 		/// Operates the process of the message.
 		/// </summary>
-		public override void handle()
+		public override void Handle(ICommToData commToData)
 		{
-			//calls interface
-
-			//test code
-			Console.WriteLine("message handled");
+			//commToData.$
 		}
 	}
 }

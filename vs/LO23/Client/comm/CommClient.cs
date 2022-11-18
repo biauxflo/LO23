@@ -1,162 +1,65 @@
 ﻿using System;
 using System.IO;
 using System.Net.Sockets;
+using Shared.data;
 using Shared.comm;
 using Shared.interfaces;
 using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
-using Shared.data;
 
 namespace Client.comm
 {
-    public class CommClient : IDataToComm
+	public class CommClient
 	{
-		/// <summary>
-		/// Socket de connexion avec le serveur.
-		/// </summary>
-		private readonly TcpClient clientSocket = new TcpClient();
+		/// <summary>Interface fournie par DataClient</summary>
+		public ICommToData CommToData { get; set; }
+		/// <summary>Interface implémentée pour DataClient</summary>
+		public IDataToComm DataToComm { get; }
+
+		/// <summary>Tcp client handler</summary>
+		private TcpClientHandler<MessageToServer, MessageToClient> handler;
 
 		/// <summary>
-		/// Socket de connexion avec le serveur.
+		/// Constructeur : instancie l'interface implémentée pour DataClient.
 		/// </summary>
-		private Thread tcpListenerThread = default;
-
-		/// <summary>
-		/// Interface avec les données du client.
-		/// </summary>
-		/// private ICommToData
-
-		/// <summary>
-		/// Envoie un message au serveur.
-		/// </summary>
-		private void sendMessage(MessageToServer msg)
-        {
-			string data = JsonConvert.SerializeObject(msg, Formatting.Indented, new JsonSerializerSettings
-			{
-				TypeNameHandling = TypeNameHandling.All
-			});
-			NetworkStream nwStream = this.clientSocket.GetStream();
-			byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(data);
-			nwStream.Write(bytesToSend, 0, bytesToSend.Length);
-		}
-
-		/// <summary>
-		/// Réceptionne un message du serveur.
-		/// </summary>
-		private void receiveMessage()
-        {
-			while (true)
-			{
-				try
-				{
-					byte[] bytesToRead = new byte[this.clientSocket.ReceiveBufferSize];
-					NetworkStream nwStream = this.clientSocket.GetStream();
-					int bytesRead = nwStream.Read(bytesToRead, 0, this.clientSocket.ReceiveBufferSize);
-					string data = Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
-					MessageToClient msg = JsonConvert.DeserializeObject<MessageToClient>(data, new JsonSerializerSettings
-					{
-						TypeNameHandling = TypeNameHandling.All
-					});
-					msg.handle();
-				}
-				catch (Exception e)
-				{
-					//TODO : handle exception
-				}
-			}
+		public CommClient()
+		{
+			this.DataToComm = new IDataToCommImpl(this.Send);
 		}
 
 		/// <summary>
 		/// Initie la connexion et l'écoute.
 		/// </summary>
-		public void start(string ip, int port)
-        {
+		public void Start(string ip, int port)
+		{
+			TcpClient tcpClient = new TcpClient();
 			//try to connect
 			do
 			{
 				try
 				{
-					this.clientSocket.Connect(ip, port);
+					tcpClient.Connect(ip, port);
 				}
-				catch (SocketException e)
+				catch(Exception e)
 				{
 					//TODO : Connection fail
 				}
-			} while (!this.clientSocket.Connected);
+			} while(!tcpClient.Connected);
 
-			//listen to server
-			this.tcpListenerThread = new Thread(this.receiveMessage);
-			this.tcpListenerThread.Start();
+			this.handler = new TcpClientHandler<MessageToServer, MessageToClient>
+				(tcpClient, this.OnReceive);
 		}
 
-		/// <summary>
-        /// Termine la connexion et l'écoute.
-        /// </summary>
-		private void end()
-        {
-			this.tcpListenerThread.Abort();
-			this.clientSocket.Close();
-		}
-
-		/// <summary>
-        /// 
-        /// </summary>
-        /// <param name="username"></param>
-		public void announceUser(string username)
-        {
-			AnnounceUserMessage msg = new AnnounceUserMessage();
-			this.sendMessage(msg);
-		}
-
-		void IDataToComm.announceUser(User user)
+		private void OnReceive(MessageToClient msg)
 		{
-			throw new NotImplementedException();
+			msg.Handle(this.CommToData);
 		}
 
-		void IDataToComm.unannounce(Guid userId)
+		public void Send(MessageToServer msg)
 		{
-			throw new NotImplementedException();
+			this.handler.Send(msg);
 		}
 
-		void IDataToComm.sendMessage(ChatMessage chatMsg)
-		{
-			throw new NotImplementedException();
-		}
-
-		void IDataToComm.requestStopGame(Guid gameId, Guid playerId)
-		{
-			throw new NotImplementedException();
-		}
-
-		void IDataToComm.requestLeaveGame(Guid gameId, Guid playerId)
-		{
-			throw new NotImplementedException();
-		}
-
-		void IDataToComm.requestPlayRound(GameAction gameAction)
-		{
-			throw new NotImplementedException();
-		}
-
-		void IDataToComm.requestWatchGame(Guid gameId, Guid playerId)
-		{
-			throw new NotImplementedException();
-		}
-
-		void IDataToComm.requestPlayGame(Guid gameId, Guid playerId)
-		{
-			throw new NotImplementedException();
-		}
-
-		void IDataToComm.createNewGame(Game game)
-		{
-			throw new NotImplementedException();
-		}
-
-		void IDataToComm.getProfile(Guid playerId)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

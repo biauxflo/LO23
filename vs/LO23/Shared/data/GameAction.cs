@@ -14,7 +14,6 @@ namespace Shared.data
         fold = 4
     }
 
-
     public class GameAction
     {
 

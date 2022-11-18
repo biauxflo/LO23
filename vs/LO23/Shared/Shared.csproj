@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="comm\TcpClientHandler.cs" />
     <Compile Include="data\Game.cs" />
     <Compile Include="data\LightGame.cs" />
     <Compile Include="data\Round.cs" />
@@ -55,10 +56,10 @@
     <Compile Include="data\Deck.cs" />
     <Compile Include="data\Player.cs" />
     <Compile Include="data\User.cs" />
-    <Compile Include="interfaces\Interface_Comm_calls_Data_Client.cs" />
-    <Compile Include="interfaces\Interface_Comm_calls_Data_Server.cs" />
-    <Compile Include="comm\AnnounceUserMessage.cs" />
-    <Compile Include="comm\UserAnnouncedMessage.cs" />
+    <Compile Include="interfaces\ICommToData.cs" />
+    <Compile Include="interfaces\ICommToDataServer.cs" />
+    <Compile Include="comm\messages\AnnounceUserMessage.cs" />
+    <Compile Include="comm\messages\UserAnnouncedMessage.cs" />
     <Compile Include="comm\MessageToClient.cs" />
     <Compile Include="comm\MessageToServer.cs" />
     <Compile Include="interfaces\IDataToComm.cs" />
