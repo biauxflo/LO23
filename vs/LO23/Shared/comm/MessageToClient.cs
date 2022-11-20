@@ -1,3 +1,5 @@
+using Shared.interfaces;
+
 namespace Shared.comm
 {
 	public abstract class MessageToClient
@@ -5,6 +7,6 @@ namespace Shared.comm
 		/// <summary>
 		/// Operates the process of the message.
 		/// </summary>
-		public abstract void handle();
+		public abstract void Handle(ICommToData commToData);
 	}
 }

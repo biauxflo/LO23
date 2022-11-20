@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Shared.interfaces
 {
-    public interface Interface_Comm_calls_Data_Client
-    {
+	public interface Interface_Comm_calls_Data_Client
+	{
 
-    }
+	}
 }
+

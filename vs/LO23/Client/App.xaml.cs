@@ -1,4 +1,5 @@
 using Client.data;
+using Client.comm;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,10 +19,11 @@ namespace Client
 
         private void App_Startup(object sender, StartupEventArgs e)
         {
-            dataCore = new DataCore();
+            this.dataCore = new DataCore();
             CommClient cli = new CommClient();
-			cli.start("127.0.0.1", 10000);
-			cli.announceUser("Bonjour");
+			cli.Start("127.0.0.1", 10000);
+			cli.DataToComm.announceUser(new Shared.data.User(
+				1, "","", "", true, "Test", "Test", 12));
         }
     }
 }

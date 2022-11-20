@@ -1,3 +1,6 @@
+using Shared.interfaces;
+using System;
+
 namespace Shared.comm
 {
 	public abstract class MessageToServer
@@ -5,6 +8,10 @@ namespace Shared.comm
 		/// <summary>
 		/// Operates the process of the message.
 		/// </summary>
-		public abstract void handle();
+		public abstract void Handle(
+			string id,
+			ICommToDataServer commToDataServer,
+			Action<MessageToClient, string> sendTo
+		);
 	}
 }

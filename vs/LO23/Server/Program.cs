@@ -12,7 +12,7 @@ namespace Server
         static void Main(string[] args)
         {
             CommServer s = new CommServer();
-			s.run("127.0.0.1", 10000);
+			s.Run("127.0.0.1", 10000);
             _ = Console.ReadLine(); // wait until press Return to close console
         }
     }

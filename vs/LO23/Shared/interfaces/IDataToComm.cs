@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Shared.data;
 namespace Shared.interfaces
 {
 	public interface IDataToComm

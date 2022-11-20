@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="comm\TcpClientHandler.cs" />
     <Compile Include="data\Game.cs" />
     <Compile Include="data\LightGame.cs" />
     <Compile Include="data\Round.cs" />
@@ -52,10 +56,19 @@
     <Compile Include="data\Deck.cs" />
     <Compile Include="data\Player.cs" />
     <Compile Include="data\User.cs" />
+    <Compile Include="interfaces\ICommToData.cs" />
+    <Compile Include="interfaces\ICommToDataServer.cs" />
+    <Compile Include="comm\messages\AnnounceUserMessage.cs" />
+    <Compile Include="comm\messages\UserAnnouncedMessage.cs" />
+    <Compile Include="comm\MessageToClient.cs" />
+    <Compile Include="comm\MessageToServer.cs" />
+    <Compile Include="interfaces\IDataToComm.cs" />
     <Compile Include="interfaces\Interface_Comm_calls_Data_Client.cs" />
     <Compile Include="interfaces\Interface_Comm_calls_Data_Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
