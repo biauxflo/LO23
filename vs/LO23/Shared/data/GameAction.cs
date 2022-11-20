@@ -6,25 +6,23 @@ using System.Threading.Tasks;
 
 namespace Shared.data
 {
-    public enum TypeAction : ushort
+    public enum TypeAction
     {
-        call = 1,
-        rise = 2,
-        allin = 3,
-        fold = 4
+        call,
+        rise,
+        allin,
+        fold
     }
 
     public class GameAction
     {
+        public int id { get; set; }
+        public string typeAction { get; set; }
 
-        private int id { get; set; }
-        private TypeAction typeAction { get; set; }
-
-        public GameAction(int id, TypeAction typeAction)
+        public GameAction(int id, string typeAction)
         {
             this.id = id;
             this.typeAction = typeAction;
-
         }
     }
 

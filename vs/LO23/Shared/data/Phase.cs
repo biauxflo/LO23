@@ -14,10 +14,14 @@ namespace Shared.data
         reveal = 4
     }
 
-
     public class Phase
     {
-        GameAction[] actions { set; get; }
+        public List<GameAction> actions { set; get; }
+
+        public Phase()
+        {
+            this.actions = new List<GameAction>();
+        }
     }
 
 }

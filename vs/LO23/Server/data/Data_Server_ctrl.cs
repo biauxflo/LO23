@@ -1,8 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using Server.Data;
 
-public class Class1
+namespace Server.Data
 {
-	public Class1()
-	{
-	}
+    public class Data_Server_ctrl
+    {
+        private Comm_calls_Data_Server_Impl implInterfaceForComm;
+
+        public Data_Server_ctrl()
+        {
+            implInterfaceForComm = new Comm_calls_Data_Server_Impl();
+        }
+
+        public Comm_calls_Data_Server_Impl getImplInterfaceForComm()
+        {
+            return implInterfaceForComm;
+        }
+    }
 }

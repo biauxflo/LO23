@@ -1,12 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.data
+
+namespace Shared.interfaces
 {
-    class Class1
+    public interface Interface_Comm_calls_Data_Server
     {
+        
     }
 }
+

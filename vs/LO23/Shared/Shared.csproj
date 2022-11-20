@@ -63,6 +63,8 @@
     <Compile Include="comm\MessageToClient.cs" />
     <Compile Include="comm\MessageToServer.cs" />
     <Compile Include="interfaces\IDataToComm.cs" />
+    <Compile Include="interfaces\Interface_Comm_calls_Data_Client.cs" />
+    <Compile Include="interfaces\Interface_Comm_calls_Data_Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
