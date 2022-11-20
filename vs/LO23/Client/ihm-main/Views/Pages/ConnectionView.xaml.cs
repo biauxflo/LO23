@@ -11,5 +11,10 @@ namespace Client.ihm_main.Views.Pages
         {
             InitializeComponent();
         }
+
+        private void TB_Login_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

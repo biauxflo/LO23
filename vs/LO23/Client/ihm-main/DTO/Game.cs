@@ -68,6 +68,25 @@ namespace Client.ihm_main.DTO
 
         }
 
+        public override bool Equals(object obj)
+        {
+
+            if(obj.GetType() != GetType())
+            {
+                throw new Exception("Le type testé n'est pas une partie");
+            }
+            else
+            {
+                Game game = (Game)obj;
+                return nom == game.nom;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
 
     }
 }

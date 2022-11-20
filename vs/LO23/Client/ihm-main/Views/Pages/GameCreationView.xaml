@@ -35,7 +35,79 @@
             <ColumnDefinition Width="3"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="2" Grid.Column="2">
-            <TextBlock Text="BIENVENUE" Foreground="Black" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-101,0,-100.667,0.333"/>
+            <TextBlock Foreground="Black" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-101,0,-100.667,0.333"><Run Text="Créer une Partie"/><LineBreak/><Run/></TextBlock>
+        </Grid>
+        <Grid Grid.Row="4" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="Nom de la Partie" FontSize="22" />
+            <TextBox Grid.Column="1"  Grid.Row="3"  Name="TB_Nom"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Nom de la Partie" Text="{Binding Partie1.Nom}"/>
+        </Grid>
+        <Grid Grid.Row="6" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="Nombre de Joueurs" FontSize="22" />
+            <TextBox Grid.Column="1"  Grid.Row="3"  Name="TB_NbJoueurs"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Nombre de Joueurs" Text="{Binding Partie1.NbJoueurs}"/>
+
+        </Grid>
+        <Grid Grid.Row="8" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="Nombre de Jeutons" FontSize="22" />
+            <TextBox Grid.Column="1"  Grid.Row="3"  Name="TB_NbJeutons"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Nombre de Jeutons" Text="{Binding Partie1.NbJeutons}"/>
+        </Grid>
+        <Grid Grid.Row="10" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <CheckBox Grid.Column="1"  Grid.Row="0"  Name="TB_spects"  Height="50" Width="50" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Spectateurs" Checked="{Binding Partie1.Spectateurs}"/>
+            <TextBlock Grid.Column="3" Grid.Row="0" Text="Spectateurs" FontSize="22" />
+            <CheckBox Grid.Column="5"  Grid.Row="0"  Name="TB_chat_spects"  Height="50" Width="50" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Chat entre spectateurs" Checked="{Binding Partie1.Chat_spectateurs}"/>
+            <TextBlock Grid.Column="7" Grid.Row="0" Text="Chat entre spectateurs" FontSize="22" />
         </Grid>
         <Grid Grid.Row="12" Grid.Column="2">
             <Grid.ColumnDefinitions>
@@ -51,7 +123,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Button Name="BT_Quitter" Grid.Column="1" Grid.Row="1" Content="Quitter" Command="{Binding Path=QuitCommand}" FontSize="23" Width="175" Height="35"/>
-            <Button Name="BT_Connecter" Grid.Column="3" Grid.Row="1"  Content="Valider" Command="{Binding Path=ConnectionCommand}" FontSize="23" Width="175" Height="35"/>
+            <Button Name="BT_Creer" Grid.Column="3" Grid.Row="1"  Content="Valider" Command="{Binding Path=CreationCommand}" FontSize="23" Width="175" Height="35"/>
         </Grid>
     </Grid>
 </Page>

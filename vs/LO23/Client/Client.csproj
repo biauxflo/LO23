@@ -82,6 +82,7 @@
     <Compile Include="data\Class1.cs" />
     <Compile Include="ihm-game\Class1.cs" />
     <Compile Include="ihm-main\DataToMain.cs" />
+    <Compile Include="ihm-main\DTO\Game.cs" />
     <Compile Include="ihm-main\DTO\User.cs" />
     <Compile Include="ihm-main\IhmMainCore.cs" />
     <Compile Include="ihm-main\ViewModels\ConnectionViewModel.cs" />
