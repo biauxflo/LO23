@@ -23,7 +23,7 @@ namespace Client
             CommClient cli = new CommClient();
 			cli.Start("127.0.0.1", 10000);
 			cli.DataToComm.announceUser(new Shared.data.User(
-				1, "","", "", true, "Test", 12));
+				1, "","", "", true, "Test", "Test", 12));
         }
     }
 }
