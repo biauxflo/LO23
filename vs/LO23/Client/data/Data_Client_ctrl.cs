@@ -18,7 +18,7 @@ namespace Client.data
 
         public Comm_calls_Data_Client_impl getImplInterfaceForComm()
         {
-            return implInterfaceForComm;
+            return this.implInterfaceForComm;
         }
     }
 }
