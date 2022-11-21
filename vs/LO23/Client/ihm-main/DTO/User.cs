@@ -2,6 +2,7 @@
 
 namespace Client.ihm_main.DTO
 {
+    // TODO : Remplacer par la classe de Data
     /// <summary>
     /// Utilisateur de l'application.
     /// </summary>
