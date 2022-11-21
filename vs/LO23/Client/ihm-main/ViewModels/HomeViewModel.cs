@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Client.ihm_main.DTO;
+using GalaSoft.MvvmLight.Command;
+using System;
 using GalaSoft.MvvmLight.Command;
 using Shared.data;
 using System.Collections.ObjectModel;
@@ -10,7 +12,7 @@ namespace Client.ihm_main.ViewModels
 {
     internal class HomeViewModel : INotifyPropertyChanged
     {
-		/// <summary>
+        /// <summary>
 		/// Core principal du module IhmMain.
 		/// </summary>
         private readonly IhmMainCore core;
@@ -30,14 +32,14 @@ namespace Client.ihm_main.ViewModels
 		}
 
 		/// <summary>
-		/// Liste des parties accessibles.
-		/// </summary>
+        /// Liste des parties accessibles.
+        /// </summary>
 		private ObservableCollection<LightGame> games;
 		public ObservableCollection<LightGame> Games
         {
             get => games;
 			set
-			{
+        {
 				games = value;
 				OnPropertyChanged();
 			}
@@ -65,7 +67,7 @@ namespace Client.ihm_main.ViewModels
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
+        }
 
         /// <summary>
         /// Lance la partie donnée en paramètre.
