@@ -12,12 +12,12 @@ namespace Server.Data
 
         public Data_Server_ctrl()
         {
-            implInterfaceForComm = new Comm_calls_Data_Server_Impl();
+            this.implInterfaceForComm = new Comm_calls_Data_Server_Impl();
         }
 
         public Comm_calls_Data_Server_Impl getImplInterfaceForComm()
         {
-            return implInterfaceForComm;
+            return this.implInterfaceForComm;
         }
     }
 }
