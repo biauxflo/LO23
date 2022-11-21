@@ -18,9 +18,9 @@ namespace Client.ihm_main.Views.Pages
     /// <summary>
     /// Logique d'interaction pour GameInProcessView.xaml
     /// </summary>
-    public partial class GameInProcessView : Page
+    public partial class HomeView : Page
     {
-        public GameInProcessView()
+        public HomeView()
         {
             InitializeComponent();
         }
