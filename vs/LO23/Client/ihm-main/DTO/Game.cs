@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client.ihm_main.DTO
 {
+    // TODO : Remplacer par la classe de data.
     class Game
     {
         private string name = string.Empty;
@@ -15,6 +16,16 @@ namespace Client.ihm_main.DTO
             set
             {
                 name = value;
+            }
+        }
+
+        private int nbPeople = 0;
+        public int NbPeople
+        {
+            get => nbPeople;
+            set
+            {
+                nbPeople = value;
             }
         }
 
@@ -38,6 +49,13 @@ namespace Client.ihm_main.DTO
         {
             Name = name;
             GameStatus = gameStatus;
+        }
+
+        public Game(string name, int gameStatus, int nbPeople)
+        {
+            Name = name;
+            GameStatus = gameStatus;
+            NbPeople = nbPeople;
         }
     }
 }
