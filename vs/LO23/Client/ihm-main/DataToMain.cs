@@ -23,5 +23,10 @@ namespace Client.ihm_main
         {
             core.ConnectionSucceed(username);
         }
+        
+        public void GameCreationFailed(string error)
+        {
+            core.GameCreationFailed(error);
+        }
     }
 }
