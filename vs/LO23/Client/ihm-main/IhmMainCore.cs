@@ -68,7 +68,7 @@ namespace Client.ihm_main
         /// <summary>
         /// Informe l'utilisateur que la connexion a échoué.
         /// </summary>
-        public void ConnectionFailed()
+        internal void ConnectionFailed()
         {
             // TODO : Mettre en place le vrai mécanisme de connexion
             MessageBox.Show(mainWindow, "Erreur", "Connexion refusée", MessageBoxButton.OK);
@@ -78,7 +78,7 @@ namespace Client.ihm_main
         /// Connecte l'utilisateur à l'application.
         /// </summary>
         /// <param name="username">Nom de l'utilisateur.</param>
-        public void ConnectionSucceed(string username)
+        internal void ConnectionSucceed(string username)
         {
             // TODO : Mettre en place le vrai mécanisme de connexion
             MessageBox.Show(mainWindow, "OK", $"Connexion réussie : Bonjour {username}", MessageBoxButton.OK);
@@ -103,6 +103,16 @@ namespace Client.ihm_main
             // TODO : Cacher la main window
             // TODO : Appel IHM-Game
         }
+        
+        /// <summary>
+        /// Indique que la partie n'a pas pu être créée.
+        /// </summary>
+        /// <param name="error">Raison pour laquelle la partie n'a pas pu être créée.</param>
+        internal void GameCreationFailed(string error)
+        {
+            MessageBox.Show(mainWindow, error, "Partie non créée", MessageBoxButton.OK);
+        }
+
     }
 
 }

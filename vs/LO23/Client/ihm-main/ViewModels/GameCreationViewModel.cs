@@ -7,14 +7,16 @@ using Client.ihm_main.DTO;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace Client.ihm_main.ViewModels
 {
     internal class GameCreationViewModel
     {
-        //Partie en cours de création
+        public ObservableCollection<Game> Games { get; set; }
 
-        private Game partie1;
+        //Partie en cours de création
+        private Game partie1 = new Game();
         public Game Partie1
         {
             get => partie1;
@@ -24,59 +26,44 @@ namespace Client.ihm_main.ViewModels
             }
         }
 
-        private Game partie2;
-        public Game Partie2
-        {
-            get => partie2;
-            set
-            {
-                partie2 = value;
-            }
-        }
-
         /// <summary>
-        /// Commande liée au bouton de connexion.
+        /// Commande liée au bouton de creation.
         /// </summary>
         public ICommand CreationCommand { get; set; }
 
         /// <summary>
-        /// Commande liée au bouton "Quitter".
+        /// Commande liée au bouton "Annuler".
         /// </summary>
-        public ICommand QuitCommand { get; set; }
-        public GameCreationViewModel() {
-            partie2 = new Game("Partie123", 2,2,true,true);
-            CreationCommand = new RelayCommand(OnConnectionClick, true);
-            QuitCommand = new RelayCommand(OnQuitClick, true);
-           
+        public ICommand CancelCommand { get; set; }
+
+        public GameCreationViewModel()
+        {
+            Games = new ObservableCollection<Game>();
+
+            CreationCommand = new RelayCommand(OnCreationClick, true);
+            CancelCommand = new RelayCommand(OnCancelClick, true);
+
+            Games.Add(new Game("partie1", 2, 2500, true, true));
         }
 
-        private void OnQuitClick()
+        private void OnCancelClick()
         {
-            // Récupère la fenêtre principale de l'application.
-            Window view = Application.Current.MainWindow;
-
-            // Demande la confirmation avant de fermer l'application.
-            MessageBoxResult result = MessageBox.Show(view, "Voulez-vous quitter l'application ?", "Quitter l'application ?", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-
-            if(result == MessageBoxResult.OK)
-            {
-                view.Close();
-            }
+            // TODO : Retour à l'ecran d'acceuil
         }
 
-        private void OnConnectionClick()
+        private void OnCreationClick()
         {
-            // TODO : Mettre en place l'appel au module Data
+            // TODO : Mettre en place l'appel au module Data pour recuperer les parties en cours
             string messageBoxText = string.Empty;
             MessageBoxImage icon = MessageBoxImage.None;
             string windowCaption = "Résultat de création de partie";
             MessageBoxButton button = MessageBoxButton.OK;
 
-            if(partie1.Equals(partie2))
+            if(Games
+                .Any( game => game.Nom == partie1.Nom))
             {
                 messageBoxText = "Nom de Partie déjà existant";
                 icon = MessageBoxImage.Error;
-                
             }
             else
             {

@@ -35,5 +35,10 @@ namespace Client.ihm_main
             core.GameLaunched(game);
         }
 
+        
+        public void GameCreationFailed(string error)
+        {
+            core.GameCreationFailed(error);
+        }
     }
 }
