@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Client.ihm_main.DTO
+﻿namespace Client.ihm_main.DTO
 {
     // TODO : Remplacer par la classe de data.
     class Game
@@ -50,7 +44,7 @@ namespace Client.ihm_main.DTO
             Name = name;
             GameStatus = gameStatus;
         }
-        public Game(string name, int joueurs,int jeutons, bool spec,bool chat_spec)
+        public Game(string name, int joueurs, int jeutons, bool spec, bool chat_spec)
         {
             nom = name;
             nbJoueurs = joueurs;
@@ -77,7 +71,6 @@ namespace Client.ihm_main.DTO
                 Game game = (Game)obj;
                 return nom == game.nom;
             }
-        }
 
         public override int GetHashCode()
         {
