@@ -17,11 +17,6 @@ namespace Client
     public partial class App : Application
     {
         private IhmGameCore gameCore;
-
-        private void App_Startup(object sender, StartupEventArgs e)
-        {
-            gameCore = new IhmGameCore();
-        }
         private DataCore dataCore;
 
         private void App_Startup(object sender, StartupEventArgs e)
@@ -31,6 +26,8 @@ namespace Client
 			cli.Start("127.0.0.1", 10000);
 			cli.DataToComm.announceUser(new Shared.data.User(
 				1, "","", "", true, "Test", "Test", 12));
-        }
+
+			gameCore = new IhmGameCore();
+		}
     }
 }
