@@ -19,6 +19,44 @@ namespace Client.Data
             this.users = users;
             this.games = games;
         }
-    }
+		public void setGamesAndUsers(List<LightUser> listUsers, List<LightGame> listGame)
+		{
+		}
+		public void setLoggedOut()
+		{
+		}
+		public void updateMessages(ChatMessage message)
+		{
+		}
+		public void updateGame(Game game)
+		{
+		}
+		public void setGame(Game game)
+		{
+		}
+		public LightUser getProfile()
+		{
+			return new LightUser();
+
+		}
+		public void getProfileReturn(LightUser user)
+		{
+		}
+		public void removeUserFromListUsers(LightUser user)
+		{
+		}
+		public void addUserToListUsers(LightUser user)
+		{
+		}
+		public void removeGameFromListGames(LightGame game)
+		{
+		}
+		public void addGameToListGames(LightGame game)
+		{
+		}
+
+
+
+	}
 }
 
