@@ -85,10 +85,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="ihm-main\Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
-    <Page Include="ihm-game\Views\MainWindow.xaml">
+    <Page Include="ihm-game\Views\GameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -100,9 +100,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="comm\Class1.cs" />
-    <Compile Include="data\Class1.cs" />
-    <Compile Include="ihm-game\Class1.cs" />
     <Compile Include="ihm-main\DataToMain.cs" />
     <Compile Include="ihm-main\DTO\Game.cs" />
     <Compile Include="ihm-main\DTO\User.cs" />
@@ -114,6 +111,7 @@
     <Compile Include="ihm-main\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ihm-game\IhmGameCore.cs" />
     <Compile Include="ihm-game\ViewModels\GameViewModel.cs" />
     <Compile Include="ihm-game\ViewModels\MainWindowViewModel.cs" />
@@ -152,6 +150,10 @@
     </Compile>
     <Compile Include="ihm-main\Views\Pages\GameCreationView.xaml.cs">
       <DependentUpon>GameCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ihm-game\Views\GameWindow.xaml.cs">
+	  <DependentUpon>GameWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

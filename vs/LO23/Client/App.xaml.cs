@@ -9,8 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Client.ihm_game;
-using Client.ihm_main.Views;
-using Client.ihm_main.ViewModel;
+using Client.ihm_main;
 
 namespace Client
 {
@@ -33,20 +32,28 @@ namespace Client
         private IhmGameCore gameCore;
         private DataCore dataCore;
 
+        /// <summary>
+        /// Controleur principal de l'IHM-Main
+        /// </summary>
+        private IhmMainCore mainCore;
+
+        /// <summary>
+        /// Interface de communication de Data vers IHM-Main
+        /// </summary>
+        private DataToMain dataToMain;
+
         private void App_Startup(object sender, StartupEventArgs e)
         {
-            base.OnStartup(e);
+			dataToMain = new DataToMain(mainCore);
             this.dataCore = new DataCore();
             CommClient cli = new CommClient();
 			cli.Start("127.0.0.1", 10000);
 			cli.DataToComm.announceUser(new Shared.data.User(
 				1, "","", "", true, "Test", "Test", 12));
 
-            dataToMain = new DataToMain(mainCore);
-			
-            gameCore = new IhmGameCore();
+			gameCore = new IhmGameCore();
 
-            mainCore = new IhmMainCore();
-        }
+			mainCore = new IhmMainCore();
+		}
     }
 }

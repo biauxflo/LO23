@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.ihm_game.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +19,9 @@ namespace Client.ihm_game.Views
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GameWindow : Window
     {
-        public MainWindow()
+        public GameWindow()
         {
             InitializeComponent();
         }
