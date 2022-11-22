@@ -1,0 +1,87 @@
+﻿<Page x:Class="Client.ihm_game.Views.Pages.GameView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client.ihm_game.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GameView">
+
+    <Grid Background="#a2aebb">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Button Name="BT_parameter"  Grid.Row="0" Grid.Column="0"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=ParamCommand}">
+            <Image Source="/Client;component/ihm-game/Views/images/config.png"/>
+        </Button>
+        
+
+        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="2" Grid.Row="3"/>
+        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="5" Grid.Row="1"/>
+        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="8" Grid.Row="3"/>
+
+        <Button Name="BT_seCoucher"  Grid.Column="1" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=FoldCommand}">
+            <Image Source="/Client;component/ihm-game/Views/images/coucher.png"/>
+        </Button>
+
+        <Button Name="BT_egaler"  Grid.Column="4" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=CallCommand}">
+            <Image Source="/Client;component/ihm-game/Views/images/egaler.png"/>
+        </Button>
+
+        <Button Name="BT_doubler"  Grid.Column="7" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=RaiseCommand}">
+            <Image Source="/Client;component/ihm-game/Views/images/doubler.png"/>
+        </Button>
+        <Viewbox Grid.Column="4" Grid.Row="7" StretchDirection="DownOnly">
+            <TextBlock Text="20" Name="TBlock_call" Background="Transparent" MaxHeight="50" MaxWidth="50"/>
+        </Viewbox>
+        <!-- Pour relier le contenu du texte au code, mettre le champs Text="{Binding <Game.callValue>}"   puis dans le code relier avec un setter-->
+
+        <TextBlock Text="test" Grid.Column="7" Grid.Row="7" Name="TB_raise" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <TextBlock Text="User 1" Name="TBlock_user1" Grid.Column="1" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Mise 1" Name="TBlock_bet1" Grid.Column="3" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="solde 1" Name="TBlock_balance1" Grid.Column="1" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="3" Grid.Row="3" Height="30"  Margin="2.667,37,56.333,2" />
+
+        <TextBlock Text="User 2" Name="TBlock_user2" Grid.Column="4" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Cards 2" Grid.Column="5" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Mise 2" Name="TBlock_bet2" Grid.Column="4" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="4" Grid.Row="4" Height="30" Margin="2.667,37,56.333,2"/>
+        <TextBlock Text="solde 2" Name="TBlock_balance2" Grid.Column="4" Grid.Row="6" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <TextBlock Text="User 3" Name="TBlock_user3" Grid.Column="4" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Mise 3" Name="TBlock_bet3" Grid.Column="4" Grid.Row="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="4" Grid.Row="2" Height="30" Margin="2.667,37,56.333,2"/>
+        <TextBlock Text="solde 3" Name="TBlock_balance3" Grid.Column="3" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <TextBlock Text="Mise 4" Name="TBlock_bet4" Grid.Column="7" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="7" Grid.Row="3" Height="30" Margin="2.667,37,56.333,2"/>
+        <TextBlock Text="User 4" Name="TBlock_user4" Grid.Column="9" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="solde 4" Name="TBlock_balance4" Grid.Column="9" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <TextBlock Text="Pot" Name="TBlock_pot" Grid.Column="5" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image Source="/Client;component/ihm-game/Views/images/pot.png" Grid.Column="5" Grid.Row="3" Margin="8.667,0,19.333,10"/>
+
+    </Grid>
+</Page>
