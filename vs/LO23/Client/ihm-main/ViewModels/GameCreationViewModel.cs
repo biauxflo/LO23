@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Client.ihm_main.DTO;
+﻿using Client.ihm_main.DTO;
 using GalaSoft.MvvmLight.CommandWpf;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using System.Collections.ObjectModel;
 
 namespace Client.ihm_main.ViewModels
 {
@@ -36,7 +32,9 @@ namespace Client.ihm_main.ViewModels
         /// </summary>
         public ICommand CancelCommand { get; set; }
 
-        public GameCreationViewModel()
+        private readonly IhmMainCore core;
+
+        public GameCreationViewModel(IhmMainCore core)
         {
             Games = new ObservableCollection<Game>();
 
@@ -44,11 +42,13 @@ namespace Client.ihm_main.ViewModels
             CancelCommand = new RelayCommand(OnCancelClick, true);
 
             Games.Add(new Game("partie1", 2, 2500, true, true));
+
+            this.core = core;
         }
 
         private void OnCancelClick()
         {
-            // TODO : Retour à l'ecran d'acceuil
+            core.BackToHomePage();
         }
 
         private void OnCreationClick()
@@ -60,7 +60,7 @@ namespace Client.ihm_main.ViewModels
             MessageBoxButton button = MessageBoxButton.OK;
 
             if(Games
-                .Any( game => game.Nom == partie1.Nom))
+                .Any(game => game.Nom == partie1.Nom))
             {
                 messageBoxText = "Nom de Partie déjà existant";
                 icon = MessageBoxImage.Error;

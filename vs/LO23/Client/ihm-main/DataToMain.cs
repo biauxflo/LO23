@@ -1,5 +1,4 @@
-﻿using Client.ihm_main.DTO;
-using Shared.interfaces;
+﻿using Shared.interfaces;
 
 namespace Client.ihm_main
 {
@@ -23,6 +22,11 @@ namespace Client.ihm_main
         public void ConnectionSucceed(string username)
         {
             core.ConnectionSucceed(username);
+        }
+
+        public void GameCreationFailed(string error)
+        {
+            core.GameCreationFailed(error);
         }
 
         public void GameListUpdated(string game)

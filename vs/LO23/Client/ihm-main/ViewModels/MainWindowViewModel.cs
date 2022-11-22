@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace Client.ihm_main.ViewModels
 {
-    internal class MainWindowViewModel
+    internal class MainWindowViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
