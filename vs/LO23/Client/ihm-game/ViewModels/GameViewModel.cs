@@ -46,7 +46,8 @@ namespace Client.ihm_game.ViewModels
             {
                 new Player(20,"joueur1","joueur1.png"),
                 new Player(30,"joueur2", "joueur2.png"),
-                new Player(30,"joueur3", "joueur3.png")
+                new Player(30,"joueur3", "joueur3.png"),
+                new Player(30,"joueur4","joueur4.png")
             };
 
             lightgame = new LightGame(3, players, 200);
@@ -85,6 +86,7 @@ namespace Client.ihm_game.ViewModels
         private void Display()
         {
             //Fonctions à remplacer par les fonctions qui seront implémenter dans IHMGameCallsData
+
 
         }
     }
