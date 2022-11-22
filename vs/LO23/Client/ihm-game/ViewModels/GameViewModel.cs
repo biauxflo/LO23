@@ -19,9 +19,22 @@ namespace Client.ihm_game.ViewModels
         // exemple: <Button Name="BT_parameter"  Grid.Row="0" Grid.Column="0"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=ParamCommand}">
         public ICommand ParamCommand { get; set; }
 
+        public ICommand FoldCommand { get; set; }
+
+        public ICommand CallCommand { get; set; }
+
+        public ICommand RaiseCommand { get; set; }
+
         public GameViewModel()
         {
             ParamCommand = new RelayCommand(OnParamClick);
+
+            FoldCommand = new RelayCommand(OnFoldClick);
+
+            CallCommand = new RelayCommand(OnCallClick);
+
+            RaiseCommand = new RelayCommand(OnRaiseClick);
+
         }
         
         // fonction lié au bouton
@@ -37,5 +50,19 @@ namespace Client.ihm_game.ViewModels
             MessageBox.Show("message dans la fenêtre", "nom de la fenêtre", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
         }
 
+        private void OnFoldClick()
+        {
+            MessageBox.Show("bouton fold", "bouton fold", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+        }
+
+        private void OnCallClick()
+        {
+            MessageBox.Show("bouton call", "bouton call", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+        }
+
+        private void OnRaiseClick()
+        {
+            MessageBox.Show("bouton raise", "bouton raise", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+        }
     }
 }
