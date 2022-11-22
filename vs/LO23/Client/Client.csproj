@@ -88,8 +88,6 @@
     </Compile>
     <Compile Include="comm\Class1.cs" />
     <Compile Include="data\Class1.cs" />
-    <Compile Include="ihm-game\DTO\Game.cs" />
-    <Compile Include="ihm-game\DTO\LightGame.cs" />
     <Compile Include="ihm-game\IhmGameCore.cs" />
     <Compile Include="ihm-game\ViewModels\GameViewModel.cs" />
     <Compile Include="ihm-game\ViewModels\MainWindowViewModel.cs" />

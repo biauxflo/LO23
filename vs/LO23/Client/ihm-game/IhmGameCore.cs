@@ -21,12 +21,11 @@ namespace Client.ihm_game
 
         private readonly Page gamePage = new GameView();
 
-        private readonly GameViewModel gameViewModel;
+        private readonly GameViewModel gameViewModel = new GameViewModel();
 
 
         public IhmGameCore()
         {
-            gameViewModel = new GameViewModel(this);
             mainWindow.DataContext = mainWindowViewModel;
             gamePage.DataContext = gameViewModel;
 
