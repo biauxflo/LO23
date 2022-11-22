@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
-
-
-
-
-
+using Client.ihm_game.DTO;
+using System.Collections.ObjectModel;
 namespace Client.ihm_game.ViewModels
 {
     internal class GameViewModel
@@ -19,9 +16,39 @@ namespace Client.ihm_game.ViewModels
         // exemple: <Button Name="BT_parameter"  Grid.Row="0" Grid.Column="0"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=ParamCommand}">
         public ICommand ParamCommand { get; set; }
 
-        public GameViewModel()
+        public ICommand FoldCommand { get; set; }
+
+        public ICommand CallCommand { get; set; }
+
+        public ICommand RaiseCommand { get; set; }
+
+        public LightGame lightgame { get; set; }
+
+        private readonly IhmGameCore core;
+
+        private List<Player> players;
+        public GameViewModel(IhmGameCore core)
         {
             ParamCommand = new RelayCommand(OnParamClick);
+
+            FoldCommand = new RelayCommand(OnFoldClick);
+
+            CallCommand = new RelayCommand(OnCallClick);
+
+            RaiseCommand = new RelayCommand(OnRaiseClick);
+
+            players = new List<Player>
+            {
+                new Player(20,"joueur1","joueur1.png"),
+                new Player(30,"joueur2", "joueur2.png"),
+                new Player(30,"joueur3", "joueur3.png"),
+                new Player(30,"joueur4","joueur4.png")
+            };
+
+            lightgame = new LightGame(3, players, 200);
+
+            this.core = core;
+            Display();
         }
         
         // fonction lié au bouton
@@ -37,5 +64,25 @@ namespace Client.ihm_game.ViewModels
             MessageBox.Show("message dans la fenêtre", "nom de la fenêtre", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
         }
 
+        private void OnFoldClick()
+        {
+            MessageBox.Show("bouton fold", "bouton fold", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+        }
+
+        private void OnCallClick()
+        {
+            MessageBox.Show("bouton call", "bouton call", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+        }
+
+        private void OnRaiseClick()
+        {
+            MessageBox.Show("bouton raise", "bouton raise", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+        }
+        private void Display()
+        {
+            //Fonctions à remplacer par les fonctions qui seront implémenter dans IHMGameCallsData
+
+
+        }
     }
 }
