@@ -8,11 +8,6 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
 using Client.ihm_game.DTO;
 using System.Collections.ObjectModel;
-
-
-
-
-
 namespace Client.ihm_game.ViewModels
 {
     internal class GameViewModel
