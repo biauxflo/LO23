@@ -1,8 +1,6 @@
-﻿using Client.ihm_main.DTO;
-using Client.ihm_main.ViewModels;
+﻿using Client.ihm_main.ViewModels;
 using Client.ihm_main.Views;
 using Client.ihm_main.Views.Pages;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -24,11 +22,6 @@ namespace Client.ihm_main
         /// </summary>
         private readonly Page connectionPage = new ConnectionView();
 
-        internal void GameListUpdated(Game game)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// View Model de la page de connexion.
         /// </summary>
@@ -42,7 +35,7 @@ namespace Client.ihm_main
         /// <summary>
         /// View Model de creation de Partie.
         /// </summary>
-        private readonly GameCreationViewModel gameCreationViewModel = new GameCreationViewModel();
+        private readonly GameCreationViewModel gameCreationViewModel;
 
         /// <summary>
         /// Page d'acceuil une fois connecté.
@@ -52,12 +45,15 @@ namespace Client.ihm_main
         /// <summary>
         /// View Model de la page d'acceuil.
         /// </summary>
-        private readonly HomeViewModel homeViewModel = new HomeViewModel();
+        private readonly HomeViewModel homeViewModel;
 
         #endregion
 
         public IhmMainCore()
         {
+            gameCreationViewModel = new GameCreationViewModel(this);
+            homeViewModel = new HomeViewModel(this);
+
             //Association des vues et de leur view model
             mainWindow.DataContext = mainWindowViewModel;
             connectionPage.DataContext = connectionViewModel;
@@ -65,9 +61,25 @@ namespace Client.ihm_main
             homePage.DataContext = homeViewModel;
 
             // Page active de la fenetre
-            mainWindowViewModel.ActivePage = connectionPage;
+            mainWindowViewModel.ActivePage = homePage;
 
             mainWindow.Show();
+        }
+
+        /// <summary>
+        /// Met la page active sur la page de création de partie.
+        /// </summary>
+        internal void OpenGameCreationPage()
+        {
+            mainWindowViewModel.ActivePage = gameCreationPage;
+        }
+
+        /// <summary>
+        /// Met la page active sur la page d'acceuil.
+        /// </summary>
+        internal void BackToHomePage()
+        {
+            mainWindowViewModel.ActivePage = homePage;
         }
 
         /// <summary>
@@ -89,7 +101,7 @@ namespace Client.ihm_main
             MessageBox.Show(mainWindow, "OK", $"Connexion réussie : Bonjour {username}", MessageBoxButton.OK);
             mainWindowViewModel.ActivePage = homePage;
         }
-        
+
         /// <summary>
         /// Indique que la partie n'a pas pu être créée.
         /// </summary>

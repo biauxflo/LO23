@@ -35,10 +35,10 @@
                             <Button Margin="5" Width="auto" Command="{Binding DataContext.GameLaunchingCommand, RelativeSource={RelativeSource AncestorType={x:Type ScrollViewer}}}" CommandParameter="{Binding .}">
                                 <Button.Content>
                                     <StackPanel>
-                                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Nom}" HorizontalAlignment="Center"/>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Nombres de joueurs : "/>
-                                            <TextBlock Text="{Binding NbPeople}"/>
+                                            <TextBlock Text="{Binding NbJoueurs}"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Button.Content>

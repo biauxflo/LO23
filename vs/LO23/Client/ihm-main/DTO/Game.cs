@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Client.ihm_main.DTO
+﻿namespace Client.ihm_main.DTO
 {
     internal class Game
     {
+        // TODO : remplacer par la classe de DATA
         private string nom = string.Empty;
         public string Nom
         {
@@ -53,25 +48,24 @@ namespace Client.ihm_main.DTO
                 chat_spectateurs = value;
             }
         }
-        public Game(string name, int joueurs,int jeutons, bool spec,bool chat_spec)
+        public Game(string name, int joueurs, int jeutons, bool spec, bool chat_spec)
         {
             nom = name;
             nbJoueurs = joueurs;
             nbJoueurs = jeutons;
             spectateurs = spec;
             chat_spectateurs = chat_spec;
-            
+        }
+
+        public Game(string name, int joueurs)
+        {
+            nom = name;
+            nbJoueurs = joueurs;
         }
 
         public Game()
         {
 
-        }
-
-        {
-        }
-
-        {
         }
     }
 }

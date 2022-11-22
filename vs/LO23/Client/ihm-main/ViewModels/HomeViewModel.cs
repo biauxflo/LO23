@@ -1,11 +1,6 @@
 ﻿using Client.ihm_main.DTO;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Client.ihm_main.ViewModels
@@ -31,19 +26,24 @@ namespace Client.ihm_main.ViewModels
         /// </summary>
         public ICommand GameLaunchingCommand { get; set; }
 
-        public HomeViewModel()
-        {
-            Games = new ObservableCollection<Game>();
+        private readonly IhmMainCore core;
 
-            Games.Add(new Game("partie 1",1,1));
-            Games.Add(new Game("partie 2",1,2));
-            Games.Add(new Game("partie 3",1,3));
-            Games.Add(new Game("partie 4", 1, 4));
-            Games.Add(new Game("partie 5", 1, 5));
-            Games.Add(new Game("partie 6", 1, 6));
+        public HomeViewModel(IhmMainCore core)
+        {
+            Games = new ObservableCollection<Game>
+            {
+                new Game("partie 1", 1),
+                new Game("partie 2", 1),
+                new Game("partie 3", 1),
+                new Game("partie 4", 1),
+                new Game("partie 5", 1),
+                new Game("partie 6", 1)
+            };
 
             GameCreationCommand = new RelayCommand(CreateNewGame, true);
             GameLaunchingCommand = new RelayCommand<object>(LaunchGame, true);
+
+            this.core = core;
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Client.ihm_main.ViewModels
         /// </summary>
         private void CreateNewGame()
         {
-            // TODO : Changer l'écran 
+            core.OpenGameCreationPage();
         }
     }
 }
