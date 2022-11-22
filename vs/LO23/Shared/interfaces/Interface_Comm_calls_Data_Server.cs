@@ -11,6 +11,13 @@ namespace Shared.interfaces
     {
         LightUser getUser();
         List<LightUser> registerUser(LightUser lightUser);
-        void removeUser(int idJoueur);
+        void removeUser(int playerId);
+		List<int> getPlayersOfGame(Game game);
+		Game addPlayerToGame(int playerId);
+
+		//Game createNewGame(GameOptions options);
+		void uneregisterUser(int playerId);
+	
+
     }
 }
