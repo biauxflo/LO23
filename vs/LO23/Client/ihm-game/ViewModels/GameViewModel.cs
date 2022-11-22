@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
+using Client.ihm_game.DTO;
+using System.Collections.ObjectModel;
 
 
 
@@ -25,7 +27,12 @@ namespace Client.ihm_game.ViewModels
 
         public ICommand RaiseCommand { get; set; }
 
-        public GameViewModel()
+        public LightGame lightgame { get; set; }
+
+        private readonly IhmGameCore core;
+
+        private List<Player> players;
+        public GameViewModel(IhmGameCore core)
         {
             ParamCommand = new RelayCommand(OnParamClick);
 
@@ -35,6 +42,17 @@ namespace Client.ihm_game.ViewModels
 
             RaiseCommand = new RelayCommand(OnRaiseClick);
 
+            players = new List<Player>
+            {
+                new Player(20,"joueur1","joueur1.png"),
+                new Player(30,"joueur2", "joueur2.png"),
+                new Player(30,"joueur3", "joueur3.png")
+            };
+
+            lightgame = new LightGame(3, players, 200);
+
+            this.core = core;
+            Display();
         }
         
         // fonction lié au bouton
@@ -63,6 +81,11 @@ namespace Client.ihm_game.ViewModels
         private void OnRaiseClick()
         {
             MessageBox.Show("bouton raise", "bouton raise", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+        }
+        private void Display()
+        {
+            //Fonctions à remplacer par les fonctions qui seront implémenter dans IHMGameCallsData
+
         }
     }
 }
