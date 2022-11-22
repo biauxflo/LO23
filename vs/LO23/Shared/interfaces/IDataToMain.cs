@@ -25,5 +25,11 @@
         /// </summary>
         /// <param name="game">Partie à lancer.</param>
         void GameLaunched(string game);
+
+        /// <summary>
+        /// Indique qu'une demande de création de partie n'a pas pu être créée.
+        /// </summary>
+        /// <param name="error">Erreur lors de la création.</param>
+        void GameCreationFailed(string error);
     }
 }

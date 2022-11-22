@@ -6,38 +6,61 @@ using System.Threading.Tasks;
 
 namespace Client.ihm_main.DTO
 {
-    // TODO : Remplacer par la classe de data.
-    class Game
+    internal class Game
     {
-        private string name = string.Empty;
-        public string Name
+        private string nom = string.Empty;
+        public string Nom
         {
-            get => name;
+            get => nom;
             set
             {
-                name = value;
+                nom = value;
             }
         }
-
-        private int nbPeople = 0;
-        public int NbPeople
+        private int nbJoueurs = 0;
+        public int NbJoueurs
         {
-            get => nbPeople;
+            get => nbJoueurs;
             set
             {
-                nbPeople = value;
+                nbJoueurs = value;
             }
         }
-
-        // 1 : partie en cours
-        private int gameStatus = default;
-        public int GameStatus
+        private int nbJeutons = 0;
+        public int NbJeutons
         {
-            get => gameStatus;
+            get => nbJeutons;
             set
             {
-                gameStatus = value;
+                nbJeutons = value;
             }
+        }
+        private bool spectateurs = false;
+        public bool Spectateurs
+        {
+            get => spectateurs;
+            set
+            {
+                spectateurs = value;
+            }
+        }
+        private bool chat_spectateurs = false;
+        public bool Chat_spectateurs
+        {
+            get => chat_spectateurs;
+            set
+            {
+                chat_spectateurs = value;
+            }
+        }
+        public Game(string name, int joueurs,int jeutons, bool spec,bool chat_spec)
+        {
+            nom = name;
+            nbJoueurs = joueurs;
+            nbJoueurs = jeutons;
+            spectateurs = spec;
+            chat_spectateurs = chat_spec;
+            
         }
 
         public Game()
@@ -45,17 +68,10 @@ namespace Client.ihm_main.DTO
 
         }
 
-        public Game(string name, int gameStatus)
         {
-            Name = name;
-            GameStatus = gameStatus;
         }
 
-        public Game(string name, int gameStatus, int nbPeople)
         {
-            Name = name;
-            GameStatus = gameStatus;
-            NbPeople = nbPeople;
         }
     }
 }
