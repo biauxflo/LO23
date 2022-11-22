@@ -1,4 +1,4 @@
-﻿using Client.ihm_main.ViewModel;
+﻿using Client.ihm_game.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +14,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Client.ihm_main.Views
+namespace Client.ihm_game.Views
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GameWindow : Window
     {
-        public MainWindow()
+        public GameWindow()
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();

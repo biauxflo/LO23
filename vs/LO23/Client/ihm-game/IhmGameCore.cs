@@ -13,7 +13,7 @@ namespace Client.ihm_game
 {
     internal class IhmGameCore
     {
-        private readonly MainWindow mainWindow = new MainWindow();
+        private readonly GameWindow mainWindow = new GameWindow();
 
 
         private readonly MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
