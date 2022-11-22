@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.ihm_game.DTO
+namespace Client.ihm_game
 {
-    class Game
+    class Class1
     {
     }
 }
