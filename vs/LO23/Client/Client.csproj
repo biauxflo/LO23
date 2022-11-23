@@ -101,8 +101,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ihm-main\DataToMain.cs" />
-    <Compile Include="ihm-main\DTO\Game.cs" />
-    <Compile Include="ihm-main\DTO\User.cs" />
     <Compile Include="ihm-main\IhmMainCore.cs" />
     <Compile Include="ihm-main\ViewModels\ConnectionViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\HomeViewModel.cs" />
@@ -152,7 +150,7 @@
       <DependentUpon>GameCreationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ihm-game\Views\GameWindow.xaml.cs">
-	  <DependentUpon>GameWindow.xaml</DependentUpon>
+      <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">

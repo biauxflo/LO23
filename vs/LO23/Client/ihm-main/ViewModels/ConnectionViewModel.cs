@@ -1,4 +1,4 @@
-﻿using Client.ihm_main.DTO;
+﻿using Shared.data;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows;
 using System.Windows.Input;
@@ -45,7 +45,7 @@ namespace Client.ihm_main.ViewModels
 
         public ConnectionViewModel()
         {
-            user2 = new User("utilisateur", "utilisateur123");
+            user2 = new User(1,"utilisateur", null,"utilisateur123", true, "test", "test", 18);
             ConnectionCommand = new RelayCommand(OnConnectionClick, true);
             QuitCommand = new RelayCommand(OnQuitClick, true);
         }

@@ -18,8 +18,14 @@ namespace Shared.data
         public int highestBet { set; get; }
         public int nbNoRise { set; get; }
         public List<ChatMessage> chat { set; get; }
+		public bool CanSpecJoin { get; set; }
+		public bool CanSpecChat { get; set; }
+		public string Name { get;set; }
+		public int NbPlayers { get;set; }
+		public int NbTokens { get;set;
+		}
 
-        public Game(int smallBlind, int bingBLind)
+		public Game(int smallBlind, int bingBLind)
         {
             this.rounds = new List<Round>();
             this.turn = 0;
@@ -33,7 +39,32 @@ namespace Shared.data
             this.chat = new List<ChatMessage>();
         }
 
-        public Game(
+		// For test purpose
+		// TODO : Delete later
+		public Game()
+		{
+		}
+
+		// For test purpose
+		// TODO : Delete later
+		public Game(string name, int nbPlayers, int nbTokens, bool canSpecJoin, bool canSpecChat )
+		{
+			this.Name = name;
+			this.NbPlayers = nbPlayers;
+			this.NbTokens = nbTokens;
+			this.CanSpecJoin = canSpecJoin;
+			this.CanSpecChat = canSpecChat;
+		}
+
+		// For test purpose
+		// TODO : Delete later
+		public Game(string name, int nbPlayers)
+		{
+			this.Name = name;
+			this.NbPlayers = nbPlayers;
+		}
+
+		public Game(
             List<Round> rounds,
             int turn, int smallBlind,
             int bingBLind,

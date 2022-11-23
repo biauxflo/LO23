@@ -1,5 +1,5 @@
-﻿using Client.ihm_main.DTO;
-using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.Command;
+using Shared.data;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
