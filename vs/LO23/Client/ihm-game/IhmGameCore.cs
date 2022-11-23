@@ -11,30 +11,31 @@ using System.Windows.Controls;
 
 namespace Client.ihm_game
 {
-    internal class IhmGameCore
-    {
-        private readonly MainWindow mainWindow = new MainWindow();
+	internal class IhmGameCore
+	{
+		private readonly MainWindow mainWindow = new MainWindow();
 
 
-        private readonly MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
+		private readonly MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
 
 
-        private readonly Page gamePage = new GameView();
+		private readonly Page gamePage = new GameView();
 
-        private readonly GameViewModel gameViewModel = new GameViewModel();
-
-
-        public IhmGameCore()
-        {
-            mainWindow.DataContext = mainWindowViewModel;
-            gamePage.DataContext = gameViewModel;
-
-            mainWindowViewModel.ActivePage = gamePage;
-
-            mainWindow.Show();
-
-        }
+		private readonly GameViewModel gameViewModel;
 
 
-    }
+		public IhmGameCore()
+		{
+			gameViewModel = new GameViewModel(this);
+			mainWindow.DataContext = mainWindowViewModel;
+			gamePage.DataContext = gameViewModel;
+
+			mainWindowViewModel.ActivePage = gamePage;
+
+			mainWindow.Show();
+
+		}
+
+
+	}
 }
