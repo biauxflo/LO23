@@ -1,4 +1,4 @@
-﻿using Client.ihm_main.DTO;
+﻿using Shared.data;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -60,7 +60,7 @@ namespace Client.ihm_main.ViewModels
             MessageBoxButton button = MessageBoxButton.OK;
 
             if(Games
-                .Any(game => game.Nom == partie1.Nom))
+                .Any(game => game.Name == partie1.Name))
             {
                 messageBoxText = "Nom de Partie déjà existant";
                 icon = MessageBoxImage.Error;

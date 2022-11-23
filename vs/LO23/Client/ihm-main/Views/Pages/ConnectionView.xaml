@@ -5,8 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.ihm_main.Views"
       xmlns:viewmodels="clr-namespace:Client.ihm_main.ViewModels"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="ConnectionView">
     <Page.DataContext>
         <viewmodels:ConnectionViewModel/>
@@ -53,7 +51,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" Grid.Row="1" Text="Login" FontSize="22" />
-            <TextBox Grid.Column="1"  Grid.Row="3"  Name="TB_Login"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Login" Text="{Binding User1.Login}"/>
+            <TextBox Grid.Column="1"  Grid.Row="3"  Name="TB_Login"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Login" Text="{Binding User1.username}"/>
         </Grid>
         <Grid Grid.Row="6" Grid.Column="2">
             <Grid.RowDefinitions>
@@ -69,7 +67,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" Grid.Row="1" Text="Mot de passe" FontSize="22" />
-            <TextBox Grid.Column="1" Grid.Row="3"  Name="TB_Password"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" Text="{Binding User1.Password}"/>
+            <TextBox Grid.Column="1" Grid.Row="3"  Name="TB_Password"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" Text="{Binding User1.password}"/>
         </Grid>
         <Grid Grid.Row="8" Grid.Column="2">
             <Grid.ColumnDefinitions>
