@@ -11,16 +11,18 @@ namespace Server.Data
         private static List<LightUser> lightUsers = new List<LightUser>();
         private static List<LightGame> games = new List<LightGame>();
 
-        public Comm_calls_Data_Server_Impl()
+		public Comm_calls_Data_Server_Impl()
+		{
+		}
+
+		public Comm_calls_Data_Server_Impl(LightUser lightUser)
         {
-            this.lightUser = new LightUser();
-            this.registerUser(this.lightUser);
+			this.lightUser = lightUser;
         }
-        
+
         public LightUser getUser()
         {
             return this.lightUser;
-       
         }
 
         public List<LightUser> registerUser(LightUser lightUser)
@@ -41,12 +43,17 @@ namespace Server.Data
             }
         }
 
-        public Comm_calls_Data_Server_Impl getCommCallsDataServerImpl()
+		public void printLightUserList()
+		{
+			foreach(LightUser lightUser in lightUsers)
+			{
+				Console.WriteLine(lightUser.id + " " + lightUser.username);
+			}
+		}
+
+		public Comm_calls_Data_Server_Impl getCommCallsDataServerImpl()
         {
             return this;
         }
-
     }
-
 }
-
