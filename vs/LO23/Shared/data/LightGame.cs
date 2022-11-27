@@ -28,6 +28,11 @@ namespace Shared.data
         {
         }
 
+        // Default constructor
+        public LightGame()
+        {
+        }
+
         public LightGame(int id)
         {
             this.id = id;
