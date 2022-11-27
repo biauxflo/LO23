@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Shared.data
 {
-    public class Game
+	// Nina added inheritance from LightGame
+    public class Game : LightGame
     {
         public List<Round> rounds { get; set; }
         public int turn { set; get; }
@@ -25,9 +26,15 @@ namespace Shared.data
 		public int NbTokens { get;set; }
 		}
 
-		public Game(int smallBlind, int bingBLind)
-        {
-            this.rounds = new List<Round>();
+		// For test purpose
+		// TODO : Delete later
+		public Game()
+		{
+		}
+
+		public Game(int id, int smallBlind, int bingBLind) : base(id)
+		{
+			this.rounds = new List<Round>();
             this.turn = 0;
             this.smallBlind = smallBlind;
             this.bingBLind = bingBLind;
@@ -39,13 +46,7 @@ namespace Shared.data
             this.chat = new List<ChatMessage>();
         }
 
-		// For test purpose
-		// TODO : Delete later
-		public Game()
-		{
-		}
-
-		// For test purpose
+        // For test purpose
 		// TODO : Delete later
 		public Game(string name, int nbPlayers, int nbTokens, bool canSpecJoin, bool canSpecChat )
 		{
@@ -64,29 +65,12 @@ namespace Shared.data
 			this.NbPlayers = nbPlayers;
 		}
 
-		public Game(
-            List<Round> rounds,
-            int turn, int smallBlind,
-            int bingBLind,
-            int currentPLayerIndex,
-            Phase currentPhase,
-            int pot,
-            int highestBet,
-            int nbNoRise,
-            List<ChatMessage> chat
-        ) {
-            // Not sure if we really need that but it is present in case
-            // Prefer using the constructor above
-            this.rounds = rounds;
-            this.turn = turn;
-            this.smallBlind = smallBlind;
-            this.bingBLind = bingBLind;
-            this.currentPLayerIndex = currentPLayerIndex;
-            this.currentPhase = currentPhase;
-            this.pot = pot;
-            this.highestBet = highestBet;
-            this.nbNoRise = nbNoRise;
-            this.chat = chat;
-        }
+		public int GoToNextPlayer()
+		{
+			int nextPlayerIndex = this.currentPLayerIndex + 1 <= this.players.Count ? this.currentPLayerIndex + 1 : 0;
+			this.currentPLayerIndex = nextPlayerIndex;
+
+			return nextPlayerIndex;
+		}
     }
 }

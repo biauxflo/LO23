@@ -23,6 +23,11 @@ namespace Shared.data
         public List<User> spectators { get; set; }
         public List<User> lobby { get; set; }
 
+        // Default constructor
+        public LightGame()
+        {
+        }
+
         public LightGame(int id)
         {
             this.id = id;
