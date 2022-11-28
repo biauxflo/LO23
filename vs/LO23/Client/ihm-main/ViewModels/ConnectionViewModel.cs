@@ -2,36 +2,43 @@
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows;
 using System.Windows.Input;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Client.ihm_main.ViewModels
 {
-    internal class ConnectionViewModel
+    internal class ConnectionViewModel : INotifyPropertyChanged
     {
         /// <summary>
         /// Utilisateur essaynt de se connecter.
         /// </summary>
-        private User user1 = new User();
-        public User User1
+        private User connectionUser = new User();
+        public User ConnectionUser
         {
-            get => user1;
+            get => connectionUser;
             set
             {
-                user1 = value;
+                connectionUser = value;
+				OnPropertyChanged();
             }
         }
 
         /// <summary>
         /// Utilisateur test (pour verifier que le mecanisme de connexion fonctionne).
         /// </summary>
+		// TODO : Supprimer lors de l'integration
         private User user2;
-        public User User2
+		public User User2
         {
             get => user2;
             set
             {
                 user2 = value;
+				OnPropertyChanged();
             }
         }
+		public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Commande liée au bouton de connexion.
@@ -50,6 +57,20 @@ namespace Client.ihm_main.ViewModels
             QuitCommand = new RelayCommand(OnQuitClick, true);
         }
 
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+
+		/// <summary>
+		/// Remet à zéro le formulaire de connexion.
+		/// </summary>
+		internal void Reset()
+		{
+			ConnectionUser.username = string.Empty;
+			ConnectionUser.password = string.Empty;
+		}
+
         /// <summary>
         /// Mécanisme de connexion.
         /// </summary>
@@ -61,7 +82,7 @@ namespace Client.ihm_main.ViewModels
             string windowCaption = "Résultat de connexion";
             MessageBoxButton button = MessageBoxButton.OK;
 
-            if(user2.Equals(user1))
+            if(user2.Equals(ConnectionUser))
             {
                 messageBoxText = "Connexion réussie";
                 icon = MessageBoxImage.Information;
@@ -91,5 +112,6 @@ namespace Client.ihm_main.ViewModels
                 view.Close();
             }
         }
-    }
+
+	}
 }

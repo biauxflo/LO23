@@ -4,23 +4,30 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Client.ihm_main.ViewModels
 {
-    internal class GameCreationViewModel
+    internal class GameCreationViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Game> Games { get; set; }
-
-        //Partie en cours de création
-        private Game partie1 = new Game();
+        private readonly IhmMainCore core;
+        
+        /// <summary>
+		/// Partie en cours de création.
+		/// </summary>
+		private Game gameInCreation = new Game();
         public Game Partie1
         {
-            get => partie1;
+            get => gameInCreation;
             set
             {
-                partie1 = value;
+                gameInCreation = value;
+				OnPropertyChanged();
             }
         }
+
+		public ObservableCollection<Game> Games { get; set; }
 
         /// <summary>
         /// Commande liée au bouton de creation.
@@ -32,9 +39,10 @@ namespace Client.ihm_main.ViewModels
         /// </summary>
         public ICommand CancelCommand { get; set; }
 
-        private readonly IhmMainCore core;
 
-        public GameCreationViewModel(IhmMainCore core)
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		public GameCreationViewModel(IhmMainCore core)
         {
             Games = new ObservableCollection<Game>();
 
@@ -46,8 +54,14 @@ namespace Client.ihm_main.ViewModels
             this.core = core;
         }
 
-        private void OnCancelClick()
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+
+		private void OnCancelClick()
         {
+			Partie1 = null;
             core.BackToHomePage();
         }
 
@@ -60,7 +74,7 @@ namespace Client.ihm_main.ViewModels
             MessageBoxButton button = MessageBoxButton.OK;
 
             if(Games
-                .Any(game => game.Name == partie1.Name))
+                .Any(game => game.Name == gameInCreation.Name))
             {
                 messageBoxText = "Nom de Partie déjà existant";
                 icon = MessageBoxImage.Error;
@@ -70,7 +84,6 @@ namespace Client.ihm_main.ViewModels
                 messageBoxText = "Création réussie";
                 icon = MessageBoxImage.Information;
             }
-
             MessageBox.Show(messageBoxText, windowCaption, button, icon, MessageBoxResult.OK);
         }
 

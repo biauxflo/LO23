@@ -1,13 +1,34 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Shared.data;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Client.ihm_main.ViewModels
 {
-    internal class HomeViewModel
+    internal class HomeViewModel : INotifyPropertyChanged
     {
-        /// <summary>
+		/// <summary>
+		/// Core principal du module IhmMain.
+		/// </summary>
+        private readonly IhmMainCore core;
+        
+		/// <summary>
+		/// Utilisateur crée avec le formulaire de connexion.
+		/// </summary>
+		private User connectedUser;
+		public User ConnectedUser
+		{
+			get => connectedUser;
+			set
+			{
+				connectedUser = value;
+				OnPropertyChanged();
+			}
+		}
+
+		/// <summary>
         /// Liste des parties accessibles.
         /// </summary>
         public ObservableCollection<Game> Games
@@ -26,9 +47,9 @@ namespace Client.ihm_main.ViewModels
         /// </summary>
         public ICommand GameLaunchingCommand { get; set; }
 
-        private readonly IhmMainCore core;
-
-        public HomeViewModel(IhmMainCore core)
+		public event PropertyChangedEventHandler PropertyChanged;
+        
+		public HomeViewModel(IhmMainCore core)
         {
             Games = new ObservableCollection<Game>
             {
@@ -45,12 +66,16 @@ namespace Client.ihm_main.ViewModels
 
             this.core = core;
         }
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
-        /// <summary>
-        /// Lance la partie donnée en paramètre.
-        /// </summary>
-        /// <param name="obj">Partie à lancer.</param>
-        private void LaunchGame(object obj)
+		/// <summary>
+		/// Lance la partie donnée en paramètre.
+		/// </summary>
+		/// <param name="obj">Partie à lancer.</param>
+		private void LaunchGame(object obj)
         {
             if(obj.GetType() != typeof(Game))
             {

@@ -1,4 +1,6 @@
-﻿using Shared.interfaces;
+﻿using Shared.data;
+using Shared.interfaces;
+using System.Collections.Generic;
 
 namespace Client.ihm_main
 {
@@ -19,9 +21,9 @@ namespace Client.ihm_main
             core.ConnectionFailed();
         }
 
-        public void ConnectionSucceed(string username)
+        public void ConnectionSucceed(User user)
         {
-            core.ConnectionSucceed(username);
+            core.ConnectionSucceed(user);
         }
 
         public void GameCreationFailed(string error)
@@ -29,20 +31,14 @@ namespace Client.ihm_main
             core.GameCreationFailed(error);
         }
 
-        public void GameListUpdated(string game)
-        {
-            core.GameListUpdated(game);
-        }
+		public void GameListUpdated(List<Game> games)
+		{
+			core.GameListUpdated(games);
+		}
 
-        public void GameLaunched(string game)
-        {
-            core.GameLaunched(game);
-        }
-
-        
-        public void GameCreationFailed(string error)
-        {
-            core.GameCreationFailed(error);
-        }
-    }
+		public void GameLaunched(Game game)
+		{
+			core.GameLaunched(game);
+		}
+	}
 }

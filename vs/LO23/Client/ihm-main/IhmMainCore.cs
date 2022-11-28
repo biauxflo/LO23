@@ -1,6 +1,9 @@
 ﻿using Client.ihm_main.ViewModels;
 using Client.ihm_main.Views;
 using Client.ihm_main.Views.Pages;
+using Shared.data;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -47,9 +50,12 @@ namespace Client.ihm_main
         /// </summary>
         private readonly HomeViewModel homeViewModel;
 
-        #endregion
+		#endregion
 
-        public IhmMainCore()
+		#region Interfaces des autres modules
+		#endregion
+
+		public IhmMainCore()
         {
             gameCreationViewModel = new GameCreationViewModel(this);
             homeViewModel = new HomeViewModel(this);
@@ -61,7 +67,7 @@ namespace Client.ihm_main
             homePage.DataContext = homeViewModel;
 
             // Page active de la fenetre
-            mainWindowViewModel.ActivePage = homePage;
+            mainWindowViewModel.ActivePage = connectionPage;
 
             mainWindow.Show();
         }
@@ -87,7 +93,7 @@ namespace Client.ihm_main
         /// </summary>
         internal void ConnectionFailed()
         {
-            // TODO : Mettre en place le vrai mécanisme de connexion
+			connectionViewModel.Reset();
             MessageBox.Show(mainWindow, "Erreur", "Connexion refusée", MessageBoxButton.OK);
         }
 
@@ -95,11 +101,10 @@ namespace Client.ihm_main
         /// Connecte l'utilisateur à l'application.
         /// </summary>
         /// <param name="username">Nom de l'utilisateur.</param>
-        internal void ConnectionSucceed(string username)
+        internal void ConnectionSucceed(User user)
         {
-            // TODO : Mettre en place le vrai mécanisme de connexion
-            MessageBox.Show(mainWindow, "OK", $"Connexion réussie : Bonjour {username}", MessageBoxButton.OK);
-            mainWindowViewModel.ActivePage = homePage;
+			homeViewModel.ConnectedUser = user;
+			mainWindowViewModel.ActivePage = homePage;
         }
 
         /// <summary>
@@ -116,18 +121,19 @@ namespace Client.ihm_main
         /// Met à jour la liste des parties en cours.
         /// </summary>
         /// <param name="game">Liste des parties en cours.</param>
-        internal void GameListUpdated(string game)
+        internal void GameListUpdated(List<Game> games)
         {
-            // TODO : Passer à homeViewModel et creationViewModel la nouvelle liste
-        }
+			ObservableCollection<Game> GameCollection = new ObservableCollection<Game>(games);
+			homeViewModel.Games = GameCollection;
+		}
 
         /// <summary>
         /// Lance la partie donnée.
         /// </summary>
         /// <param name="game">Partie à afficher.</param>
-        internal void GameLaunched(string game)
+        internal void GameLaunched(Game game)
         {
-            // TODO : Cacher la main window
+			mainWindow.Hide();
             // TODO : Appel IHM-Game
         }
         
