@@ -29,7 +29,7 @@ namespace Client.ihm_main.ViewModels
         /// </summary>
 		// TODO : Supprimer lors de l'integration
         private User user2;
-		public User User2
+        public User User2
         {
             get => user2;
             set
@@ -62,7 +62,7 @@ namespace Client.ihm_main.ViewModels
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 
-		/// <summary>
+        /// <summary>
 		/// Remet à zéro le formulaire de connexion.
 		/// </summary>
 		internal void Reset()
@@ -113,5 +113,5 @@ namespace Client.ihm_main.ViewModels
             }
         }
 
-	}
+    }
 }

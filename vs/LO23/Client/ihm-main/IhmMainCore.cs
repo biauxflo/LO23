@@ -50,12 +50,12 @@ namespace Client.ihm_main
         /// </summary>
         private readonly HomeViewModel homeViewModel;
 
-		#endregion
+        #endregion
 
 		#region Interfaces des autres modules
 		#endregion
 
-		public IhmMainCore()
+        public IhmMainCore()
         {
             gameCreationViewModel = new GameCreationViewModel(this);
             homeViewModel = new HomeViewModel(this);
@@ -104,7 +104,7 @@ namespace Client.ihm_main
         internal void ConnectionSucceed(User user)
         {
 			homeViewModel.ConnectedUser = user;
-			mainWindowViewModel.ActivePage = homePage;
+            mainWindowViewModel.ActivePage = homePage;
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Client.ihm_main
         {
 			ObservableCollection<Game> GameCollection = new ObservableCollection<Game>(games);
 			homeViewModel.Games = GameCollection;
-		}
+        }
 
         /// <summary>
         /// Lance la partie donnée.

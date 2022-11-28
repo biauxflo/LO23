@@ -137,7 +137,17 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ihm-game\Views\MainWindow.xaml.cs">
+    <Compile Include="ihm-main\Views\Pages\ConnectionView.xaml.cs">
+      <DependentUpon>ConnectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ihm-main\Views\Pages\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ihm-main\Views\Pages\GameCreationView.xaml.cs">
+      <DependentUpon>GameCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ihm-game\Views\GameWindow.xaml.cs">
+      <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ihm-main\Views\Pages\ConnectionView.xaml.cs">

@@ -32,13 +32,14 @@ namespace Client.ihm_main
         }
 
 		public void GameListUpdated(List<Game> games)
-		{
+        {
 			core.GameListUpdated(games);
-		}
+        }
 
 		public void GameLaunched(Game game)
-		{
-			core.GameLaunched(game);
-		}
-	}
+        {
+            core.GameLaunched(game);
+        }
+
+    }
 }

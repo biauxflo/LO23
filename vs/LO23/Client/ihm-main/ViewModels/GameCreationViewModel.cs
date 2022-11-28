@@ -12,7 +12,7 @@ namespace Client.ihm_main.ViewModels
     internal class GameCreationViewModel : INotifyPropertyChanged
     {
         private readonly IhmMainCore core;
-        
+
         /// <summary>
 		/// Partie en cours de création.
 		/// </summary>
@@ -42,7 +42,7 @@ namespace Client.ihm_main.ViewModels
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public GameCreationViewModel(IhmMainCore core)
+        public GameCreationViewModel(IhmMainCore core)
         {
             Games = new ObservableCollection<Game>();
 
@@ -59,7 +59,7 @@ namespace Client.ihm_main.ViewModels
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 
-		private void OnCancelClick()
+        private void OnCancelClick()
         {
 			Partie1 = null;
             core.BackToHomePage();
@@ -84,6 +84,7 @@ namespace Client.ihm_main.ViewModels
                 messageBoxText = "Création réussie";
                 icon = MessageBoxImage.Information;
             }
+
             MessageBox.Show(messageBoxText, windowCaption, button, icon, MessageBoxResult.OK);
         }
 

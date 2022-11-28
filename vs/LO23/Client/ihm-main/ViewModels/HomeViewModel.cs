@@ -22,13 +22,13 @@ namespace Client.ihm_main.ViewModels
 		{
 			get => connectedUser;
 			set
-			{
+    {
 				connectedUser = value;
 				OnPropertyChanged();
 			}
 		}
 
-		/// <summary>
+        /// <summary>
         /// Liste des parties accessibles.
         /// </summary>
         public ObservableCollection<Game> Games
@@ -48,8 +48,8 @@ namespace Client.ihm_main.ViewModels
         public ICommand GameLaunchingCommand { get; set; }
 
 		public event PropertyChangedEventHandler PropertyChanged;
-        
-		public HomeViewModel(IhmMainCore core)
+
+        public HomeViewModel(IhmMainCore core)
         {
             Games = new ObservableCollection<Game>
             {
@@ -71,11 +71,11 @@ namespace Client.ihm_main.ViewModels
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 
-		/// <summary>
-		/// Lance la partie donnée en paramètre.
-		/// </summary>
-		/// <param name="obj">Partie à lancer.</param>
-		private void LaunchGame(object obj)
+        /// <summary>
+        /// Lance la partie donnée en paramètre.
+        /// </summary>
+        /// <param name="obj">Partie à lancer.</param>
+        private void LaunchGame(object obj)
         {
             if(obj.GetType() != typeof(Game))
             {

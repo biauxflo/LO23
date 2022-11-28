@@ -24,6 +24,7 @@ namespace Client.ihm_game.Views
         public GameWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainWindowViewModel();
         }
     }
 }
