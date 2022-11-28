@@ -24,7 +24,6 @@ namespace Shared.data
 		public string Name { get;set; }
 		public int NbPlayers { get;set; }
 		public int NbTokens { get;set; }
-		}
 
 		// For test purpose
 		// TODO : Delete later
