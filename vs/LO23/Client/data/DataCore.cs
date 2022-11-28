@@ -1,4 +1,4 @@
-﻿using Client.ihm_game.Views;
+﻿using Client.ihm_main.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +11,10 @@ namespace Client.data
 {
     internal class DataCore
     {
-        /// <summary>
-        /// Vue principale de l'application.
-        /// </summary>
-        private readonly MainWindow mainWindow = new MainWindow();
+		/// <summary>
+		/// Vue principale de l'application.
+		/// </summary>
+		private readonly MainWindow mainWindow = new MainWindow();
         
 
         public DataCore()
