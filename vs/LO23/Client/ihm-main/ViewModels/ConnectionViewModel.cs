@@ -82,7 +82,7 @@ namespace Client.ihm_main.ViewModels
             string windowCaption = "Résultat de connexion";
             MessageBoxButton button = MessageBoxButton.OK;
 
-            if(user2.Equals(ConnectionUser))
+            if(user2.username.Equals(ConnectionUser.username) && user2.password.Equals(ConnectionUser.password))
             {
                 messageBoxText = "Connexion réussie";
                 icon = MessageBoxImage.Information;

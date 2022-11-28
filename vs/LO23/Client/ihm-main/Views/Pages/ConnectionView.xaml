@@ -6,9 +6,6 @@
       xmlns:local="clr-namespace:Client.ihm_main.Views"
       xmlns:viewmodels="clr-namespace:Client.ihm_main.ViewModels"
       Title="ConnectionView">
-    <Page.DataContext>
-        <viewmodels:ConnectionViewModel/>
-    </Page.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3"/>
@@ -51,7 +48,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" Grid.Row="1" Text="Login" FontSize="22" />
-            <TextBox Grid.Column="1"  Grid.Row="3"  Name="TB_Login"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Login" Text="{Binding User1.username}"/>
+            <TextBox Grid.Column="1"  Grid.Row="3"  Name="TB_Login"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Login" Text="{Binding ConnectionUser.username}"/>
         </Grid>
         <Grid Grid.Row="6" Grid.Column="2">
             <Grid.RowDefinitions>
@@ -67,7 +64,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" Grid.Row="1" Text="Mot de passe" FontSize="22" />
-            <TextBox Grid.Column="1" Grid.Row="3"  Name="TB_Password"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" Text="{Binding User1.password}"/>
+            <TextBox Grid.Column="1" Grid.Row="3"  Name="TB_Password"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" Text="{Binding ConnectionUser.password}"/>
         </Grid>
         <Grid Grid.Row="8" Grid.Column="2">
             <Grid.ColumnDefinitions>

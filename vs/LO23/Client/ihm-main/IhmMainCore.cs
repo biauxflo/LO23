@@ -67,7 +67,7 @@ namespace Client.ihm_main
             homePage.DataContext = homeViewModel;
 
             // Page active de la fenetre
-            mainWindowViewModel.ActivePage = connectionPage;
+            mainWindowViewModel.ActivePage = homePage;
 
             mainWindow.Show();
         }
@@ -136,16 +136,5 @@ namespace Client.ihm_main
 			mainWindow.Hide();
             // TODO : Appel IHM-Game
         }
-        
-        /// <summary>
-        /// Indique que la partie n'a pas pu être créée.
-        /// </summary>
-        /// <param name="error">Raison pour laquelle la partie n'a pas pu être créée.</param>
-        internal void GameCreationFailed(string error)
-        {
-            MessageBox.Show(mainWindow, error, "Partie non créée", MessageBoxButton.OK);
-        }
-
     }
-
 }

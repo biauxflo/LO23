@@ -28,19 +28,8 @@ namespace Client
         /// </summary>
         private DataToMain dataToMain;
 
-
         private IhmGameCore gameCore;
         private DataCore dataCore;
-
-        /// <summary>
-        /// Controleur principal de l'IHM-Main
-        /// </summary>
-        private IhmMainCore mainCore;
-
-        /// <summary>
-        /// Interface de communication de Data vers IHM-Main
-        /// </summary>
-        private DataToMain dataToMain;
 
         private void App_Startup(object sender, StartupEventArgs e)
         {
