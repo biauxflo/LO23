@@ -10,7 +10,6 @@ namespace Client.data
     {
         public List<LightUser> users { get; set; }
         public List<LightGame> games { get; set; }
-
         public Data_Client_ctrl data_Client_Ctrl { get; private set; }
         
         public Comm_calls_Data_Client_impl(Data_Client_ctrl data_Client_Ctrl){

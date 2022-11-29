@@ -8,9 +8,9 @@ namespace Shared.data
 {
     public enum TypePhase
     {
-        mise1,
-        echange,
-        mise2,
+        bet1,
+        draw,
+        bet2,
         reveal
     }
 
