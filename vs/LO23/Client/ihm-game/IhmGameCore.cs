@@ -35,7 +35,7 @@ namespace Client.ihm_game
 			mainWindowViewModel.ActivePage = gamePage;
 			mainWindow.Show();
 
-
+			gameViewModel.Card();
 
 		}
 		internal void LaunchGame(Game game)

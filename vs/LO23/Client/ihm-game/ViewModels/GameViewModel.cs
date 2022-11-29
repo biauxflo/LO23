@@ -10,9 +10,6 @@ using Shared.data;
 using System.Collections.ObjectModel;
 
 
-
-
-
 namespace Client.ihm_game.ViewModels
 {
 	internal class GameViewModel
@@ -45,6 +42,14 @@ namespace Client.ihm_game.ViewModels
 		}
 
 		//private readonly IhmGameCore core;
+
+		private Player player;
+		private Card card = new Card(1, 'c', 1, true, true);
+
+		public void Card()
+        {
+			player.hand.Add(card);
+		}
 
 		public GameViewModel(IhmGameCore core) 
 		{
@@ -79,7 +84,9 @@ namespace Client.ihm_game.ViewModels
 
 		private void OnFoldClick()
 		{
-			MessageBox.Show("bouton fold", "bouton fold", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+			//MessageBox.Show("bouton fold", "bouton fold", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+
+			MessageBox.Show("Test", "Test", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
 		}
 
 		private void OnCallClick()
