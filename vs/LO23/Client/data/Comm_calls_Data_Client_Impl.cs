@@ -5,7 +5,7 @@ using System.Data;
 using Shared.interfaces;
 
 namespace Client.data
-{   
+{
     public class Comm_calls_Data_Client_impl : Shared.interfaces.Interface_Comm_calls_Data_Client
     {
         public List<LightUser> users { get; set; }
