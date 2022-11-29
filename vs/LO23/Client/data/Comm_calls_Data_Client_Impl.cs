@@ -71,4 +71,3 @@ namespace Client.data
 		}
 	}
 }
-

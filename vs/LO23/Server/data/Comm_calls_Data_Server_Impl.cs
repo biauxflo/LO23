@@ -11,11 +11,13 @@ namespace Server.Data
         private static List<LightUser> lightUsers = new List<LightUser>();
         private static List<Game> games = new List<Game>();
 
-		public Comm_calls_Data_Server_Impl()
-		{
-		}
+        public Comm_calls_Data_Server_Impl()
+        {
+            this.lightUser = new LightUser();
+            registerUser(lightUser);
+        }
 
-		public Comm_calls_Data_Server_Impl(LightUser lightUser)
+        public Comm_calls_Data_Server_Impl(LightUser lightUser)
         {
             this.lightUser = new LightUser();
             registerUser(lightUser);
@@ -25,7 +27,7 @@ namespace Server.Data
         {
 			this.lightUser = lightUser;
         }
-
+        
         public LightUser getUser()
         {
             return this.lightUser;
