@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Shared.data
 {
-    public class Game
+    public class Game : LightGame
     {
         public List<Round> rounds { get; set; }
         public int turn { set; get; }
         public int smallBlind { set; get; }
-        public int bingBLind { set; get; }
+        public int bingBlind { set; get; }
         public int currentPLayerIndex { set; get; }
         public Phase currentPhase { set; get; }
         public int pot { set; get; }
@@ -22,15 +22,20 @@ namespace Shared.data
 		public bool CanSpecChat { get; set; }
 		public string Name { get;set; }
 		public int NbPlayers { get;set; }
-		public int NbTokens { get;set;
+		public int NbTokens { get;set; }
+
+		// For test purpose
+		// TODO : Delete later
+		public Game()
+		{
 		}
 
-		public Game(int smallBlind, int bingBLind)
-        {
-            this.rounds = new List<Round>();
+		public Game(int id, int smallBlind, int bingBlind) : base(id)
+		{
+			this.rounds = new List<Round>();
             this.turn = 0;
             this.smallBlind = smallBlind;
-            this.bingBLind = bingBLind;
+            this.bingBlind = bingBlind;
             this.currentPLayerIndex = 0;
             this.currentPhase = new Phase();
             this.pot = 0;
@@ -39,13 +44,7 @@ namespace Shared.data
             this.chat = new List<ChatMessage>();
         }
 
-		// For test purpose
-		// TODO : Delete later
-		public Game()
-		{
-		}
-
-		// For test purpose
+        // For test purpose
 		// TODO : Delete later
 		public Game(string name, int nbPlayers, int nbTokens, bool canSpecJoin, bool canSpecChat )
 		{
@@ -64,29 +63,12 @@ namespace Shared.data
 			this.NbPlayers = nbPlayers;
 		}
 
-		public Game(
-            List<Round> rounds,
-            int turn, int smallBlind,
-            int bingBLind,
-            int currentPLayerIndex,
-            Phase currentPhase,
-            int pot,
-            int highestBet,
-            int nbNoRise,
-            List<ChatMessage> chat
-        ) {
-            // Not sure if we really need that but it is present in case
-            // Prefer using the constructor above
-            this.rounds = rounds;
-            this.turn = turn;
-            this.smallBlind = smallBlind;
-            this.bingBLind = bingBLind;
-            this.currentPLayerIndex = currentPLayerIndex;
-            this.currentPhase = currentPhase;
-            this.pot = pot;
-            this.highestBet = highestBet;
-            this.nbNoRise = nbNoRise;
-            this.chat = chat;
-        }
+		public int GoToNextPlayer()
+		{
+			int nextPlayerIndex = this.currentPLayerIndex + 1 <= this.players.Count ? this.currentPLayerIndex + 1 : 0;
+			this.currentPLayerIndex = nextPlayerIndex;
+
+			return nextPlayerIndex;
+		}
     }
 }

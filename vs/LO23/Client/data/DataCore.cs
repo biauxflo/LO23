@@ -15,14 +15,11 @@ namespace Client.data
 		/// Vue principale de l'application.
 		/// </summary>
 		private readonly MainWindow mainWindow = new MainWindow();
-        
 
         public DataCore()
         {
             //Association des vues et de leur view model
-           
             Console.WriteLine("Running DataCore class");
         }
-
     }
 }

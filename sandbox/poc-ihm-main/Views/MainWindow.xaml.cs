@@ -1,4 +1,4 @@
-﻿using Client.ihm_main.ViewModel;
+using Client.ihm_main.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
