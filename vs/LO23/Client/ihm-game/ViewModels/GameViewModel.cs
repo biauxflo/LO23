@@ -44,11 +44,11 @@ namespace Client.ihm_game.ViewModels
 			get; set;
 		}
 
-		private readonly IhmGameCore core;
+		//private readonly IhmGameCore core;
 
-		public GameViewModel(IhmGameCore core)
+		public GameViewModel(IhmGameCore core) 
 		{
-			this.core = core;
+			//this.core = core;
 			ParamCommand = new RelayCommand(OnParamClick);
 
 			FoldCommand = new RelayCommand(OnFoldClick);
