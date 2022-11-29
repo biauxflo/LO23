@@ -59,7 +59,7 @@ namespace Client.ihm_game.ViewModels
 
 
 
-			game = new Game(1, 2);
+			game = new Game("Game1", 2);
 			game.pot = 200;
 			Display();
 		}
