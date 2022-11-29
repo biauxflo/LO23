@@ -48,7 +48,7 @@ namespace Client.ihm_game.ViewModels
 			}
 		}
 
-		private readonly IhmGameCore core;
+		//private readonly IhmGameCore core;
 
 		public event PropertyChangedEventHandler PropertyChanged;
 

@@ -34,6 +34,11 @@ namespace Client.ihm_game
 			gameWindow.DataContext = gameWindowViewModel;
 			this.MainToGame = new MainToGame(this);
 		}
+		internal void LaunchGame(Game game)
+		{
+			
+		}
+
 
 		internal void LaunchGame(Game game)
 		{
