@@ -20,8 +20,8 @@ namespace Shared.data
         public string status { get; set; }
         public int indexRound { get; set; }
         public List<Player> players { get; set; }
-        public List<User> spectators { get; set; }
-        public List<User> lobby { get; set; }
+        public List<LightUser> spectators { get; set; }
+        public List<LightUser> lobby { get; set; }
 
         // Default constructor
         public LightGame()
@@ -34,8 +34,13 @@ namespace Shared.data
             this.status = GameStatus.lobby.ToString();
             this.indexRound = 0;
             this.players = new List<Player>();
-            this.spectators = new List<User>();
-            this.lobby = new List<User>();
+            this.spectators = new List<LightUser>();
+            this.lobby = new List<LightUser>();
+        }
+
+        public void addUser(LightUser user)
+        {
+            lobby.Add(user);
         }
     }
 }

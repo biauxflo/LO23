@@ -9,7 +9,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Client.ihm_game;
-using Client.ihm_main;
 
 namespace Client
 {

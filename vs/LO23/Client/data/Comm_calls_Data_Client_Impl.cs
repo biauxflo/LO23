@@ -2,22 +2,32 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Shared.interfaces;
 
-namespace Client.Data
-{
+namespace Client.data
+{   
     public class Comm_calls_Data_Client_impl : Shared.interfaces.Interface_Comm_calls_Data_Client
     {
         public List<LightUser> users { get; set; }
         public List<LightGame> games { get; set; }
+
+        public Data_Client_ctrl data_Client_Ctrl { get; private set; }
         
-        public Comm_calls_Data_Client_impl(){
+        public Comm_calls_Data_Client_impl(Data_Client_ctrl data_Client_Ctrl){
             this.users = new List<LightUser>();
             this.games = new List<LightGame>();
+            this.data_Client_Ctrl = data_Client_Ctrl;
         }
 
         public Comm_calls_Data_Client_impl(List<LightUser> users, List<LightGame> games){
             this.users = users;
             this.games = games;
+        }
+
+        public void setGame(Game game)
+        {
+            data_Client_Ctrl.joinedGame = game;
+            data_Client_Ctrl.request_displayGameToIHMMain(game);
         }
 
 		public void setGamesAndUsers(List<LightUser> listUsers, List<LightGame> listGame)
@@ -33,10 +43,6 @@ namespace Client.Data
 		}
 
 		public void updateGame(Game game)
-		{
-		}
-
-		public void setGame(Game game)
 		{
 		}
 
@@ -66,4 +72,3 @@ namespace Client.Data
 		}
 	}
 }
-

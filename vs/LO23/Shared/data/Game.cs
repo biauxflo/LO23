@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace Shared.data
 {
-	// Nina added inheritance from LightGame
     public class Game : LightGame
     {
         public List<Round> rounds { get; set; }
         public int turn { set; get; }
         public int smallBlind { set; get; }
-        public int bingBLind { set; get; }
+        public int bingBlind { set; get; }
         public int currentPLayerIndex { set; get; }
         public Phase currentPhase { set; get; }
         public int pot { set; get; }
@@ -31,12 +30,12 @@ namespace Shared.data
 		{
 		}
 
-		public Game(int id, int smallBlind, int bingBLind) : base(id)
+		public Game(int id, int smallBlind, int bingBlind) : base(id)
 		{
 			this.rounds = new List<Round>();
             this.turn = 0;
             this.smallBlind = smallBlind;
-            this.bingBLind = bingBLind;
+            this.bingBlind = bingBlind;
             this.currentPLayerIndex = 0;
             this.currentPhase = new Phase();
             this.pot = 0;

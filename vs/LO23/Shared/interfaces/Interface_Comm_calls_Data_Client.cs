@@ -9,7 +9,6 @@ namespace Shared.interfaces
 {
 	public interface Interface_Comm_calls_Data_Client
 	{
-		
 		void setGamesAndUsers(List<LightUser> listUsers, List<LightGame> listGame );
 		void setLoggedOut();
 		void updateMessages(ChatMessage message);
@@ -21,10 +20,6 @@ namespace Shared.interfaces
 		void addUserToListUsers(LightUser user);
 		void removeGameFromListGames(LightGame game);
 		void addGameToListGames(LightGame game);
-
-
-
-
 	}
 }
 

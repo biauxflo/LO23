@@ -19,7 +19,6 @@ namespace Client.data
         public DataCore()
         {
             //Association des vues et de leur view model
-           
             Console.WriteLine("Running DataCore class");
         }
     }

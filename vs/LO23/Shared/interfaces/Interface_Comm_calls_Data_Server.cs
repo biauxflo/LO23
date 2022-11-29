@@ -14,6 +14,7 @@ namespace Shared.interfaces
         void removeUser(int playerId);
 		List<int> getPlayersOfGame(Game game);
 		Game addPlayerToGame(int playerId);
+        Game addUserToGame(LightUser user, int gameId);
 
 		//Game createNewGame(GameOptions options);
 		void uneregisterUser(int playerId);
