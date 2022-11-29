@@ -16,34 +16,34 @@ namespace Client.ihm_game
     {
 
 		// interface et page avec viewModel 
-        private readonly GameWindow mainWindow = new GameWindow();
+		private GameWindow gameWindow;
 
-		private readonly MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
+		private GameWindowViewModel gameWindowViewModel;
 
+		private Page gamePage = new GameView();
 
-		private readonly Page gamePage = new GameView();
-
-		private readonly GameViewModel gameViewModel;
+		private GameViewModel gameViewModel;
 
 
 		public IhmGameCore()
 		{
-			gameViewModel = new GameViewModel(this);
-			mainWindow.DataContext = mainWindowViewModel;
-			gamePage.DataContext = gameViewModel;
-
-			mainWindowViewModel.ActivePage = gamePage;
-			mainWindow.Show();
-
-
-
+			gameWindow = new GameWindow();
+			gameWindowViewModel = new GameWindowViewModel(this);
+			gameWindow.DataContext = gameWindowViewModel;
 		}
+
 		internal void LaunchGame(Game game)
 		{
-			
+			gameViewModel = new GameViewModel(this, game);
+			gamePage.DataContext = gameViewModel;
+
+			gameWindowViewModel.ActivePage = gamePage;
+			gameWindow.Show();
 		}
 
-
-
+		internal void GameEnded()
+		{
+			gameWindow.Hide();
+		}
 	}
 }
