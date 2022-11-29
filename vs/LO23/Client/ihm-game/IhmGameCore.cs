@@ -38,6 +38,11 @@ namespace Client.ihm_game
 		{
 			
 		}
+		internal void LaunchGame(Game game)
+		{
+			
+		}
+
 
 
 		internal void LaunchGame(Game game)
