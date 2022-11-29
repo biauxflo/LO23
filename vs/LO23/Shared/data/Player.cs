@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Shared.data
 {
-    enum PlayerRole
+    public enum PlayerRole
     {
         smallBlind,
         bigBlind,
