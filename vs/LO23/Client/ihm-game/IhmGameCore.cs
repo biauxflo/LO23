@@ -11,9 +11,9 @@ using System.Windows.Controls;
 
 namespace Client.ihm_game
 {
-	internal class IhmGameCore
-	{
-		private readonly MainWindow mainWindow = new MainWindow();
+    internal class IhmGameCore
+    {
+        private readonly GameWindow mainWindow = new GameWindow();
 
 
 		private readonly MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
