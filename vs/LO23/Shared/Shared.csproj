@@ -65,6 +65,7 @@
     <Compile Include="interfaces\IDataToComm.cs" />
     <Compile Include="interfaces\IGameToData.cs" />
     <Compile Include="interfaces\IDataToMain.cs" />
+    <Compile Include="interfaces\IMainToGame.cs" />
     <Compile Include="interfaces\Interface_Comm_calls_Data_Client.cs" />
     <Compile Include="interfaces\Interface_Comm_calls_Data_Server.cs" />
     <Compile Include="interfaces\Interface_IHM_Main_calls_Data_Client.cs" />

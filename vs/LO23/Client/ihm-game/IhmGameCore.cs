@@ -8,13 +8,15 @@ using Client.ihm_game.Views;
 using Client.ihm_game.Views.Pages;
 using System.Windows;
 using System.Windows.Controls;
+using Shared.data;
 
 namespace Client.ihm_game
 {
     internal class IhmGameCore
     {
-        private readonly GameWindow mainWindow = new GameWindow();
 
+		// interface et page avec viewModel 
+        private readonly GameWindow mainWindow = new GameWindow();
 
 		private readonly MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
 
@@ -31,10 +33,16 @@ namespace Client.ihm_game
 			gamePage.DataContext = gameViewModel;
 
 			mainWindowViewModel.ActivePage = gamePage;
-
 			mainWindow.Show();
 
+
+
 		}
+		internal void LaunchGame(Game game)
+		{
+			
+		}
+
 
 
 	}
