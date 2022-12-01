@@ -49,16 +49,24 @@ namespace Client.ihm_game.ViewModels
 		}
 
 		private readonly IhmGameCore core;
-
-		private Player player;
-		private Card card = new Card(1, 'c', 1, true, true);
-
-		public void Card()
-        {
-			this.player.hand.Add(this.card);
-		}
-
 		public event PropertyChangedEventHandler PropertyChanged;
+
+		// --- Test rcisnero ---
+		public Player player;
+		private Card card1 = new Card(1, 'h', 1, true, true);
+		private Card card2 = new Card(2, 's', 2, true, true);
+		private Card card3 = new Card(3, 'c', 3, true, true);
+
+		public Player Player
+		{
+			get => player;
+			set
+			{
+				player = value;
+				OnPropertyChanged(nameof(Player));
+			}
+		}
+		// --- Fin Test rcisnero ---
 
 		public GameViewModel(IhmGameCore core, Game game) 
 		{
@@ -73,7 +81,13 @@ namespace Client.ihm_game.ViewModels
 
 			RaiseCommand = new RelayCommand(OnRaiseClick);
 
+			// --- Test rcisnero ---
+			player = new Player(100);
+			TestCards();
+			// --- Fin Test rcisnero ---
+
 			Display();
+			
 		}
 
 		// fonction lié au bouton
@@ -92,8 +106,12 @@ namespace Client.ihm_game.ViewModels
 		private void OnFoldClick()
 		{
 			//MessageBox.Show("bouton fold", "bouton fold", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+			
+			// --- Test rcisnero ---
+			player.Card[0] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
+			OnPropertyChanged(nameof(Player));
+			// --- Fin Test rcisnero ---
 
-			MessageBox.Show("Test", this.card.color.ToString(), MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
 		}
 
 		private void OnCallClick()
@@ -108,9 +126,19 @@ namespace Client.ihm_game.ViewModels
 		public void Display()
 		{
 			//Fonctions à remplacer par les fonctions qui seront implémenter dans IHMGameCallsData
-			
-
 		}
+
+		// --- Test rcisnero ---
+		public void TestCards()
+		{
+			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card1.value + "_" + this.card1.color + ".png");
+			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card2.value + "_" + this.card2.color + ".png");
+			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card1.value + "_" + this.card1.color + ".png");
+			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card2.value + "_" + this.card2.color + ".png");
+			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card1.value + "_" + this.card1.color + ".png");
+			OnPropertyChanged(nameof(Player));
+		}
+		// --- Fin Test rcisnero ---
 
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
