@@ -36,6 +36,29 @@ namespace Shared.data
 		{
 			set; get;
 		}
-		public string Name { get;set; }
+		public string Name {
+			set; get;
+		}
+
+		public GameOptions(
+			string name,
+			int startingTokens,
+			bool canSpecJoin,
+			bool canSpecChat,
+			int nbRoundMax,
+			int nbPlayersMax,
+			int startingBigBlind,
+			int bigBlindValue
+		)
+		{
+			this.Name = name;
+			this.StartingTokens = startingTokens;
+			this.CanSpecJoin = canSpecJoin;
+			this.CanSpecChat = canSpecChat;
+			this.NbRoundMax = nbRoundMax;
+			this.NbPlayersMax = nbPlayersMax;
+			this.StartingBigBlind = startingBigBlind;
+			this.BigBlindValue = bigBlindValue;
+		}
 	}
 }

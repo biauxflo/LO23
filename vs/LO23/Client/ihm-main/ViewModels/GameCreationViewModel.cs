@@ -74,7 +74,7 @@ namespace Client.ihm_main.ViewModels
             MessageBoxButton button = MessageBoxButton.OK;
 
             if(Games
-                .Any(game => game.Name == gameInCreation.Name))
+                .Any(game => game.name == gameInCreation.name))
             {
                 messageBoxText = "Nom de Partie déjà existant";
                 icon = MessageBoxImage.Error;

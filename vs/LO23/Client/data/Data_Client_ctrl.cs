@@ -9,13 +9,19 @@ namespace Client.data
 {
     public class Data_Client_ctrl
     {
-        private Comm_calls_Data_Client_impl implInterfaceForComm;
+		public List<LightUser> users {get; set;}
+		public List<LightGame> games { get; set;}
+
+		public Comm_calls_Data_Client_impl implInterfaceForComm;
         public Game joinedGame { get; set; }
 
         public Data_Client_ctrl()
         {
             this.implInterfaceForComm = new Comm_calls_Data_Client_impl(this);
-        }
+
+			this.users = new List<LightUser>();
+			this.games = new List<LightGame>();
+		}
 
         public Comm_calls_Data_Client_impl getImplInterfaceForComm()
         {
