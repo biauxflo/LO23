@@ -55,7 +55,7 @@ namespace Client.ihm_game.ViewModels
 
 		public void Card()
         {
-			player.hand.Add(card);
+			this.player.hand.Add(this.card);
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -93,7 +93,7 @@ namespace Client.ihm_game.ViewModels
 		{
 			//MessageBox.Show("bouton fold", "bouton fold", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
 
-			MessageBox.Show("Test", "Test", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+			MessageBox.Show("Test", this.card.color.ToString(), MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
 		}
 
 		private void OnCallClick()
