@@ -47,7 +47,7 @@ namespace Shared.interfaces
 		/// <summary>
 		///
 		/// </summary>
-		void createNewGame(Game game);
+		void createNewGame(GameOptions gameOptions);
 
 		/// <summary>
 		///

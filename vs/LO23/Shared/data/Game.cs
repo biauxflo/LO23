@@ -8,7 +8,13 @@ namespace Shared.data
 {
     public class Game : LightGame
     {
-        public List<Round> rounds { get; set; }
+		public string Name  { set; get; } // TODO : Supprimer duplicata (info déjà dans GameOptions)
+		public int NbPlayers { set; get; } // TODO : Supprimer duplicata (info déjà dans GameOptions) 
+		public int NbTokens  { set; get; } // TODO : Supprimer duplicata (info déjà dans GameOptions)
+		public bool CanSpecJoin  { set; get; } // TODO : Supprimer duplicata (info déjà dans GameOptions)
+		public bool CanSpecChat  { set; get; } // TODO : Supprimer duplicata (info déjà dans GameOptions)
+		public GameOptions options { set; get; }
+		public List<Round> rounds { set; get; }
         public int turn { set; get; }
         public int smallBlind { set; get; }
         public int bingBlind { set; get; }
@@ -18,11 +24,6 @@ namespace Shared.data
         public int highestBet { set; get; }
         public int nbNoRise { set; get; }
         public List<ChatMessage> chat { set; get; }
-		public bool CanSpecJoin { get; set; }
-		public bool CanSpecChat { get; set; }
-		public string Name { get;set; }
-		public int NbPlayers { get;set; }
-		public int NbTokens { get;set; }
 
 		// For test purpose
 		// TODO : Delete later

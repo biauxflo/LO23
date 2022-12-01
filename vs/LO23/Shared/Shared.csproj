@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="comm\TcpClientHandler.cs" />
     <Compile Include="data\Game.cs" />
+    <Compile Include="data\GameOptions.cs" />
     <Compile Include="data\LightGame.cs" />
     <Compile Include="data\Round.cs" />
     <Compile Include="data\GameAction.cs" />
