@@ -8,11 +8,12 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
 using Shared.data;
 using System.Collections.ObjectModel;
-
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Client.ihm_game.ViewModels
 {
-	internal class GameViewModel
+	internal class GameViewModel : INotifyPropertyChanged
 	{
 		// pour ajouter un bouton, dans le xaml section bouton-> Command="{Binding Path=ParamCommand}"
 		// exemple: <Button Name="BT_parameter"  Grid.Row="0" Grid.Column="0"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=ParamCommand}">
@@ -36,12 +37,18 @@ namespace Client.ihm_game.ViewModels
 			get; set;
 		}
 
-		public Game game
+		private Game game;
+		public Game Game
 		{
-			get; set;
+			get=>game;
+			set
+			{
+				game = value;
+				OnPropertyChanged();
+			}
 		}
 
-		//private readonly IhmGameCore core;
+		private readonly IhmGameCore core;
 
 		private Player player;
 		private Card card = new Card(1, 'c', 1, true, true);
@@ -51,9 +58,13 @@ namespace Client.ihm_game.ViewModels
 			player.hand.Add(card);
 		}
 
-		public GameViewModel(IhmGameCore core) 
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		public GameViewModel(IhmGameCore core, Game game) 
 		{
-			//this.core = core;
+			this.core = core;
+			Game = game;
+
 			ParamCommand = new RelayCommand(OnParamClick);
 
 			FoldCommand = new RelayCommand(OnFoldClick);
@@ -62,10 +73,6 @@ namespace Client.ihm_game.ViewModels
 
 			RaiseCommand = new RelayCommand(OnRaiseClick);
 
-
-
-			game = new Game(1, 2);
-			game.pot = 200;
 			Display();
 		}
 
@@ -98,10 +105,17 @@ namespace Client.ihm_game.ViewModels
 		{
 			MessageBox.Show("bouton raise", "bouton raise", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
 		}
-		private void Display()
+		public void Display()
 		{
 			//Fonctions à remplacer par les fonctions qui seront implémenter dans IHMGameCallsData
+			
 
 		}
+
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+
 	}
 }

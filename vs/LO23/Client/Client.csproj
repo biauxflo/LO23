@@ -61,10 +61,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Windows.Design.Interaction, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.Composition.Registration" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -113,7 +120,7 @@
     </Compile>
     <Compile Include="ihm-game\IhmGameCore.cs" />
     <Compile Include="ihm-game\ViewModels\GameViewModel.cs" />
-    <Compile Include="ihm-game\ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ihm-game\ViewModels\GameWindowViewModel.cs" />
     <Compile Include="comm\CommClient.cs" />
     <Compile Include="comm\IDataToCommImpl.cs" />
     <Compile Include="data\Data_Client_ctrl.cs" />
@@ -151,19 +158,6 @@
       <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ihm-main\Views\Pages\ConnectionView.xaml.cs">
-      <DependentUpon>ConnectionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ihm-main\Views\Pages\HomeView.xaml.cs">
-      <DependentUpon>HomeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ihm-main\Views\Pages\GameCreationView.xaml.cs">
-      <DependentUpon>GameCreationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ihm-game\Views\GameWindow.xaml.cs">
-      <DependentUpon>GameWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -181,6 +175,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -189,7 +184,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\Shared.dll" />
+    <Content Include="bin\Debug\Shared.pdb" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="ihm-game\Views\images\config.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

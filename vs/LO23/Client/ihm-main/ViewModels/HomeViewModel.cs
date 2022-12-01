@@ -84,7 +84,9 @@ namespace Client.ihm_main.ViewModels
             else
             {
                 Game game = (Game)obj;
-                // TODO : Appel IHM-Game
+				// TODO : Appel Data
+				// TODO : A supprimer à l'integration
+				core.mainToGame.LaunchGame(game);
             }
         }
 

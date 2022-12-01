@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Shared.data
 {
-    enum TypePhase : ushort
+    public enum TypePhase
     {
-        mise1 = 1,
-        echange = 2,
-        mise2 = 2,
-        reveal = 4
+        bet1,
+        draw,
+        bet2,
+        reveal
     }
 
     public class Phase
