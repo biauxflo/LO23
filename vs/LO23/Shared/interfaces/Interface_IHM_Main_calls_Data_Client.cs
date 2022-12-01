@@ -10,7 +10,7 @@ namespace Shared.interfaces
     public interface Interface_IHM_Main_calls_Data_Client
     {
         void registerProfile(User user);
-        Boolean authenticate(String login, String mdp);
+        User authenticate(string login, string password); // login is username#id
         void logout();
         List<LightGame> requestSavedGames();
         Game requestStartReplay();

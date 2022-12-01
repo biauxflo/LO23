@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using Client.data;
 using Shared.data;
 using Shared.interfaces;
+using Shared.helpers;
+using Shared.constants;
+using Newtonsoft.Json.Linq;
+
 public class IHM_Main_calls_Data_Client_Impl : Shared.interfaces.Interface_IHM_Main_calls_Data_Client
 {
     Data_Client_ctrl data_client_ctrl;
@@ -11,9 +15,33 @@ public class IHM_Main_calls_Data_Client_Impl : Shared.interfaces.Interface_IHM_M
         this.data_client_ctrl = data_client_ctrl;
     }
 
-     public bool authenticate(string login, string mdp)
+     public User authenticate(string login, string password)
     {
-        throw new NotImplementedException();
+		int parser = login.IndexOf('#');
+		if(parser < 0)
+		{
+			throw new Exception("InvalidLoginFormat");
+		}
+		string username = login.Substring(0, parser);
+		string id = login.Substring(parser + 1, login.Length - 1);
+
+		string hash = login + password;
+
+		try
+		{
+			JArray listUsersJSON = JSONHelper.getJSONFromFile(Constants.USER_STORAGE_PATH);
+			List<User> users = listUsersJSON.ToObject<List<User>>();;
+			User user = users.Find(u => u.password == hash);
+
+			if(user != null)
+			{
+				return user;
+			}
+			throw new Exception("BadCredentials");
+		} catch (Exception e)
+		{
+			throw new Exception("BadCredentials");
+		}
     }
 
     public void createNewGame(int nbPlayers, int nbTokens, bool spectatorsAllowed, bool chatAllowed, int roundMax, int doubleBlind)
