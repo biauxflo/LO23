@@ -23,5 +23,11 @@ namespace Server.Data
         {
             return this.implInterfaceForComm;
         }
+
+
+		internal void addGameToList(Game game)
+		{
+			games.Add(game);
+		}
     }
 }

@@ -23,12 +23,12 @@ namespace Shared.data
 		public int nbPlayers { get;set; }
 		public Deck deck {get; private set;} //L'ensemble des cartes dans le jeu, qu'elles soient en main, dans la pioche ou la défausse
 
-		public Game(int id, int smallBlind, int bingBlind) : base(id)
+		public Game(int id, GameOptions options) : base(id, options)
 		{
 			this.rounds = new List<Round>();
             this.turn = 0;
-            this.smallBlind = smallBlind;
-            this.bingBlind = bingBlind;
+            this.smallBlind = options.StartingBigBlind/2;
+            this.bingBlind = options.StartingBigBlind;
             this.currentPlayerIndex = 0;
             this.currentPhase = new Phase();
             this.pot = 0;

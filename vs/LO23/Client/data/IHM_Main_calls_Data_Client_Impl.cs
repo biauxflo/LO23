@@ -44,9 +44,9 @@ public class IHM_Main_calls_Data_Client_Impl : Shared.interfaces.Interface_IHM_M
 		}
     }
 
-    public void createNewGame(int nbPlayers, int nbTokens, bool spectatorsAllowed, bool chatAllowed, int roundMax, int doubleBlind)
+    public void createNewGame(GameOptions options)
     {
-        throw new NotImplementedException();
+		data_client_ctrl.sendCreateNewGame(options);
     }
 
     public void getProfile(int userId)

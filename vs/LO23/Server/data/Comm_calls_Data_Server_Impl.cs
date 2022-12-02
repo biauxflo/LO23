@@ -56,5 +56,16 @@ namespace Server.Data
         {
             return this;
         }
+
+
+
+		public Game createNewGame(GameOptions options)
+		{
+			Random rnd = new Random();
+			Game game = new Game(rnd.Next(1, int.MaxValue), options);
+			data_Server_Ctrl.addGameToList(game);
+
+			return game;
+		}
     }
 }

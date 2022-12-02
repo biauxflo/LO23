@@ -16,7 +16,7 @@ namespace Shared.interfaces
         Game requestStartReplay();
        void watchGame();
         void playGame(int GameId);
-        void createNewGame(int nbPlayers, int nbTokens, Boolean spectatorsAllowed, Boolean chatAllowed, int roundMax, int doubleBlind);
+        void createNewGame(GameOptions options);
        void getProfile(int userId);
     }
 }

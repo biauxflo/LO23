@@ -23,14 +23,13 @@ namespace Shared.data
         public List<LightUser> spectators { get; set; }
         public List<LightUser> lobby { get; set; }
 
-        // Default constructor
-        public LightGame()
-        {
-        }
+		public GameOptions gameOptions {get; private set;} //Options de la game à sa création
 
-        public LightGame(int id)
+
+		public LightGame(int id, GameOptions options)
         {
             this.id = id;
+			this.gameOptions = options;
             this.status = GameStatus.lobby.ToString();
             this.indexRound = 0;
             this.players = new List<Player>();

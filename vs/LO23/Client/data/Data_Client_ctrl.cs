@@ -37,5 +37,10 @@ namespace Client.data
         {
             //EN attendant l'ajout des interfaces de IHM Game pour DisplayGame
         }
-    }
+
+		internal void sendCreateNewGame(GameOptions options)
+		{
+			//interfaceFromComm.createNewGame(options);
+		}
+	}
 }
