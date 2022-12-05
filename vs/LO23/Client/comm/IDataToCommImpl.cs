@@ -58,7 +58,7 @@ namespace Client.comm
 			throw new NotImplementedException();
 		}
 
-		void IDataToComm.createNewGame(Game game)
+		void IDataToComm.createNewGame(GameOptions gameOptions)
 		{
 			throw new NotImplementedException();
 		}

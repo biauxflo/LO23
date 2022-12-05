@@ -16,7 +16,7 @@ namespace Shared.data
         public bool isFolded { get; set; }
         public int tokens { get; set; }
         public int tokensBet { get; set; }
-        public List<Card> hand { get; set; }
+        public List<Card> hand { get; set; } //Doit referencer les objets cartes contenus dans l'objet Deck
 
         public Player(int tokens)
         {

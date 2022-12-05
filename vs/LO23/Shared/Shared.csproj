@@ -45,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="comm\TcpClientHandler.cs" />
+    <Compile Include="constants\Constants.cs" />
     <Compile Include="data\Game.cs" />
+    <Compile Include="data\GameOptions.cs" />
     <Compile Include="data\LightGame.cs" />
     <Compile Include="data\Round.cs" />
     <Compile Include="data\GameAction.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="data\Deck.cs" />
     <Compile Include="data\Player.cs" />
     <Compile Include="data\User.cs" />
+    <Compile Include="helpers\JSONHelper.cs" />
     <Compile Include="interfaces\ICommToData.cs" />
     <Compile Include="interfaces\ICommToDataServer.cs" />
     <Compile Include="comm\messages\AnnounceUserMessage.cs" />
@@ -65,6 +68,7 @@
     <Compile Include="interfaces\IDataToComm.cs" />
     <Compile Include="interfaces\IGameToData.cs" />
     <Compile Include="interfaces\IDataToMain.cs" />
+    <Compile Include="interfaces\IMainToGame.cs" />
     <Compile Include="interfaces\Interface_Comm_calls_Data_Client.cs" />
     <Compile Include="interfaces\Interface_Comm_calls_Data_Server.cs" />
     <Compile Include="interfaces\Interface_IHM_Main_calls_Data_Client.cs" />

@@ -28,11 +28,13 @@ namespace Client
         private DataToMain dataToMain;
 
         private IhmGameCore gameCore;
+
+		private MainToGame mainToGame;
+
         private DataCore dataCore;
 
         private void App_Startup(object sender, StartupEventArgs e)
         {
-			dataToMain = new DataToMain(mainCore);
             this.dataCore = new DataCore();
             CommClient cli = new CommClient();
 			cli.Start("127.0.0.1", 10000);
@@ -40,8 +42,12 @@ namespace Client
 				1, "","", "", true, "Test", "Test", 12));
 
 			gameCore = new IhmGameCore();
+			mainToGame = new MainToGame(gameCore);
 
 			mainCore = new IhmMainCore();
+			mainCore.mainToGame = mainToGame;
+			dataToMain = new DataToMain(mainCore);
+
 		}
     }
 }

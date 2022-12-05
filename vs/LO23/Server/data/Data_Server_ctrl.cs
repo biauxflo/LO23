@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using Server.Data;
+using Shared.data;
 
 namespace Server.Data
 {
@@ -10,14 +11,23 @@ namespace Server.Data
     {
         private Comm_calls_Data_Server_Impl implInterfaceForComm;
 
-        public Data_Server_ctrl()
+		internal static List<LightUser> lightUsers = new List<LightUser>();
+		internal static List<Game> games = new List<Game>();
+
+		public Data_Server_ctrl()
         {
-            this.implInterfaceForComm = new Comm_calls_Data_Server_Impl();
+            this.implInterfaceForComm = new Comm_calls_Data_Server_Impl(this);
         }
 
         public Comm_calls_Data_Server_Impl getImplInterfaceForComm()
         {
             return this.implInterfaceForComm;
         }
+
+
+		internal void addGameToList(Game game)
+		{
+			games.Add(game);
+		}
     }
 }

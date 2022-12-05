@@ -8,19 +8,10 @@ namespace Client.data
 {
     public class Comm_calls_Data_Client_impl : Shared.interfaces.Interface_Comm_calls_Data_Client
     {
-        public List<LightUser> users { get; set; }
-        public List<LightGame> games { get; set; }
         public Data_Client_ctrl data_Client_Ctrl { get; private set; }
         
         public Comm_calls_Data_Client_impl(Data_Client_ctrl data_Client_Ctrl){
-            this.users = new List<LightUser>();
-            this.games = new List<LightGame>();
-            this.data_Client_Ctrl = data_Client_Ctrl;
-        }
-
-        public Comm_calls_Data_Client_impl(List<LightUser> users, List<LightGame> games){
-            this.users = users;
-            this.games = games;
+			this.data_Client_Ctrl = data_Client_Ctrl;
         }
 
         public void setGame(Game game)
@@ -31,6 +22,8 @@ namespace Client.data
 
 		public void setGamesAndUsers(List<LightUser> listUsers, List<LightGame> listGame)
 		{
+			data_Client_Ctrl.games = listGame;
+			data_Client_Ctrl.users = listUsers;
 		}
 
 		public void setLoggedOut()

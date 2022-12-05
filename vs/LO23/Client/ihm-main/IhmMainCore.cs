@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using Shared.interfaces;
 
 namespace Client.ihm_main
 {
@@ -50,9 +51,10 @@ namespace Client.ihm_main
         /// </summary>
         private readonly HomeViewModel homeViewModel;
 
-        #endregion
+		#endregion
 
 		#region Interfaces des autres modules
+		internal IMainToGame mainToGame;
 		#endregion
 
         public IhmMainCore()
@@ -134,7 +136,7 @@ namespace Client.ihm_main
         internal void GameLaunched(Game game)
         {
 			mainWindow.Hide();
-            // TODO : Appel IHM-Game
+			mainToGame.LaunchGame(game);
         }
     }
 }
