@@ -52,6 +52,11 @@ namespace Client.ihm_game.ViewModels
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		// --- Test rcisnero ---
+		/*public ICommand OnClickCard
+		{
+			get; set;
+		}*/
+
 		public Player player;
 		private Card card1 = new Card(1, 'h', 1, true, true);
 		private Card card2 = new Card(2, 's', 2, true, true);
@@ -82,12 +87,19 @@ namespace Client.ihm_game.ViewModels
 			RaiseCommand = new RelayCommand(OnRaiseClick);
 
 			// --- Test rcisnero ---
+			//OnClickCard = new RelayCommand(CardCommand);
+			
 			player = new Player(100);
 			TestCards();
 			// --- Fin Test rcisnero ---
 
 			Display();
 			
+		}
+
+		private void CardCommand(object obj)
+		{
+		
 		}
 
 		// fonction lié au bouton

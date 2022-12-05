@@ -7,6 +7,54 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GameView">
+    
+    <Page.Resources>
+        <Style x:Key="Card" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid>
+                            <Border Name="PressedBorder" BorderBrush="#007bff" BorderThickness="2" CornerRadius="10">
+                                <ContentPresenter/>
+                            </Border>
+                            <Border Name="NormalBorder" BorderBrush="Black"  BorderThickness="1" CornerRadius="10"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <!--
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsPressed"  Value="True" />
+                                    <Condition Property="IsChecked" Value="False" />
+                                </MultiTrigger.Conditions>
+
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsPressed" Value="False" />
+                                    <Condition Property="IsChecked" Value="True" />
+                                </MultiTrigger.Conditions>
+
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsPressed" Value="True" />
+                                    <Condition Property="IsChecked" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="NormalBorder" Property="BorderBrush" Value="Transparent" />
+                            </MultiTrigger>
+                            -->
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="NormalBorder" Property="BorderBrush" Value="Transparent" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="PressedBorder" Property="BorderBrush" Value="Transparent" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Grid Background="#a2aebb">
         <Grid.ColumnDefinitions>
@@ -65,15 +113,23 @@
         <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="3" Grid.Row="3" Height="30"  Margin="2.667,37,56.333,2" />
 
         <TextBlock Text="User 2" Name="TBlock_user2" Grid.Column="4" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        
+
         <Canvas Grid.Column="5" Grid.Row="5">
-            <Button BorderThickness="3">
-                <Image Source="{Binding Player.Card[0]}" Canvas.Left="15" Canvas.Top="5" Width="60"/>
-            </Button>
-            <Image Source="{Binding Player.Card[1]}" Canvas.Left="30" Canvas.Top="5" Width="60"/>
-            <Image Source="{Binding Player.Card[2]}" Canvas.Left="45" Canvas.Top="5" Width="60"/>
-            <Image Source="{Binding Player.Card[3]}" Canvas.Left="60" Canvas.Top="5" Width="60"/>
-            <Image Source="{Binding Player.Card[4]}" Canvas.Left="75" Canvas.Top="5" Width="60"/>
+            <ToggleButton Name="Card1" Style="{StaticResource Card}" Click="OnClickCard" Canvas.Left="15" Canvas.Top="5">
+                <Image Source="{Binding Player.Card[0]}" Width="60"/>
+            </ToggleButton>
+            <ToggleButton Name="Card2" Style="{StaticResource Card}" Click="OnClickCard" Canvas.Left="30" Canvas.Top="5">
+                <Image Source="{Binding Player.Card[1]}" Width="60"/>
+            </ToggleButton>
+            <ToggleButton Name="Card3" Style="{StaticResource Card}" Click="OnClickCard" Canvas.Left="45" Canvas.Top="5">
+                <Image Source="{Binding Player.Card[2]}" Width="60"/>
+            </ToggleButton>
+            <ToggleButton Name="Card4" Style="{StaticResource Card}" Click="OnClickCard" Canvas.Left="60" Canvas.Top="5">
+                <Image Source="{Binding Player.Card[3]}" Width="60"/>
+            </ToggleButton>
+            <ToggleButton Name="Card5" Style="{StaticResource Card}" Click="OnClickCard" Canvas.Left="75" Canvas.Top="5">
+                <Image Source="{Binding Player.Card[4]}" Width="60"/>
+            </ToggleButton>
         </Canvas>
 
         <TextBlock Text="Mise 2" Name="TBlock_bet2" Grid.Column="4" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>

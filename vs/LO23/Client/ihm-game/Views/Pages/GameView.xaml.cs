@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -24,5 +25,12 @@ namespace Client.ihm_game.Views.Pages
         {
             InitializeComponent();
         }
-    }
+
+		private void OnClickCard(object sender, RoutedEventArgs e)
+		{
+			ToggleButton button = (ToggleButton)sender;
+			MessageBox.Show(button.Name, "Test Button Card", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+
+		}
+	}
 }
