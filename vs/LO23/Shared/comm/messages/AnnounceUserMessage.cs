@@ -1,3 +1,4 @@
+using Shared.comm.messages;
 using Shared.data;
 using Shared.interfaces;
 using System;
@@ -8,9 +9,9 @@ namespace Shared.comm
 {
 	public class AnnounceUserMessage : MessageToServer
 	{
-		public User user;
+		public LightUser user;
 
-		public AnnounceUserMessage(User user)
+		public AnnounceUserMessage(LightUser user)
 		{
 			this.user = user;
 		}
@@ -21,12 +22,14 @@ namespace Shared.comm
 		public override void Handle(
 			string id,
 			ICommToDataServer commToDataServer,
-			Action<MessageToClient, string> sendTo
+			Action<MessageToClient, string> sendTo,
+			Action<MessageToClient, string> broadcastExceptTo
 		)
 		{
-			Console.WriteLine(this.user.firstname);
-			// commToDataServer.$
-			sendTo(new UserAnnouncedMessage(), id);
+			Console.WriteLine(this.user.username);
+			(List<LightUser>, List<LightGame>) usersAndGames = commToDataServer.registerUser(this.user);
+			sendTo(new RegisterUserReturnMessage(usersAndGames.Item1, usersAndGames.Item2), id);
+			broadcastExceptTo(new NotifyUserChangeMessage(usersAndGames.Item1, usersAndGames.Item2), id);
 		}
 	}
 }

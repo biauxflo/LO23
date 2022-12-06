@@ -65,7 +65,7 @@ namespace Client.ihm_game.ViewModels
 
 			RaiseCommand = new RelayCommand(OnRaiseClick);
 
-			Display();
+			//Display();
 		}
 
 		// fonction lié au bouton
