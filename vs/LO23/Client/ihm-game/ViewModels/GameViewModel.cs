@@ -52,15 +52,34 @@ namespace Client.ihm_game.ViewModels
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		// --- Test rcisnero ---
-		/*public ICommand OnClickCard
+
+		public ICommand CardCommand1
 		{
 			get; set;
-		}*/
+		}
+		public ICommand CardCommand2
+		{
+			get; set;
+		}
+		public ICommand CardCommand3
+		{
+			get; set;
+		}
+		public ICommand CardCommand4
+		{
+			get; set;
+		}
+		public ICommand CardCommand5
+		{
+			get; set;
+		}
+
+		private List<bool> selectedCards;
 
 		public Player player;
 		private Card card1 = new Card(1, 'h', 1, true, true);
-		private Card card2 = new Card(2, 's', 2, true, true);
-		private Card card3 = new Card(3, 'c', 3, true, true);
+		private Card card2 = new Card(2, 's', 10, true, true);
+		private Card card3 = new Card(3, 'c', 13, true, true);
 
 		public Player Player
 		{
@@ -87,9 +106,14 @@ namespace Client.ihm_game.ViewModels
 			RaiseCommand = new RelayCommand(OnRaiseClick);
 
 			// --- Test rcisnero ---
-			//OnClickCard = new RelayCommand(CardCommand);
-			
+			CardCommand1 = new RelayCommand(OnCardClick1);
+			CardCommand2 = new RelayCommand(OnCardClick2);
+			CardCommand3 = new RelayCommand(OnCardClick3);
+			CardCommand4 = new RelayCommand(OnCardClick4);
+			CardCommand5 = new RelayCommand(OnCardClick5);
+
 			player = new Player(100);
+			selectedCards = new List<bool> { false, false, false, false, false };
 			TestCards();
 			// --- Fin Test rcisnero ---
 
@@ -112,11 +136,17 @@ namespace Client.ihm_game.ViewModels
 
 		private void OnFoldClick()
 		{
-			//MessageBox.Show("bouton fold", "bouton fold", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
-			
 			// --- Test rcisnero ---
-			player.Card[0] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
-			OnPropertyChanged(nameof(Player));
+			for(int i = 0; i < 5; i++)
+			{
+				if(selectedCards[i])
+				{
+					player.Card[i] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
+					OnPropertyChanged(nameof(Player));
+				}
+			}
+			//player.Card[0] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
+			//OnPropertyChanged(nameof(Player));
 			// --- Fin Test rcisnero ---
 
 		}
@@ -136,6 +166,42 @@ namespace Client.ihm_game.ViewModels
 		}
 
 		// --- Test rcisnero ---
+		private void OnCardClick1()
+		{
+			if(!selectedCards[0]) 
+				selectedCards[0] = true;
+			else 
+				selectedCards[0] = false;
+		}
+		private void OnCardClick2()
+		{
+			if(!selectedCards[1])
+				selectedCards[1] = true;
+			else
+				selectedCards[1] = false;
+		}
+		private void OnCardClick3()
+		{
+			if(!selectedCards[2])
+				selectedCards[2] = true;
+			else
+				selectedCards[2] = false;
+		}
+		private void OnCardClick4()
+		{
+			if(!selectedCards[3])
+				selectedCards[3] = true;
+			else
+				selectedCards[3] = false;
+		}
+		private void OnCardClick5()
+		{
+			if(!selectedCards[4])
+				selectedCards[4] = true;
+			else
+				selectedCards[4] = false;
+		}
+
 		public void TestCards()
 		{
 			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card1.value + "_" + this.card1.color + ".png");

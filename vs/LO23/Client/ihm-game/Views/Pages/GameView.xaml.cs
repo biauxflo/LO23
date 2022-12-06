@@ -25,12 +25,5 @@ namespace Client.ihm_game.Views.Pages
         {
             InitializeComponent();
         }
-
-		private void OnClickCard(object sender, RoutedEventArgs e)
-		{
-			ToggleButton button = (ToggleButton)sender;
-			MessageBox.Show(button.Name, "Test Button Card", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
-
-		}
 	}
 }

@@ -118,19 +118,19 @@
         <TextBlock Text="User 2" Name="TBlock_user2" Grid.Column="4" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <Canvas Grid.Column="5" Grid.Row="5">
-            <ToggleButton Name="Card1" Style="{StaticResource Card}" Click="OnClickCard" Canvas.Left="15" Canvas.Top="5">
+            <ToggleButton Name="Card1" Style="{StaticResource Card}" Command="{Binding CardCommand1}" Canvas.Left="20" Canvas.Top="5">
                 <Image Source="{Binding Player.Card[0]}" Width="60"/>
             </ToggleButton>
-            <ToggleButton Name="Card2" Style="{StaticResource Card}" Click="OnClickCard" Canvas.Left="30" Canvas.Top="5">
+            <ToggleButton Name="Card2" Style="{StaticResource Card}" Command="{Binding CardCommand2}" Canvas.Left="40" Canvas.Top="5">
                 <Image Source="{Binding Player.Card[1]}" Width="60"/>
             </ToggleButton>
-            <ToggleButton Name="Card3" Style="{StaticResource Card}" Click="OnClickCard" Canvas.Left="45" Canvas.Top="5">
+            <ToggleButton Name="Card3" Style="{StaticResource Card}" Command="{Binding CardCommand3}" Canvas.Left="60" Canvas.Top="5">
                 <Image Source="{Binding Player.Card[2]}" Width="60"/>
             </ToggleButton>
-            <ToggleButton Name="Card4" Style="{StaticResource Card}" Click="OnClickCard" Canvas.Left="60" Canvas.Top="5">
+            <ToggleButton Name="Card4" Style="{StaticResource Card}" Command="{Binding CardCommand4}" Canvas.Left="80" Canvas.Top="5">
                 <Image Source="{Binding Player.Card[3]}" Width="60"/>
             </ToggleButton>
-            <ToggleButton Name="Card5" Style="{StaticResource Card}" Click="OnClickCard" Canvas.Left="75" Canvas.Top="5">
+            <ToggleButton Name="Card5" Style="{StaticResource Card}" Command="{Binding CardCommand5}" Canvas.Left="100" Canvas.Top="5">
                 <Image Source="{Binding Player.Card[4]}" Width="60"/>
             </ToggleButton>
         </Canvas>

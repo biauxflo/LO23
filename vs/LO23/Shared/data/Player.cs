@@ -20,14 +20,16 @@ namespace Shared.data
         public int tokensBet { get; set; }
         public List<Card> hand { get; set; }
 
+		// Test rcisnero
+		private List<string> cardImage;
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		public List<string> Card
 		{
-			get => _card;
+			get => cardImage;
 			set
 			{
-				_card = value;
+				cardImage = value;
 				OnPropertyChanged(nameof(Card));
 			}
 		}
@@ -40,7 +42,7 @@ namespace Shared.data
             this.tokensBet = 0;
             this.hand = new List<Card>();
 
-			this._card = new List<string>(); // Init de la liste
+			this.cardImage = new List<string>(); // Init de la liste
         }
 
 		protected void OnPropertyChanged(string propertyName)
@@ -49,9 +51,9 @@ namespace Shared.data
 		}
 
 		// Methode pour transformer un objet Card vers string
-		public string getCardToString(int index)
+		/*public string getCardToString(int index)
 		{
 			return "/Client;component/ihm-game/Views/images/" + this.hand[index].value + "_" + this.hand[index].color + ".png";
-		}
+		}*/
     }
 }
