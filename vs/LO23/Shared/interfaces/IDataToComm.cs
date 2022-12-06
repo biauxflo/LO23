@@ -32,7 +32,7 @@ namespace Shared.interfaces
 		/// <summary>
 		///
 		/// </summary>
-		void requestPlayRound(GameAction gameAction);
+		void requestPlayRound(GameAction gameAction, Guid playerId);
 
 		/// <summary>
 		///
