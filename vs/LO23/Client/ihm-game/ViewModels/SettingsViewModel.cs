@@ -46,7 +46,15 @@ namespace Client.ihm_game.ViewModels
 		}
 		private void OnSaveClick()
 		{
-			MessageBox.Show("message dans la fenêtre", "nom de la fenêtre", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+			// Demande la confirmation avant de fermer le jeu.
+			MessageBoxResult result = MessageBox.Show("Voulez-vous sauvegarder la partie ?", "Sauvegarder la partie ?", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+			if(result == MessageBoxResult.OK)
+			{
+				// TODO appel à Data void startRecording() / saveGame() ?
+
+			}
+
 		}
 		private void OnQuitClick()
 		{
