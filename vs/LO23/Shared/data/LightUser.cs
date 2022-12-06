@@ -11,14 +11,16 @@ namespace Shared.data
     public class LightUser
 
     {
-        public int id { get; private set; }
+        public Guid id { get; private set; }
         public string username { get; set; }    // username et login c'est la même chose 
         public string image { get; set; }
 
-        public LightUser() {}
+		public LightUser()
+		{
+		}
 
         public LightUser(
-            int id,
+            Guid id,
             string username,
             string image
         ) {

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using JsonNet.ContractResolvers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,13 +18,15 @@ namespace Shared.comm
 		readonly TcpClient client;
 		readonly Thread thread;
 		readonly Action<ReceiveType> handler;
-		public TcpClientHandler(TcpClient client, Action<ReceiveType> handler)
+		readonly string debugId;
+		public TcpClientHandler(TcpClient client, Action<ReceiveType> handler, string debugId=null)
 		{
 			this.client = client;
 			this.handler = handler;
 
 			this.thread = new Thread(this.Listener);
 			this.thread.Start();
+			this.debugId = debugId;	
 		}
 
 		private void Listener()
@@ -32,7 +35,9 @@ namespace Shared.comm
 			{
 				JsonSerializer serializer = new JsonSerializer
 				{
-					TypeNameHandling = TypeNameHandling.All
+					TypeNameHandling = TypeNameHandling.All,
+					ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
+					ContractResolver = new PrivateSetterContractResolver()
 				};
 				NetworkStream nwStream = this.client.GetStream();
 				byte[] buffer = new byte[this.client.ReceiveBufferSize];
@@ -56,7 +61,11 @@ namespace Shared.comm
 					while(reader.Read())
 					{
 						ReceiveType msg = serializer.Deserialize<ReceiveType>(reader);
-						Console.WriteLine(String.Format("-> (in) {0}", msg.GetType()));
+
+						Console.WriteLine(this.debugId == null ?
+							string.Format("-> (in) {0}", msg.GetType()):
+							string.Format("-> (in from {1}) {0}", msg.GetType(), this.debugId)
+						);
 						this.handler(msg);
 					}
 				}
@@ -85,7 +94,10 @@ namespace Shared.comm
 				byte[] bytesToSend = Encoding.UTF8.GetBytes(data);
 				nwStream.Write(bytesToSend, 0, bytesToSend.Length);
 
-				Console.WriteLine(string.Format("<- (out) {0} [{1}]", msg.GetType(), bytesToSend.Length));
+				Console.WriteLine(this.debugId == null ?
+					string.Format("<- (out) {0} [{1}]", msg.GetType(), bytesToSend.Length) :
+					string.Format("<- (out to {2}) {0} [{1}]", msg.GetType(), bytesToSend.Length, this.debugId)
+				);
 			}
 			catch(Exception e)
 			{

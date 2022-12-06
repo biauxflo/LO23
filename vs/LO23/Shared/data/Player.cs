@@ -20,11 +20,8 @@ namespace Shared.data
         public int tokensBet { get; set; }
         public List<Card> hand { get; set; }
 
-		private List<string> _card; // List des URI des images des cartes
-
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		
 		public List<string> Card
 		{
 			get => _card;
@@ -32,7 +29,6 @@ namespace Shared.data
 			{
 				_card = value;
 				OnPropertyChanged(nameof(Card));
-				
 			}
 		}
 		

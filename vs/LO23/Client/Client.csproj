@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{12DAE194-2F49-40BC-9E60-D0AB55FFE12B}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Client</RootNamespace>
     <AssemblyName>Client</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
@@ -61,6 +64,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="JsonNet.ContractResolvers, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JsonNet.ContractResolvers.2.0.0\lib\netstandard2.0\JsonNet.ContractResolvers.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Windows.Design.Interaction, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
@@ -73,6 +79,9 @@
     <Reference Include="System.ComponentModel.Composition.Registration" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Reflection.TypeExtensions, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.TypeExtensions.4.5.1\lib\net461\System.Reflection.TypeExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -123,11 +132,9 @@
     <Compile Include="ihm-game\ViewModels\GameWindowViewModel.cs" />
     <Compile Include="comm\CommClient.cs" />
     <Compile Include="comm\IDataToCommImpl.cs" />
-    <Compile Include="data\Data_Client_ctrl.cs" />
-    <Compile Include="data\DataCore.cs" />
-    <Compile Include="data\Comm_calls_Data_Client_Impl.cs" />
-    <Compile Include="data\IHM_Main_calls_Data_Client_Impl.cs" />
-    <Compile Include="data\Programtest.cs" />
+    <Compile Include="data\DataClientCore.cs" />
+    <Compile Include="data\CommToDataClient.cs" />
+    <Compile Include="data\IHMMainToDataClient.cs" />
     <Compile Include="ihm-game\Views\Pages\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
     </Compile>
@@ -262,7 +269,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ihm-main\Views\images\poker.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -97,11 +97,6 @@ namespace Client.ihm_game.ViewModels
 			
 		}
 
-		private void CardCommand(object obj)
-		{
-		
-		}
-
 		// fonction lié au bouton
 		// mécanisme temporaire juste pour tester affichage d'une console de message
 		private void OnParamClick()
