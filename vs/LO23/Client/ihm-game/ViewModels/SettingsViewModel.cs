@@ -33,28 +33,21 @@ namespace Client.ihm_game.ViewModels
 			BackToPlayCommand = new RelayCommand(OnBackToPlayClick);
 			SaveCommand = new RelayCommand(OnSaveClick);
 			QuitCommand = new RelayCommand(OnQuitClick);
-
-
-			Display();
 		}
 
-		// fonction lié au bouton
-		// mécanisme temporaire juste pour tester affichage d'une console de message
+		// fonction lié au bouton Retour Partie pour quitter les paramètres
 		private void OnBackToPlayClick()
 		{
 			core.BackToGamePage();
 		}
 		private void OnSaveClick()
 		{
-			// Demande la confirmation avant de fermer le jeu.
+			// Demande la confirmation avant de sauvegarder le jeu.
 			MessageBoxResult result = MessageBox.Show("Voulez-vous sauvegarder la partie ?", "Sauvegarder la partie ?", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-
 			if(result == MessageBoxResult.OK)
 			{
-				// TODO appel à Data void startRecording() / saveGame() ?
-
+				core.SaveGame();
 			}
-
 		}
 		private void OnQuitClick()
 		{
@@ -70,12 +63,6 @@ namespace Client.ihm_game.ViewModels
 				view.Close();
 			}
 			// TODO appel de IHM-Main ?
-
-		}
-		private void Display()
-		{
-			//Fonctions à remplacer par les fonctions qui seront implémenter dans IHMGameCallsData
-
 		}
 	}
 }

@@ -9,6 +9,7 @@ using Client.ihm_game.Views.Pages;
 using System.Windows;
 using System.Windows.Controls;
 using Shared.data;
+using Shared.interfaces;
 
 namespace Client.ihm_game
 {
@@ -29,6 +30,8 @@ namespace Client.ihm_game
 		private SettingsViewModel settingsViewModel;
 
 		internal MainToGame MainToGame;
+
+		internal IGameToData gameToData;
 
 
 		public IhmGameCore()
@@ -65,7 +68,10 @@ namespace Client.ihm_game
 			settingsPage.DataContext = settingsViewModel;
 			gameWindowViewModel.ActivePage = settingsPage;
 		}
-
+		internal void SaveGame()
+		{
+			gameToData.saveGame();
+		}
 		internal void GameEnded()
 		{
 			gameWindow.Hide();
