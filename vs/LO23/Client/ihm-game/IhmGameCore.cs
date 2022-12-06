@@ -22,7 +22,11 @@ namespace Client.ihm_game
 
 		private Page gamePage = new GameView();
 
+		private Page settingsPage = new SettingsView();
+
 		private GameViewModel gameViewModel;
+
+		private SettingsViewModel settingsViewModel;
 
 		internal MainToGame MainToGame;
 
@@ -49,9 +53,18 @@ namespace Client.ihm_game
 		/// </summary>
 		internal void BackToGamePage()
 		{
-			mainWindowViewModel.ActivePage = gamePage;
+			gameWindowViewModel.ActivePage = gamePage;
 		}
 
+		/// <summary>
+		/// Met la page active sur la page de paramètre.
+		/// </summary>
+		internal void GoToSettingsPage()
+		{
+			settingsViewModel = new SettingsViewModel(this);
+			settingsPage.DataContext = settingsViewModel;
+			gameWindowViewModel.ActivePage = settingsPage;
+		}
 
 		internal void GameEnded()
 		{
