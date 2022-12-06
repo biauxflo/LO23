@@ -33,7 +33,7 @@ namespace Client.comm
 			throw new NotImplementedException();
 		}
 
-		void IDataToComm.requestStopGame(Guid gameId, Guid playerId)
+		void IDataToComm.requestStopGame(Guid gameId)
 		{
 			throw new NotImplementedException();
 		}
