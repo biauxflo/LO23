@@ -9,6 +9,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Client.ihm_game;
+using Shared.helpers;
+using Shared.data;
+using Shared.constants;
+using Shared.comm.messages;
 
 namespace Client
 {
@@ -25,23 +29,41 @@ namespace Client
         /// <summary>
         /// Interface de communication de Data vers IHM-Main
         /// </summary>
-        private DataToMain dataToMain;
+        //private DataToMain dataToMain;
 
         private IhmGameCore gameCore;
-        private DataCore dataCore;
+        private DataClientCore dataCore;
+		private CommClient commCore;
 
+
+		//private MainToGame mainToGame;
         private void App_Startup(object sender, StartupEventArgs e)
         {
-			dataToMain = new DataToMain(mainCore);
-            this.dataCore = new DataCore();
-            CommClient cli = new CommClient();
-			cli.Start("127.0.0.1", 10000);
-			cli.DataToComm.announceUser(new Shared.data.User(
-				1, "","", "", true, "Test", "Test", 12));
-
 			gameCore = new IhmGameCore();
-
 			mainCore = new IhmMainCore();
+			dataCore = new DataClientCore();
+            commCore = new CommClient();
+
+			mainCore.mainToData = dataCore.implInterfaceForMain;
+			commCore.CommToData = dataCore.implInterfaceForComm;
+			dataCore.interfaceFromComm = commCore.DataToComm;
+			dataCore.interfaceFromMain = mainCore.dataToMain;
+			mainCore.mainToGame = gameCore.MainToGame;
+			//FIXME: implement interfaces with IHM Main
+
+			commCore.Start("127.0.0.1", 10000);
+
+			/************** Start code needed for V1 - To delete later **************/
+			Guid userGuid = new Guid();
+			List<User> users = new List<User>
+			{
+				new User(userGuid, "username", "image", "password", true, "firstname", "lastname", 10)
+			};
+			JSONHelper.writeUsersListToJSONFile(users);
+			/************** End code needed for V1 - To delete later **************/
+
+
+			mainCore.Run();
 		}
-    }
+	}
 }

@@ -8,34 +8,45 @@ using Client.ihm_game.Views;
 using Client.ihm_game.Views.Pages;
 using System.Windows;
 using System.Windows.Controls;
+using Shared.data;
 
 namespace Client.ihm_game
 {
     internal class IhmGameCore
     {
-        private readonly GameWindow mainWindow = new GameWindow();
 
+		// interface et page avec viewModel 
+		private GameWindow gameWindow;
 
-		private readonly MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
+		private GameWindowViewModel gameWindowViewModel;
 
+		private Page gamePage = new GameView();
 
-		private readonly Page gamePage = new GameView();
+		private GameViewModel gameViewModel;
 
-		private readonly GameViewModel gameViewModel;
+		internal MainToGame MainToGame;
 
 
 		public IhmGameCore()
 		{
-			gameViewModel = new GameViewModel(this);
-			mainWindow.DataContext = mainWindowViewModel;
-			gamePage.DataContext = gameViewModel;
-
-			mainWindowViewModel.ActivePage = gamePage;
-
-			mainWindow.Show();
-
+			gameWindow = new GameWindow();
+			gameWindowViewModel = new GameWindowViewModel(this);
+			gameWindow.DataContext = gameWindowViewModel;
+			this.MainToGame = new MainToGame(this);
 		}
 
+		internal void LaunchGame(Game game)
+		{
+			gameViewModel = new GameViewModel(this, game);
+			gamePage.DataContext = gameViewModel;
 
+			gameWindowViewModel.ActivePage = gamePage;
+			gameWindow.Show();
+		}
+
+		internal void GameEnded()
+		{
+			gameWindow.Hide();
+		}
 	}
 }

@@ -10,34 +10,33 @@ namespace Client.ihm_main.ViewModels
 {
     internal class ConnectionViewModel : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Utilisateur essaynt de se connecter.
-        /// </summary>
-        private User connectionUser = new User();
-        public User ConnectionUser
-        {
-            get => connectionUser;
-            set
-            {
-                connectionUser = value;
-				OnPropertyChanged();
-            }
-        }
+		private readonly IhmMainCore core;
 
-        /// <summary>
-        /// Utilisateur test (pour verifier que le mecanisme de connexion fonctionne).
-        /// </summary>
-		// TODO : Supprimer lors de l'integration
-        private User user2;
-        public User User2
-        {
-            get => user2;
-            set
-            {
-                user2 = value;
+		/// <summary>
+		/// Utilisateur essaynt de se connecter.
+		/// </summary>
+		private string username;
+		public string Username
+		{
+			get => username;
+			set
+			{
+				username = value;
 				OnPropertyChanged();
-            }
-        }
+			}
+		}
+
+		private string password;
+		public string Password
+		{
+			get => password;
+			set
+			{
+				password = value;
+				OnPropertyChanged();
+			}
+		}
+
 		public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -50,9 +49,10 @@ namespace Client.ihm_main.ViewModels
         /// </summary>
         public ICommand QuitCommand { get; set; }
 
-        public ConnectionViewModel()
+        public ConnectionViewModel(IhmMainCore core)
         {
-            user2 = new User(1,"utilisateur", null,"utilisateur123", true, "test", "test", 18);
+			this.core = core;
+
             ConnectionCommand = new RelayCommand(OnConnectionClick, true);
             QuitCommand = new RelayCommand(OnQuitClick, true);
         }
@@ -67,8 +67,8 @@ namespace Client.ihm_main.ViewModels
 		/// </summary>
 		internal void Reset()
 		{
-			ConnectionUser.username = string.Empty;
-			ConnectionUser.password = string.Empty;
+			Username = string.Empty;
+			Password = string.Empty;
 		}
 
         /// <summary>
@@ -76,25 +76,10 @@ namespace Client.ihm_main.ViewModels
         /// </summary>
         private void OnConnectionClick()
         {
-            // TODO : Mettre en place l'appel au module Data
-            string messageBoxText = string.Empty;
-            MessageBoxImage icon = MessageBoxImage.None;
-            string windowCaption = "Résultat de connexion";
-            MessageBoxButton button = MessageBoxButton.OK;
+			// TODO : Mettre en place l'appel au module Data
+			core.TryAuthenticate(Username, Password);
 
-            if(user2.username.Equals(ConnectionUser.username) && user2.password.Equals(ConnectionUser.password))
-            {
-                messageBoxText = "Connexion réussie";
-                icon = MessageBoxImage.Information;
-            }
-            else
-            {
-                messageBoxText = "Votre indentifiant ou votre mot de passe est incorrect";
-                icon = MessageBoxImage.Error;
-            }
-
-            MessageBox.Show(messageBoxText, windowCaption, button, icon, MessageBoxResult.OK);
-        }
+		}
 
         /// <summary>
         /// Mécansime de fermeture de l'application.

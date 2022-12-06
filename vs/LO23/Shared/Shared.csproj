@@ -31,11 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JsonNet.ContractResolvers, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JsonNet.ContractResolvers.2.0.0\lib\netstandard2.0\JsonNet.ContractResolvers.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Reflection.TypeExtensions, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.TypeExtensions.4.5.1\lib\net461\System.Reflection.TypeExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,8 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="comm\messages\AddPlayerToGameReturn.cs" />
+    <Compile Include="comm\messages\CreateNewGame.cs" />
+    <Compile Include="comm\messages\CreateNewGameReturn.cs" />
+    <Compile Include="comm\messages\NotifyUserChangeMessage.cs" />
+    <Compile Include="comm\messages\RequestPlayGame.cs" />
     <Compile Include="comm\TcpClientHandler.cs" />
+    <Compile Include="constants\Constants.cs" />
     <Compile Include="data\Game.cs" />
+    <Compile Include="data\GameOptions.cs" />
     <Compile Include="data\LightGame.cs" />
     <Compile Include="data\Round.cs" />
     <Compile Include="data\GameAction.cs" />
@@ -56,18 +69,18 @@
     <Compile Include="data\Deck.cs" />
     <Compile Include="data\Player.cs" />
     <Compile Include="data\User.cs" />
-    <Compile Include="interfaces\ICommToData.cs" />
-    <Compile Include="interfaces\ICommToDataServer.cs" />
+    <Compile Include="helpers\JSONHelper.cs" />
     <Compile Include="comm\messages\AnnounceUserMessage.cs" />
-    <Compile Include="comm\messages\UserAnnouncedMessage.cs" />
+    <Compile Include="comm\messages\RegisterUserReturnMessage.cs" />
     <Compile Include="comm\MessageToClient.cs" />
     <Compile Include="comm\MessageToServer.cs" />
     <Compile Include="interfaces\IDataToComm.cs" />
     <Compile Include="interfaces\IGameToData.cs" />
     <Compile Include="interfaces\IDataToMain.cs" />
-    <Compile Include="interfaces\Interface_Comm_calls_Data_Client.cs" />
-    <Compile Include="interfaces\Interface_Comm_calls_Data_Server.cs" />
-    <Compile Include="interfaces\Interface_IHM_Main_calls_Data_Client.cs" />
+    <Compile Include="interfaces\IMainToGame.cs" />
+    <Compile Include="interfaces\ICommToDataClient.cs" />
+    <Compile Include="interfaces\ICommToDataServer.cs" />
+    <Compile Include="interfaces\IDataClientToMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

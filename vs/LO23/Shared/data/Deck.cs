@@ -8,10 +8,15 @@ namespace Shared.data
         public int index { get; set; }
         public List<Card> cards { get; set; }
 
-        public Deck(int index, List<Card> cards)
-        {
-            this.index = index;
-            this.cards = cards;
-        }
+        public Deck()
+		{
+			generate52Cards();
+		}
+
+		private void generate52Cards() //Can also just be the reset() function
+		{
+			//TODO
+			//Implemente
+		}
     }
 }
