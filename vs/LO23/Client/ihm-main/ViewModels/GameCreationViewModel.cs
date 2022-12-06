@@ -1,4 +1,5 @@
-﻿using Shared.data;
+﻿using System;
+using Shared.data;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -16,8 +17,8 @@ namespace Client.ihm_main.ViewModels
         /// <summary>
 		/// Partie en cours de création.
 		/// </summary>
-		private Game gameInCreation = new Game();
-        public Game Partie1
+		private GameOptions gameInCreation = new GameOptions(String.Empty, 2000, true, true, 100, 4, 0, 10);
+        public GameOptions GameInCreation
         {
             get => gameInCreation;
             set
@@ -49,8 +50,6 @@ namespace Client.ihm_main.ViewModels
             CreationCommand = new RelayCommand(OnCreationClick, true);
             CancelCommand = new RelayCommand(OnCancelClick, true);
 
-            Games.Add(new Game("partie1", 2, 2500, true, true));
-
             this.core = core;
         }
 
@@ -61,33 +60,13 @@ namespace Client.ihm_main.ViewModels
 
         private void OnCancelClick()
         {
-			Partie1 = null;
+			GameInCreation = new GameOptions(String.Empty, 2000, true, true, 100, 4, 0, 10);
             core.BackToHomePage();
         }
 
         private void OnCreationClick()
         {
-            // TODO : Mettre en place l'appel au module Data pour recuperer les parties en cours
-            string messageBoxText = string.Empty;
-            MessageBoxImage icon = MessageBoxImage.None;
-            string windowCaption = "Résultat de création de partie";
-            MessageBoxButton button = MessageBoxButton.OK;
-
-            if(Games
-                .Any(game => game.Name == gameInCreation.Name))
-            {
-                messageBoxText = "Nom de Partie déjà existant";
-                icon = MessageBoxImage.Error;
-            }
-            else
-            {
-                messageBoxText = "Création réussie";
-                icon = MessageBoxImage.Information;
-            }
-
-            MessageBox.Show(messageBoxText, windowCaption, button, icon, MessageBoxResult.OK);
+			core.CreateNewGame(GameInCreation);
         }
-
     }
-
 }

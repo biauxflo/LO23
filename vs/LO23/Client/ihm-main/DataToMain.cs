@@ -16,12 +16,12 @@ namespace Client.ihm_main
             this.core = core;
         }
 
-        public void ConnectionFailed()
+        public void ConnectionFailed(string error)
         {
-            core.ConnectionFailed();
+            core.ConnectionFailed(error);
         }
 
-        public void ConnectionSucceed(User user)
+        public void ConnectionSucceed(LightUser user)
         {
             core.ConnectionSucceed(user);
         }
@@ -31,7 +31,7 @@ namespace Client.ihm_main
             core.GameCreationFailed(error);
         }
 
-		public void GameListUpdated(List<Game> games)
+		public void GameListUpdated(List<LightGame> games)
         {
 			core.GameListUpdated(games);
         }

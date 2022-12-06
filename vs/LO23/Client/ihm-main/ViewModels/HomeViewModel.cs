@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using System;
+using GalaSoft.MvvmLight.Command;
 using Shared.data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -17,8 +18,8 @@ namespace Client.ihm_main.ViewModels
 		/// <summary>
 		/// Utilisateur crée avec le formulaire de connexion.
 		/// </summary>
-		private User connectedUser;
-		public User ConnectedUser
+		private LightUser connectedUser;
+		public LightUser ConnectedUser
 		{
 			get => connectedUser;
 			set
@@ -28,13 +29,18 @@ namespace Client.ihm_main.ViewModels
 			}
 		}
 
-        /// <summary>
-        /// Liste des parties accessibles.
-        /// </summary>
-        public ObservableCollection<Game> Games
+		/// <summary>
+		/// Liste des parties accessibles.
+		/// </summary>
+		private ObservableCollection<LightGame> games;
+		public ObservableCollection<LightGame> Games
         {
-            get;
-            set;
+            get => games;
+			set
+			{
+				games = value;
+				OnPropertyChanged();
+			}
         }
 
         /// <summary>
@@ -51,16 +57,6 @@ namespace Client.ihm_main.ViewModels
 
         public HomeViewModel(IhmMainCore core)
         {
-            Games = new ObservableCollection<Game>
-            {
-                new Game("partie 1", 1),
-                new Game("partie 2", 1),
-                new Game("partie 3", 1),
-                new Game("partie 4", 1),
-                new Game("partie 5", 1),
-                new Game("partie 6", 1)
-            };
-
             GameCreationCommand = new RelayCommand(CreateNewGame, true);
             GameLaunchingCommand = new RelayCommand<object>(LaunchGame, true);
 
@@ -77,16 +73,14 @@ namespace Client.ihm_main.ViewModels
         /// <param name="obj">Partie à lancer.</param>
         private void LaunchGame(object obj)
         {
-            if(obj.GetType() != typeof(Game))
+            if(obj.GetType() != typeof(LightGame))
             {
                 return;
             }
             else
             {
-                Game game = (Game)obj;
-				// TODO : Appel Data
-				// TODO : A supprimer à l'integration
-				core.mainToGame.LaunchGame(game);
+                LightGame game = (LightGame)obj;
+				core.TryJoinGame(game.id, ConnectedUser);
             }
         }
 

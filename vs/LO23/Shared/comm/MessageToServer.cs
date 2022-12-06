@@ -11,7 +11,8 @@ namespace Shared.comm
 		public abstract void Handle(
 			string id,
 			ICommToDataServer commToDataServer,
-			Action<MessageToClient, string> sendTo
+			Action<MessageToClient, string> sendTo,
+			Action<MessageToClient, string> broadcastExceptTo
 		);
 	}
 }

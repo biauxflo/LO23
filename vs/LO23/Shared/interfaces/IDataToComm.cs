@@ -7,7 +7,7 @@ namespace Shared.interfaces
 		/// <summary>
 		///
 		/// </summary>
-		void announceUser(User user);
+		void announceUser(LightUser user);
 
 		/// <summary>
 		///
@@ -42,12 +42,12 @@ namespace Shared.interfaces
 		/// <summary>
 		///
 		/// </summary>
-		void requestPlayGame(Guid gameId, Guid playerId);
+		void requestPlayGame(Guid gameId, LightUser lightUser);
 
 		/// <summary>
 		///
 		/// </summary>
-		void createNewGame(Game game);
+		void createNewGame(GameOptions gameOptions);
 
 		/// <summary>
 		///
