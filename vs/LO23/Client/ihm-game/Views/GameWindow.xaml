@@ -6,11 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.ihm_game.Views"
         mc:Ignorable="d"
-<<<<<<< HEAD
         Title="Partie en cours" Height="450" Width="800">
-=======
-        Title="MainWindow" Height="450" Width="800">
->>>>>>> 5d92ae7 (feat: integration IHM)
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding Closing}" PassEventArgsToCommand="True"/>
