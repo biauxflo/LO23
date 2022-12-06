@@ -32,7 +32,7 @@
         <Grid Grid.Row="2" Grid.Column="2">
             <Ellipse Width="150" Height="150" Fill="DarkGreen"/>
             <TextBlock Text="BIENVENUE" Foreground="Black" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Image Source="images/poker.png" Width="60" VerticalAlignment="Bottom"/>
+            <Image Source="../images/poker.png" Width="60" VerticalAlignment="Bottom"/>
         </Grid>
         <Grid Grid.Row="4" Grid.Column="2">
             <Grid.RowDefinitions>

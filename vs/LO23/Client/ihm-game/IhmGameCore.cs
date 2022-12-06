@@ -44,6 +44,15 @@ namespace Client.ihm_game
 			gameWindow.Show();
 		}
 
+		/// <summary>
+		/// Met la page active sur la page de jeu.
+		/// </summary>
+		internal void BackToGamePage()
+		{
+			mainWindowViewModel.ActivePage = gamePage;
+		}
+
+
 		internal void GameEnded()
 		{
 			gameWindow.Hide();

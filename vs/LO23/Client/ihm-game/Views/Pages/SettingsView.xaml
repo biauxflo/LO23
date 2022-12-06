@@ -23,14 +23,9 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Button Name="RetourPartie"  Grid.Row="1" Grid.Column="1"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=BackToPlayCommand}">
-            <Image Source="/Client;component/ihm-game/Views/images/RetourPartie.png"/>
-        </Button>
-        <Button Name="SauvegardePartie"  Grid.Row="3" Grid.Column="1"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=SaveCommand}">
-            <Image Source="/Client;component/ihm-game/Views/images/SauvegarderPartie.png"/>
-        </Button>
-        <Button Name="Quitter"  Grid.Row="5" Grid.Column="1"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=QuitCommand}">
-            <Image Source="/Client;component/ihm-game/Views/images/Quitter.png"/>
-        </Button>
+        <Button Name="BT_RetourPartie"  Grid.Row="1" Grid.Column="1" Background="#d9d9d9" Content="Retour partie" Command="{Binding Path=BackToPlayCommand}" FontSize="23"></Button>
+        <Button Name="BT_SauvegardePartie"  Grid.Row="3" Grid.Column="1" Background="#d9d9d9" Content="Sauvegarder partie" Command="{Binding Path=SaveCommand}" FontSize="23"></Button>
+        <Button Name="BT_Quitter"  Grid.Row="5" Grid.Column="1" Background="#d9d9d9" Content="Quitter" Command="{Binding Path=QuitCommand}" FontSize="23"></Button>
+
     </Grid>
 </Page>

@@ -42,13 +42,7 @@ namespace Client.ihm_game.ViewModels
 		// mécanisme temporaire juste pour tester affichage d'une console de message
 		private void OnBackToPlayClick()
 		{
-			// exemple de fenêtre warning 
-			/* MessageBoxResult result = MessageBox.Show("message dans la fenêtre","nom de la fenêtre", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-            if(result == MessageBoxResult.OK)
-             {
-
-             } */
-			MessageBox.Show("message dans la fenêtre", "nom de la fenêtre", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+			core.BackToGamePage();
 		}
 		private void OnSaveClick()
 		{

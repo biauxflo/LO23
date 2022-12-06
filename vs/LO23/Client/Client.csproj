@@ -202,9 +202,6 @@
   <ItemGroup>
     <Content Include="bin\Debug\Shared.dll" />
     <Content Include="bin\Debug\Shared.pdb" />
-    <Resource Include="ihm-game\Views\images\SauvegarderPartie.png" />
-    <Resource Include="ihm-game\Views\images\Quitter.png" />
-    <Resource Include="ihm-game\Views\images\RetourPartie.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ihm-game\Views\images\config.png">
