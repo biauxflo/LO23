@@ -26,6 +26,8 @@ namespace Client.ihm_game
 
 		internal MainToGame MainToGame;
 
+		internal DataToGame DataToGame;
+
 
 		public IhmGameCore()
 		{
@@ -33,6 +35,7 @@ namespace Client.ihm_game
 			gameWindowViewModel = new GameWindowViewModel(this);
 			gameWindow.DataContext = gameWindowViewModel;
 			this.MainToGame = new MainToGame(this);
+			this.DataToGame = new DataToGame(this);
 		}
 
 		internal void LaunchGame(Game game)
@@ -47,6 +50,26 @@ namespace Client.ihm_game
 		internal void GameEnded()
 		{
 			gameWindow.Hide();
+		}
+
+		internal void updateMessageDisplay(ChatMessage message)
+		{
+			
+		}
+
+		internal void updateGameDisplay(Game game)
+		{
+		
+		}
+
+		internal void startReplayDisplay(Game game)
+		{
+
+		}
+
+		internal void displayGame(Game game)
+		{
+		
 		}
 	}
 }
