@@ -100,6 +100,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ihm-game\Views\Pages\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ihm-main\Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -117,6 +121,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ihm-game\MainToGame.cs" />
+    <Compile Include="ihm-game\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ihm-game\Views\Pages\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ihm-main\DataToMain.cs" />
     <Compile Include="ihm-main\IhmMainCore.cs" />
     <Compile Include="ihm-main\ViewModels\ConnectionViewModel.cs" />
@@ -194,6 +202,9 @@
   <ItemGroup>
     <Content Include="bin\Debug\Shared.dll" />
     <Content Include="bin\Debug\Shared.pdb" />
+    <Resource Include="ihm-game\Views\images\SauvegarderPartie.png" />
+    <Resource Include="ihm-game\Views\images\Quitter.png" />
+    <Resource Include="ihm-game\Views\images\RetourPartie.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ihm-game\Views\images\config.png">
