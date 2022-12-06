@@ -6,24 +6,25 @@ using Shared.interfaces;
 
 namespace Client.data
 {
-    public class Comm_calls_Data_Client_impl : Shared.interfaces.Interface_Comm_calls_Data_Client
+    public class CommToDataClient : Shared.interfaces.ICommToDataClient
     {
-        public Data_Client_ctrl data_Client_Ctrl { get; private set; }
+        public DataClientCore dataClientCore { get; private set; }
         
-        public Comm_calls_Data_Client_impl(Data_Client_ctrl data_Client_Ctrl){
-			this.data_Client_Ctrl = data_Client_Ctrl;
+        public CommToDataClient(DataClientCore data_Client_Ctrl){
+			this.dataClientCore = data_Client_Ctrl;
         }
 
+		// @pirousse: setGame creating/joining game
         public void setGame(Game game)
         {
-            data_Client_Ctrl.joinedGame = game;
-            data_Client_Ctrl.request_displayGameToIHMMain(game);
+            dataClientCore.joinedGame = game;
+            dataClientCore.request_displayGameToIHMMain(game);
         }
 
 		public void setGamesAndUsers(List<LightUser> listUsers, List<LightGame> listGame)
 		{
-			data_Client_Ctrl.games = listGame;
-			data_Client_Ctrl.users = listUsers;
+			dataClientCore.Games = listGame;
+			dataClientCore.Users = listUsers;
 		}
 
 		public void setLoggedOut()
@@ -36,11 +37,6 @@ namespace Client.data
 
 		public void updateGame(Game game)
 		{
-		}
-
-		public LightUser getProfile()
-		{
-			return new LightUser();
 		}
 
 		public void getProfileReturn(LightUser user)

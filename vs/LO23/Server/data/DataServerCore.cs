@@ -7,21 +7,16 @@ using Shared.data;
 
 namespace Server.Data
 {
-    public class Data_Server_ctrl
+    public class DataServerCore
     {
-        private Comm_calls_Data_Server_Impl implInterfaceForComm;
+		internal CommToDataServer implInterfaceForComm { get; private set; }
 
 		internal static List<LightUser> lightUsers = new List<LightUser>();
 		internal static List<Game> games = new List<Game>();
 
-		public Data_Server_ctrl()
+		public DataServerCore()
         {
-            this.implInterfaceForComm = new Comm_calls_Data_Server_Impl(this);
-        }
-
-        public Comm_calls_Data_Server_Impl getImplInterfaceForComm()
-        {
-            return this.implInterfaceForComm;
+            this.implInterfaceForComm = new CommToDataServer(this);
         }
 
 

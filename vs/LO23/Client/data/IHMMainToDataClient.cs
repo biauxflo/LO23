@@ -6,41 +6,34 @@ using Shared.interfaces;
 using Shared.helpers;
 using Shared.constants;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
-public class IHM_Main_calls_Data_Client_Impl : Shared.interfaces.Interface_IHM_Main_calls_Data_Client
+public class IHMMainToDataClient : Shared.interfaces.IDataClientToMain
 {
-    Data_Client_ctrl data_client_ctrl;
-	public IHM_Main_calls_Data_Client_Impl(Data_Client_ctrl data_client_ctrl)
+    DataClientCore data_client_ctrl;
+	public IHMMainToDataClient(DataClientCore data_client_ctrl)
 	{
         this.data_client_ctrl = data_client_ctrl;
     }
 
-     public User authenticate(string login, string password)
+    public void authenticate(string login, string password)
     {
-		int parser = login.IndexOf('#');
-		if(parser < 0)
-		{
-			throw new Exception("InvalidLoginFormat");
-		}
-		string username = login.Substring(0, parser);
-		string id = login.Substring(parser + 1, login.Length - 1);
-
-		string hash = login + password;
-
 		try
 		{
 			JArray listUsersJSON = JSONHelper.getJSONFromFile(Constants.USER_STORAGE_PATH);
-			List<User> users = listUsersJSON.ToObject<List<User>>();;
-			User user = users.Find(u => u.password == hash);
+			List<User> users = listUsersJSON.ToObject<List<User>>();
+			User user = users.Find(u => u.username == login && u.password == password);
 
 			if(user != null)
 			{
-				return user;
-			}
-			throw new Exception("BadCredentials");
+				data_client_ctrl.ask_announceUser(User.ToLightUser(user));
+                data_client_ctrl.SendConnectionSucceedToMain(user);
+			} else {
+                data_client_ctrl.SendConnectionFailedToMain("BadCredentials");
+            }
 		} catch (Exception e)
 		{
-			throw new Exception("BadCredentials");
+			data_client_ctrl.SendConnectionFailedToMain("BadCredentials");
 		}
     }
 
@@ -49,7 +42,7 @@ public class IHM_Main_calls_Data_Client_Impl : Shared.interfaces.Interface_IHM_M
 		data_client_ctrl.sendCreateNewGame(options);
     }
 
-    public void getProfile(int userId)
+    public void getProfile(Guid userId)
     {
         throw new NotImplementedException();
     }
@@ -59,9 +52,9 @@ public class IHM_Main_calls_Data_Client_Impl : Shared.interfaces.Interface_IHM_M
         throw new NotImplementedException();
     }
 
-    public void playGame(int gameId)
+    public void playGame(Guid gameId, LightUser lightUser)
     {
-        data_client_ctrl.request_PlayGameToComm(gameId);
+        data_client_ctrl.request_PlayGameToComm(gameId, lightUser);
     }
 
     public void registerProfile(User user)

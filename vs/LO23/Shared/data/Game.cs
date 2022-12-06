@@ -10,7 +10,6 @@ namespace Shared.data
     {
         public List<Round> rounds { get; set; } //Un round est un enchainement de phases de jeu => Il va de la distribution des cartes jusqu'au reveal des cartes et répartition des gains
         public int turn { set; get; } //Un turn correspond au tour de jeu d'un joueur
-		public GameOptions options { set; get; }
         public int smallBlind { set; get; }
         public int bingBlind { set; get; } 
         public int currentPlayerIndex { set; get; } //Le joueur qui doit jouer actuellement
@@ -19,11 +18,12 @@ namespace Shared.data
         public int highestBet { set; get; } //Le nombre de jetons misés par un joueur le plus important 
         public int nbNoRise { set; get; } //Nombre de turn depuis le début de la phase courante qui n'ont pas rise (augmenter le pari minimum nécessaire) => Sert à déduire la fin d'une phase
         public List<ChatMessage> chat { set; get; }
-		public string name { get;set; }
 		public int nbPlayers { get;set; }
 		public Deck deck {get; private set;} //L'ensemble des cartes dans le jeu, qu'elles soient en main, dans la pioche ou la défausse
 
-		public Game(int id, GameOptions options) : base(id, options)
+		protected Game(){}
+
+		public Game(Guid id, GameOptions options) : base(id, options)
 		{
 			this.rounds = new List<Round>();
             this.turn = 0;
@@ -38,9 +38,14 @@ namespace Shared.data
 			this.deck = new Deck();
         }
 
+		public static LightGame ToLightGame(Game game)
+		{
+			return new LightGame(game.id, game.gameOptions);
+		}
+
 		public int goToNextPlayer()
 		{
-			int nextPlayerIndex = this.currentPlayerIndex + 1 <= this.players.Count ? this.currentPlayerIndex + 1 : 0;
+			int nextPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
 			this.currentPlayerIndex = nextPlayerIndex;
 
 			return nextPlayerIndex;
