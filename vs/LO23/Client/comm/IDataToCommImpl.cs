@@ -1,4 +1,5 @@
 ﻿using Shared.comm;
+using Shared.comm.messages;
 using Shared.data;
 using Shared.interfaces;
 using System;
@@ -17,8 +18,7 @@ namespace Client.comm
 			this.send = send;
 		}
 
-
-		void IDataToComm.announceUser(User user)
+		void IDataToComm.announceUser(LightUser user)
 		{
 			AnnounceUserMessage msg = new AnnounceUserMessage(user);
 			this.send(msg);
@@ -53,14 +53,16 @@ namespace Client.comm
 			throw new NotImplementedException();
 		}
 
-		void IDataToComm.requestPlayGame(Guid gameId, Guid playerId)
+		void IDataToComm.requestPlayGame(Guid gameId, LightUser lightUser)
 		{
-			throw new NotImplementedException();
+			RequestPlayGame msg = new RequestPlayGame(lightUser, gameId);
+			this.send(msg);
 		}
 
-		void IDataToComm.createNewGame(Game game)
+		void IDataToComm.createNewGame(GameOptions gameOptions)
 		{
-			throw new NotImplementedException();
+			CreateNewGame msg = new CreateNewGame(gameOptions); 
+			this.send(msg);
 		}
 
 		void IDataToComm.getProfile(Guid playerId)

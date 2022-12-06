@@ -24,12 +24,15 @@ namespace Client.ihm_game
 
 		private GameViewModel gameViewModel;
 
+		internal MainToGame MainToGame;
+
 
 		public IhmGameCore()
 		{
 			gameWindow = new GameWindow();
 			gameWindowViewModel = new GameWindowViewModel(this);
 			gameWindow.DataContext = gameWindowViewModel;
+			this.MainToGame = new MainToGame(this);
 		}
 
 		internal void LaunchGame(Game game)

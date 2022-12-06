@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Shared.interfaces
 {
-    public interface Interface_IHM_Main_calls_Data_Client
+    public interface IDataClientToMain
     {
         void registerProfile(User user);
-        Boolean authenticate(String login, String mdp);
+        void authenticate(string login, string password); // login is username#id
         void logout();
         List<LightGame> requestSavedGames();
         Game requestStartReplay();
        void watchGame();
-        void playGame(int GameId);
-        void createNewGame(int nbPlayers, int nbTokens, Boolean spectatorsAllowed, Boolean chatAllowed, int roundMax, int doubleBlind);
-       void getProfile(int userId);
+        void playGame(Guid gameId, LightUser lightUser);
+        void createNewGame(GameOptions options);
+       void getProfile(Guid userId);
     }
 }

@@ -7,15 +7,16 @@ using Shared.interfaces;
 using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
+using System.Windows;
 
 namespace Client.comm
 {
 	public class CommClient
 	{
 		/// <summary>Interface fournie par DataClient</summary>
-		public ICommToData CommToData { get; set; }
+		public ICommToDataClient CommToData { private get; set; }
 		/// <summary>Interface implémentée pour DataClient</summary>
-		public IDataToComm DataToComm { get; }
+		public IDataToComm DataToComm { get; private set; }
 
 		/// <summary>Tcp client handler</summary>
 		private TcpClientHandler<MessageToServer, MessageToClient> handler;
@@ -53,7 +54,7 @@ namespace Client.comm
 
 		private void OnReceive(MessageToClient msg)
 		{
-			msg.Handle(this.CommToData);
+			Application.Current.Dispatcher.Invoke(() => msg.Handle(this.CommToData));
 		}
 
 		public void Send(MessageToServer msg)
