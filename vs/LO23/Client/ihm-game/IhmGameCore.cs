@@ -52,24 +52,20 @@ namespace Client.ihm_game
 			gameWindow.Hide();
 		}
 
-		internal void updateMessageDisplay(ChatMessage message)
+		internal void UpdateMessageDisplay(ChatMessage message)
 		{
 			
 		}
 
-		internal void updateGameDisplay(Game game)
+		internal void UpdateGameDisplay(Game game)
 		{
 		
 		}
 
-		internal void startReplayDisplay(Game game)
+		internal void StartReplayDisplay(Game game)
 		{
 
 		}
 
-		internal void displayGame(Game game)
-		{
-		
-		}
 	}
 }

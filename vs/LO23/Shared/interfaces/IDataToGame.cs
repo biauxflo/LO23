@@ -9,12 +9,24 @@ namespace Shared.interfaces
 {
 	public interface IDataToGame
 	{
-		void updateMessageDisplay(ChatMessage message);
+		/// <summary>
+		/// Fonction qui met à jour le chat, TODO: vérifier que la paramètre est bon
+		/// </summary>
+		/// <param name="message">Ajout du message du chat</param>
+		void UpdateMessageDisplay(ChatMessage message);
 
-		void updateGameDisplay(Game game);
+		/// <summary>
+		/// Fonction appelé par DataClient qui met à jour la game, TODO: vérifier que la paramètre est bon
+		/// </summary>
+		/// <param name="game">game avec les modifications</param>
+		void UpdateGameDisplay(Game game);
 
-		void startReplayDisplay(Game game);
+		/// <summary>
+		/// Fonction appelé par DataClient qui permet de revoir la partie TODO: vérifier que la paramètre est bon
+		/// 
+		/// </summary>
+		/// <param name="game">game avec les modifications</param>
+		void StartReplayDisplay(Game game);
 
-		void displayGame(Game game);
 	}
 }

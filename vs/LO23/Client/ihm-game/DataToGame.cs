@@ -16,24 +16,20 @@ namespace Client.ihm_game
 		{
 			this.core = core;
 		}
-		public void updateMessageDisplay(ChatMessage message)
+		public void UpdateMessageDisplay(ChatMessage message)
 		{
-			core.updateMessageDisplay(message);
+			core.UpdateMessageDisplay(message);
 		}
 
-		public void updateGameDisplay(Game game)
+		public void UpdateGameDisplay(Game game)
 		{
-			core.updateGameDisplay(game);
+			core.UpdateGameDisplay(game);
 		}
 
-		public void startReplayDisplay(Game game)
+		public void StartReplayDisplay(Game game)
 		{
-			core.startReplayDisplay(game);
+			core.StartReplayDisplay(game);
 		}
 
-		public void displayGame(Game game)
-		{
-			core.displayGame(game);
-		}
 	}
 }
