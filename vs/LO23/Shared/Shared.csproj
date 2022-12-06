@@ -51,6 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="comm\messages\AddPlayerToGameReturn.cs" />
+    <Compile Include="comm\messages\RequestPlayRoundMessage.cs" />
+    <Compile Include="comm\messages\RequestLeaveGameMessage.cs" />
+    <Compile Include="comm\messages\NotifyGameChangeMessage.cs" />
     <Compile Include="comm\messages\CreateNewGame.cs" />
     <Compile Include="comm\messages\CreateNewGameReturn.cs" />
     <Compile Include="comm\messages\NotifyUserChangeMessage.cs" />
