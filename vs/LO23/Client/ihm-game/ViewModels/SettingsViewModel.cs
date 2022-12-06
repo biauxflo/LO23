@@ -50,7 +50,19 @@ namespace Client.ihm_game.ViewModels
 		}
 		private void OnQuitClick()
 		{
-			MessageBox.Show("message dans la fenêtre", "nom de la fenêtre", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+			// Récupère la fenêtre principale de l'application.
+			Window view = Application.Current.MainWindow;
+
+			// Demande la confirmation avant de fermer le jeu.
+			MessageBoxResult result = MessageBox.Show(view, "Voulez-vous quitter la partie ?", "Quitter la partie ?", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+			if(result == MessageBoxResult.OK)
+			{
+				// TODO appel à Data void leaveGame()
+				view.Close();
+			}
+			// TODO appel de IHM-Main ?
+
 		}
 		private void Display()
 		{
