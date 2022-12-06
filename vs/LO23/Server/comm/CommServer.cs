@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Server.comm
 {
+	/// <summary>
+	/// Server that handle several clients and manages communication.
+	/// </summary>
 	public class CommServer
 	{
 		/// <summary>Interface fournie par DataServer</summary>
@@ -25,8 +28,10 @@ namespace Server.comm
 
 
 		/// <summary>
-		/// Initie l'écoute.
+		/// Starts to listen to new clients.
 		/// </summary>
+		/// <param name="ip">Ip</param>
+		/// <param name="port">Port</param>
 		public void Run(string ip, int port)
 		{
 			//setup server
@@ -51,6 +56,11 @@ namespace Server.comm
 			}
 		}
 
+		/// <summary>
+		/// Handles a received message.
+		/// </summary>
+		/// <param name="msg">Message received</param>
+		/// <param name="id">Client id</param>
 		private void OnReceiveFrom(MessageToServer msg, string id)
 		{
 			msg.Handle(
@@ -61,11 +71,21 @@ namespace Server.comm
 			);
 		}
 
+		/// <summary>
+		/// Sends a message to a client.
+		/// </summary>
+		/// <param name="msg">Message to send</param>
+		/// <param name="id">Client id</param>
 		public void SendTo(MessageToClient msg, string id)
 		{
 			this.tcpClientHandlers[id].Send(msg);
 		}
 
+		/// <summary>
+		/// Sends a message to all clients except one.
+		/// </summary>
+		/// <param name="msg">Message to send</param>
+		/// <param name="exceptId">Id of one client who won't receive the message</param>
 		public void BroadcastExceptTo(MessageToClient msg, string exceptId)
 		{
 			foreach(KeyValuePair<string, TcpClientHandler<MessageToClient, MessageToServer>> client in this.tcpClientHandlers)
