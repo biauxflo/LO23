@@ -44,9 +44,9 @@ namespace Client.comm
 			this.send(msg);
 		}
 
-		void IDataToComm.requestPlayRound(GameAction gameAction, Guid playerId)
+		void IDataToComm.requestPlayRound(GameAction gameAction)
 		{
-			RequestPlayRoundMessage msg = new RequestPlayRoundMessage(gameAction, playerId);
+			RequestPlayRoundMessage msg = new RequestPlayRoundMessage(gameAction);
 			this.send(msg);
 		}
 

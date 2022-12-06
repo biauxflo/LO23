@@ -13,12 +13,10 @@ namespace Shared.comm.messages
 	public class RequestPlayRoundMessage : MessageToServer
 	{
 		public GameAction gameAction;
-		public Guid playerId;
 
-		public RequestPlayRoundMessage(GameAction gameAction, Guid playerId)
+		public RequestPlayRoundMessage(GameAction gameAction)
 		{
 			this.gameAction = gameAction;
-			this.playerId = playerId;
 		}
 		public override void Handle(
 			string id,
@@ -27,7 +25,7 @@ namespace Shared.comm.messages
 			Action<MessageToClient, string> broadcastExceptTo
 			)
 		{
-			Game game = commToDataServer.applyActionToPlayer(this.gameAction, this.playerId);
+			Game game = commToDataServer.applyActionToPlayer(this.gameAction);
 			broadcastExceptTo(new NotifyGameChangeMessage(game), id);
 		}
 	}
