@@ -16,7 +16,7 @@ namespace Shared.interfaces
         Game addUserToGame(LightUser user, Guid gameId);	
 		Game createNewGame(GameOptions options);
 		void uneregisterUser(Guid playerId);
-		Game applyActionToPlayer(GameAction gameAction, Guid playerId);
+		Game applyActionToPlayer(GameAction gameAction);
 		Game removePlayerToGame(Guid playerId, Guid gameId);
 
     }
