@@ -49,7 +49,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" Grid.Row="1" Text="Nom de la Partie" FontSize="22" />
-            <TextBox Grid.Column="1"  Grid.Row="3"  Name="TB_Nom"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Nom de la Partie" Text="{Binding Partie1.Name}"/>
+            <TextBox Grid.Column="1"  Grid.Row="3"  Name="TB_Nom"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Nom de la Partie" Text="{Binding GameInCreation.Name}"/>
         </Grid>
         <Grid Grid.Row="6" Grid.Column="2">
             <Grid.RowDefinitions>
@@ -65,7 +65,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" Grid.Row="1" Text="Nombre de Joueurs" FontSize="22" />
-            <TextBox Grid.Column="1"  Grid.Row="3"  Name="TB_NbJoueurs"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Nombre de Joueurs" Text="{Binding Partie1.NbPlayers}"/>
+            <TextBox Grid.Column="1"  Grid.Row="3"  Name="TB_NbJoueurs"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Nombre de Joueurs" Text="{Binding GameInCreation.NbPlayersMax}"/>
 
         </Grid>
         <Grid Grid.Row="8" Grid.Column="2">
@@ -81,8 +81,8 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1" Grid.Row="1" Text="Nombre de Jeutons" FontSize="22" />
-            <TextBox Grid.Column="1"  Grid.Row="3"  Name="TB_NbJeutons"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Nombre de Jeutons" Text="{Binding Partie1.NbTokens}"/>
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="Nombre de Jetons" FontSize="22" />
+            <TextBox Grid.Column="1"  Grid.Row="3"  Name="TB_NbJetons"  Height="50" Width="250" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Nombre de Jeutons" Text="{Binding GameInCreation.StartingTokens}"/>
         </Grid>
         <Grid Grid.Row="10" Grid.Column="2">
             <Grid.RowDefinitions>
@@ -102,9 +102,9 @@
                 <ColumnDefinition Width="*"/>
 
             </Grid.ColumnDefinitions>
-            <CheckBox Grid.Column="1"  Grid.Row="0"  Name="TB_spects"  Height="50" Width="50" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Spectateurs" IsChecked="{Binding Partie1.CanSpecJoin}"/>
+            <CheckBox Grid.Column="1"  Grid.Row="0"  Name="TB_spects"  Height="50" Width="50" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Spectateurs" IsChecked="{Binding GameInCreation.CanSpecJoin}"/>
             <TextBlock Grid.Column="3" Grid.Row="0" Text="Spectateurs" FontSize="22" />
-            <CheckBox Grid.Column="5"  Grid.Row="0"  Name="TB_chat_spects"  Height="50" Width="50" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Chat entre spectateurs" IsChecked="{Binding Partie1.CanSpecChat}"/>
+            <CheckBox Grid.Column="5"  Grid.Row="0"  Name="TB_chat_spects"  Height="50" Width="50" BorderBrush="SteelBlue" BorderThickness="2" ToolTip="Chat entre spectateurs" IsChecked="{Binding GameInCreation.CanSpecChat}"/>
             <TextBlock Grid.Column="7" Grid.Row="0" Text="Chat entre spectateurs" FontSize="22" />
         </Grid>
         <Grid Grid.Row="12" Grid.Column="2">

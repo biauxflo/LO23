@@ -7,6 +7,6 @@ namespace Shared.comm
 		/// <summary>
 		/// Operates the process of the message.
 		/// </summary>
-		public abstract void Handle(ICommToData commToData);
+		public abstract void Handle(ICommToDataClient commToData);
 	}
 }

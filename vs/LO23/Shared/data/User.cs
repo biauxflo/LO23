@@ -14,12 +14,13 @@ namespace Shared.data {
         public string lastname { get; private set; }    // Once created the user should not be able to change his lastname
         public int age { get; private set; }    // Once created the user should not be able to change his age
 
-		public User()
-		{
-		}
+
+        public User()
+        {
+        }
 
         public User(
-            int id,
+            Guid id,
             string username,
             string image,
             string password,
@@ -36,5 +37,10 @@ namespace Shared.data {
             this.age = age;
         }
 
-    }
+
+		public static LightUser ToLightUser(User user)
+		{
+			return new LightUser(user.id, user.username, user.image);
+		}
+	}
 }

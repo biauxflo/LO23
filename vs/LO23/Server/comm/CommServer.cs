@@ -14,7 +14,7 @@ namespace Server.comm
 	public class CommServer
 	{
 		/// <summary>Interface fournie par DataServer</summary>
-		public ICommToDataServer CommToDataServer {get; set; }
+		public ICommToDataServer CommToDataServer { private get; set; }
 
 		/// <summary>Recepteur de nouveaux cliens</summary>
 		private TcpListener newClientListener = default;
@@ -46,19 +46,33 @@ namespace Server.comm
 
 				this.tcpClientHandlers.Add(
 					id,
-					new TcpClientHandler<MessageToClient, MessageToServer>(client, action)
+					new TcpClientHandler<MessageToClient, MessageToServer>(client, action, id)
 				);
 			}
 		}
 
 		private void OnReceiveFrom(MessageToServer msg, string id)
 		{
-			msg.Handle(id, this.CommToDataServer, this.SendTo);
+			msg.Handle(
+				id, 
+				this.CommToDataServer, 
+				this.SendTo,
+				this.BroadcastExceptTo
+			);
 		}
 
 		public void SendTo(MessageToClient msg, string id)
 		{
 			this.tcpClientHandlers[id].Send(msg);
+		}
+
+		public void BroadcastExceptTo(MessageToClient msg, string exceptId)
+		{
+			foreach(KeyValuePair<string, TcpClientHandler<MessageToClient, MessageToServer>> client in this.tcpClientHandlers)
+			{
+				if(client.Key == exceptId) break;
+				client.Value.Send(msg);
+			}
 		}
 		
 		// TODO : clean stop or destroy

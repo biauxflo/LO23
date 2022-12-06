@@ -16,17 +16,17 @@ namespace Shared.data
 
    public class LightGame
     {
-        public int id { get; set; }
+        public Guid id { get; set; }
         public string status { get; set; }
         public int indexRound { get; set; }
         public List<Player> players { get; set; }
         public List<LightUser> spectators { get; set; }
         public List<LightUser> lobby { get; set; }
-
 		public GameOptions gameOptions {get; private set;} //Options de la game à sa création
 
+		protected LightGame(){}
 
-		public LightGame(int id, GameOptions options)
+		public LightGame(Guid id, GameOptions options)
         {
             this.id = id;
 			this.gameOptions = options;

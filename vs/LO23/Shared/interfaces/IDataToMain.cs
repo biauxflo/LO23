@@ -8,19 +8,19 @@ namespace Shared.interfaces
         /// <summary>
         /// Informe l'utilisateur que la connexion a échoué.
         /// </summary>
-        void ConnectionFailed();
+        void ConnectionFailed(string error);
 
         /// <summary>
         /// Connecte l'utilisateur à l'application.
         /// </summary>
         /// <param name="username">Nom de l'utilisateur.</param>
-        void ConnectionSucceed(User user);
+        void ConnectionSucceed(LightUser user);
 
         /// <summary>
         /// Met à jour la liste des parties rejoignable par l'utilisateur.
         /// </summary>
         /// <param name="game">Liste des parties rejoignables.</param>
-        void GameListUpdated(List<Game> games);
+        void GameListUpdated(List<LightGame> games);
 
         /// <summary>
         /// Lance une partie.
