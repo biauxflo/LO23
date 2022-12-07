@@ -1,7 +1,5 @@
-﻿using Client.ihm_main.DTO;
-using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.Command;
 using System;
-using GalaSoft.MvvmLight.Command;
 using Shared.data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -64,6 +62,7 @@ namespace Client.ihm_main.ViewModels
 
             this.core = core;
         }
+
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
