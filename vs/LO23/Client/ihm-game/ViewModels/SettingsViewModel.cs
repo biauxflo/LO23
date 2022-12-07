@@ -9,7 +9,6 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Shared.data;
 using System.Collections.ObjectModel;
 
-
 namespace Client.ihm_game.ViewModels
 {
 	internal class SettingsViewModel
@@ -35,11 +34,12 @@ namespace Client.ihm_game.ViewModels
 			QuitCommand = new RelayCommand(OnQuitClick);
 		}
 
-		// fonction lié au bouton Retour Partie pour quitter les paramètres
+		// fonction liée au bouton Retour Partie pour quitter les paramètres
 		private void OnBackToPlayClick()
 		{
 			core.BackToGamePage();
 		}
+		// fonction liée au bouton Sauvegarder la partie
 		private void OnSaveClick()
 		{
 			// Demande la confirmation avant de sauvegarder le jeu.
@@ -49,6 +49,7 @@ namespace Client.ihm_game.ViewModels
 				core.SaveGame();
 			}
 		}
+		//fonction liée au bouton Quitter
 		private void OnQuitClick()
 		{
 			// Récupère la fenêtre principale de l'application.
@@ -56,13 +57,10 @@ namespace Client.ihm_game.ViewModels
 
 			// Demande la confirmation avant de fermer le jeu.
 			MessageBoxResult result = MessageBox.Show(view, "Voulez-vous quitter la partie ?", "Quitter la partie ?", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-
 			if(result == MessageBoxResult.OK)
 			{
-				// TODO appel à Data void leaveGame()
-				view.Close();
+				core.GameEnded();
 			}
-			// TODO appel de IHM-Main ?
 		}
 	}
 }

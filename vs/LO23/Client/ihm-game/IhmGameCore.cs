@@ -68,12 +68,20 @@ namespace Client.ihm_game
 			settingsPage.DataContext = settingsViewModel;
 			gameWindowViewModel.ActivePage = settingsPage;
 		}
+		/// <summary>
+		/// Appel à data pour sauvegarder la partie
+		/// </summary>
 		internal void SaveGame()
 		{
 			gameToData.saveGame();
 		}
+		/// <summary>
+		/// Appel à data pour quitter la partie
+		/// Cache la fenêtre de jeu
+		/// </summary>
 		internal void GameEnded()
 		{
+			gameToData.leaveGame();
 			gameWindow.Hide();
 		}
 	}
