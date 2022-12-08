@@ -32,7 +32,7 @@ namespace Client.ihm_game
 		internal MainToGame MainToGame;
 
 		internal IGameToData gameToData;
-=======
+
 		internal DataToGame DataToGame;
 
 		public IhmGameCore()
