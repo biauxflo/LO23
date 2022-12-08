@@ -90,6 +90,21 @@ namespace Client.ihm_game.ViewModels
 				OnPropertyChanged(nameof(Player));
 			}
 		}
+	
+		private int _pot;
+		/// Property for the pot value 
+		public int Pot
+
+		{
+			get => _pot;
+			set
+			{
+				_pot = value;
+				OnPropertyChanged(nameof(Pot));
+			}
+		}
+
+
 		// --- Fin Test rcisnero ---
 
 		public GameViewModel(IhmGameCore core, Game game) 
@@ -114,6 +129,8 @@ namespace Client.ihm_game.ViewModels
 
 			player = new Player(100);
 			selectedCards = new List<bool> { false, false, false, false, false };
+			/// pot obtained from game
+			_pot = game.pot;
 			TestCards();
 			// --- Fin Test rcisnero ---
 
@@ -138,6 +155,9 @@ namespace Client.ihm_game.ViewModels
 					OnPropertyChanged(nameof(Player));
 				}
 			}
+
+			_pot = 100;
+			OnPropertyChanged(nameof(Pot));
 			//player.Card[0] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
 			//OnPropertyChanged(nameof(Player));
 			// --- Fin Test rcisnero ---

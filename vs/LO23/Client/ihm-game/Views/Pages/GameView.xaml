@@ -151,7 +151,7 @@
         <TextBlock Text="User 4" Name="TBlock_user4" Grid.Column="9" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Name="TBlock_balance4" Grid.Column="9" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <TextBlock Text="{Binding Game.pot}" Name="TBlock_pot" Grid.Column="5" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="{Binding Pot}" Name="TBlock_pot" Grid.Column="5" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Image Source="/Client;component/ihm-game/Views/images/pot.png" Grid.Column="5" Grid.Row="3" Margin="8.667,0,19.333,10"/>
 
     </Grid>
