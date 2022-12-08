@@ -75,6 +75,7 @@
     <Compile Include="comm\MessageToClient.cs" />
     <Compile Include="comm\MessageToServer.cs" />
     <Compile Include="interfaces\IDataToComm.cs" />
+    <Compile Include="interfaces\IDataToGame.cs" />
     <Compile Include="interfaces\IGameToData.cs" />
     <Compile Include="interfaces\IDataToMain.cs" />
     <Compile Include="interfaces\IMainToGame.cs" />

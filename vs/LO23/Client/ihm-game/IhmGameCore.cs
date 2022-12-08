@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,7 +32,8 @@ namespace Client.ihm_game
 		internal MainToGame MainToGame;
 
 		internal IGameToData gameToData;
-
+=======
+		internal DataToGame DataToGame;
 
 		public IhmGameCore()
 		{
@@ -40,6 +41,7 @@ namespace Client.ihm_game
 			gameWindowViewModel = new GameWindowViewModel(this);
 			gameWindow.DataContext = gameWindowViewModel;
 			this.MainToGame = new MainToGame(this);
+			this.DataToGame = new DataToGame(this);
 		}
 
 		internal void LaunchGame(Game game)
@@ -84,5 +86,21 @@ namespace Client.ihm_game
 			gameToData.leaveGame();
 			gameWindow.Hide();
 		}
+
+		internal void UpdateMessageDisplay(ChatMessage message)
+		{
+			
+		}
+
+		internal void UpdateGameDisplay(Game game)
+		{
+		
+		}
+
+		internal void StartReplayDisplay(Game game)
+		{
+
+		}
+
 	}
 }
