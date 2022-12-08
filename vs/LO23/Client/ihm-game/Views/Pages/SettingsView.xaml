@@ -1,0 +1,31 @@
+﻿<Page x:Class="Client.ihm_game.Views.Pages.SettingsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client.ihm_game.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SettingsView">
+    <Grid Background="#a2aebb">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Button Name="BT_RetourPartie"  Grid.Row="1" Grid.Column="1" Background="#d9d9d9" Content="Retour partie" Command="{Binding Path=BackToPlayCommand}" FontSize="23"></Button>
+        <Button Name="BT_SauvegardePartie"  Grid.Row="3" Grid.Column="1" Background="#d9d9d9" Content="Sauvegarder partie" Command="{Binding Path=SaveCommand}" FontSize="23"></Button>
+        <Button Name="BT_Quitter"  Grid.Row="5" Grid.Column="1" Background="#d9d9d9" Content="Quitter" Command="{Binding Path=QuitCommand}" FontSize="23"></Button>
+
+    </Grid>
+</Page>

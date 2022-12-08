@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +9,7 @@ using Client.ihm_game.Views.Pages;
 using System.Windows;
 using System.Windows.Controls;
 using Shared.data;
+using Shared.interfaces;
 
 namespace Client.ihm_game
 {
@@ -22,12 +23,17 @@ namespace Client.ihm_game
 
 		private Page gamePage = new GameView();
 
+		private Page settingsPage = new SettingsView();
+
 		private GameViewModel gameViewModel;
+
+		private SettingsViewModel settingsViewModel;
 
 		internal MainToGame MainToGame;
 
-		internal DataToGame DataToGame;
+		internal IGameToData gameToData;
 
+		internal DataToGame DataToGame;
 
 		public IhmGameCore()
 		{
@@ -47,8 +53,37 @@ namespace Client.ihm_game
 			gameWindow.Show();
 		}
 
+		/// <summary>
+		/// Met la page active sur la page de jeu.
+		/// </summary>
+		internal void BackToGamePage()
+		{
+			gameWindowViewModel.ActivePage = gamePage;
+		}
+
+		/// <summary>
+		/// Met la page active sur la page de paramètre.
+		/// </summary>
+		internal void GoToSettingsPage()
+		{
+			settingsViewModel = new SettingsViewModel(this);
+			settingsPage.DataContext = settingsViewModel;
+			gameWindowViewModel.ActivePage = settingsPage;
+		}
+		/// <summary>
+		/// Appel à data pour sauvegarder la partie
+		/// </summary>
+		internal void SaveGame()
+		{
+			gameToData.saveGame();
+		}
+		/// <summary>
+		/// Appel à data pour quitter la partie
+		/// Cache la fenêtre de jeu
+		/// </summary>
 		internal void GameEnded()
 		{
+			gameToData.leaveGame();
 			gameWindow.Hide();
 		}
 
