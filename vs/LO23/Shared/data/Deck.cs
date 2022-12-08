@@ -18,5 +18,39 @@ namespace Shared.data
 			//TODO
 			//Implemente
 		}
-    }
+		public Card getNextCardAvailable()
+		{
+	
+				while(this.cards[this.index].isInHand==true )
+				{
+					this.index = (this.index + 1) % 52;
+				
+				}
+
+				Card cardTmp = this.cards[this.index];
+				this.index++;// ptr on the next card potentially available
+			return cardTmp;
+
+
+			
+		}
+
+		public Card giveNewCard()
+		{
+
+				Card card = this.getNextCardAvailable();
+				card.isInHand = true;
+				return card;
+
+		}
+		public void giveBackCards(List<Card> listOfCards)
+		{
+			for(int i = 0; i < listOfCards.Count; i++)
+			{
+				Card card = listOfCards[i];
+				card.isInHand = false;
+			}
+
+		}
+	}
 }

@@ -26,5 +26,27 @@ namespace Shared.data
             this.tokensBet = 0;
             this.hand = new List<Card>();
         }
-    }
+
+		public void RemoveCardFromHand(Card card)
+		{   
+			int remove = 0;//index of the card to remove in player's hand
+			for(int i = 0; i < hand.Count; i++)
+			{
+				remove = this.hand[i] == card ? i : 6;
+			}
+			if(remove == 6)
+			{
+				Console.WriteLine("pas bien la vérification dans player pour la carte");
+			}
+			this.hand.RemoveAt(remove);
+		}
+		public void AddCardToHand(Card card)
+		{
+			
+			if(this.hand.Count < 5)
+			{
+				this.hand.Add(card);
+			}
+		}
+	}
 }
