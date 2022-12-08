@@ -57,7 +57,7 @@ namespace Shared.data
 			get; private set;
 		} //L'ensemble des cartes dans le jeu, qu'elles soient en main, dans la pioche ou la défausse
 
-		protected Game()
+		public Game()// nina changed to public to test
 		{
 		}
 
@@ -92,11 +92,13 @@ namespace Shared.data
 		{
 			int nb = listOfCards.Count;
 
+			// To remove once we have a proper constructor for game
+			this.deck = new Deck();
 
 			List<Card> listOfNewCards = new List<Card>();
 			for(int i = 0; i < nb; i++)
 			{
-				player.RemoveCardFromHand(listOfCards[i]); // we take back the cards from the player
+				player.removeCardFromHand(listOfCards[i]); // we take back the cards from the player
 			}
 			this.deck.giveBackCards(listOfCards); //give back to the deck the cards
 
@@ -106,7 +108,15 @@ namespace Shared.data
 				Card cardTmp = this.deck.giveNewCard(); // what's the next card i can give
 				listOfNewCards.Add(cardTmp); //add to the list of new cards
 				player.AddCardToHand(cardTmp); // add card to player's hand
+				
 
+			}
+		}
+		public void printHand(List<Card> hand)// Sylvain's function I needed -> ATTENTION watch out ctrl c ctrl v
+		{
+			foreach(Card card in hand)
+			{
+				Console.WriteLine(card.color + " : " + card.value);
 			}
 		}
 	}		

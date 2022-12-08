@@ -27,26 +27,39 @@ namespace Shared.data
             this.hand = new List<Card>();
         }
 
-		public void RemoveCardFromHand(Card card)
+		public void removeCardFromHand(Card card)
 		{   
 			int remove = 0;//index of the card to remove in player's hand
-			for(int i = 0; i < hand.Count; i++)
-			{
-				remove = this.hand[i] == card ? i : 6;
+			bool flag =false;
+
+			for(int i = 0; i < this.hand.Count; i++)
+			{   
+				if(this.CompareCard(this.hand[i], card) == true)
+				{
+					flag = true;
+				}
+				
 			}
+
 			if(remove == 6)
 			{
 				Console.WriteLine("pas bien la vérification dans player pour la carte");
 			}
 			this.hand.RemoveAt(remove);
+
 		}
 		public void AddCardToHand(Card card)
 		{
-			
+
 			if(this.hand.Count < 5)
 			{
 				this.hand.Add(card);
 			}
+
+		}
+		public bool CompareCard(Card card1, Card card2)
+		{
+			return (card1.color == card2.color) && (card1.index == card2.index);
 		}
 	}
 }
