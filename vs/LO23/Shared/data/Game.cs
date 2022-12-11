@@ -50,5 +50,62 @@ namespace Shared.data
 
 			return nextPlayerIndex;
 		}
-    }
+
+		public void runGame()
+		{
+
+			/*
+			 * Game in lobby status
+			 * 
+			 * //Waiting for players ot start game 
+			 * while nbPlayers (or players.size()) < nbPlayersMax  
+			 *		if nbPlayers > nbPlayersMin && launchGameTimer not started
+			 *			start launchGameTimer
+			 *		
+			 *		if launchGameTimer > 1minute
+			 *			break;
+			 *		else
+			 *			wait
+			 *	
+			 * //Starting game
+			 * 
+			 * initialize Game //nothing may happen, maybe just check everythign is alright and do nothing else, if the rest has already been done when players join for example
+			 * 
+			 * 
+			 * while nbRounds < roundMax && nbPlayers > 1:
+				 * currentRound = creation of a Round (corresponds to creating a round and initialising it) //shuffle deck, make players pay blind, distribute cards ->send game changes to players
+				 * put game in running status
+				 * currentRound.enterPhaseBet() //Here in the object Round is all the logic to enter in a beting phase, for example creates an object phase and add it in Round class's phases array. Declare this phase as the current one for
+				 * 
+				 * indexCurrentPlayer = 0;
+				 * 
+				 * while nbNoRise < nbPlayers // As long as not everyone did not rise, that means that not everyone has bet the same amount, menaing you can not pass to the next phase
+				 *		currentRound.currentPhase.RequestAndExecuteActionFromPlayer(players.getAt(indexCurrentPlayer)) //could be implmented differently
+				 *		indexCurrentPlayer +1 % nbPlayers
+				 *		
+				 *  currentRound.exitPhaseBet()  //Here in the object Round is all the logic to exit from a beting phase, could be nothing
+				 *	
+				 *	currentRound.enterPhaseExchange()
+				 *	for each player still active:
+				 *		currentRound.currentPhase.RequestAndExecuteActionFromPlayer(player)) //could be implemented differently
+				 *		
+				 *	currentRound.exitPhaseExchange()
+				 *	
+				 *	currentRound.enterPhaseReveal() 
+				 *	currentRound.exitPhaseReveal() 
+				 *	
+				 *	finishRound()
+				 *
+			 * finishGame()
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 */
+		}
+	}
 }
