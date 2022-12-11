@@ -142,16 +142,20 @@ namespace Client.ihm_game.ViewModels
 			//OnPropertyChanged(nameof(Player));
 			// --- Fin Test rcisnero ---
 
+			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
 		}
 
 		private void OnCallClick()
 		{
 			MessageBox.Show("bouton call", "bouton call", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+
+			//this.core.PlayRound(TypeAction.call); Attente réponse data pour définir le paramètre de type TypeAction
 		}
 
 		private void OnRaiseClick()
 		{
 			MessageBox.Show("bouton raise", "bouton raise", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
 		}
 		public void Display()
 		{
