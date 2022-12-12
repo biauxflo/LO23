@@ -84,6 +84,7 @@ namespace Shared.data
 			}
 
 		}
+
 		public bool CompareCard(Card card1, Card card2)
 		{
 			return (card1.color == card2.color) && (card1.index == card2.index);
