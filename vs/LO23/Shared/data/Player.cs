@@ -12,7 +12,11 @@ namespace Shared.data
 
     public class Player
     {
-        public string role { get; set; }
+		private Guid id;
+		private string username;
+		private string image;
+
+		public string role { get; set; }
         public bool isFolded { get; set; }
         public int tokens { get; set; }
         public int tokensBet { get; set; }
@@ -26,6 +30,20 @@ namespace Shared.data
             this.tokensBet = 0;
             this.hand = new List<Card>();
         }
+
+		public Player(Guid id, string username, string image)
+		{
+			this.id = id;
+			this.username = username;
+			this.image = image;
+			this.role = PlayerRole.nothing.ToString();
+			this.isFolded = false;
+			this.tokens = tokens;
+			this.tokensBet = 0;
+			this.hand = new List<Card>();
+
+			this.tokens = 1000;
+		}
 
 		public void removeCardFromHand(Card card)
 		{   
@@ -61,5 +79,7 @@ namespace Shared.data
 		{
 			return (card1.color == card2.color) && (card1.index == card2.index);
 		}
+
+		
 	}
 }
