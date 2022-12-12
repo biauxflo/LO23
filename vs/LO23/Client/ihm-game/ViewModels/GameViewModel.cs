@@ -51,8 +51,9 @@ namespace Client.ihm_game.ViewModels
 		private readonly IhmGameCore core;
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		// --- Test rcisnero ---
-
+		/** --- Test rcisnero ---
+		 * ICommand methods for each card (impossible to call only one method in WPF ?)
+		 */
 		public ICommand CardCommand1
 		{
 			get; set;
@@ -76,10 +77,12 @@ namespace Client.ihm_game.ViewModels
 
 		private List<bool> selectedCards;
 
+		/** TODO : delete (4 lines) when we get actual game from data */
 		public Player player;
 		private Card card1 = new Card(1, 'h', 1, true, true);
 		private Card card2 = new Card(2, 's', 10, true, true);
 		private Card card3 = new Card(3, 'c', 13, true, true);
+		/** ------- */
 
 		public Player Player
 		{
@@ -112,6 +115,7 @@ namespace Client.ihm_game.ViewModels
 			CardCommand4 = new RelayCommand(OnCardClick4);
 			CardCommand5 = new RelayCommand(OnCardClick5);
 
+			/** TODO : delete (3 lines) when we get actual game from data */
 			player = new Player(100);
 			selectedCards = new List<bool> { false, false, false, false, false };
 			TestCards();
@@ -129,7 +133,9 @@ namespace Client.ihm_game.ViewModels
 
 		private void OnFoldClick()
 		{
-			// --- Test rcisnero ---
+			/** --- Test rcisnero ---
+			 * TODO : delete when we get actual game from data - Button used to change selected cards
+			 */
 			for(int i = 0; i < 5; i++)
 			{
 				if(selectedCards[i])
@@ -138,8 +144,6 @@ namespace Client.ihm_game.ViewModels
 					OnPropertyChanged(nameof(Player));
 				}
 			}
-			//player.Card[0] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
-			//OnPropertyChanged(nameof(Player));
 			// --- Fin Test rcisnero ---
 
 		}
@@ -195,6 +199,7 @@ namespace Client.ihm_game.ViewModels
 				selectedCards[4] = false;
 		}
 
+		/** TODO : delete (TestCards fonction) when we get actual game from data */
 		public void TestCards()
 		{
 			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card1.value + "_" + this.card1.color + ".png");

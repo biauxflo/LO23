@@ -20,7 +20,9 @@ namespace Shared.data
         public int tokensBet { get; set; }
         public List<Card> hand { get; set; }
 
-		// Test rcisnero
+		/** Test rcisnero
+		 * Temporary string list to add images paths
+		 */
 		private List<string> cardImage;
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -33,7 +35,8 @@ namespace Shared.data
 				OnPropertyChanged(nameof(Card));
 			}
 		}
-		
+		/** Fin test rcisnero **/
+
 		public Player(int tokens)
         {
             this.role = PlayerRole.nothing.ToString();
@@ -42,7 +45,7 @@ namespace Shared.data
             this.tokensBet = 0;
             this.hand = new List<Card>();
 
-			this.cardImage = new List<string>(); // Init de la liste
+			this.cardImage = new List<string>(); // Test, list init
         }
 
 		protected void OnPropertyChanged(string propertyName)
@@ -50,7 +53,10 @@ namespace Shared.data
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
-		// Methode pour transformer un objet Card vers string
+		/** Test rcisnero
+		 * Converts one card from the hand to path
+		 * - if we keep the cardImage attribute, we delete this method. 
+		 */
 		/*public string getCardToString(int index)
 		{
 			return "/Client;component/ihm-game/Views/images/" + this.hand[index].value + "_" + this.hand[index].color + ".png";
