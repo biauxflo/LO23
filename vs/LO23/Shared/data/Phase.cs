@@ -16,10 +16,15 @@ namespace Shared.data
 
     public class Phase
     {
-        public List<GameAction> actions { set; get; }
+		public TypePhase typePhase
+		{
+			set; get;
+		}
+		public List<GameAction> actions { set; get; }
 
-        public Phase()
+        public Phase(TypePhase typePhase)
         {
+			this.typePhase = typePhase;
             this.actions = new List<GameAction>();
         }
     }
