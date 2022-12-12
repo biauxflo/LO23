@@ -89,6 +89,23 @@ namespace Shared.data
 			return nextPlayerIndex;
 		}
 
+		//Method that distribute cards to all Players
+		public void distributeCards()
+		{
+			List<Card> cardsAvailable = this.deck.cards.Where(c => c.isInHand == false).ToList();
+
+			for(int i = 0; i < 5; i++)
+			{
+				foreach(Player player in this.players)
+				{
+					Card card = cardsAvailable[0];
+					card.isInHand = true;
+					player.hand.Add(card);
+					cardsAvailable.RemoveAt(0);
+				}
+			}
+		}
+
 		public void runGame()
 		{
 
@@ -170,7 +187,8 @@ namespace Shared.data
 
 			}
 		}
-		public void printHand(List<Card> hand)// Sylvain's function I needed -> ATTENTION watch out ctrl c ctrl v
+
+		public void printHand(List<Card> hand) // Sylvain's function I needed -> ATTENTION watch out ctrl c ctrl v
 		{
 			foreach(Card card in hand)
 			{
