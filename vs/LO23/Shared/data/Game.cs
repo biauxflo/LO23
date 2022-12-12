@@ -20,7 +20,7 @@ namespace Shared.data
 		{
 			set; get;
 		}
-		public int bingBlind
+		public int bigBlind
 		{
 			set; get;
 		}
@@ -56,17 +56,19 @@ namespace Shared.data
 		{
 			get; private set;
 		} //L'ensemble des cartes dans le jeu, qu'elles soient en main, dans la pioche ou la défausse
+	
 
 		public Game()// nina changed to public to test
 		{
 		}
+
 
 		public Game(Guid id, GameOptions options) : base(id, options)
 		{
 			this.rounds = new List<Round>();
 			this.turn = 0;
 			this.smallBlind = options.StartingBigBlind / 2;
-			this.bingBlind = options.StartingBigBlind;
+			this.bigBlind = options.StartingBigBlind;
 			this.currentPlayerIndex = 0;
 			this.currentPhase = new Phase();
 			this.pot = 0;
@@ -74,6 +76,7 @@ namespace Shared.data
 			this.nbNoRise = 0;
 			this.chat = new List<ChatMessage>();
 			this.deck = new Deck();
+		
 		}
 
 		public static LightGame ToLightGame(Game game)
@@ -89,8 +92,68 @@ namespace Shared.data
 			return nextPlayerIndex;
 		}
 
-		public void runGame()
+		//Method that distribute cards to all Players
+		public void distributeCards()
 		{
+			List<Card> cardsAvailable = this.deck.cards.Where(c => c.isInHand == false).ToList();
+
+			for(int i = 0; i < 5; i++)
+			{
+				foreach(Player player in this.players)
+				{
+					Card card = cardsAvailable[0];
+					card.isInHand = true;
+					player.hand.Add(card);
+					cardsAvailable.RemoveAt(0);
+				}
+			}
+		}
+
+		public void runGame()
+		{/*
+			int nbUser = this.lobby.Count;
+			if (nbUser < nbMinPlayers)
+			{
+				System.Threading.Thread.Sleep(5000);
+			}
+			/*
+			 * Timer timer = new System.Timers.Timer(120000);
+			timer.Start();
+			while()
+			
+			System.Threading.Thread.Sleep(2000);
+			if(nbUser > nbMaxPlayers)
+			{
+				Console.WriteLine(" trop de user dans le lobby, veuillez quitter");
+			}
+			for(int i = 0; i < nbUser; i++)
+			{	Player p =new  Player(this.lobby[i].id,this.lobby[i].username,this.lobby[i].image);
+				this.players.Add(p);
+			}
+			//this.initializeGame();
+			int nbPlayers = this.players.Count();
+			int nbRounds = 1;//remplacer avec game options
+			int roundMax = 4;
+			while(nbRounds < roundMax && nbPlayers > 2)
+			{   Phase p1 = new Phase(TypePhase.bet1);
+			{   Phase p2 = new Phase(TypePhase.draw);
+				Round r1 = new Round();
+				r1.addPhase(p1);
+				this.rounds.Add(r1);
+
+				//this.distributeCards(this.players);
+				this.paySmallBlind(players[currentPlayerIndex]);
+				currentPlayerIndex++;
+				this.payBigBlind(players[currentPlayerIndex+1]);
+				currentPlayerIndex++;
+
+				IDataToComm.notifyGameChange()
+				
+				players[currentPlayerIndex]).chooseAction();
+
+				//switch()
+
+			}
 
 			/*
 			 * Game in lobby status
@@ -146,6 +209,19 @@ namespace Shared.data
 			 */
 		}
 
+		private void payBigBlind(Player player)
+		{
+			player.tokens -= this.bigBlind;
+			this.pot += this.bigBlind;
+		}
+
+		private void paySmallBlind(Player player)
+		{
+			player.tokens -= this.smallBlind;
+			this.pot += this.smallBlind;
+
+		}
+
 		public void exchangeCards(Player player, List<Card> listOfCards)
 		{
 			int nb = listOfCards.Count;
@@ -170,12 +246,15 @@ namespace Shared.data
 
 			}
 		}
-		public void printHand(List<Card> hand)// Sylvain's function I needed -> ATTENTION watch out ctrl c ctrl v
+
+		public void printHand(List<Card> hand) // Sylvain's function I needed -> ATTENTION watch out ctrl c ctrl v
 		{
 			foreach(Card card in hand)
 			{
 				Console.WriteLine(card.color + " : " + card.value);
 			}
 		}
+		
+		
 	}		
 }
