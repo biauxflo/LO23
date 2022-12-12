@@ -66,6 +66,15 @@ namespace Shared.data
 			this.hand.RemoveAt(remove);
 
 		}
+
+
+		public void removeAllCards()
+		{
+			foreach(Card card in this.hand)
+			{
+				this.removeCardFromHand(card);
+			}
+		}
 		public void AddCardToHand(Card card)
 		{
 

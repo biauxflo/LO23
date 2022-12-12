@@ -84,6 +84,7 @@ namespace Shared.data
 			return new LightGame(game.id, game.gameOptions);
 		}
 
+
 		public int goToNextPlayer()
 		{
 			int nextPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
@@ -236,7 +237,38 @@ namespace Shared.data
 				Console.WriteLine(card.color + " : " + card.value);
 			}
 		}
+<<<<<<< Updated upstream
 		
 		
 	}		
+=======
+
+		public void resetRound()
+		{
+			foreach(Player player in this.players)
+			{
+				player.isFolded = false;
+				player.removeAllCards();
+			}
+			this.deck.giveBackCards(this.deck.cards);
+			// to do: mix the cards
+			this.pot = 0;
+			this.highestBet = 0;
+			this.nbNoRise = 0;
+			this.currentPlayerIndex = 0; // to DO : how do we choose the first player of each round
+			this.smallBlind = 0;
+			this.bingBlind = this.updateBlind();
+			this.currentPhase = new Phase();
+			
+
+
+		}
+		public int updateBlind()
+		{
+			this.bingBlind *= 2; //to verify
+			return this.bingBlind;
+		}
+
+	}
+>>>>>>> Stashed changes
 }
