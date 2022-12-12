@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Timers;
 
 namespace Shared.data
 {
@@ -57,8 +56,7 @@ namespace Shared.data
 		{
 			get; private set;
 		} //L'ensemble des cartes dans le jeu, qu'elles soient en main, dans la pioche ou la défausse
-		public const int nbMaxPlayers = 8;
-		public const int nbMinPlayers = 2;
+	
 
 		public Game()// nina changed to public to test
 		{

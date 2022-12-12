@@ -22,7 +22,11 @@ namespace Shared.data
 		}
 		public List<GameAction> actions { set; get; }
 
-        public Phase(TypePhase typePhase)
+		public Phase()
+		{
+			this.actions = new List<GameAction>();
+		}
+		public Phase(TypePhase typePhase)
         {
 			this.typePhase = typePhase;
             this.actions = new List<GameAction>();
