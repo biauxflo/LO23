@@ -94,7 +94,9 @@ namespace Client.ihm_game
 
 		internal void UpdateGameDisplay(Game game)
 		{
-		
+			this.gameViewModel.Game = game;
+			//if data send gamePublic
+			// replace Game attribute by game attribute
 		}
 
 		internal void StartReplayDisplay(Game game)
