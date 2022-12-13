@@ -11,15 +11,16 @@ namespace Shared.data
         call,
         rise,
         allin,
-        fold
+        fold, 
+		exchangeCards
     }
 
     public class GameAction
     {
         public int id { get; set; }
-        public string typeAction { get; set; }
+        public TypeAction typeAction { get; set; }
 
-        public GameAction(int id, string typeAction)
+        public GameAction(int id, TypeAction typeAction)
         {
             this.id = id;
             this.typeAction = typeAction;

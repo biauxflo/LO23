@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace Shared.data
 {
@@ -255,6 +256,88 @@ namespace Shared.data
 				Console.WriteLine(card.color + " : " + card.value);
 			}
 		}
+
+		public void chooseAction(Player player, int value, GameAction action, List<Card> listOfCards)
+		{
+			// Check player existence in the game
+			bool isPlayerInTheGame = this.players.Contains(player);
+			if (!isPlayerInTheGame)
+			{
+				Console.WriteLine("Player is not in the game");
+			}
+
+			switch(action.typeAction)
+			{
+				case TypeAction.call:
+					this.call(player, value);
+					break;
+
+				case TypeAction.rise:
+					this.rise(player, value);
+					break;
+				case TypeAction.allin:
+					this.allIn(player, value);
+
+					break;
+				case TypeAction.fold:
+					fold(player);
+
+					break;
+				case TypeAction.exchangeCards:
+					this.exchangeCards(player, listOfCards);
+					break;
+			}
+		}
+
+		private void rise(Player player, int value)
+		{
+			if(player.tokens < value)
+			{
+				Console.WriteLine("Player doesn't have enough tokens to bet that amount.");
+			}
+			else
+			{
+				player.decrementTokens(value, player.tokens);
+				player.incrementTokens(value, player.tokensBet);
+				this.pot += value;
+				this.highestBet = value;
+
+			}
+		}
+
+		private static void fold(Player player)
+		{
+			player.isFolded = true;
+			for(int card = 0; card < player.hand.Count; card++)
+			{
+				player.removeCardFromHand(player.hand[card]);
+			}
+		}
+
+		private void allIn(Player player, int value)
+		{
+			value = player.tokens;
+			player.incrementTokens(value, player.tokensBet);
+			player.decrementTokens(0, player.tokens);
+			this.pot += value;
+			this.highestBet = value;
+		}
+
+		private void call(Player player, int value)
+		{
+			value = this.highestBet;
+			if(player.tokens < value)
+			{
+				Console.WriteLine("Player doesn't have enough tokens to bet that amount.");
+			}
+			else
+			{
+				player.decrementTokens(value, player.tokens);
+				player.incrementTokens(value, player.tokensBet);
+				this.pot += value;
+			}
+		}
+		
 		
 	
 		
