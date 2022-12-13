@@ -84,11 +84,12 @@
             <Image Source="/Client;component/ihm-game/Views/images/config.png"/>
         </Button>
 
-
+        <!-- visibilité à modifier selon l'attribut isFolded d'un player -->
         <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="2" Grid.Row="3"/>
         <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="5" Grid.Row="1"/>
         <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="8" Grid.Row="3"/>
 
+        <!-- Action buttons -->
         <Button Name="BT_seCoucher"  Grid.Column="1" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=FoldCommand}" Click="OnFoldClick" ClickMode="Press">
             <Image Source="/Client;component/ihm-game/Views/images/coucher.png"/>
         </Button>
@@ -96,24 +97,17 @@
         <Button Name="BT_egaler"  Grid.Column="4" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=CallCommand}" Click="OnCallClick" ClickMode="Press">
             <Image Source="/Client;component/ihm-game/Views/images/egaler.png"/>
         </Button>
+        <Viewbox Grid.Column="4" Grid.Row="7" StretchDirection="DownOnly">
+            <TextBlock Text="{Binding Game.highestBet}" Name="TBlock_call" Background="Transparent" MaxHeight="50" MaxWidth="50"/>
+        </Viewbox>
 
         <Button Name="BT_doubler"  Grid.Column="7" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=RaiseCommand}" Click="OnRaiseClick" ClickMode="Press">
             <Image Source="/Client;component/ihm-game/Views/images/doubler.png"/>
         </Button>
-        <Viewbox Grid.Column="4" Grid.Row="7" StretchDirection="DownOnly">
-            <TextBlock Text="20" Name="TBlock_call" Background="Transparent" MaxHeight="50" MaxWidth="50"/>
-        </Viewbox>
+        
         <!-- Pour relier le contenu du texte au code, mettre le champs Text="{Binding <Game.callValue>}"   puis dans le code relier avec un setter-->
 
-        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="1" Grid.Row="4" Name="TB_raise" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="3" Grid.Row="1" Name="TB_raise3" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="9" Grid.Row="4" Name="TB_raise4" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-        <TextBlock Text="User 1" Name="TBlock_user1" Grid.Column="1" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="Mise 1" Name="TBlock_bet1" Grid.Column="3" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Name="TBlock_balance1" Grid.Column="1" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="3" Grid.Row="3" Height="30"  Margin="2.667,37,56.333,2" />
-
+        <!-- Self player -->
         <Canvas Grid.Column="5" Grid.Row="5">
             <ToggleButton Name="Card1" Style="{StaticResource Card}" Command="{Binding CardCommand1}" Canvas.Left="20" Canvas.Top="5">
                 <Image Source="{Binding Player.Card[0]}" Width="60"/>
@@ -137,20 +131,29 @@
         <TextBlock Text="{Binding Player.username}" Name="TBlock_user2" Grid.Column="4" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Text="{Binding Player.tokens}" Name="TBlock_balance2" Grid.Column="4" Grid.Row="6" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         
-        <!-- Exemple pour le binding-->
-        <!--<TextBlock Text="{Binding lightgame.players[0].username}" Name="TBlock_user1" Grid.Column="1" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/> -->
+        <!-- User 1 -->
+        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="1" Grid.Row="4" Name="TB_raise" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="User 1" Name="TBlock_user1" Grid.Column="1" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Mise 1" Name="TBlock_bet1" Grid.Column="3" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Name="TBlock_balance1" Grid.Column="1" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="3" Grid.Row="3" Height="30"  Margin="2.667,37,56.333,2" />
+        
+        <!-- User 2 -->
+        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="3" Grid.Row="1" Name="TB_raise3" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Text="User 3" Name="TBlock_user3" Grid.Column="4" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Text="Mise 3" Name="TBlock_bet3" Grid.Column="4" Grid.Row="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="4" Grid.Row="2" Height="30" Margin="2.667,37,56.333,2"/>
         <TextBlock Name="TBlock_balance3" Grid.Column="3" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+        
+        <!-- User 3 -->
+        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="9" Grid.Row="4" Name="TB_raise4" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Text="Mise 4" Name="TBlock_bet4" Grid.Column="7" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="7" Grid.Row="3" Height="30" Margin="2.667,37,56.333,2"/>
         <TextBlock Text="User 4" Name="TBlock_user4" Grid.Column="9" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Name="TBlock_balance4" Grid.Column="9" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+       
+        <!-- Pot -->
         <TextBlock Text="{Binding Game.pot}" Name="TBlock_pot" Grid.Column="5" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Image Source="/Client;component/ihm-game/Views/images/pot.png" Grid.Column="5" Grid.Row="3" Margin="8.667,0,19.333,10"/>
-
     </Grid>
 </Page>
