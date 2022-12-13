@@ -8,12 +8,19 @@ using System.Runtime.CompilerServices;
 
 namespace Client.ihm_main.ViewModels
 {
-    internal class ConnectionViewModel : INotifyPropertyChanged
+	/// <summary>
+	/// Class <c>ConnectionViewModel</c> Modèle de la connection
+	/// </summary>
+	internal class ConnectionViewModel : INotifyPropertyChanged
     {
         /// <summary>
-        /// Utilisateur essaynt de se connecter.
+        /// Utilisateur essayant de se connecter.
         /// </summary>
         private User connectionUser = new User();
+
+		/// <summary>
+		/// On itialise la nouvelle connection
+		/// </summary>
         public User ConnectionUser
         {
             get => connectionUser;
