@@ -8,7 +8,7 @@ using Shared.constants;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-public class IHMMainToDataClient : Shared.interfaces.IDataClientToMain
+public class IHMMainToDataClient : Shared.interfaces.IMainToDataClient
 {
     DataClientCore data_client_ctrl;
 	public IHMMainToDataClient(DataClientCore data_client_ctrl)
@@ -27,6 +27,7 @@ public class IHMMainToDataClient : Shared.interfaces.IDataClientToMain
 			if(user != null)
 			{
 				data_client_ctrl.ask_announceUser(User.ToLightUser(user));
+				data_client_ctrl.CurrentUser = user;
                 data_client_ctrl.SendConnectionSucceedToMain(user);
 			} else {
                 data_client_ctrl.SendConnectionFailedToMain("BadCredentials");
@@ -76,4 +77,5 @@ public class IHMMainToDataClient : Shared.interfaces.IDataClientToMain
     {
         throw new NotImplementedException();
     }
+
 }

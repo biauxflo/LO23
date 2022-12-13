@@ -116,6 +116,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="data\IHMGameToDataClient.cs" />
     <Compile Include="ihm-game\MainToGame.cs" />
     <Compile Include="ihm-main\DataToMain.cs" />
     <Compile Include="ihm-main\IhmMainCore.cs" />
