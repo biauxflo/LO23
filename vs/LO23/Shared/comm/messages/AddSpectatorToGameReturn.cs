@@ -21,7 +21,6 @@ namespace Shared.comm
 		public override void Handle(ICommToDataClient commToData)
 		{
 			commToData.setGame(this.game);
-			throw new NotImplementedException();
 		}
 	}
 }
