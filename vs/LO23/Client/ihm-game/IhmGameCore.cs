@@ -75,7 +75,7 @@ namespace Client.ihm_game
 		/// </summary>
 		internal void SaveGame()
 		{
-			gameToData.saveGame();
+			gameToData.SaveGame();
 		}
 		/// <summary>
 		/// Appel à data pour quitter la partie
@@ -83,7 +83,7 @@ namespace Client.ihm_game
 		/// </summary>
 		internal void GameEnded()
 		{
-			gameToData.leaveGame();
+			gameToData.LeaveGame();
 			gameWindow.Hide();
 		}
 
@@ -125,7 +125,7 @@ namespace Client.ihm_game
 		/// </summary>
 		internal void PlayRound(Action a)
 		{
-			gameToData.playRound(a);
+			gameToData.PlayRound(a);
 		}
 		/// <summary>
 	}
