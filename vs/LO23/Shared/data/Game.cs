@@ -239,7 +239,7 @@ namespace Shared.data
 		}
 		
 	
-	
+		
 
 		public void resetRound()
 		{
@@ -256,15 +256,30 @@ namespace Shared.data
 		this.currentPlayerIndex = 0; // to DO : how do we choose the first player of each round
 		this.smallBlind = 0;
 		this.bigBlind = this.updateBlind();
-		this.currentPhase = new Phase();
-
-
-
+		Phase p= new Phase(TypePhase.bet1);
+		this.currentPhase = p;
+			Round r = new Round();
+			r.addPhase(p);
+			this.rounds.Add(r);
+		foreach(Player player in this.players)
+			{
+				//player.distributeCards();
+			}
 		}
 		public int updateBlind()
 		{
 			this.bigBlind *= 2; //to verify
 			return this.bigBlind;
+		}
+
+		public List<Card> revealCardsOfPlayer(Player player)
+		{
+			List<Card> revealedCards = new List<Card>();
+			if(player.reveal())
+			{
+				revealedCards = player.hand;
+			}
+			return revealedCards;
 		}
 
 	}

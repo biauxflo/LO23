@@ -90,6 +90,11 @@ namespace Shared.data
 			return (card1.color == card2.color) && (card1.index == card2.index);
 		}
 
-		
+		public bool reveal()// need to precise how we know how to reveal or not the cards
+		{
+			return true;
+		}
+
+
 	}
 }
