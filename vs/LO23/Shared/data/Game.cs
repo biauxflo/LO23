@@ -211,6 +211,17 @@ namespace Shared.data
 			 */
 		}
 
+		public void handleGameAction(Guid playerId, GameAction action)
+		{
+			Player player=this.players.Find(x =>
+			{
+				return x.id == playerId;
+			});
+			int value = action.value;
+			List<Card> listOfCards = action.cards;
+			this.chooseAction(player, value, action, listOfCards);
+		}
+
 		private void payBigBlind(Player player)
 		{
 			player.tokens -= this.bigBlind;
