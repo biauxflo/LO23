@@ -76,7 +76,7 @@ namespace Client.ihm_game.ViewModels
 
 		private List<bool> selectedCards;
 
-		public Player player;
+		private Player player;
 		private Card card1 = new Card(1, 'h', 1, true, true);
 		private Card card2 = new Card(2, 's', 10, true, true);
 		private Card card3 = new Card(3, 'c', 13, true, true);
@@ -90,27 +90,12 @@ namespace Client.ihm_game.ViewModels
 				OnPropertyChanged(nameof(Player));
 			}
 		}
-	
-		private int _pot;
-		/// Property for the pot value 
-		public int Pot
-
-		{
-			get => _pot;
-			set
-			{
-				_pot = value;
-				OnPropertyChanged(nameof(Pot));
-			}
-		}
-
-
 		// --- Fin Test rcisnero ---
 
 		public GameViewModel(IhmGameCore core, Game game) 
 		{
 			this.core = core;
-			Game = game;
+			this.game = game;
 
 			ParamCommand = new RelayCommand(OnParamClick);
 
@@ -129,8 +114,8 @@ namespace Client.ihm_game.ViewModels
 
 			player = new Player(100);
 			selectedCards = new List<bool> { false, false, false, false, false };
-			/// pot obtained from game
-			_pot = game.pot;
+			player.tokens = this.game.gameOptions.StartingTokens;
+			
 			TestCards();
 			// --- Fin Test rcisnero ---
 
@@ -147,26 +132,34 @@ namespace Client.ihm_game.ViewModels
 		private void OnFoldClick()
 		{
 			// --- Test rcisnero ---
+			// Change selected cards
 			for(int i = 0; i < 5; i++)
 			{
 				if(selectedCards[i])
 				{
 					player.Card[i] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
-					OnPropertyChanged(nameof(Player));
 				}
 			}
 
-			_pot = 100;
-			OnPropertyChanged(nameof(Pot));
-			//player.Card[0] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
-			//OnPropertyChanged(nameof(Player));
+			// Test : pot changed
+			this.game.pot = 100;
+			OnPropertyChanged(nameof(Game));
+
+			// Test : tokens balance changed (simulates a 500 tokens gain)
+			this.player.tokens += 500;
+			OnPropertyChanged(nameof(Player));
 			// --- Fin Test rcisnero ---
 
 		}
 
 		private void OnCallClick()
 		{
-			MessageBox.Show("bouton call", "bouton call", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+			//MessageBox.Show("bouton call", "bouton call", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+			// Test : simulates a 100 tokens call
+			// TODO : get the maximum bet from current game (game.highestBet ?) and put it when user click this button
+			this.player.tokensBet += 100;
+			OnPropertyChanged(nameof(Player));
+
 		}
 
 		private void OnRaiseClick()
@@ -179,6 +172,7 @@ namespace Client.ihm_game.ViewModels
 		}
 
 		// --- Test rcisnero ---
+		// TODO : add togglebutton bindings with selectedCards parameter
 		private void OnCardClick1()
 		{
 			if(!selectedCards[0]) 
