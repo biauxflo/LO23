@@ -49,56 +49,56 @@ namespace Client.ihm_game.ViewModels
 		}
 
 		private readonly IhmGameCore core;
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		/** --- Test rcisnero ---
-		 * ICommand methods for each card (impossible to call only one method in WPF ?)
-		 */
-		public ICommand CardCommand1
-		{
-			get; set;
-		}
-		public ICommand CardCommand2
-		{
-			get; set;
-		}
-		public ICommand CardCommand3
-		{
-			get; set;
-		}
-		public ICommand CardCommand4
-		{
-			get; set;
-		}
-		public ICommand CardCommand5
-		{
-			get; set;
-		}
-
-		private List<bool> selectedCards;
-
-		/** TODO : delete (4 lines) when we get actual game from data */
-		public Player player;
-		private Card card1 = new Card(1, 'h', 1, true, true);
-		private Card card2 = new Card(2, 's', 10, true, true);
-		private Card card3 = new Card(3, 'c', 13, true, true);
-		/** ------- */
-
-		public Player Player
-		{
-			get => player;
-			set
-			{
-				player = value;
-				OnPropertyChanged(nameof(Player));
-			}
-		}
-		// --- Fin Test rcisnero ---
-
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		/** --- Test rcisnero ---
+		 * ICommand methods for each card (impossible to call only one method in WPF ?)
+		 */
+		public ICommand CardCommand1
+		{
+			get; set;
+		}
+		public ICommand CardCommand2
+		{
+			get; set;
+		}
+		public ICommand CardCommand3
+		{
+			get; set;
+		}
+		public ICommand CardCommand4
+		{
+			get; set;
+		}
+		public ICommand CardCommand5
+		{
+			get; set;
+		}
+
+		private List<bool> selectedCards;
+
+		/** TODO : delete (4 lines) when we get actual game from data */
+		public Player player;
+		private Card card1 = new Card(1, 'h', 1, true, true);
+		private Card card2 = new Card(2, 's', 10, true, true);
+		private Card card3 = new Card(3, 'c', 13, true, true);
+		/** ------- */
+
+		public Player Player
+		{
+			get => player;
+			set
+			{
+				player = value;
+				OnPropertyChanged(nameof(Player));
+			}
+		}
+		// --- Fin Test rcisnero ---
+
 		public GameViewModel(IhmGameCore core, Game game) 
 		{
 			this.core = core;
-			Game = game;
+			this.game = game;
 
 			ParamCommand = new RelayCommand(OnParamClick);
 
@@ -106,20 +106,21 @@ namespace Client.ihm_game.ViewModels
 
 			CallCommand = new RelayCommand(OnCallClick);
 
-			RaiseCommand = new RelayCommand(OnRaiseClick);
-
-			// --- Test rcisnero ---
-			CardCommand1 = new RelayCommand(OnCardClick1);
-			CardCommand2 = new RelayCommand(OnCardClick2);
-			CardCommand3 = new RelayCommand(OnCardClick3);
-			CardCommand4 = new RelayCommand(OnCardClick4);
-			CardCommand5 = new RelayCommand(OnCardClick5);
-
-			/** TODO : delete (3 lines) when we get actual game from data */
-			player = new Player(100);
-			selectedCards = new List<bool> { false, false, false, false, false };
+			RaiseCommand = new RelayCommand(OnRaiseClick);
+
+			// --- Test rcisnero ---
+			CardCommand1 = new RelayCommand(OnCardClick1);
+			CardCommand2 = new RelayCommand(OnCardClick2);
+			CardCommand3 = new RelayCommand(OnCardClick3);
+			CardCommand4 = new RelayCommand(OnCardClick4);
+			CardCommand5 = new RelayCommand(OnCardClick5);
+
+			/** TODO : delete (3 lines) when we get actual game from data */
+			player = new Player(100);
+			selectedCards = new List<bool> { false, false, false, false, false };
+			player.tokens = this.game.gameOptions.StartingTokens;
 			TestCards();
-			// --- Fin Test rcisnero ---
+            // --- Fin Test rcisnero ---
 
 			Display();
 			
@@ -132,25 +133,37 @@ namespace Client.ihm_game.ViewModels
 		}
 
 		private void OnFoldClick()
-		{
-			/** --- Test rcisnero ---
-			 * TODO : delete when we get actual game from data - Button used to change selected cards
-			 */
-			for(int i = 0; i < 5; i++)
-			{
-				if(selectedCards[i])
-				{
+		{
+			/** --- Test rcisnero ---
+			 * TODO : delete when we get actual game from data - Button used to change selected cards
+			 * Change selected cards
+			 */
+			for(int i = 0; i < 5; i++)
+			{
+				if(selectedCards[i])
+				{
 					player.Card[i] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
-					OnPropertyChanged(nameof(Player));
 				}
 			}
-			// --- Fin Test rcisnero ---
 
+			// Test : pot changed
+			this.game.pot = 100;
+			OnPropertyChanged(nameof(Game));
+
+			// Test : tokens balance changed (simulates a 500 tokens gain)
+			this.player.tokens += 500;
+			OnPropertyChanged(nameof(Player));
+			// --- Fin Test rcisnero ---
 		}
 
 		private void OnCallClick()
 		{
-			MessageBox.Show("bouton call", "bouton call", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+			//MessageBox.Show("bouton call", "bouton call", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+			// Test : simulates a 100 tokens call
+			// TODO : get the maximum bet from current game (game.highestBet ?) and put it when user click this button
+			this.player.tokensBet += 100;
+			OnPropertyChanged(nameof(Player));
+
 		}
 
 		private void OnRaiseClick()
@@ -163,6 +176,7 @@ namespace Client.ihm_game.ViewModels
 		}
 
 		// --- Test rcisnero ---
+		// TODO : add togglebutton bindings with selectedCards parameter
 		private void OnCardClick1()
 		{
 			if(!selectedCards[0]) 
@@ -199,9 +213,9 @@ namespace Client.ihm_game.ViewModels
 				selectedCards[4] = false;
 		}
 
-		/** TODO : delete (TestCards fonction) when we get actual game from data */
-		public void TestCards()
-		{
+		/** TODO : delete (TestCards fonction) when we get actual game from data */
+		public void TestCards()
+		{
 			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card1.value + "_" + this.card1.color + ".png");
 			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card2.value + "_" + this.card2.color + ".png");
 			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card1.value + "_" + this.card1.color + ".png");
