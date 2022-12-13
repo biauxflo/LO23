@@ -143,6 +143,9 @@ namespace Client.ihm_game.ViewModels
 			this.player.tokens += 500;
 			OnPropertyChanged(nameof(Player));
 			// --- Fin Test rcisnero ---
+
+			// Appel fonction data (Gabrielle)
+			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
 		}
 
 		private void OnCallClick()
@@ -152,11 +155,18 @@ namespace Client.ihm_game.ViewModels
 			// TODO : get the maximum bet from current game (game.highestBet ?) and put it when user click this button
 			this.player.tokensBet += 100;
 			OnPropertyChanged(nameof(Player));
+
+			// Appel fonction data (Gabrielle)
+			//this.core.PlayRound(TypeAction.call); Attente réponse data pour définir le paramètre de type TypeAction
+
 		}
 
 		private void OnRaiseClick()
 		{
 			MessageBox.Show("bouton raise", "bouton raise", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+
+			// Appel fonction data (Gabrielle)
+			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
 		}
 		public void Display()
 		{

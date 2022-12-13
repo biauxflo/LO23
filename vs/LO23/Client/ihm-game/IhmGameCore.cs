@@ -102,5 +102,12 @@ namespace Client.ihm_game
 
 		}
 
+		/// Appel à data pour demander une action (call/rise/fold/allin)
+		/// </summary>
+		internal void PlayRound(Action a)
+		{
+			gameToData.playRound(a);
+		}
+		/// <summary>
 	}
 }

@@ -89,15 +89,15 @@
         <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="5" Grid.Row="1"/>
         <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="8" Grid.Row="3"/>
 
-        <Button Name="BT_seCoucher"  Grid.Column="1" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=FoldCommand}">
+        <Button Name="BT_seCoucher"  Grid.Column="1" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=FoldCommand}" Click="OnFoldClick" ClickMode="Press">
             <Image Source="/Client;component/ihm-game/Views/images/coucher.png"/>
         </Button>
 
-        <Button Name="BT_egaler"  Grid.Column="4" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=CallCommand}">
+        <Button Name="BT_egaler"  Grid.Column="4" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=CallCommand}" Click="OnCallClick" ClickMode="Press">
             <Image Source="/Client;component/ihm-game/Views/images/egaler.png"/>
         </Button>
 
-        <Button Name="BT_doubler"  Grid.Column="7" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=RaiseCommand}">
+        <Button Name="BT_doubler"  Grid.Column="7" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=RaiseCommand}" Click="OnRaiseClick" ClickMode="Press">
             <Image Source="/Client;component/ihm-game/Views/images/doubler.png"/>
         </Button>
         <Viewbox Grid.Column="4" Grid.Row="7" StretchDirection="DownOnly">
