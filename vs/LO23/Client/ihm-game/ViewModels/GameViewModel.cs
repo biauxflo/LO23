@@ -49,56 +49,56 @@ namespace Client.ihm_game.ViewModels
 		}
 
 		private readonly IhmGameCore core;
-		public event PropertyChangedEventHandler PropertyChanged;
-
+		public event PropertyChangedEventHandler PropertyChanged;
 		/** --- Test rcisnero ---
 		 * ICommand methods for each card (impossible to call only one method in WPF ?)
 		 */
 		public ICommand CardCommand1
 		{
 			get; set;
-		}
-
+		}
 		public ICommand CardCommand2
 		{
 			get; set;
-		}
-
+		}
 		public ICommand CardCommand3
 		{
 			get; set;
-		}
-
+		}
 		public ICommand CardCommand4
 		{
 			get; set;
-		}
-
+		}
 		public ICommand CardCommand5
 		{
 			get; set;
-		}
+		}
+		private List<bool> selectedCards;		private Player player;
+		private List<Player> playerList;
 
-		private List<bool> selectedCards;
-
-		/** TODO : delete (4 lines) when we get actual game from data */
-		public Player player;
+		/** TODO : delete (3 lines) when we get actual game from data */
 		private Card card1 = new Card(1, 'h', 1, true, true);
 		private Card card2 = new Card(2, 's', 10, true, true);
 		private Card card3 = new Card(3, 'c', 13, true, true);
-		/** ------- */
-
+		/** ------- */
 		public Player Player
 		{
 			get => player;
 			set
 			{
-				player = value;
-				OnPropertyChanged(nameof(Player));
+				player = value;				OnPropertyChanged(nameof(Player));
 			}
 		}
-		// --- Fin Test rcisnero ---
 
+		public List<Player> PlayerList
+		{
+			get => playerList;
+			set
+			{
+				playerList = value;				OnPropertyChanged(nameof(PlayerList));
+			}
+		}
+		// --- Fin Test rcisnero ---
 		public GameViewModel(IhmGameCore core, Game game) 
 		{
 			this.core = core;
@@ -107,21 +107,20 @@ namespace Client.ihm_game.ViewModels
 			ParamCommand = new RelayCommand(OnParamClick);
 			FoldCommand = new RelayCommand(OnFoldClick);
 			CallCommand = new RelayCommand(OnCallClick);
-			RaiseCommand = new RelayCommand(OnRaiseClick);
-
+			RaiseCommand = new RelayCommand(OnRaiseClick);
 			// --- Test rcisnero ---
 			CardCommand1 = new RelayCommand(OnCardClick1);
 			CardCommand2 = new RelayCommand(OnCardClick2);
 			CardCommand3 = new RelayCommand(OnCardClick3);
 			CardCommand4 = new RelayCommand(OnCardClick4);
-			CardCommand5 = new RelayCommand(OnCardClick5);
-
+			CardCommand5 = new RelayCommand(OnCardClick5);
 			/** TODO : delete (3 lines) when we get actual game from data */
 			player = new Player(100);
 			selectedCards = new List<bool> { false, false, false, false, false };
 			TestCards();
 
 			player.tokens = this.game.gameOptions.StartingTokens;
+			
             // --- Fin Test rcisnero ---
 
 			Display();	
@@ -157,8 +156,7 @@ namespace Client.ihm_game.ViewModels
 			// --- Fin Test rcisnero ---
 
 			// Appel fonction data (Gabrielle)
-			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
-
+			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
 		}
 
 		private void OnCallClick()
