@@ -23,8 +23,11 @@ namespace Server.comm
 		private TcpListener newClientListener = default;
 
 		/// <summary>Ensemble des clients connectés.</summary>
-		private readonly Dictionary<string, TcpClientHandler<MessageToClient, MessageToServer>> 
+		private readonly Dictionary<string, TcpClientHandler<MessageToClient, MessageToServer>>
 			tcpClientHandlers = new Dictionary<string, TcpClientHandler<MessageToClient, MessageToServer>>();
+
+		/// <summary>Ensemble des clients identifiés.</summary>
+		private readonly Dictionary<Guid, string> tcpClientIds = new Dictionary<Guid, string>();
 
 
 		/// <summary>
@@ -63,6 +66,11 @@ namespace Server.comm
 		/// <param name="id">Client id</param>
 		private void OnReceiveFrom(MessageToServer msg, string id)
 		{
+			if(typeof(AnnounceUserMessage) == msg.GetType())
+			{
+
+				this.tcpClientIds[((AnnounceUserMessage)msg).user.id] = id;
+			}
 			msg.Handle(
 				id, 
 				this.CommToDataServer, 
