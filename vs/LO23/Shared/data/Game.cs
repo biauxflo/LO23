@@ -84,6 +84,7 @@ namespace Shared.data
 			return new LightGame(game.id, game.gameOptions);
 		}
 
+
 		public int goToNextPlayer()
 		{
 			int nextPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
@@ -255,6 +256,50 @@ namespace Shared.data
 			}
 		}
 		
+	
 		
-	}		
+
+		public void resetRound()
+		{
+		foreach(Player player in this.players)
+		{
+			player.isFolded = false;
+			player.removeAllCards();
+		}
+		this.deck.giveBackCards(this.deck.cards);
+		// to do: mix the cards
+		this.pot = 0;
+		this.highestBet = 0;
+		this.nbNoRise = 0;
+		this.currentPlayerIndex = 0; // to DO : how do we choose the first player of each round
+		this.smallBlind = 0;
+		this.bigBlind = this.updateBlind();
+		Phase p= new Phase(TypePhase.bet1);
+		this.currentPhase = p;
+			Round r = new Round();
+			r.addPhase(p);
+			this.rounds.Add(r);
+		foreach(Player player in this.players)
+			{
+				//player.distributeCards();
+			}
+		}
+		public int updateBlind()
+		{
+			this.bigBlind *= 2; //to verify
+			return this.bigBlind;
+		}
+
+		public List<Card> revealCardsOfPlayer(Player player)
+		{
+			List<Card> revealedCards = new List<Card>();
+			if(player.reveal())
+			{
+				revealedCards = player.hand;
+			}
+			return revealedCards;
+		}
+
+	}
 }
+
