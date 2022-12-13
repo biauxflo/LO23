@@ -51,6 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="comm\messages\AddPlayerToGameReturn.cs" />
+    <Compile Include="comm\messages\AddSpectatorToGameReturn.cs" />
+    <Compile Include="comm\messages\NotifyNewChatMessage.cs" />
     <Compile Include="comm\messages\RequestPlayRoundMessage.cs" />
     <Compile Include="comm\messages\RequestLeaveGameMessage.cs" />
     <Compile Include="comm\messages\NotifyGameChangeMessage.cs" />
@@ -58,6 +60,11 @@
     <Compile Include="comm\messages\CreateNewGameReturn.cs" />
     <Compile Include="comm\messages\NotifyUserChangeMessage.cs" />
     <Compile Include="comm\messages\RequestPlayGame.cs" />
+    <Compile Include="comm\messages\RequestStopGame.cs" />
+    <Compile Include="comm\messages\RequestWatchGame.cs" />
+    <Compile Include="comm\messages\SendChatMessage.cs" />
+    <Compile Include="comm\messages\UnregisterUser.cs" />
+    <Compile Include="comm\messages\UnregisterUserReturn.cs" />
     <Compile Include="comm\TcpClientHandler.cs" />
     <Compile Include="constants\Constants.cs" />
     <Compile Include="data\Game.cs" />
