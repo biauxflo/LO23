@@ -66,6 +66,15 @@ namespace Shared.data
 			this.hand.RemoveAt(remove);
 
 		}
+
+
+		public void removeAllCards()
+		{
+			foreach(Card card in this.hand)
+			{
+				this.removeCardFromHand(card);
+			}
+		}
 		public void AddCardToHand(Card card)
 		{
 
@@ -75,11 +84,17 @@ namespace Shared.data
 			}
 
 		}
+
 		public bool CompareCard(Card card1, Card card2)
 		{
 			return (card1.color == card2.color) && (card1.index == card2.index);
 		}
 
-		
+		public bool reveal()// need to precise how we know how to reveal or not the cards
+		{
+			return true;
+		}
+
+
 	}
 }
