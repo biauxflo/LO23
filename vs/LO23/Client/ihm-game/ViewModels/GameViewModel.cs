@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,46 +49,56 @@ namespace Client.ihm_game.ViewModels
 		}
 
 		private readonly IhmGameCore core;
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		/** --- Test rcisnero ---
 		 * ICommand methods for each card (impossible to call only one method in WPF ?)
 		 */
 		public ICommand CardCommand1
 		{
 			get; set;
-		}
+		}
+
 		public ICommand CardCommand2
 		{
 			get; set;
-		}
+		}
+
 		public ICommand CardCommand3
 		{
 			get; set;
-		}
+		}
+
 		public ICommand CardCommand4
 		{
 			get; set;
-		}
+		}
+
 		public ICommand CardCommand5
 		{
 			get; set;
-		}
-		private List<bool> selectedCards;
+		}
+
+		private List<bool> selectedCards;
+
 		/** TODO : delete (4 lines) when we get actual game from data */
 		public Player player;
 		private Card card1 = new Card(1, 'h', 1, true, true);
 		private Card card2 = new Card(2, 's', 10, true, true);
 		private Card card3 = new Card(3, 'c', 13, true, true);
-		/** ------- */
+		/** ------- */
+
 		public Player Player
 		{
 			get => player;
 			set
 			{
-				player = value;				OnPropertyChanged(nameof(Player));
+				player = value;
+				OnPropertyChanged(nameof(Player));
 			}
 		}
-		// --- Fin Test rcisnero ---
+		// --- Fin Test rcisnero ---
+
 		public GameViewModel(IhmGameCore core, Game game) 
 		{
 			this.core = core;
@@ -98,13 +107,15 @@ namespace Client.ihm_game.ViewModels
 			ParamCommand = new RelayCommand(OnParamClick);
 			FoldCommand = new RelayCommand(OnFoldClick);
 			CallCommand = new RelayCommand(OnCallClick);
-			RaiseCommand = new RelayCommand(OnRaiseClick);
+			RaiseCommand = new RelayCommand(OnRaiseClick);
+
 			// --- Test rcisnero ---
 			CardCommand1 = new RelayCommand(OnCardClick1);
 			CardCommand2 = new RelayCommand(OnCardClick2);
 			CardCommand3 = new RelayCommand(OnCardClick3);
 			CardCommand4 = new RelayCommand(OnCardClick4);
-			CardCommand5 = new RelayCommand(OnCardClick5);
+			CardCommand5 = new RelayCommand(OnCardClick5);
+
 			/** TODO : delete (3 lines) when we get actual game from data */
 			player = new Player(100);
 			selectedCards = new List<bool> { false, false, false, false, false };
@@ -120,6 +131,7 @@ namespace Client.ihm_game.ViewModels
 		private void OnParamClick()
 		{
 			core.GoToSettingsPage();
+			//core.UpdateGameDisplay();
 		}
 
 		private void OnFoldClick()
@@ -220,118 +232,3 @@ namespace Client.ihm_game.ViewModels
 		}
 	}
 }
-=======
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using GalaSoft.MvvmLight.CommandWpf;
-using Shared.data;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace Client.ihm_game.ViewModels
-{
-	internal class GameViewModel : INotifyPropertyChanged
-	{
-		// pour ajouter un bouton, dans le xaml section bouton-> Command="{Binding Path=ParamCommand}"
-		// exemple: <Button Name="BT_parameter"  Grid.Row="0" Grid.Column="0"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=ParamCommand}">
-		public ICommand ParamCommand
-		{
-			get; set;
-		}
-
-		public ICommand FoldCommand
-		{
-			get; set;
-		}
-
-		public ICommand CallCommand
-		{
-			get; set;
-		}
-
-		public ICommand RaiseCommand
-		{
-			get; set;
-		}
-
-		private Game game;
-		public Game Game
-		{
-			get=>game;
-			set
-			{
-				game = value;
-				OnPropertyChanged();
-			}
-		}
-
-		private readonly IhmGameCore core;
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		public GameViewModel(IhmGameCore core, Game game) 
-		{
-			this.core = core;
-			Game = game;
-
-			ParamCommand = new RelayCommand(OnParamClick);
-
-			FoldCommand = new RelayCommand(OnFoldClick);
-
-			CallCommand = new RelayCommand(OnCallClick);
-
-			RaiseCommand = new RelayCommand(OnRaiseClick);
-
-			//Display();
-		}
-
-		// fonction lié au bouton
-		// mécanisme temporaire juste pour tester affichage d'une console de message
-		private void OnParamClick()
-		{
-			// exemple de fenêtre warning 
-			/* MessageBoxResult result = MessageBox.Show("message dans la fenêtre","nom de la fenêtre", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-            if(result == MessageBoxResult.OK)
-             {
-
-             } */
-			MessageBox.Show("message dans la fenêtre", "nom de la fenêtre", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
-		}
-
-		private void OnFoldClick()
-		{
-			MessageBox.Show("bouton fold", "bouton fold", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
-		}
-
-		private void OnCallClick()
-		{
-			MessageBox.Show("bouton call", "bouton call", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
-		}
-
-		private void OnRaiseClick()
-		{
-			MessageBox.Show("bouton raise", "bouton raise", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
-		}
-		public void Display()
-		{
-			//Fonctions à remplacer par les fonctions qui seront implémenter dans IHMGameCallsData
-			
-
-		}
-
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
-		}
-	
-
-	}
-}
->>>>>>> 448e2ad ([ADD] updateGameDisplay)

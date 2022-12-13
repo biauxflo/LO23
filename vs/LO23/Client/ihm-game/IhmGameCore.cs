@@ -92,9 +92,26 @@ namespace Client.ihm_game
 			
 		}
 
+		/** TODO : delete when we get actual game from data */
+		internal Game testNewGame()
+		{
+			GameOptions gameOptions = new GameOptions("name", 102, true, true, 5, 4, 1, 10);
+			Guid guid = new Guid();
+			Game game = new Game(guid, gameOptions);
+			game.pot = 250;
+			return game;
+
+		}
+		/** ------- */
+
 		internal void UpdateGameDisplay(Game game)
 		{
 			this.gameViewModel.Game = game;
+			
+			/**  Test :
+			Game gamme = testNewGame();
+			this.gameViewModel.Game = gamme;
+			*/
 			//if data send gamePublic
 			// replace Game attribute by game attribute
 		}
