@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="comm\messages\AddPlayerToGameReturn.cs" />
     <Compile Include="comm\messages\AddSpectatorToGameReturn.cs" />
+    <Compile Include="comm\messages\GetProfile.cs" />
     <Compile Include="comm\messages\NotifyNewChatMessage.cs" />
     <Compile Include="comm\messages\RequestPlayRoundMessage.cs" />
     <Compile Include="comm\messages\RequestLeaveGameMessage.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="comm\messages\RegisterUserReturnMessage.cs" />
     <Compile Include="comm\MessageToClient.cs" />
     <Compile Include="comm\MessageToServer.cs" />
+    <Compile Include="comm\messages\GetProfileReturn.cs" />
     <Compile Include="interfaces\IDataToComm.cs" />
     <Compile Include="interfaces\IDataToGame.cs" />
     <Compile Include="interfaces\IGameToData.cs" />
