@@ -41,11 +41,13 @@ namespace Client.data
 
 		public IDataToMain interfaceFromMain { internal get; set; }
 		public IHMMainToDataClient implInterfaceForMain { get; private set; }
+		public IHMGameToDataClient implInterfaceForGame { get; private set; }
 
 		public DataClientCore()
         {
             this.implInterfaceForComm = new CommToDataClient(this);
 			this.implInterfaceForMain = new IHMMainToDataClient(this);
+			this.implInterfaceForGame = new IHMGameToDataClient(this);
 		}
 
         public void request_PlayGameToComm(Guid gameId, LightUser lightUser)
@@ -77,5 +79,9 @@ namespace Client.data
         {
             interfaceFromMain.ConnectionFailed(error);
         }
+		public void request_PlayRoundToComm(GameAction action)
+		{
+			interfaceFromComm.requestPlayRound(action);
+		}
 	}
 }

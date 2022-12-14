@@ -88,5 +88,13 @@ namespace Server.Data
 		{
 			throw new NotImplementedException();
 		}
+		public (Game,List<Guid>) applyPlayTurn(Guid playerId, GameAction action)
+		{
+			Game game = DataServerCore.games.Find(x => x.players.Find((y)=> y.id == playerId) != null);// ask denis it is his pb <3
+			game.handleGameAction(playerId, action);
+			List<Guid> playersId = game.players.ConvertAll(new Converter<Player, Guid>(x => x.id));// ask denis it is his pb <3
+
+			return (game,playersId);
+		}
 	}
 }

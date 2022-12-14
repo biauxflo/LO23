@@ -12,7 +12,10 @@ namespace Shared.data
 
     public class Player
     {
-		private Guid id;
+		public Guid id
+		{
+			get; 
+		}
 		private string username;
 		private string image;
 
