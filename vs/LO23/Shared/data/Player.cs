@@ -21,7 +21,8 @@ namespace Shared.data
         public int tokens { get; set; }
         public int tokensBet { get; set; }
         public List<Card> hand { get; set; } //Doit referencer les objets cartes contenus dans l'objet Deck
-
+		public int score{get; set;}
+		
         public Player(int tokens)
         {
             this.role = PlayerRole.nothing.ToString();
