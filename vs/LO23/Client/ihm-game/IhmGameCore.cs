@@ -83,7 +83,8 @@ namespace Client.ihm_game
 		/// </summary>
 		internal void GameEnded()
 		{
-			gameToData.LeaveGame();
+			// A decommenter au moment de l'integration de la V2 avec data
+			//gameToData.LeaveGame();
 			gameWindow.Hide();
 		}
 

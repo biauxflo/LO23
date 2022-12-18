@@ -204,6 +204,7 @@
   <ItemGroup>
     <Content Include="bin\Debug\Shared.dll" />
     <Content Include="bin\Debug\Shared.pdb" />
+    <Resource Include="ihm-game\Views\images\Enchere.png" />
     <Resource Include="ihm-game\Views\images\cards\10_c.png" />
     <Resource Include="ihm-game\Views\images\cards\10_d.png" />
     <Resource Include="ihm-game\Views\images\cards\10_h.png" />
