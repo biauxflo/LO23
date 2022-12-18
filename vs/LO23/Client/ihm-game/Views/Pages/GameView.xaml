@@ -85,9 +85,13 @@
         </Button>
 
         <!-- visibilité à modifier selon l'attribut isFolded d'un player -->
-        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="2" Grid.Row="3"/>
-        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="5" Grid.Row="1"/>
-        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="8" Grid.Row="3"/>
+        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="2" Grid.Row="5" Visibility="{Binding Path=VisibilityPlayer2}"/>
+        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="2" Grid.Row="3" Visibility="{Binding Path=VisibilityPlayer3}"/>
+        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="2" Grid.Row="1" Visibility="{Binding Path=VisibilityPlayer4}"/>
+        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="5" Grid.Row="1" Visibility="{Binding Path=VisibilityPlayer5}"/>
+        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="8" Grid.Row="1" Visibility="{Binding Path=VisibilityPlayer6}"/>
+        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="8" Grid.Row="3" Visibility="{Binding Path=VisibilityPlayer7}"/>
+        <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="8" Grid.Row="5" Visibility="{Binding Path=VisibilityPlayer8}"/>
 
         <!-- Action buttons -->
         <Button Name="BT_seCoucher"  Grid.Column="1" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=FoldCommand}" Click="OnFoldClick" ClickMode="Press">
@@ -126,32 +130,60 @@
             </ToggleButton>
         </Canvas>
 
-        <TextBlock Text="{Binding Player.tokensBet}" Name="TBlock_bet2" Grid.Column="4" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="4" Grid.Row="4" Height="30" Margin="2.667,37,56.333,2"/>
+        <TextBlock Text="{Binding Player.tokensBet}" Name="TBlock_bet2" Grid.Column="5" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="5" Grid.Row="4" Height="30" Margin="2.667,37,56.333,2"/>
         <TextBlock Text="{Binding Player.username}" Name="TBlock_user2" Grid.Column="4" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Text="{Binding Player.tokens}" Name="TBlock_balance2" Grid.Column="4" Grid.Row="6" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         
-        <!-- User 1 -->
-        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="1" Grid.Row="4" Name="TB_raise" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="User 1" Name="TBlock_user1" Grid.Column="1" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="Mise 1" Name="TBlock_bet1" Grid.Column="3" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Name="TBlock_balance1" Grid.Column="1" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="3" Grid.Row="3" Height="30"  Margin="2.667,37,56.333,2" />
-        
         <!-- User 2 -->
-        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="3" Grid.Row="1" Name="TB_raise3" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="User 3" Name="TBlock_user3" Grid.Column="4" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="Mise 3" Name="TBlock_bet3" Grid.Column="4" Grid.Row="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="4" Grid.Row="2" Height="30" Margin="2.667,37,56.333,2"/>
-        <TextBlock Name="TBlock_balance3" Grid.Column="3" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="1" Grid.Row="6" Name="TB_raise" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer2}"/>
+        <TextBlock Text="User 2" Name="TBlock_user1" Grid.Column="1" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer2}"/>
+        <TextBlock Text="Mise 2" Name="TBlock_bet1" Grid.Column="3" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer2}"/>
+        <TextBlock Name="TBlock_balance1" Grid.Column="1" Grid.Row="6" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer2}"/>
+        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="3" Grid.Row="5" Height="30"  Margin="2.667,37,56.333,2" Visibility="{Binding Path=VisibilityPlayer2}"/>
         
         <!-- User 3 -->
-        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="9" Grid.Row="4" Name="TB_raise4" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Text="Mise 4" Name="TBlock_bet4" Grid.Column="7" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="7" Grid.Row="3" Height="30" Margin="2.667,37,56.333,2"/>
-        <TextBlock Text="User 4" Name="TBlock_user4" Grid.Column="9" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Name="TBlock_balance4" Grid.Column="9" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-       
+        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="1" Grid.Row="4" Name="TB_raise3" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer3}"/>
+        <TextBlock Text="User 3" Name="TBlock_user3" Grid.Column="1" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer3}"/>
+        <TextBlock Text="Mise 3" Name="TBlock_bet3" Grid.Column="3" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer3}"/>
+        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="3" Grid.Row="3" Height="30" Margin="2.667,37,56.333,2" Visibility="{Binding Path=VisibilityPlayer3}"/>
+        <TextBlock Name="TBlock_balance3" Grid.Column="1" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer3}"/>
+        
+        <!-- User 4 -->
+        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="1" Grid.Row="2" Name="TB_raise4" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer4}"/>
+        <TextBlock Text="Mise 4" Name="TBlock_bet4" Grid.Column="3" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer4}"/>
+        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="3" Grid.Row="1" Height="30" Margin="2.667,37,56.333,2" Visibility="{Binding Path=VisibilityPlayer4}"/>
+        <TextBlock Text="User 4" Name="TBlock_user4" Grid.Column="1" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer4}"/>
+        <TextBlock Name="TBlock_balance4" Grid.Column="1" Grid.Row="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer4}"/>
+
+        <!-- User 5 -->
+        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="6" Grid.Row="1" Name="TB_raise5" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer5}"/>
+        <TextBlock Text="Mise 5" Name="TBlock_bet5" Grid.Column="5" Grid.Row="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer5}"/>
+        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="5" Grid.Row="2" Height="30" Margin="2.667,37,56.333,2" Visibility="{Binding Path=VisibilityPlayer5}"/>
+        <TextBlock Text="User 5" Name="TBlock_user5" Grid.Column="4" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer5}"/>
+        <TextBlock Name="TBlock_balance5" Grid.Column="6" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer5}"/>
+
+        <!-- User 6 -->
+        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="9" Grid.Row="2" Name="TB_raise6" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer6}"/>
+        <TextBlock Text="Mise 6" Name="TBlock_bet6" Grid.Column="7" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer6}"/>
+        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="7" Grid.Row="1" Height="30" Margin="2.667,37,56.333,2" Visibility="{Binding Path=VisibilityPlayer6}"/>
+        <TextBlock Text="User 6" Name="TBlock_user6" Grid.Column="9" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer6}"/>
+        <TextBlock Name="TBlock_balance6" Grid.Column="9" Grid.Row="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer6}"/>
+
+        <!-- User 7 -->
+        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="9" Grid.Row="4" Name="TB_raise7" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer7}"/>
+        <TextBlock Text="Mise 7" Name="TBlock_bet7" Grid.Column="7" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer7}"/>
+        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="7" Grid.Row="3" Height="30" Margin="2.667,37,56.333,2" Visibility="{Binding Path=VisibilityPlayer7}"/>
+        <TextBlock Text="User 7" Name="TBlock_user7" Grid.Column="9" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer7}"/>
+        <TextBlock Name="TBlock_balance7" Grid.Column="9" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer7}"/>
+
+        <!-- User 8 -->
+        <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="9" Grid.Row="6" Name="TB_raise8" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer8}"/>
+        <TextBlock Text="Mise 8" Name="TBlock_bet8" Grid.Column="7" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer8}"/>
+        <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="7" Grid.Row="5" Height="30" Margin="2.667,37,56.333,2" Visibility="{Binding Path=VisibilityPlayer8}"/>
+        <TextBlock Text="User 8" Name="TBlock_user8" Grid.Column="9" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer8}"/>
+        <TextBlock Name="TBlock_balance8" Grid.Column="9" Grid.Row="6" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer8}"/>
+
         <!-- Pot -->
         <TextBlock Text="{Binding Game.pot}" Name="TBlock_pot" Grid.Column="5" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Image Source="/Client;component/ihm-game/Views/images/pot.png" Grid.Column="5" Grid.Row="3" Margin="8.667,0,19.333,10"/>
