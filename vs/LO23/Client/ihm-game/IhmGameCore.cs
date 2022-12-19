@@ -13,8 +13,8 @@ using Shared.interfaces;
 
 namespace Client.ihm_game
 {
-    internal class IhmGameCore
-    {
+	internal class IhmGameCore
+	{
 
 		// interface et page avec viewModel 
 		private GameWindow gameWindow;
@@ -90,7 +90,7 @@ namespace Client.ihm_game
 
 		internal void UpdateMessageDisplay(ChatMessage message)
 		{
-			
+
 		}
 
 		/** TODO : delete when we get actual game from data */
@@ -108,7 +108,15 @@ namespace Client.ihm_game
 		internal void UpdateGameDisplay(Game game)
 		{
 			this.gameViewModel.Game = game;
+			if(this.WhoAmI() == game.currentPlayerIndex)
+			{
+				((GameView)this.gamePage).BT_doubler.IsEnabled = true;
+				((GameView)this.gamePage).BT_egaler.IsEnabled = true;
+				((GameView)this.gamePage).BT_seCoucher.IsEnabled = true;
+			}
 			
+
+
 			/**  Test :
 			Game gamme = testNewGame();
 			this.gameViewModel.Game = gamme;
@@ -123,11 +131,34 @@ namespace Client.ihm_game
 		}
 
 		/// Appel à data pour demander une action (call/rise/fold/allin)
-		/// </summary>
+		/// <summary>
+		// TODO : replace parameter Action a with TypeAction t
 		internal void PlayRound(Action a)
 		{
-			gameToData.PlayRound(a);
+			this.gameToData.PlayRound(a);
 		}
-		/// <summary>
+		/// </summary>
+		// Call to data to get the id of the current user
+		internal int WhoAmI()
+		{
+			//TODO : define WhoAmI 
+			return 1;//TODO : replace with : return this.gameToData.WhoAmI();
+
+		}
+
+		// <remarks>
+		// To be called at the end of data function "initializeRound()"
+		//the fold display is cancelled when a new round starts
+		// </remarks>
+		internal void NewRoundDisplay()
+		{
+			((GameView)this.gamePage).Card1.Visibility = Visibility.Visible;
+			((GameView)this.gamePage).Card2.Visibility = Visibility.Visible;
+			((GameView)this.gamePage).Card3.Visibility = Visibility.Visible;
+			((GameView)this.gamePage).Visibility = Visibility.Visible;
+			((GameView)this.gamePage).Visibility = Visibility.Visible;
+
+		}
 	}
 }
+		
