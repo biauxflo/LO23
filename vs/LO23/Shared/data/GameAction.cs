@@ -12,6 +12,7 @@ namespace Shared.data
         rise,
         allin,
         fold, 
+		check,
 		exchangeCards
     }
 

@@ -57,7 +57,7 @@ namespace Shared.data
 		{
 			get; private set;
 		} //L'ensemble des cartes dans le jeu, qu'elles soient en main, dans la pioche ou la défausse
-	
+
 		public Game()// nina changed to public to test
 		{
 		}
@@ -75,7 +75,7 @@ namespace Shared.data
 			this.nbNoRise = 0;
 			this.chat = new List<ChatMessage>();
 			this.deck = new Deck();
-		
+
 		}
 
 		public static LightGame ToLightGame(Game game)
@@ -217,7 +217,7 @@ namespace Shared.data
 
 		public void handleGameAction(Guid playerId, GameAction action)
 		{
-			Player player=this.players.Find(x =>
+			Player player = this.players.Find(x =>
 			{
 				return x.id == playerId;
 			});
@@ -259,7 +259,7 @@ namespace Shared.data
 				Card cardTmp = this.deck.giveNewCard(); // what's the next card i can give
 				listOfNewCards.Add(cardTmp); //add to the list of new cards
 				player.AddCardToHand(cardTmp); // add card to player's hand
-				
+
 
 			}
 		}
@@ -341,7 +341,7 @@ namespace Shared.data
 		public List<Player> findWinner()
 		{
 			List<Player> listWinners = new List<Player>();
-			
+
 			this.attributeEachScoreToPlayerForHisCombo();
 			listWinners = this.getWinner();
 
@@ -376,7 +376,7 @@ namespace Shared.data
 					{
 						listWinners.Add(actualPlayer);
 					}
-					
+
 					//Equality of Straight Flush  or Equality of Straight
 					else if(actualPlayer.score == 9 || actualPlayer.score == 5)
 					{
@@ -422,16 +422,16 @@ namespace Shared.data
 							{
 								winner = this.replaceWinner(listWinners, winner, actualPlayer);
 							}
-							else if (this.isSameCard(actualPlayer.hand[1], winner.hand[1]))
+							else if(this.isSameCard(actualPlayer.hand[1], winner.hand[1]))
 							{
 								Card appearOneTimePlayer = FindElementThatAppearsOnlyOnce(actualPlayer.hand).First();
 								Card appearOneTimeWinner = FindElementThatAppearsOnlyOnce(winner.hand).First();
 
-								if (this.isBetterCardThanWinner(appearOneTimePlayer, appearOneTimeWinner))
+								if(this.isBetterCardThanWinner(appearOneTimePlayer, appearOneTimeWinner))
 								{
 									winner = this.replaceWinner(listWinners, winner, actualPlayer);
 								}
-								else if (this.isSameCard(appearOneTimePlayer, appearOneTimeWinner))
+								else if(this.isSameCard(appearOneTimePlayer, appearOneTimeWinner))
 								{
 									listWinners.Add(actualPlayer);
 								}
@@ -450,7 +450,7 @@ namespace Shared.data
 							winner = this.replaceWinner(listWinners, winner, actualPlayer);
 						}
 
-						else if (this.isSameCard(getpairForActualPlayer, getpairForWinner))
+						else if(this.isSameCard(getpairForActualPlayer, getpairForWinner))
 						{
 							List<Card> appearOneTimePlayer = FindElementThatAppearsOnlyOnce(actualPlayer.hand);
 							List<Card> appearOneTimeWinner = FindElementThatAppearsOnlyOnce(winner.hand);
@@ -603,7 +603,7 @@ namespace Shared.data
 		{
 			// Check player existence in the game
 			bool isPlayerInTheGame = this.players.Contains(player);
-			if (!isPlayerInTheGame)
+			if(!isPlayerInTheGame)
 			{
 				Console.WriteLine("Player is not in the game");
 			}
@@ -622,12 +622,27 @@ namespace Shared.data
 
 					break;
 				case TypeAction.fold:
-					fold(player);
+					this.fold(player, listOfCards);
 
+					break;
+				case TypeAction.check:
+					this.bet(player, value);
+					// TODO: check means not betting, BUT while still being in the game 
+					// check only possible if nobody has bet during the current Round
 					break;
 				case TypeAction.exchangeCards:
 					this.exchangeCards(player, listOfCards);
 					break;
+			}
+			// TODO: increment the current player index here 
+		}
+
+		private void bet(Player player, int value)
+		{
+			player.tokensBet = value;
+			if(player.tokensBet == this.highestBet)
+			{
+				_ = this.goToNextPlayer();
 			}
 		}
 
@@ -647,13 +662,17 @@ namespace Shared.data
 			}
 		}
 
-		private static void fold(Player player)
+		private void fold(Player player, List<Card> listOfCards)
 		{
-			player.isFolded = true;
+			// To remove once we have a proper constructor for game, same as for exchangeCards
+			this.deck = new Deck();
+
 			for(int card = 0; card < player.hand.Count; card++)
 			{
-				player.removeCardFromHand(player.hand[card]);
+				player.removeCardFromHand(listOfCards[card]); // we take back the cards from the player
 			}
+			this.deck.giveBackCards(listOfCards); //give back to the deck the cards
+			player.isFolded = true;
 		}
 
 		private void allIn(Player player, int value)
@@ -695,7 +714,7 @@ namespace Shared.data
 			this.currentPlayerIndex = 0; // to DO : how do we choose the first player of each round
 			this.smallBlind = 0;
 			this.bigBlind = this.updateBlind();
-			Phase p= new Phase(TypePhase.bet1);
+			Phase p = new Phase(TypePhase.bet1);
 			this.currentPhase = p;
 			Round r = new Round();
 			r.addPhase(p);
