@@ -22,8 +22,7 @@ namespace Client.ihm_main
 
 		internal DataToMain dataToMain;
 
-
-#region Déclaration des pages et de leurs viewModels
+		#region Déclaration des pages et de leurs viewModels
 
         /// <summary>
         /// Page de connection.
@@ -55,6 +54,10 @@ namespace Client.ihm_main
         /// </summary>
         private readonly HomeViewModel homeViewModel;
 
+		private Page profileCreationPage = new ProfilCreationView();
+
+		private ProfilCreationViewModel profilCreationViewModel;
+
 #endregion
 
 		#region Interfaces des autres modules
@@ -71,6 +74,7 @@ namespace Client.ihm_main
             gameCreationViewModel = new GameCreationViewModel(this);
 			connectionViewModel = new ConnectionViewModel(this);
 			homeViewModel = new HomeViewModel(this);
+			profilCreationViewModel = new ProfilCreationViewModel(this);
 
 			// Instanciation des interfaces exposées.
 			dataToMain = new DataToMain(this);
@@ -80,10 +84,20 @@ namespace Client.ihm_main
             connectionPage.DataContext = connectionViewModel;
             gameCreationPage.DataContext = gameCreationViewModel;
             homePage.DataContext = homeViewModel;
+			profileCreationPage.DataContext = profilCreationViewModel;
 
             // Page active de la fenetre.
             mainWindowViewModel.ActivePage = connectionPage;
         }
+
+
+		/// <summary>
+		/// Renvoie à la page de connexion.
+		/// </summary>
+		internal void Disconnect()
+		{
+			mainWindowViewModel.ActivePage = connectionPage;
+		}
 
 		/// <summary>
 		/// Met la page active sur la page de création de partie.
@@ -92,6 +106,14 @@ namespace Client.ihm_main
         {
             mainWindowViewModel.ActivePage = gameCreationPage;
         }
+
+		/// <summary>
+		/// Met la page active sur la page de création de profil.
+		/// </summary>
+		internal void ShowProfileCreationPage()
+		{
+			mainWindowViewModel.ActivePage = profileCreationPage;
+		}
 
         /// <summary>
         /// Met la page active sur la page d'acceuil.
@@ -129,22 +151,34 @@ namespace Client.ihm_main
             MessageBox.Show(mainWindow, error, "Partie non créée", MessageBoxButton.OK);
         }
 
-
-        /// <summary>
-        /// Met à jour la liste des parties en cours.
-        /// </summary>
-        /// <param name="game">Liste des parties en cours.</param>
-        internal void GameListUpdated(List<LightGame> games)
+		/// <summary>
+		/// Met à jour la liste des parties en cours.
+		/// </summary>
+		/// <param name="game">Liste des parties en cours.</param>
+		internal void GameListUpdated(List<LightGame> games)
         {
 			ObservableCollection<LightGame> GameCollection = new ObservableCollection<LightGame>(games);
 			homeViewModel.Games = GameCollection;
         }
 
-        /// <summary>
-        /// Lance la partie donnée.
-        /// </summary>
-        /// <param name="game">Partie à afficher.</param>
-        internal void GameLaunched(Game game)
+		internal void ProfileCreationSuceed()
+		{
+			MessageBox.Show(mainWindow, "Profil créé,\nVous pouvez vous connecter", "Profil créé", MessageBoxButton.OK);
+			profilCreationViewModel.Reset();
+			mainWindowViewModel.ActivePage = connectionPage;
+		}
+
+		internal void ProfileCreationFailed(string error)
+		{
+			MessageBox.Show(mainWindow, error, "Profil non créé", MessageBoxButton.OK);
+			profilCreationViewModel.Reset();
+		}
+
+		/// <summary>
+		/// Lance la partie donnée.
+		/// </summary>
+		/// <param name="game">Partie à afficher.</param>
+		internal void GameLaunched(Game game)
         {
 			// TODO : FIX
 			//mainWindow.Hide
@@ -169,6 +203,11 @@ namespace Client.ihm_main
 		internal void TryJoinGame(Guid id, LightUser user)
 		{
 			mainToData.playGame(id, user);
+		}
+
+		internal void TryCreateProfile(string username, string password, string firstname, string lastname, int age)
+		{
+			// TODO : call data
 		}
 
 		internal void Run()

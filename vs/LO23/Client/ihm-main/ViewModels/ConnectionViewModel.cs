@@ -50,12 +50,18 @@ namespace Client.ihm_main.ViewModels
         /// </summary>
         public ICommand QuitCommand { get; set; }
 
-        public ConnectionViewModel(IhmMainCore core)
+		/// <summary>
+		/// Commande liée au bouton "Créer un profil".
+		/// </summary>
+		public ICommand CreateProfileCommand { get; set; }
+
+		public ConnectionViewModel(IhmMainCore core)
         {
 			this.core = core;
 
             ConnectionCommand = new RelayCommand(OnConnectionClick, true);
             QuitCommand = new RelayCommand(OnQuitClick, true);
+			CreateProfileCommand = new RelayCommand(OnProfileCreationClick, true);
         }
 
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -72,15 +78,22 @@ namespace Client.ihm_main.ViewModels
 			Password = string.Empty;
 		}
 
+		/// <summary>
+		/// Appelle la page de création de profil.
+		/// </summary>
+		private void OnProfileCreationClick()
+		{
+			core.ShowProfileCreationPage();
+		}
+
         /// <summary>
         /// Mécanisme de connexion.
         /// </summary>
         private void OnConnectionClick()
         {
-			// TODO : Mettre en place l'appel au module Data
 			core.TryAuthenticate(Username, Password);
-
 		}
+
 		/// <summary>
 		/// Mécansime de fermeture de l'application.
 		/// </summary>
