@@ -17,7 +17,7 @@ namespace Client.ihm_main.ViewModels
         /// <summary>
 		/// Partie en cours de création.
 		/// </summary>
-		private GameOptions gameInCreation = new GameOptions(String.Empty, 2000, true, true, 100, 4, 0, 10);
+		private GameOptions gameInCreation = new GameOptions(string.Empty, 2000, true, true, 100, 4, 0, 10);
         public GameOptions GameInCreation
         {
             get => gameInCreation;
