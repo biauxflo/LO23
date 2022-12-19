@@ -96,5 +96,19 @@ namespace Server.Data
 
 			return (game,playersId);
 		}
+
+		public (Game, List<Guid>) removePlayerToGame(Guid playerId)
+		{
+			Game game = DataServerCore.games.Find(x => x.players.Find((y) => y.id == playerId) != null);
+			Player player = game.players.Find(x => x.id == playerId);
+			player.tokens = 0;
+			game.fold(player, player.hand);
+			game.players.Remove(player);
+			List<Guid> playersId = game.players.ConvertAll(new Converter<Player, Guid>(x => x.id));
+
+			return (game, playersId);
+
+		}
+
 	}
 }
