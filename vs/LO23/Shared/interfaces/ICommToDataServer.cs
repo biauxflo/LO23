@@ -16,7 +16,10 @@ namespace Shared.interfaces
         Game addUserToGame(LightUser user, Guid gameId);	
 		Game createNewGame(GameOptions options);
 		void uneregisterUser(Guid playerId);
-	
+		(Game, List<Guid>) applyPlayTurn(Guid playerId, GameAction action);
 
-    }
+
+
+
+	}
 }

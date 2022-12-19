@@ -23,9 +23,9 @@ namespace Client.data
 			throw new NotImplementedException();
 		}
 
-		void IGameToData.playRound(Action action)
+		void IGameToData.playRound(GameAction action)
 		{
-			throw new NotImplementedException();
+			data_client_ctrl.request_PlayRoundToComm(action);
 		}
 
 		void IGameToData.saveGame()

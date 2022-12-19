@@ -12,7 +12,10 @@ namespace Shared.data
 
     public class Player
     {
-		private Guid id;
+		public Guid id
+		{
+			get; 
+		}
 		private string username;
 		private string image;
 
@@ -21,7 +24,8 @@ namespace Shared.data
         public int tokens { get; set; }
         public int tokensBet { get; set; }
         public List<Card> hand { get; set; } //Doit referencer les objets cartes contenus dans l'objet Deck
-
+		public int score{get; set;}
+		
         public Player(int tokens)
         {
             this.role = PlayerRole.nothing.ToString();
