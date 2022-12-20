@@ -10,7 +10,7 @@ namespace Client.data
 {
 	public class DataClientCore
 	{
-		private List<LightUser> users = new List<LightUser>();
+		private List<LightUser> users = new List<LightUser>(); //List of connected users sent from server
 		public List<LightUser> Users
 		{
 			get => users;
@@ -20,7 +20,8 @@ namespace Client.data
 				//interfaceFromMain.UserListUpdated(users); //TODO: Not yet implemented - Waiting for v2
 			}
 		}
-		private List<LightGame> games = new List<LightGame>();
+
+		private List<LightGame> games = new List<LightGame>(); //List of games sent from server
 		public List<LightGame> Games
 		{
 			get => games;
@@ -31,6 +32,7 @@ namespace Client.data
 			}
 		}
 
+		public User CurrentUser { get; set; } //The current user connected on this client
 
 		public CommToDataClient implInterfaceForComm { get; private set; }
 		public Game joinedGame { get; set; }

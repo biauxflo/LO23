@@ -16,8 +16,7 @@ namespace Shared.interfaces
 		void SaveGame();
 
 		void LeaveGame();
-
-		void PlayRound(Action action);
-
+		
+		LightUser whoAmi();
 	}
 }

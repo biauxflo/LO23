@@ -68,7 +68,7 @@ namespace Client.ihm_main
 
 		#endregion
 
-        public IhmMainCore()
+		public IhmMainCore()
         {
 			// Instanciation des views models.
             gameCreationViewModel = new GameCreationViewModel(this);
@@ -250,5 +250,31 @@ namespace Client.ihm_main
         {
 			mainWindow.Show();
         }
-    }
+
+		internal void LaunchGame(Game game)
+		{
+			mainToGame.LaunchGame(game);
+		}
+
+		internal void CreateNewGame(GameOptions gameInCreation)
+		{
+			mainToData.createNewGame(gameInCreation);
+		}
+
+		internal void TryAuthenticate(string username, string password)
+		{
+			mainToData.authenticate(username, password);
+		}
+
+		internal void TryJoinGame(Guid id, LightUser user)
+		{
+			mainToData.playGame(id, user);
+		}
+
+		internal void Run()
+		{
+			// Afficher la fenêtre.
+			mainWindow.Show();
+		}
+	}
 }

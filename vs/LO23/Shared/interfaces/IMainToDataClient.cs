@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shared.interfaces
 {
-    public interface IDataClientToMain
+    public interface IMainToDataClient
     {
         void registerProfile(User user);
         void authenticate(string login, string password); // login is username#id

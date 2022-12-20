@@ -14,17 +14,17 @@ namespace Shared.data
 	// TODO : Classes observables ? Methode "ObservableObject" pour réutiliser l'interface INotifyPropertyChanged
 	public class Player : INotifyPropertyChanged
     {
-        public string role { get; set; }
+		private Guid id;
+		private string username;
+		private string image;
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		public string role { get; set; }
         public bool isFolded { get; set; }
         public int tokens { get; set; }
         public int tokensBet { get; set; }
-        public List<Card> hand { get; set; }
-
-		/** Test rcisnero
-		 * Temporary string list to add images paths
-		 */
-		private List<string> cardImage;
-		public event PropertyChangedEventHandler PropertyChanged;
+        public List<Card> hand { get; set; } //Doit referencer les objets cartes contenus dans l'objet Deck
 
 		public List<string> Card
 		{
@@ -44,22 +44,80 @@ namespace Shared.data
             this.tokens = tokens;
             this.tokensBet = 0;
             this.hand = new List<Card>();
-
-			this.cardImage = new List<string>(); // Test, list init
         }
 
-		protected void OnPropertyChanged(string propertyName)
+		public Player(Guid id, string username, string image)
 		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+			this.id = id;
+			this.username = username;
+			this.image = image;
+			this.role = PlayerRole.nothing.ToString();
+			this.isFolded = false;
+			this.tokens = tokens;
+			this.tokensBet = 0;
+			this.hand = new List<Card>();
+
+			this.tokens = 1000;
 		}
 
-		/** Test rcisnero
-		 * Converts one card from the hand to path
-		 * - if we keep the cardImage attribute, we delete this method. 
-		 */
-		/*public string getCardToString(int index)
+		public void removeCardFromHand(Card card)
+		{   
+			int remove = 0;//index of the card to remove in player's hand
+			bool flag =false;
+
+			for(int i = 0; i < this.hand.Count; i++)
+			{   
+				if(this.CompareCard(this.hand[i], card) == true)
+				{
+					flag = true;
+				}
+				
+			}
+
+			if(remove == 6)
+			{
+				Console.WriteLine("pas bien la vérification dans player pour la carte");
+			}
+			this.hand.RemoveAt(remove);
+
+		}
+
+
+		public void removeAllCards()
 		{
-			return "/Client;component/ihm-game/Views/images/" + this.hand[index].value + "_" + this.hand[index].color + ".png";
-		}*/
-    }
+			foreach(Card card in this.hand)
+			{
+				this.removeCardFromHand(card);
+			}
+		}
+		public void AddCardToHand(Card card)
+		{
+
+			if(this.hand.Count < 5)
+			{
+				this.hand.Add(card);
+			}
+
+		}
+
+		public bool CompareCard(Card card1, Card card2)
+		{
+			return (card1.color == card2.color) && (card1.index == card2.index);
+		}
+
+		public void decrementTokens(int value, int concernedTokens)
+		{
+			concernedTokens -= value;
+		}
+
+		public void incrementTokens(int value, int concernedTokens)
+		{
+			concernedTokens += value;
+		}
+		
+		public bool reveal()// need to precise how we know how to reveal or not the cards
+		{
+			return true;
+		}
+	}
 }

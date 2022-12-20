@@ -121,6 +121,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ihm-game\DataToGame.cs" />
+    <Compile Include="data\IHMGameToDataClient.cs" />
     <Compile Include="ihm-game\MainToGame.cs" />
     <Compile Include="ihm-game\ViewModels\SettingsViewModel.cs" />
     <Compile Include="ihm-game\Views\Pages\SettingsView.xaml.cs">
