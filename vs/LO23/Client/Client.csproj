@@ -100,6 +100,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ihm-game\Views\Pages\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ihm-main\Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -117,13 +121,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="data\IHMGameToDataClient.cs" />
+    <Compile Include="ihm-game\DataToGame.cs" />
     <Compile Include="ihm-game\MainToGame.cs" />
+    <Compile Include="ihm-game\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ihm-game\Views\Pages\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ihm-main\DataToMain.cs" />
     <Compile Include="ihm-main\IhmMainCore.cs" />
     <Compile Include="ihm-main\ViewModels\ConnectionViewModel.cs" />
-    <Compile Include="ihm-main\ViewModels\HomeViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\GameCreationViewModel.cs" />
+    <Compile Include="ihm-main\ViewModels\HomeViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ihm-main\ViewModels\ProfilCreationViewModel.cs" />
     <Compile Include="ihm-main\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -144,10 +154,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ihm-main\Views\Pages\GameCreationView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ihm-main\Views\Pages\HomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ihm-main\Views\Pages\ProfilCreationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -166,6 +180,9 @@
       <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ihm-main\Views\Pages\ProfilCreationView.xaml.cs">
+      <DependentUpon>ProfilCreationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -183,6 +200,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ihm-game\Views\images\cards\.gitkeep" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -193,8 +211,59 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Shared.dll" />
-    <Content Include="bin\Debug\Shared.pdb" />
+    <Resource Include="ihm-game\Views\images\Enchere.png" />
+    <Resource Include="ihm-game\Views\images\cards\10_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\10_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\10_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\10_s.png" />
+    <Resource Include="ihm-game\Views\images\cards\11_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\11_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\11_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\11_s.png" />
+    <Resource Include="ihm-game\Views\images\cards\12_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\12_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\12_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\12_s.png" />
+    <Resource Include="ihm-game\Views\images\cards\13_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\13_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\13_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\13_s.png" />
+    <Resource Include="ihm-game\Views\images\cards\1_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\1_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\1_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\1_s.png" />
+    <Resource Include="ihm-game\Views\images\cards\2_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\2_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\2_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\2_s.png" />
+    <Resource Include="ihm-game\Views\images\cards\3_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\3_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\3_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\3_s.png" />
+    <Resource Include="ihm-game\Views\images\cards\4_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\4_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\4_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\4_s.png" />
+    <Resource Include="ihm-game\Views\images\cards\5_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\5_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\5_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\5_s.png" />
+    <Resource Include="ihm-game\Views\images\cards\6_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\6_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\6_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\6_s.png" />
+    <Resource Include="ihm-game\Views\images\cards\7_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\7_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\7_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\7_s.png" />
+    <Resource Include="ihm-game\Views\images\cards\8_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\8_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\8_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\8_s.png" />
+    <Resource Include="ihm-game\Views\images\cards\9_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\9_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\9_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\9_s.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ihm-game\Views\images\config.png">

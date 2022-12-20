@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Shared.data
 {
@@ -10,7 +11,8 @@ namespace Shared.data
         nothing,
     }
 
-    public class Player
+	// TODO : Classes observables ? Methode "ObservableObject" pour réutiliser l'interface INotifyPropertyChanged
+	public class Player : INotifyPropertyChanged
     {
 		public Guid id
 		{

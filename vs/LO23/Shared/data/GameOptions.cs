@@ -65,7 +65,7 @@ namespace Shared.data
 			this.CanSpecChat = canSpecChat;
 			this.NbRoundMax = nbRoundMax;
 			this.NbPlayersMax = nbPlayersMax;
-			this.NbPlayersMax = nbPlayersMin;
+			this.NbPlayersMin = nbPlayersMin;
 			this.StartingBigBlind = startingBigBlind;
 			this.BigBlindValue = bigBlindValue;
 		}
