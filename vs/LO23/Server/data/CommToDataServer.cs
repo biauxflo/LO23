@@ -97,7 +97,7 @@ namespace Server.Data
 
 		public Game applyActionToPlayer(GameAction gameAction)
 		{
-			throw new NotImplementedException();
+			return data_Server_Ctrl.applyGameAction(gameAction);
 		}
 		public Game removePlayerToGame(Guid playerId, Guid gameId)
 		{

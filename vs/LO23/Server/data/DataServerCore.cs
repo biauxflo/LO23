@@ -24,5 +24,18 @@ namespace Server.Data
 		{
 			games.Add(game);
 		}
+
+		internal Game findGameWithId(Guid gameId)
+		{
+			return games.Find(g => g.id == gameId);
+		}
+
+		internal Game applyGameAction(GameAction action)
+		{
+			Game game = findGameWithId(action.gameId);
+			game.handleGameAction(action);
+
+			return game;
+		}
     }
 }

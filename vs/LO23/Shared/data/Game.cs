@@ -10,6 +10,8 @@ namespace Shared.data
 {
 	public class Game : LightGame
 	{
+
+		private int nbPlayersStillPlaying;
 		public List<Round> rounds
 		{
 			get; set;
@@ -104,7 +106,7 @@ namespace Shared.data
 
 			if(lobby.Count >= Constants.NB_PLAYERS_MIN)
 			{
-				initGame(); //Créer les players, leur donner cartes et jetons, lancer la game.
+				initGame(); //Creating players, giving cards and tokens, starting game
 			}
 		}
 
@@ -263,12 +265,9 @@ namespace Shared.data
 
 			for(int i = 0; i < nb; i++)
 			{
-
 				Card cardTmp = this.deck.giveNewCard(); // what's the next card i can give
 				listOfNewCards.Add(cardTmp); //add to the list of new cards
 				player.AddCardToHand(cardTmp); // add card to player's hand
-				
-
 			}
 		}
 
@@ -280,7 +279,7 @@ namespace Shared.data
 			}
 		}
 
-		public void chooseAction(GameAction action)
+		public void handleGameAction(GameAction action)
 		{
 			// Check player existence in the game
 			bool isPlayerInTheGame = this.players.Contains(action.player);
@@ -310,6 +309,27 @@ namespace Shared.data
 					this.exchangeCards(action.player, action.listOfCards);
 					break;
 			}
+
+			if(nbNoRise >= nbPlayersStillPlaying)
+				if(currentPhase.typePhase == TypePhase.reveal)
+					initRound();
+				else
+					goToNextPhase();
+			else
+				goToNextPlayer();
+
+		}
+
+		private void goToNextPhase()
+		{
+			Phase newPhase = new Phase(currentPhase.typePhase++); //Hopefully it gives the next phase
+			newCurrentPhase(newPhase);
+		}
+
+		private void newCurrentPhase(Phase newPhase)
+		{
+			currentPhase = newPhase;
+			rounds[rounds.Count - 1].addPhase(newPhase); //Adding newPhase to current round (which is the last one in the rounds list)
 		}
 
 		private void rise(Player player, int value)
@@ -324,17 +344,19 @@ namespace Shared.data
 				player.incrementTokens(value, player.tokensBet);
 				this.pot += value;
 				this.highestBet = value;
-
+				nbNoRise = 0; //reset nb turn of no rising event
 			}
 		}
 
-		private static void fold(Player player)
+		private void fold(Player player)
 		{
 			player.isFolded = true;
 			for(int card = 0; card < player.hand.Count; card++)
 			{
 				player.removeCardFromHand(player.hand[card]);
 			}
+
+			nbPlayersStillPlaying--;
 		}
 
 		private void allIn(Player player, int value)
@@ -344,6 +366,7 @@ namespace Shared.data
 			player.decrementTokens(0, player.tokens);
 			this.pot += value;
 			this.highestBet = value;
+			nbNoRise = 0; //reset nb turn of no rising event
 		}
 
 		private void call(Player player, int value)
@@ -359,6 +382,8 @@ namespace Shared.data
 				player.incrementTokens(value, player.tokensBet);
 				this.pot += value;
 			}
+
+			nbNoRise++;
 		}
 		
 		
@@ -367,10 +392,12 @@ namespace Shared.data
 
 		public void initRound()
 		{
+			nbPlayersStillPlaying = 0;
 			foreach(Player player in this.players)
 			{
 				player.isFolded = false;
 				player.removeAllCards();
+				nbPlayersStillPlaying++;
 			}
 
 			this.deck.giveBackCards(this.deck.cards);
@@ -381,13 +408,12 @@ namespace Shared.data
 			this.currentPlayerIndex = 0; // to DO : how do we choose the first player of each round
 			this.smallBlind = 0;
 			this.bigBlind = this.updateBlind();
-			
-			Phase p = new Phase(TypePhase.bet1);
-			currentPhase = p;
-			
+
 			Round r = new Round();
-			r.addPhase(p);
 			rounds.Add(r);
+
+			Phase p = new Phase(TypePhase.bet1);
+			newCurrentPhase(p);
 
 			deck.shuffleCards();
 			distributeCards();
@@ -405,6 +431,8 @@ namespace Shared.data
 			{
 				revealedCards = player.hand;
 			}
+
+			nbNoRise++;
 			return revealedCards;
 		}
 
