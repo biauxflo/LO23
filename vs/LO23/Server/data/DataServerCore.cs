@@ -11,8 +11,8 @@ namespace Server.Data
     {
 		internal CommToDataServer implInterfaceForComm { get; private set; }
 
-		internal static List<LightUser> lightUsers = new List<LightUser>();
-		internal static List<Game> games = new List<Game>();
+		internal List<LightUser> lightUsers = new List<LightUser>();
+		internal List<Game> games = new List<Game>();
 
 		public DataServerCore()
         {

@@ -18,6 +18,8 @@ namespace Shared.interfaces
 		void uneregisterUser(Guid playerId);
 		Game applyActionToPlayer(GameAction gameAction);
 		Game removePlayerToGame(Guid playerId, Guid gameId);
+		(List<LightUser>, List<LightGame>) getUsersAndGames();
 
-    }
+
+	}
 }
