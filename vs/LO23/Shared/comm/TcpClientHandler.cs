@@ -12,7 +12,12 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Shared.comm
-{	
+{
+	/// <summary>
+	/// Handles a connection between two distant TCP clients.
+	/// </summary>
+	/// <typeparam name="SendType">Type of messages to send</typeparam>
+	/// <typeparam name="ReceiveType">Type of messages to receive</typeparam>
 	public class TcpClientHandler<SendType, ReceiveType>
 	{
 		readonly TcpClient client;
@@ -29,6 +34,9 @@ namespace Shared.comm
 			this.debugId = debugId;	
 		}
 
+		/// <summary>
+		/// Starts to listen to all messages and calls the handler when receiving messages.
+		/// </summary>
 		private void Listener()
 		{
 			try
@@ -77,6 +85,10 @@ namespace Shared.comm
 			}
 		}
 
+		/// <summary>
+		/// Sends a message to the other TCP client.
+		/// </summary>
+		/// <param name="msg">Message to send</param>
 		public void Send(SendType msg)
 		{
 			try
