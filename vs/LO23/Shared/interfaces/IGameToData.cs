@@ -9,11 +9,11 @@ namespace Shared.interfaces
 {
 	public interface IGameToData
 	{
-		void sendMessage(ChatMessage message) ;
+		void SendMessage(ChatMessage message) ;
 
-		void stopGame();
+		void StopGame();
 
-		void saveGame();
+		void SaveGame();
 
 		void leaveGame(Guid gameId, Guid lightUser);
 

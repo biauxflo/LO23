@@ -75,12 +75,14 @@
     <Compile Include="comm\MessageToClient.cs" />
     <Compile Include="comm\MessageToServer.cs" />
     <Compile Include="interfaces\IDataToComm.cs" />
+    <Compile Include="interfaces\IDataToGame.cs" />
     <Compile Include="interfaces\IGameToData.cs" />
     <Compile Include="interfaces\IDataToMain.cs" />
     <Compile Include="interfaces\IMainToGame.cs" />
     <Compile Include="interfaces\ICommToDataClient.cs" />
     <Compile Include="interfaces\ICommToDataServer.cs" />
     <Compile Include="interfaces\IMainToDataClient.cs" />
+    <Compile Include="interfaces\IDataClientToMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

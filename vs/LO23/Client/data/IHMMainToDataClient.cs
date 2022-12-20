@@ -50,6 +50,22 @@ public class IHMMainToDataClient : Shared.interfaces.IMainToDataClient
 	public void createNewGame(GameOptions options)
     {
 		this.data_client_ctrl.sendCreateNewGame(options);
+			if(user != null)
+			{
+				data_client_ctrl.ask_announceUser(User.ToLightUser(user));
+                data_client_ctrl.SendConnectionSucceedToMain(user);
+			} else {
+                data_client_ctrl.SendConnectionFailedToMain("BadCredentials");
+            }
+		} catch (Exception e)
+		{
+			data_client_ctrl.SendConnectionFailedToMain("BadCredentials");
+		}
+    }
+
+    public void createNewGame(GameOptions options)
+    {
+		data_client_ctrl.sendCreateNewGame(options);
     }
 
     public void getProfile(Guid userId)
@@ -64,7 +80,7 @@ public class IHMMainToDataClient : Shared.interfaces.IMainToDataClient
 
     public void playGame(Guid gameId, LightUser lightUser)
     {
-		this.data_client_ctrl.request_PlayGameToComm(gameId, lightUser);
+        data_client_ctrl.request_PlayGameToComm(gameId, lightUser);
     }
 
     public void registerProfile(User user)
@@ -122,5 +138,6 @@ public class IHMMainToDataClient : Shared.interfaces.IMainToDataClient
     {
         throw new NotImplementedException();
     }
-
 }
+
+
