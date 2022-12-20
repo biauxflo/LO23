@@ -19,6 +19,14 @@ namespace Shared.data
 		{
 		}
 
+
+		public LightUser(LightUser lu)
+		{
+			this.id = lu.id;
+			this.username = lu.username;
+			this.image = lu.image;
+		}
+
         public LightUser(
             Guid id,
             string username,
