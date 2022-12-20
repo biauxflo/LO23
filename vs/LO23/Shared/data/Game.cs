@@ -58,6 +58,10 @@ namespace Shared.data
 			get; private set;
 		} //L'ensemble des cartes dans le jeu, qu'elles soient en main, dans la pioche ou la défausse
 
+		public bool gameStarted
+		{
+			get; set;
+		}
 		public Game()// nina changed to public to test
 		{
 		}
@@ -75,6 +79,30 @@ namespace Shared.data
 			this.nbNoRise = 0;
 			this.chat = new List<ChatMessage>();
 			this.deck = new Deck();
+			this.gameStarted = false;
+		
+		}
+
+		public void initializeGame()
+		{
+			this.gameStarted = true;
+			foreach(LightUser user in this.lobby)
+			{
+				Player p = new Player(user.id, user.username, user.image);
+				this.players.Add(p);
+			}
+			Phase p1 = new Phase(TypePhase.bet1);
+			Round r1 = new Round();
+			r1.addPhase(p1);
+			this.rounds.Add(r1);
+			this.currentPhase = r1.phases[0];
+			this.distributeCards();
+			foreach(Player player in this.players)
+			{
+				this.payBigBlind(player);
+
+			}
+			this.currentPlayerIndex = 0;
 
 		}
 
@@ -251,7 +279,7 @@ namespace Shared.data
 			{
 				player.removeCardFromHand(listOfCards[i]); // we take back the cards from the player
 			}
-			this.deck.giveBackCards(listOfCards); //give back to the deck the cards
+			this.deck.changeStatusOfCards(listOfCards); //give back to the deck the cards
 
 			for(int i = 0; i < nb; i++)
 			{
@@ -701,21 +729,21 @@ namespace Shared.data
 
 		public void resetRound()
 		{
-			foreach(Player player in this.players)
-			{
-				player.isFolded = false;
-				player.removeAllCards();
-			}
-			this.deck.giveBackCards(this.deck.cards);
-			// to do: mix the cards
-			this.pot = 0;
-			this.highestBet = 0;
-			this.nbNoRise = 0;
-			this.currentPlayerIndex = 0; // to DO : how do we choose the first player of each round
-			this.smallBlind = 0;
-			this.bigBlind = this.updateBlind();
-			Phase p = new Phase(TypePhase.bet1);
-			this.currentPhase = p;
+		foreach(Player player in this.players)
+		{
+			player.isFolded = false;
+			player.removeAllCards();
+		}
+		this.deck.changeStatusOfCards(this.deck.cards);
+		// to do: mix the cards
+		this.pot = 0;
+		this.highestBet = 0;
+		this.nbNoRise = 0;
+		this.currentPlayerIndex = 0; // to DO : how do we choose the first player of each round
+		this.smallBlind = 0;
+		this.bigBlind = this.updateBlind();
+		Phase p= new Phase(TypePhase.bet1);
+		this.currentPhase = p;
 			Round r = new Round();
 			r.addPhase(p);
 			this.rounds.Add(r);

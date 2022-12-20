@@ -39,6 +39,9 @@ namespace Shared.data
 		public string Name {
 			set; get;
 		}
+		public int NbPlayersMin {
+			set; get;
+		}
 
 		// @pirousse: Requiered for IHM_Main
 		public GameOptions()
@@ -51,6 +54,7 @@ namespace Shared.data
 			bool canSpecChat,
 			int nbRoundMax,
 			int nbPlayersMax,
+			int nbPlayersMin,
 			int startingBigBlind,
 			int bigBlindValue
 		)
@@ -61,6 +65,7 @@ namespace Shared.data
 			this.CanSpecChat = canSpecChat;
 			this.NbRoundMax = nbRoundMax;
 			this.NbPlayersMax = nbPlayersMax;
+			this.NbPlayersMax = nbPlayersMin;
 			this.StartingBigBlind = startingBigBlind;
 			this.BigBlindValue = bigBlindValue;
 		}
