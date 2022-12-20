@@ -42,7 +42,7 @@
         </StackPanel>
         <StackPanel Grid.Row="4" Grid.Column="4" HorizontalAlignment="Center">
             <TextBlock Text="Age" FontSize="24" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Age, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="50" Width="250"/>
+            <TextBox Text="{Binding Age}" Height="50" Width="250"/>
         </StackPanel>
         <StackPanel Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center">
             <TextBlock Text="Prénom" FontSize="24" HorizontalAlignment="Center"/>

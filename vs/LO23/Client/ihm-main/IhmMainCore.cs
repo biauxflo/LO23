@@ -161,6 +161,9 @@ namespace Client.ihm_main
 			homeViewModel.Games = GameCollection;
         }
 
+		/// <summary>
+		/// Effectue les actions suite à une création de profil réussie.
+		/// </summary>
 		internal void ProfileCreationSuceed()
 		{
 			MessageBox.Show(mainWindow, "Profil créé,\nVous pouvez vous connecter", "Profil créé", MessageBoxButton.OK);
@@ -168,6 +171,10 @@ namespace Client.ihm_main
 			mainWindowViewModel.ActivePage = connectionPage;
 		}
 
+		/// <summary>
+		/// Effectue les actions suite à une création de profil échouée.
+		/// </summary>
+		/// <param name="error">Erreur ayant empeché la création de profil.</param>
 		internal void ProfileCreationFailed(string error)
 		{
 			MessageBox.Show(mainWindow, error, "Profil non créé", MessageBoxButton.OK);
@@ -185,34 +192,62 @@ namespace Client.ihm_main
 			LaunchGame(game);
         }
 
+		/// <summary>
+		/// Lance la partie donnée.
+		/// </summary>
+		/// <param name="game">Partie à lancer.</param>
 		internal void LaunchGame(Game game)
 		{
 			mainToGame.LaunchGame(game);
 		}
 
-		internal void CreateNewGame(GameOptions gameInCreation)
+		/// <summary>
+		/// Demande la création d'une partie.
+		/// </summary>
+		/// <param name="gameInCreation">Options de la partie à créer.</param>
+		internal void TryCreateNewGame(GameOptions gameInCreation)
 		{
 			mainToData.createNewGame(gameInCreation);
 		}
 
+		/// <summary>
+		/// Demande l'authentification du couple utilisateur/mot de passe donné.
+		/// </summary>
+		/// <param name="username">Nom d'utilisateur à tester.</param>
+		/// <param name="password">Mot de passe à tester.</param>
 		internal void TryAuthenticate(string username, string password)
 		{
 			mainToData.authenticate(username, password);
 		}
 
+		/// <summary>
+		/// Demande la connexion à une partie.
+		/// </summary>
+		/// <param name="id">Id de la partie à laquelle on veut se connecter.</param>
+		/// <param name="user">Utilisateur voulant se connecter à la partie.</param>
 		internal void TryJoinGame(Guid id, LightUser user)
 		{
 			mainToData.playGame(id, user);
 		}
 
+		/// <summary>
+		/// Demande la création d'un nouveau profil avec les arguments donnés.
+		/// </summary>
+		/// <param name="username">Nom d'utilisateur du profil à créer.</param>
+		/// <param name="password">Mot de passe du profil à créer.</param>
+		/// <param name="firstname">Prénom du profil à créer.</param>
+		/// <param name="lastname">Nom de famille du profil à créer.</param>
+		/// <param name="age">Age du profil à créer.</param>
 		internal void TryCreateProfile(string username, string password, string firstname, string lastname, int age)
 		{
 			// TODO : call data
 		}
 
+		/// <summary>
+		/// Lance le module IHM-Main.
+		/// </summary>
 		internal void Run()
         {
-			// Afficher la fenêtre.
 			mainWindow.Show();
         }
     }

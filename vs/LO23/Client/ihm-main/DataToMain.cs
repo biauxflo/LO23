@@ -41,5 +41,14 @@ namespace Client.ihm_main
             core.GameLaunched(game);
         }
 
-    }
+		public void ProfileCreationSuceed()
+		{
+			core.ProfileCreationSuceed();
+		}
+
+		public void ProfileCreatioFailed(string error)
+		{
+			core.ProfileCreationFailed(error);
+		}
+	}
 }

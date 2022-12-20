@@ -93,7 +93,7 @@ namespace Client.ihm_main.ViewModels
 		/// </summary>
 		private void OnCreationClick()
         {
-			core.CreateNewGame(GameInCreation);
+			core.TryCreateNewGame(GameInCreation);
         }
     }
 }
