@@ -155,8 +155,8 @@ namespace Client.ihm_game
 			((GameView)this.gamePage).Card1.Visibility = Visibility.Visible;
 			((GameView)this.gamePage).Card2.Visibility = Visibility.Visible;
 			((GameView)this.gamePage).Card3.Visibility = Visibility.Visible;
-			((GameView)this.gamePage).Visibility = Visibility.Visible;
-			((GameView)this.gamePage).Visibility = Visibility.Visible;
+			((GameView)this.gamePage).Card4.Visibility = Visibility.Visible;
+			((GameView)this.gamePage).Card5.Visibility = Visibility.Visible;
 
 		}
 	}
