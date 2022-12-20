@@ -22,7 +22,8 @@ namespace Shared.comm
 			string id, 
 			ICommToDataServer commToDataServer, 
 			Action<MessageToClient, string> sendTo, 
-			Action<MessageToClient, string> broadcastExceptTo
+			Action<MessageToClient, string> broadcastExceptTo,
+			Action<MessageToClient, Game, string> broadcastOnGame
 		)
 		{
 			//LightUser user = commToDataServer.getProfile(this.playerId);

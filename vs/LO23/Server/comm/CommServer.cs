@@ -1,4 +1,5 @@
 ﻿using Shared.comm;
+using Shared.data;
 using Shared.interfaces;
 using System;
 using System.Collections.Generic;
@@ -75,7 +76,8 @@ namespace Server.comm
 				id, 
 				this.CommToDataServer, 
 				this.SendTo,
-				this.BroadcastExceptTo
+				this.BroadcastExceptTo,
+				this.BroadcastOnGame
 			);
 		}
 
@@ -98,11 +100,31 @@ namespace Server.comm
 		{
 			foreach(KeyValuePair<string, TcpClientHandler<MessageToClient, MessageToServer>> client in this.tcpClientHandlers)
 			{
-				if(client.Key == exceptId) break;
+				if(client.Key == exceptId)
+					break;
 				client.Value.Send(msg);
 			}
 		}
-		
+
+		/// <summary>
+		/// Sends a message to all clients from a game.
+		/// This sends the message to all clients in the Loby
+		/// </summary>
+		/// <param name="msg">Message to send</param>
+		/// <param name="game">Game which contains the clients who will receive the message</param>
+		/// <param name="exceptId">Id of one client who won't receive the message</param>
+		public void BroadcastOnGame(MessageToClient msg, Game game, string exceptId)
+		{
+			foreach(LightUser user in game.lobby)
+			{
+				string clientId = this.tcpClientIds[user.id];
+				if(clientId != exceptId)
+				{
+					this.tcpClientHandlers[clientId].Send(msg);
+				}
+			}
+		}
+
 		// TODO : clean stop or destroy
 	}
 }
