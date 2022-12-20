@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -24,5 +25,43 @@ namespace Client.ihm_game.Views.Pages
         {
             InitializeComponent();
         }
-    }
+
+		private void OnCallClick()
+		{
+			MessageBox.Show("bouton call", "bouton call", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+
+			//BT_egaler.Visibility = Visibility.Hidden;
+			//BT_doubler.Visibility = Visibility.Hidden;
+			//BT_seCoucher.Visibility = Visibility.Hidden;
+
+			//BT_egaler.Visibility = false;
+
+		}
+		private void OnCallClick(object sender, RoutedEventArgs e)
+		{
+			this.BT_egaler.IsEnabled = false;
+			this.BT_doubler.IsEnabled = false;
+			this.BT_seCoucher.IsEnabled = false;
+		}
+
+		private void OnFoldClick(object sender, RoutedEventArgs e)
+		{
+			this.BT_egaler.IsEnabled = false;
+			this.BT_doubler.IsEnabled = false;
+			this.BT_seCoucher.IsEnabled = false;
+			this.Card1.Visibility= Visibility.Hidden;
+			this.Card2.Visibility = Visibility.Hidden;
+			this.Card3.Visibility = Visibility.Hidden;
+			this.Card4.Visibility = Visibility.Hidden;
+			this.Card5.Visibility = Visibility.Hidden;
+		}
+
+		private void OnRaiseClick(object sender, RoutedEventArgs e)
+		{
+			this.BT_egaler.IsEnabled = false;
+			this.BT_doubler.IsEnabled = false;
+			this.BT_seCoucher.IsEnabled = false;
+		}
+
+	}
 }
