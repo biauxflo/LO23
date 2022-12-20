@@ -1,5 +1,8 @@
 ﻿using Shared.data;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Shared.interfaces
 {
@@ -33,5 +36,17 @@ namespace Shared.interfaces
         /// </summary>
         /// <param name="error">Erreur lors de la création.</param>
         void GameCreationFailed(string error);
-    }
+
+		/// <summary>
+		/// Indique qu'une demande de création de profil a réussie.
+		/// </summary>
+		void ProfileCreationSuceed();
+
+		/// <summary>
+		/// Indique qu'une demande de création de profil a échouée.
+		/// </summary>
+		/// <param name="error">Erreur ayant fait échoué la création de profil.</param>
+		void ProfileCreatioFailed(string error);
+
+	}
 }
