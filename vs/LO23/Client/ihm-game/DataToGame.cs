@@ -31,5 +31,11 @@ namespace Client.ihm_game
 			core.StartReplayDisplay(game);
 		}
 
+		public void NewRoundDisplay()
+		{
+			core.NewRoundDisplay();
+		}
+
+
 	}
 }
