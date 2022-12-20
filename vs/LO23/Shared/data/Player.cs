@@ -108,5 +108,12 @@ namespace Shared.data
 		{
 			return true;
 		}
+		public void resetPlayerForNextRound()
+		{
+			this.score = 0;
+			this.tokensBet = 0;
+			this.isFolded = false;
+			this.removeAllCards();
+		}
 	}
 }
