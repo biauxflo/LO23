@@ -88,6 +88,16 @@ namespace Server.Data
 		{
 			throw new NotImplementedException();
 		}
+
+		public List<LightUser> getListConnectedUsers()
+		{
+			return data_Server_Ctrl.getListConnectedUsers();
+		}
+
+		public List<LightGame> getListGames()
+		{
+			return data_Server_Ctrl.getListLightGames();
+		}
 		public (Game,List<Guid>) applyPlayTurn(Guid playerId, GameAction action)
 		{
 			Game game = DataServerCore.games.Find(x => x.players.Find((y)=> y.id == playerId) != null);// ask denis it is his pb <3
