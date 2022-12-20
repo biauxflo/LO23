@@ -83,5 +83,10 @@ namespace Client.data
 		{
 			interfaceFromComm.requestPlayRound(action);
 		}
+
+		public void request_LeaveGame(Guid gameId, Guid lightUser)
+		{
+			interfaceFromComm.requestLeaveGame(gameId,lightUser);
+		}
 	}
 }

@@ -15,7 +15,7 @@ namespace Shared.interfaces
 
 		void saveGame();
 
-		void leaveGame();
+		void leaveGame(Guid gameId, Guid lightUser);
 
 		void playRound(GameAction action);
 		

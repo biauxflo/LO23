@@ -18,9 +18,9 @@ namespace Client.data
 			this.data_client_ctrl = data_client_ctrl;
 		}
 
-		void IGameToData.leaveGame()
+		void IGameToData.leaveGame(Guid gameId, Guid lightUser)
 		{
-			throw new NotImplementedException();
+			data_client_ctrl.request_LeaveGame(gameId, lightUser);
 		}
 
 		void IGameToData.playRound(GameAction action)

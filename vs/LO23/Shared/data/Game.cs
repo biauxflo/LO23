@@ -711,7 +711,7 @@ namespace Shared.data
 			}
 		}
 
-		private void fold(Player player, List<Card> listOfCards)
+		public void fold(Player player, List<Card> listOfCards)
 		{
 			// To remove once we have a proper constructor for game, same as for exchangeCards
 			this.deck = new Deck();
