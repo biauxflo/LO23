@@ -22,7 +22,6 @@ namespace Shared.comm.messages
 		public override void Handle(ICommToDataClient commToData)
 		{
 			commToData.updateGame(this.game);
-
 		}
 	}
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shared.comm.messages;
+using Shared.data;
 
 namespace Shared.comm
 {
@@ -21,7 +22,8 @@ namespace Shared.comm
 			string id, 
 			ICommToDataServer commToDataServer, 
 			Action<MessageToClient, string> sendTo, 
-			Action<MessageToClient, string> broadcastExceptTo
+			Action<MessageToClient, string> broadcastExceptTo,
+			Action<MessageToClient, Game, string> broadcastOnGame
 		)
 		{
 			commToDataServer.uneregisterUser(this.playerId);

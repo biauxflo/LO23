@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shared.comm.messages;
+using Shared.data;
 using Shared.interfaces;
 
 namespace Shared.comm
@@ -23,7 +24,8 @@ namespace Shared.comm
 			string id, 
 			ICommToDataServer commToDataServer, 
 			Action<MessageToClient, string> sendTo, 
-			Action<MessageToClient, string> broadcastExceptTo
+			Action<MessageToClient, string> broadcastExceptTo,
+			Action<MessageToClient, Game, string> broadcastOnGame
 		)
 		{
 			//Game game = commToDataServer.addSpectatorToGame(this.gameId, this.playerId);
