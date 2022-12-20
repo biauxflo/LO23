@@ -240,5 +240,32 @@ namespace Client.ihm_game.ViewModels
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
+
+		public List<Player> sortList(List<Player> players)
+		{
+			List<Player> newList = new List<Player>();
+			Player firstPlayer = new Player(100);
+			int i=0;
+			foreach(Player player in players)
+			{
+				Console.WriteLine(player);
+				i++;
+				if(player == firstPlayer)
+				{
+					break;
+				}
+				
+			}
+			for(int j = i; j < players.Count; j++)
+			{
+				newList.Add(players[j]);
+
+			}
+			for(int j = 0; j < i; j++)
+			{
+				newList.Add(players[j]);
+			}
+			return newList;
+		}
 	}
 }
