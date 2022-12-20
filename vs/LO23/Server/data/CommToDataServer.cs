@@ -54,9 +54,15 @@ namespace Server.Data
 			//Or ici on fait (je pense) une copie de cet objet la, et on ajoute le user � la copie de la game. 
 			//A verifier
 			Game game = DataServerCore.games.Find(x => x.id == gameId);
-			
-            game.addUser(user); 
-            return game;
+
+			if(game.lobby.Count < game.gameOptions.NbPlayersMax)
+			{
+				game.addUser(user);
+				return game;
+			}
+			else
+				return null;
+            
         }
 
         public CommToDataServer getCommCallsDataServerImpl()

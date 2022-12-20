@@ -1,3 +1,4 @@
+using Shared.constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,6 +84,28 @@ namespace Shared.data
 		public static LightGame ToLightGame(Game game)
 		{
 			return new LightGame(game.id, game.gameOptions);
+		}
+
+
+		public void initGame()
+		{
+			foreach(LightUser lu in lobby) //Creation of players - tokens distribution
+			{
+				players.Add(new Player(lu, gameOptions.StartingTokens));
+			}
+
+			initRound();
+		}
+
+
+		public void addUser(LightUser user)
+		{
+			lobby.Add(user);
+
+			if(lobby.Count >= Constants.NB_PLAYERS_MIN)
+			{
+				initGame(); //Créer les players, leur donner cartes et jetons, lancer la game.
+			}
 		}
 
 
@@ -257,10 +280,10 @@ namespace Shared.data
 			}
 		}
 
-		public void chooseAction(Player player, int value, GameAction action, List<Card> listOfCards)
+		public void chooseAction(GameAction action)
 		{
 			// Check player existence in the game
-			bool isPlayerInTheGame = this.players.Contains(player);
+			bool isPlayerInTheGame = this.players.Contains(action.player);
 			if (!isPlayerInTheGame)
 			{
 				Console.WriteLine("Player is not in the game");
@@ -269,22 +292,22 @@ namespace Shared.data
 			switch(action.typeAction)
 			{
 				case TypeAction.call:
-					this.call(player, value);
+					this.call(action.player, action.value);
 					break;
 
 				case TypeAction.rise:
-					this.rise(player, value);
+					this.rise(action.player, action.value);
 					break;
 				case TypeAction.allin:
-					this.allIn(player, value);
+					this.allIn(action.player, action.value);
 
 					break;
 				case TypeAction.fold:
-					fold(player);
+					fold(action.player);
 
 					break;
 				case TypeAction.exchangeCards:
-					this.exchangeCards(player, listOfCards);
+					this.exchangeCards(action.player, action.listOfCards);
 					break;
 			}
 		}
@@ -342,30 +365,32 @@ namespace Shared.data
 	
 		
 
-		public void resetRound()
+		public void initRound()
 		{
-		foreach(Player player in this.players)
-		{
-			player.isFolded = false;
-			player.removeAllCards();
-		}
-		this.deck.giveBackCards(this.deck.cards);
-		// to do: mix the cards
-		this.pot = 0;
-		this.highestBet = 0;
-		this.nbNoRise = 0;
-		this.currentPlayerIndex = 0; // to DO : how do we choose the first player of each round
-		this.smallBlind = 0;
-		this.bigBlind = this.updateBlind();
-		Phase p= new Phase(TypePhase.bet1);
-		this.currentPhase = p;
+			foreach(Player player in this.players)
+			{
+				player.isFolded = false;
+				player.removeAllCards();
+			}
+
+			this.deck.giveBackCards(this.deck.cards);
+			// to do: mix the cards
+			this.pot = 0;
+			this.highestBet = 0;
+			this.nbNoRise = 0;
+			this.currentPlayerIndex = 0; // to DO : how do we choose the first player of each round
+			this.smallBlind = 0;
+			this.bigBlind = this.updateBlind();
+			
+			Phase p = new Phase(TypePhase.bet1);
+			currentPhase = p;
+			
 			Round r = new Round();
 			r.addPhase(p);
-			this.rounds.Add(r);
-		foreach(Player player in this.players)
-			{
-				//player.distributeCards();
-			}
+			rounds.Add(r);
+
+			deck.shuffleCards();
+			distributeCards();
 		}
 		public int updateBlind()
 		{
