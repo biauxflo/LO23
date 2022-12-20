@@ -64,7 +64,7 @@ namespace Client.ihm_main
 
 		internal IMainToGame mainToGame;
 
-		internal IDataClientToMain mainToData;
+		internal IMainToDataClient mainToData;
 
 		#endregion
 

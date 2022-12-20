@@ -88,5 +88,14 @@ namespace Server.Data
 		{
 			throw new NotImplementedException();
 		}
+
+		public Game applyActionToPlayer(GameAction gameAction)
+		{
+			throw new NotImplementedException();
+		}
+		public Game removePlayerToGame(Guid playerId, Guid gameId)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

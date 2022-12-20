@@ -23,7 +23,7 @@ namespace Client.data
 			throw new NotImplementedException();
 		}
 
-		public void PlayRound(Action action)
+		public void PlayRound(GameAction action)
 		{
 			throw new NotImplementedException();
 		}

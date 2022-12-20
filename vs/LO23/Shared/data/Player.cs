@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Shared.data
 {
@@ -25,7 +26,8 @@ namespace Shared.data
         public int tokens { get; set; }
         public int tokensBet { get; set; }
         public List<Card> hand { get; set; } //Doit referencer les objets cartes contenus dans l'objet Deck
-
+		
+		private List<string> cardImage;
 		public List<string> Card
 		{
 			get => cardImage;
@@ -35,7 +37,14 @@ namespace Shared.data
 				OnPropertyChanged(nameof(Card));
 			}
 		}
-		/** Fin test rcisnero **/
+		/// <summary>
+		/// créer la méthode OnPropertyChanges pour créer un événement.
+		/// Le nom du membre appelant sera utilisé comme paramètre
+		/// </summary>
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
 		public Player(int tokens)
         {

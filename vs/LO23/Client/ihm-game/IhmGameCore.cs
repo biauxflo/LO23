@@ -133,7 +133,7 @@ namespace Client.ihm_game
 		/// Appel à data pour demander une action (call/rise/fold/allin)
 		/// <summary>
 		// TODO : replace parameter Action a with TypeAction t
-		internal void PlayRound(Action a)
+		internal void PlayRound(GameAction a)
 		{
 			this.gameToData.PlayRound(a);
 		}
