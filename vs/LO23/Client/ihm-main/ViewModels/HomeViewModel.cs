@@ -8,7 +8,10 @@ using System.Windows.Input;
 
 namespace Client.ihm_main.ViewModels
 {
-    internal class HomeViewModel : INotifyPropertyChanged
+	/// <summary>
+	/// Classe <c>HomeViewModel</c> modélise la page d'accueil et implémente INotifyPropertyChanged
+	/// </summary>
+	internal class HomeViewModel : INotifyPropertyChanged
     {
         /// <summary>
 		/// Core principal du module IhmMain.
@@ -19,6 +22,9 @@ namespace Client.ihm_main.ViewModels
 		/// Utilisateur crée avec le formulaire de connexion.
 		/// </summary>
 		private LightUser connectedUser;
+		/// <summary>
+		/// Utilisateur crée avec le formulaire de connexion.
+		/// </summary>
 		public LightUser ConnectedUser
 		{
 			get => connectedUser;
@@ -33,6 +39,9 @@ namespace Client.ihm_main.ViewModels
         /// Liste des parties accessibles.
         /// </summary>
 		private ObservableCollection<LightGame> games;
+		/// <summary>
+		/// Liste des parties accessibles.
+		/// </summary>
 		public ObservableCollection<LightGame> Games
         {
             get => games;
@@ -53,16 +62,26 @@ namespace Client.ihm_main.ViewModels
         /// </summary>
         public ICommand GameLaunchingCommand { get; set; }
 
+		/// <summary>
+		/// Déclarer l'événement
+		/// </summary>
+
 		public event PropertyChangedEventHandler PropertyChanged;
 
-        public HomeViewModel(IhmMainCore core)
+		/// <summary>
+		/// Page à afficher au sein de la fenêtre.
+		/// </summary>
+		public HomeViewModel(IhmMainCore core)
         {
             GameCreationCommand = new RelayCommand(CreateNewGame, true);
             GameLaunchingCommand = new RelayCommand<object>(LaunchGame, true);
 
             this.core = core;
         }
-
+		/// <summary>
+		/// créer la méthode OnPropertyChanges pour créer un événement.
+		/// Le nom du membre appelant sera utilisé comme paramètre
+		/// </summary>
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
