@@ -4,15 +4,25 @@ using System.Windows.Controls;
 
 namespace Client.ihm_main.ViewModels
 {
-    internal class MainWindowViewModel : INotifyPropertyChanged
+	/// <summary>
+	/// Classe <c>MainWindowViewModel</c> modélise la page principale et implémente INotifyPropertyChanged
+	/// </summary>
+	internal class MainWindowViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+		/// <summary>
+		/// Déclarer l'événement
+		/// </summary>
+		public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Page à afficher au sein de la fenêtre.
         /// </summary>
         private Page activePage;
-        public Page ActivePage
+
+		/// <summary>
+		/// Page à afficher au sein de la fenêtre.
+		/// </summary>
+		public Page ActivePage
         {
             get => activePage;
             set
@@ -21,12 +31,17 @@ namespace Client.ihm_main.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        public MainWindowViewModel()
+		/// <summary>
+		/// Page à afficher au sein de la fenêtre.
+		/// </summary>
+		public MainWindowViewModel()
         {
         }
-
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
+		/// <summary>
+		/// créer la méthode OnPropertyChanges pour créer un événement.
+		/// Le nom du membre appelant sera utilisé comme paramètre
+		/// </summary>
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }

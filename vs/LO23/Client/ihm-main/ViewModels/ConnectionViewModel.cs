@@ -1,4 +1,4 @@
-﻿using Shared.data;
+using Shared.data;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,14 +9,23 @@ using System.Runtime.CompilerServices;
 
 namespace Client.ihm_main.ViewModels
 {
-    internal class ConnectionViewModel : INotifyPropertyChanged
+	/// <summary>
+	/// Classe <c>ConnectionViewModel</c> modélise la page de connexion et implémente INotifyPropertyChanged
+	/// </summary>
+	internal class ConnectionViewModel : INotifyPropertyChanged
     {
+		/// <summary>
+		/// Core principal du module IhmMain.
+		/// </summary>
 		private readonly IhmMainCore core;
 
 		/// <summary>
-		/// Utilisateur essaynt de se connecter.
+		/// Utilisateur essayant de se connecter.
 		/// </summary>
 		private string username;
+		/// <summary>
+		/// Utilisateur essayant de se connecter.
+		/// </summary>
 		public string Username
 		{
 			get => username;
@@ -26,8 +35,13 @@ namespace Client.ihm_main.ViewModels
 				OnPropertyChanged();
 			}
 		}
-
+		/// <summary>
+		/// Entrée du mot de passe de connection
+		/// </summary>
 		private string password;
+		/// <summary>
+		/// Entrée du mot de passe de connection
+		/// </summary>
 		public string Password
 		{
 			get => password;
@@ -37,7 +51,9 @@ namespace Client.ihm_main.ViewModels
 				OnPropertyChanged();
 			}
 		}
-
+		/// <summary>
+		/// Déclarer l'événement
+		/// </summary>
 		public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -64,6 +80,10 @@ namespace Client.ihm_main.ViewModels
 			CreateProfileCommand = new RelayCommand(OnProfileCreationClick, true);
         }
 
+		/// <summary>
+		/// Crée la méthode OnPropertyChanges pour créer un événement.
+		/// Le nom du membre appelant sera utilisé comme paramètre
+		/// </summary>
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
@@ -99,10 +119,10 @@ namespace Client.ihm_main.ViewModels
 		/// </summary>
 		private void OnQuitClick()
 		{
-            // Récupère la fenêtre principale de l'application.
+            // Get current MainWindow.
             Window view = Application.Current.MainWindow;
 
-            // Demande la confirmation avant de fermer l'application.
+            // Ask for confirmation before closing the client.
             MessageBoxResult result = MessageBox.Show(view, "Voulez-vous quitter l'application ?", "Quitter l'application ?", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
 			if(result == MessageBoxResult.OK)
