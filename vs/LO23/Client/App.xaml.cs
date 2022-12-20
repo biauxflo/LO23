@@ -54,16 +54,6 @@ namespace Client
 
 			commCore.Start("127.0.0.1", 10000);
 
-			/************** Start code needed for V1 - To delete later **************/
-			Guid userGuid = new Guid();
-			List<User> users = new List<User>
-			{
-				new User(userGuid, "username", "image", "password", true, "firstname", "lastname", 10)
-			};
-			JSONHelper.writeUsersListToJSONFile(users);
-			/************** End code needed for V1 - To delete later **************/
-
-
 			mainCore.Run();
 		}
 	}

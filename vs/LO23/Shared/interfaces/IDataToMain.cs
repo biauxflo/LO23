@@ -40,7 +40,7 @@ namespace Shared.interfaces
 		/// <summary>
 		/// Indique qu'une demande de création de profil a réussie.
 		/// </summary>
-		void ProfileCreationSuceed();
+		void ProfileCreationSucceed();
 
 		/// <summary>
 		/// Indique qu'une demande de création de profil a échouée.

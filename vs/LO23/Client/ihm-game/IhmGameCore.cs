@@ -97,7 +97,7 @@ namespace Client.ihm_game
 		internal Game testNewGame()
 		{
 			GameOptions gameOptions = new GameOptions("name", 102, true, true, 5, 4, 1, 10);
-			Guid guid = new Guid();
+			Guid guid = Guid.NewGuid();
 			Game game = new Game(guid, gameOptions);
 			game.pot = 250;
 			return game;

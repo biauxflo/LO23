@@ -240,7 +240,7 @@ namespace Client.ihm_main
 		/// <param name="age">Age du profil à créer.</param>
 		internal void TryCreateProfile(string username, string password, string firstname, string lastname, int age)
 		{
-			// TODO : call data
+			mainToData.registerProfile(username, password, firstname, lastname, age);
 		}
 
 		/// <summary>

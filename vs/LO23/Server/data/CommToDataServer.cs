@@ -68,7 +68,7 @@ namespace Server.Data
 
 		public Game createNewGame(GameOptions options)
 		{
-			Game game = new Game(new Guid(), options);
+			Game game = new Game(Guid.NewGuid(), options);
 			data_Server_Ctrl.addGameToList(game);
 
 			return game;

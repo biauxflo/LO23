@@ -76,5 +76,15 @@ namespace Client.data
         {
             interfaceFromMain.ConnectionFailed(error);
         }
+
+		internal void SendProfileCreatioFailedToMain(string error)
+		{
+			interfaceFromMain.ProfileCreatioFailed(error);
+		}
+
+		internal void SendProfileCreationSucceedToMain()
+		{
+			interfaceFromMain.ProfileCreationSucceed();
+		}
 	}
 }

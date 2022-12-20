@@ -19,7 +19,7 @@ namespace Server
 			commServer.CommToDataServer = dataServer.implInterfaceForComm;
 
 			/*********** Start code needed for V1 - to delete later****************/
-			dataServer.addGameToList(new Game(new Guid(), new GameOptions("Game1", 2000, true, true, 100, 8, 0, 10)));
+			dataServer.addGameToList(new Game(Guid.NewGuid(), new GameOptions("Game1", 2000, true, true, 100, 8, 0, 10)));
 			/*********** End code needed for V1 - to delete later****************/
 
 

@@ -11,7 +11,7 @@ namespace Shared.data
     public class LightUser
 
     {
-        public Guid id { get; private set; }
+        public Guid id { get; set; }
         public string username { get; set; }    // username et login c'est la même chose 
         public string image { get; set; }
 
