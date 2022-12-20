@@ -24,7 +24,8 @@ namespace Shared.comm.messages
 			string id,
 			ICommToDataServer commToDataServer,
 			Action<MessageToClient, string> sendTo,
-			Action<MessageToClient, string> broadcastExceptTo
+			Action<MessageToClient, string> broadcastExceptTo,
+			Action<MessageToClient, Game, string> broadcastOnGame
 			)
 		{
 			Game game = commToDataServer.removePlayerToGame(this.userId, this.gameId);

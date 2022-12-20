@@ -13,7 +13,7 @@ namespace Shared.data
     }
 
 	// TODO : Classes observables ? Methode "ObservableObject" pour réutiliser l'interface INotifyPropertyChanged
-	public class Player : INotifyPropertyChanged
+	public class Player : LightUser
     {
 		private Guid id;
 		private string username;
@@ -45,7 +45,7 @@ namespace Shared.data
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
-
+/*
 		public Player(int tokens)
         {
             this.role = PlayerRole.nothing.ToString();
@@ -54,8 +54,18 @@ namespace Shared.data
             this.tokensBet = 0;
             this.hand = new List<Card>();
         }
+*/
+		public Player(LightUser lu, int tokens) : base(lu)
+		{
+			this.role = PlayerRole.nothing.ToString();
+			this.isFolded = false;
+			this.tokensBet = 0;
+			this.hand = new List<Card>();
 
-		public Player(Guid id, string username, string image)
+			this.tokens = tokens;
+		}
+
+	/*	public Player(Guid id, string username, string image)
 		{
 			this.id = id;
 			this.username = username;
@@ -68,7 +78,7 @@ namespace Shared.data
 
 			this.tokens = 1000;
 		}
-
+	*/
 		public void removeCardFromHand(Card card)
 		{   
 			int remove = 0;//index of the card to remove in player's hand

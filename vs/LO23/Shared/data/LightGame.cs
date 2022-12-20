@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shared.constants;
 
 namespace Shared.data
 {
@@ -35,11 +36,6 @@ namespace Shared.data
             this.players = new List<Player>();
             this.spectators = new List<LightUser>();
             this.lobby = new List<LightUser>();
-        }
-
-        public void addUser(LightUser user)
-        {
-            lobby.Add(user);
         }
     }
 }

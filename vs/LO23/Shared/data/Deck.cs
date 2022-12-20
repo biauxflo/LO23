@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Shared.data
 {
@@ -13,6 +14,13 @@ namespace Shared.data
 			this.index = 0;
 			this.cards = new List<Card>();
 			this.generate52Cards();
+		}
+
+
+		public void shuffleCards()
+		{
+			Random rand = new Random();
+			cards = cards.OrderBy(a => rand.Next()).ToList();
 		}
 
 		public void generate52Cards() //Can also just be the reset() function
