@@ -129,9 +129,10 @@
     <Compile Include="ihm-main\DataToMain.cs" />
     <Compile Include="ihm-main\IhmMainCore.cs" />
     <Compile Include="ihm-main\ViewModels\ConnectionViewModel.cs" />
-    <Compile Include="ihm-main\ViewModels\HomeViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\GameCreationViewModel.cs" />
+    <Compile Include="ihm-main\ViewModels\HomeViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ihm-main\ViewModels\ProfilCreationViewModel.cs" />
     <Compile Include="ihm-main\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -152,10 +153,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ihm-main\Views\Pages\GameCreationView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ihm-main\Views\Pages\HomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ihm-main\Views\Pages\ProfilCreationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -173,6 +178,9 @@
     <Compile Include="ihm-game\Views\GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ihm-main\Views\Pages\ProfilCreationView.xaml.cs">
+      <DependentUpon>ProfilCreationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -202,8 +210,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Shared.dll" />
-    <Content Include="bin\Debug\Shared.pdb" />
     <Resource Include="ihm-game\Views\images\Enchere.png" />
     <Resource Include="ihm-game\Views\images\cards\10_c.png" />
     <Resource Include="ihm-game\Views\images\cards\10_d.png" />
