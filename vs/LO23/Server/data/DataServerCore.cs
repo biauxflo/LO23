@@ -19,6 +19,21 @@ namespace Server.Data
             this.implInterfaceForComm = new CommToDataServer(this);
         }
 
+		internal List<LightUser> getListConnectedUsers()
+		{
+			return lightUsers;
+		}
+
+		internal List<LightGame> getListLightGames()
+		{
+			List<LightGame> lgs = new List<LightGame>();
+			foreach(Game g in games)
+			{
+				lgs.Add(Game.ToLightGame(g));
+			}
+
+			return lgs;
+		}
 
 		internal void addGameToList(Game game)
 		{
