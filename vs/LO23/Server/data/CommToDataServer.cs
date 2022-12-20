@@ -55,7 +55,11 @@ namespace Server.Data
 			//A verifier
 			Game game = DataServerCore.games.Find(x => x.id == gameId);
 			
-            game.addUser(user); 
+            game.addUser(user);
+			if(game.lobby.Count == game.gameOptions.NbPlayersMin)
+			{
+				game.initializeGame();
+			}
             return game;
         }
 
