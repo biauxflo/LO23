@@ -364,6 +364,27 @@ namespace Shared.data
 		{
 			return isThreeOfAKind(hand) && isPair(hand);
 		}
+		public void distributePot()
+		{
+			List<Player> listWinners = this.findWinner();
+			int nbOfWinners = listWinners.Count;
+			if(nbOfWinners != 0)
+			{
+
+				int valueToDistribute = this.pot / nbOfWinners;
+				foreach(Player player in listWinners)
+				{
+					player.tokens += valueToDistribute;
+				}
+				this.pot = 0;
+			}
+			else
+			{
+				Console.WriteLine("il n'y a pas de gagnant donc il y aurait eu une division par zéro");
+
+			}
+
+		}
 
 		//find the winner (sort is done in the main)
 		public List<Player> findWinner()
@@ -729,28 +750,25 @@ namespace Shared.data
 
 		public void resetRound()
 		{
-		foreach(Player player in this.players)
-		{
-			player.isFolded = false;
-			player.removeAllCards();
-		}
-		this.deck.changeStatusOfCards(this.deck.cards);
-		// to do: mix the cards
-		this.pot = 0;
-		this.highestBet = 0;
-		this.nbNoRise = 0;
-		this.currentPlayerIndex = 0; // to DO : how do we choose the first player of each round
-		this.smallBlind = 0;
-		this.bigBlind = this.updateBlind();
-		Phase p= new Phase(TypePhase.bet1);
-		this.currentPhase = p;
+			foreach(Player player in this.players)
+			{
+				player.resetPlayerForNextRound();
+				this.deck.changeStatusCards(player.hand);
+			}
+			this.deck.changeStatusOfCards(this.deck.cards);
+			// to do: mix the cards
+			this.pot = 0;
+			this.highestBet = 0;
+			this.nbNoRise = 0;
+			this.currentPlayerIndex = 0; // to DO : how do we choose the first player of each round
+			this.smallBlind = 0;
+			this.bigBlind = this.updateBlind();
+			Phase p = new Phase(TypePhase.bet1);
+			this.currentPhase = p;
 			Round r = new Round();
 			r.addPhase(p);
 			this.rounds.Add(r);
-			foreach(Player player in this.players)
-			{
-				//player.distributeCards();
-			}
+			this.distributeCards();
 		}
 
 		public int updateBlind()
