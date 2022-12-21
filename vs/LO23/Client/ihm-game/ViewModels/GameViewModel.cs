@@ -197,18 +197,20 @@ namespace Client.ihm_game.ViewModels
 			CardCommand4 = new RelayCommand(OnCardClick4);
 			CardCommand5 = new RelayCommand(OnCardClick5);
 
+			LightUser lu = new LightUser();
+			lu = this.core.gameToData.whoAmi();
+			Player firstPlayer = this.ToPlayer(lu);
 			/** TODO : delete (3 lines) when we get actual game from data */
-			player = new Player(100);
-			selectedCards = new List<bool> { false, false, false, false, false };
-			TestCards();
+			//selectedCards = new List<bool> { false, false, false, false, false };
+			//TestCards();
 
 			player.tokens = this.game.gameOptions.StartingTokens;
 
 			// --- Fin Test rcisnero ---
 
 			// TODO : delete (1 line) when get actual nbPlayers from data
-			this.game.nbPlayers = 8;
-			
+			//this.game.nbPlayers = 8;
+			//this.game.nbPlayers = 
 			// Hidde or show player info depending on the number of players in Game
 			// By default only the self player is shown
 			switch(this.game.nbPlayers)
@@ -333,8 +335,11 @@ namespace Client.ihm_game.ViewModels
 			OnPropertyChanged(nameof(Player));
 
 			// Appel fonction data (Gabrielle)
-			//this.core.PlayRound(TypeAction.call); Attente réponse data pour définir le paramètre de type TypeAction
 
+			LightUser lu = this.core.gameToData.whoAmi();
+			Player plyr = this.ToPlayer(lu);
+			GameAction gameAction = new GameAction(new Guid(), this.game.id, plyr, 0, new List<Card>(), TypeAction.call);
+			this.core.PlayRound(gameAction); //Attente réponse data pour définir le paramètre de type TypeAction
 		}
 
 		private void OnRaiseClick()
@@ -407,7 +412,8 @@ namespace Client.ihm_game.ViewModels
 		public List<Player> sortList(List<Player> players)
 		{
 			List<Player> newList = new List<Player>();
-			Player firstPlayer = new Player(100);
+			LightUser lu = this.core.gameToData.whoAmi();
+			Player firstPlayer = this.ToPlayer(lu);
 			int i=0;
 			foreach(Player player in players)
 			{
@@ -429,6 +435,12 @@ namespace Client.ihm_game.ViewModels
 				newList.Add(players[j]);
 			}
 			return newList;
+		}
+
+		public Player ToPlayer(LightUser lu)
+		{
+			Player player = game.players.Find(x => x.id == lu.id);
+			return player;
 		}
 	}
 }

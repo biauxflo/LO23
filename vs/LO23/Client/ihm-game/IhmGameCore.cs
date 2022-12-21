@@ -94,7 +94,7 @@ namespace Client.ihm_game
 		}
 
 		/** TODO : delete when we get actual game from data */
-		internal Game testNewGame()
+		/**internal Game testNewGame()
 		{
 			GameOptions gameOptions = new GameOptions("name", 102, true, true, 5, 4, 1, 10);
 			Guid guid = Guid.NewGuid();
@@ -102,18 +102,19 @@ namespace Client.ihm_game
 			game.pot = 250;
 			return game;
 
-		}
+		}*/
 		/** ------- */
 
 		internal void UpdateGameDisplay(Game game)
 		{
 			this.gameViewModel.Game = game;
-			if(this.WhoAmI() == game.currentPlayerIndex)
+			/*if(this.WhoAmI() == game.currentPlayerIndex)
 			{
 				((GameView)this.gamePage).BT_doubler.IsEnabled = true;
 				((GameView)this.gamePage).BT_egaler.IsEnabled = true;
 				((GameView)this.gamePage).BT_seCoucher.IsEnabled = true;
-			}
+			}*/
+
 			
 
 
@@ -139,10 +140,10 @@ namespace Client.ihm_game
 		}
 		/// </summary>
 		// Call to data to get the id of the current user
-		internal int WhoAmI()
+		internal LightUser WhoAmI()
 		{
 			//TODO : define WhoAmI 
-			return 1;//TODO : replace with : return this.gameToData.WhoAmI();
+			return this.gameToData.whoAmi();//TODO : replace with : return this.gameToData.WhoAmI();
 
 		}
 
