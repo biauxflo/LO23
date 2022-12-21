@@ -58,9 +58,9 @@ namespace Client.ihm_main
 
 		private ProfilCreationViewModel profilCreationViewModel;
 
-		private Page profileCreationPage = new ProfilCreationView();
+		//private Page profileCreationPage = new ProfilCreationView();
 
-		private ProfilCreationViewModel profilCreationViewModel;
+		//private ProfilCreationViewModel profilCreationViewModel;
 
 #endregion
 
@@ -68,7 +68,7 @@ namespace Client.ihm_main
 
 		internal IMainToGame mainToGame;
 
-		internal IDataClientToMain mainToData;
+		internal IMainToDataClient mainToData;
 
 		#endregion
 
@@ -103,14 +103,6 @@ namespace Client.ihm_main
 			mainWindowViewModel.ActivePage = connectionPage;
 		}
 
-
-		/// <summary>
-		/// Renvoie à la page de connexion.
-		/// </summary>
-		internal void Disconnect()
-		{
-			mainWindowViewModel.ActivePage = connectionPage;
-		}
 
 		/// <summary>
 		/// Met la page active sur la page de création de partie.

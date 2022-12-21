@@ -24,7 +24,7 @@ namespace Client.ihm_main.ViewModels
         /// <summary>
 		/// Partie en cours de création.
 		/// </summary>
-		private GameOptions gameInCreation = new GameOptions(String.Empty, 2000, true, true, 100, 4, 0, 10);
+		private GameOptions gameInCreation = new GameOptions(String.Empty, 2000, true, true, 100, 4, 0, 10,10);
 		/// <summary>
 		/// Partie en cours de création.
 		/// </summary>
@@ -84,7 +84,7 @@ namespace Client.ihm_main.ViewModels
 		/// </summary>
 		private void OnCancelClick()
     {
-			GameInCreation = new GameOptions(String.Empty, 2000, true, true, 100, 4, 0, 10);
+			GameInCreation = new GameOptions(String.Empty, 2000, true, true, 100, 4, 0, 10,10);
             core.BackToHomePage();
         }
 
