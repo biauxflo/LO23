@@ -204,7 +204,7 @@ namespace Client.ihm_game.ViewModels
 			//selectedCards = new List<bool> { false, false, false, false, false };
 			//TestCards();
 
-			player.tokens = this.game.gameOptions.StartingTokens;
+			//player.tokens = this.game.gameOptions.StartingTokens;
 
 			// --- Fin Test rcisnero ---
 
@@ -331,8 +331,8 @@ namespace Client.ihm_game.ViewModels
 			//MessageBox.Show("bouton call", "bouton call", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
 			// Test : simulates a 100 tokens call
 			// TODO : get the maximum bet from current game (game.highestBet ?) and put it when user click this button
-			this.player.tokensBet += 100;
-			OnPropertyChanged(nameof(Player));
+			//this.player.tokensBet += 100;
+			//OnPropertyChanged(nameof(Player));
 
 			// Appel fonction data (Gabrielle)
 
