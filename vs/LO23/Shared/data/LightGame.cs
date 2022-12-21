@@ -18,7 +18,7 @@ namespace Shared.data
    public class LightGame
     {
         public Guid id { get; set; }
-        public string status { get; set; }
+        public GameStatus status { get; set; }
         public int indexRound { get; set; }
         public List<Player> players { get; set; }
         public List<LightUser> spectators { get; set; }
@@ -31,7 +31,7 @@ namespace Shared.data
         {
             this.id = id;
 			this.gameOptions = options;
-            this.status = GameStatus.lobby.ToString();
+            this.status = GameStatus.lobby;
             this.indexRound = 0;
             this.players = new List<Player>();
             this.spectators = new List<LightUser>();

@@ -86,7 +86,7 @@ namespace Shared.data
 		
 		}
 
-		public void initializeGame()
+	/*	public void initializeGame()
 		{
 			this.gameStarted = true;
 			foreach(LightUser user in this.lobby)
@@ -108,7 +108,7 @@ namespace Shared.data
 			this.currentPlayerIndex = 0;
 
 		}
-
+	*/
 		public static LightGame ToLightGame(Game game)
 		{
 			return new LightGame(game.id, game.gameOptions);
@@ -123,6 +123,8 @@ namespace Shared.data
 			}
 
 			initRound();
+			status = GameStatus.running;
+
 		}
 
 
@@ -268,7 +270,7 @@ namespace Shared.data
 			 * 
 			 */
 		}
-
+		/*
 		public void handleGameAction(Guid playerId, GameAction action)
 		{
 			Player player = this.players.Find(x =>
@@ -276,10 +278,10 @@ namespace Shared.data
 				return x.id == playerId;
 			});
 			int value = action.value;
-			List<Card> listOfCards = action.cards;
+			List<Card> listOfCards = action.listOfCards;
 			this.chooseAction(player, value, action, listOfCards);
 		}
-
+		*/
 		private void payBigBlind(Player player)
 		{
 			player.tokens -= this.bigBlind;
@@ -704,9 +706,7 @@ namespace Shared.data
 
 					break;
 				case TypeAction.check:
-					this.bet(player, value);
-					// TODO: check means not betting, BUT while still being in the game 
-					// check only possible if nobody has bet during the current Round
+					nbNoRise++; //check means doing nothing, so not rising, so nbNoRise++
 					break;
 				case TypeAction.exchangeCards:
 					this.exchangeCards(action.player, action.listOfCards);
@@ -751,15 +751,9 @@ namespace Shared.data
 			}
 		}
 
-		private void fold(Player player)
+		public void fold(Player player)
 		{
-			// To remove once we have a proper constructor for game, same as for exchangeCards
-			this.deck = new Deck();
-
-			for(int card = 0; card < player.hand.Count; card++)
-			{
-				player.removeAllCards(); // we take back the cards from the player
-			}
+			player.removeAllCards(); // we take back the cards from the player
 
 			nbPlayersStillPlaying--;
 		}

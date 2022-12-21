@@ -46,11 +46,6 @@ namespace Shared.data
 		}
 
         public TypeAction typeAction { get; set; }
-        public int value { get; set; }
-		public List<Card> cards
-		{
-			get; set;
-		}
 
 		public GameAction(Guid id, Guid gameId, Player player, int value,  List<Card> listOfCards, TypeAction typeAction)
 		{
