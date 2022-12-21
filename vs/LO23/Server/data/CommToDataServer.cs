@@ -115,5 +115,37 @@ namespace Server.Data
 
 			return (data_Server_Ctrl.lightUsers, lgames);
 		}
+		public List<LightUser> getListConnectedUsers()
+		{
+			return data_Server_Ctrl.getListConnectedUsers();
+		}
+
+		public List<LightGame> getListGames()
+		{
+			return data_Server_Ctrl.getListLightGames();
+		}
+
+		/*public (Game,List<Guid>) applyPlayTurn(Guid playerId, GameAction action)
+		{
+			Game game = DataServerCore.games.Find(x => x.players.Find((y)=> y.id == playerId) != null);// ask denis it is his pb <3
+			game.handleGameAction(playerId, action);
+			List<Guid> playersId = game.players.ConvertAll(new Converter<Player, Guid>(x => x.id));// ask denis it is his pb <3
+
+			return (game,playersId);
+		}
+*/
+		public (Game, List<Guid>) removePlayerToGame(Guid playerId)
+		{
+			Game game = DataServerCore.games.Find(x => x.players.Find((y) => y.id == playerId) != null);
+			Player player = game.players.Find(x => x.id == playerId);
+			player.tokens = 0;
+			game.fold(player, player.hand);
+			game.players.Remove(player);
+			List<Guid> playersId = game.players.ConvertAll(new Converter<Player, Guid>(x => x.id));
+
+			return (game, playersId);
+
+		}
+
 	}
 }

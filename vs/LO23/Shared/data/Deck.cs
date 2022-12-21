@@ -88,7 +88,7 @@ namespace Shared.data
 			return card;
 
 		}
-		public void giveBackCards(List<Card> listOfCards)
+		public void changeStatusOfCards(List<Card> listOfCards)
 		{	
 			for(int i = 0; i < listOfCards.Count; i++)
 			{

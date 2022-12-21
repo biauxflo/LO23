@@ -15,7 +15,10 @@ namespace Shared.data
 	// TODO : Classes observables ? Methode "ObservableObject" pour réutiliser l'interface INotifyPropertyChanged
 	public class Player : LightUser
     {
-		private Guid id;
+		public Guid id
+		{
+			get; 
+		}
 		private string username;
 		private string image;
 
@@ -137,6 +140,13 @@ namespace Shared.data
 		public bool reveal()// need to precise how we know how to reveal or not the cards
 		{
 			return true;
+		}
+		public void resetPlayerForNextRound()
+		{
+			this.score = 0;
+			this.tokensBet = 0;
+			this.isFolded = false;
+			this.removeAllCards();
 		}
 	}
 }

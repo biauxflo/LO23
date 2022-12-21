@@ -12,6 +12,7 @@ namespace Shared.data
         rise,
         allin,
         fold, 
+		check,
 		exchangeCards
     }
 
@@ -39,24 +40,24 @@ namespace Shared.data
 		{
 			get; set;
 		}
-		public GameAction action
-		{
-			get; set;
-		}
 		public List<Card> listOfCards
 		{
 			get; set;
 		}
 
         public TypeAction typeAction { get; set; }
+        public int value { get; set; }
+		public List<Card> cards
+		{
+			get; set;
+		}
 
-		public GameAction(Guid id, Guid gameId, Player player, int value, GameAction action, List<Card> listOfCards, TypeAction typeAction)
+		public GameAction(Guid id, Guid gameId, Player player, int value,  List<Card> listOfCards, TypeAction typeAction)
 		{
 			this.id = id;
 			this.gameId = gameId;
 			this.player = player;
 			this.value = value;
-			this.action = action;
 			this.listOfCards = listOfCards;
 			this.typeAction = typeAction;
 		}

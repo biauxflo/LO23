@@ -29,9 +29,9 @@ namespace Client.ihm_main
 		/// </summary>
 		private readonly Page connectionPage = new ConnectionView();
 
-		/// <summary>
+        /// <summary>
 		/// View Model de la page de connexion.
-		/// </summary>
+        /// </summary>
 		private readonly ConnectionViewModel connectionViewModel;
 
 		/// <summary>
@@ -58,13 +58,17 @@ namespace Client.ihm_main
 
 		private ProfilCreationViewModel profilCreationViewModel;
 
-		#endregion
+		private Page profileCreationPage = new ProfilCreationView();
+
+		private ProfilCreationViewModel profilCreationViewModel;
+
+#endregion
 
 		#region Interfaces des autres modules
 
 		internal IMainToGame mainToGame;
 
-		internal IMainToDataClient mainToData;
+		internal IDataClientToMain mainToData;
 
 		#endregion
 
@@ -87,6 +91,15 @@ namespace Client.ihm_main
 			profileCreationPage.DataContext = profilCreationViewModel;
 
 			// Page active de la fenetre.
+			mainWindowViewModel.ActivePage = connectionPage;
+		}
+
+
+		/// <summary>
+		/// Renvoie à la page de connexion.
+		/// </summary>
+		internal void Disconnect()
+		{
 			mainWindowViewModel.ActivePage = connectionPage;
 		}
 

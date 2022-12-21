@@ -95,6 +95,7 @@
     <Compile Include="interfaces\ICommToDataClient.cs" />
     <Compile Include="interfaces\ICommToDataServer.cs" />
     <Compile Include="interfaces\IMainToDataClient.cs" />
+    <Compile Include="interfaces\IDataClientToMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

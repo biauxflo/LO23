@@ -20,12 +20,12 @@ namespace Client.data
 
 		public void LeaveGame()
 		{
-			throw new NotImplementedException();
+			data_client_ctrl.request_LeaveGame(gameId, lightUser);
 		}
 
 		public void PlayRound(GameAction action)
 		{
-			throw new NotImplementedException();
+			data_client_ctrl.request_PlayRoundToComm(action);
 		}
 
 		public void SaveGame()
