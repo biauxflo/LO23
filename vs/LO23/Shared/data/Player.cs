@@ -47,21 +47,24 @@ namespace Shared.data
 		/// créer la méthode OnPropertyChanges pour créer un événement.
 		/// Le nom du membre appelant sera utilisé comme paramètre
 		/// </summary>
-		
+
 		/* protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
 			PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
 		}*/
-/*
-		public Player(int tokens)
-        {
-            this.role = PlayerRole.nothing.ToString();
-            this.isFolded = false;
-            this.tokens = tokens;
-            this.tokensBet = 0;
-            this.hand = new List<Card>();
-        }
-*/
+		/*
+				public Player(int tokens)
+				{
+					this.role = PlayerRole.nothing.ToString();
+					this.isFolded = false;
+					this.tokens = tokens;
+					this.tokensBet = 0;
+					this.hand = new List<Card>();
+				}
+		*/
+		public Player() 
+		{
+		}
 		public Player(LightUser lu, int tokens) : base(lu)
 		{
 			this.role = PlayerRole.nothing.ToString();
