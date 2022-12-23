@@ -15,14 +15,7 @@ namespace Shared.data
 	// TODO : Classes observables ? Methode "ObservableObject" pour réutiliser l'interface INotifyPropertyChanged
 	public class Player : LightUser
     {
-		public Guid id
-		{
-			get; 
-		}
-		private string username;
-		private string image;
-
-		public event PropertyChangedEventHandler PropertyChanged;
+		//public event PropertyChangedEventHandler PropertyChanged;
 
 		public string role { get; set; }
         public bool isFolded { get; set; }
@@ -35,24 +28,30 @@ namespace Shared.data
 			get; set;
 		}
 		
-		private List<string> cardImage;
+		public List<string> cardImage
+		{
+			get; set; 
+		}
+
 		public List<string> Card
 		{
 			get => cardImage;
 			set
 			{
 				cardImage = value;
-				OnPropertyChanged(nameof(Card));
+				//OnPropertyChanged(nameof(Card));
 			}
 		}
+
 		/// <summary>
 		/// créer la méthode OnPropertyChanges pour créer un événement.
 		/// Le nom du membre appelant sera utilisé comme paramètre
 		/// </summary>
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		
+		/* protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
+			PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
+		}*/
 /*
 		public Player(int tokens)
         {

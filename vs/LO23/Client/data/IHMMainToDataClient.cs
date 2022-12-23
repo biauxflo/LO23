@@ -40,7 +40,7 @@ public class IHMMainToDataClient : Shared.interfaces.IMainToDataClient
 		{
 			this.data_client_ctrl.ask_announceUser(User.ToLightUser(user));
 			this.data_client_ctrl.CurrentUser = user;
-			this.data_client_ctrl.SendConnectionSucceedToMain(user);
+			this.data_client_ctrl.SendConnectionSucceedToMain(User.ToLightUser(user));
 		}
 		else
 		{
