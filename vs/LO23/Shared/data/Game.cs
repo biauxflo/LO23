@@ -120,6 +120,7 @@ namespace Shared.data
 			foreach(LightUser lu in lobby) //Creation of players - tokens distribution
 			{
 				players.Add(new Player(lu, gameOptions.StartingTokens));
+				this.nbPlayers += 1;
 			}
 
 			initRound();

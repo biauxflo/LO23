@@ -141,6 +141,10 @@ namespace Server.Data
 			player.tokens = 0;
 			game.fold(player);
 			game.players.Remove(player);
+			if(game.nbPlayers >= 1)
+			{
+				game.nbPlayers -= 1;
+			}
 			List<Guid> playersId = game.players.ConvertAll(new Converter<Player, Guid>(x => x.id));
 
 			return (game, playersId);
