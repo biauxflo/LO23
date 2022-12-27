@@ -121,6 +121,7 @@ namespace Shared.data
 			{
 				players.Add(new Player(lu, gameOptions.StartingTokens));
 				this.nbPlayers += 1;
+				this.nbPlayersStillPlaying += 1;
 			}
 
 			initRound();
