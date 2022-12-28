@@ -28,11 +28,12 @@ namespace Shared.data
 			get; set;
 		}
 		
-		public List<string> cardImage
+		public List<string> Card
 		{
 			get; set; 
 		}
 
+		/*
 		public List<string> Card
 		{
 			get => cardImage;
@@ -41,17 +42,17 @@ namespace Shared.data
 				cardImage = value;
 				//OnPropertyChanged(nameof(Card));
 			}
-		}
+		}*/
 
 		/// <summary>
 		/// créer la méthode OnPropertyChanges pour créer un événement.
 		/// Le nom du membre appelant sera utilisé comme paramètre
 		/// </summary>
-
-		/* protected void OnPropertyChanged([CallerMemberName] string name = null)
+		/*
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
 			PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
-		}*/
+		}
 		/*
 				public Player(int tokens)
 				{
@@ -71,7 +72,7 @@ namespace Shared.data
 			this.isFolded = false;
 			this.tokensBet = 0;
 			this.hand = new List<Card>();
-
+			this.Card = new List<string>();
 			this.tokens = tokens;
 		}
 

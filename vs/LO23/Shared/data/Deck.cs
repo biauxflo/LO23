@@ -27,11 +27,11 @@ namespace Shared.data
 		{
 			//TODO
 			//Implemente
-			Card c1 = new Card(0, 'C', 5, true, false);
-			Card c2 = new Card(1, 'P', 4, true, false);
-			Card c3 = new Card(2, 'C', 2, true, false);
-			Card c4 = new Card(3, 'C', 7, true, false);
-			Card c5 = new Card(4, 'C', 10, true, false);
+			Card c1 = new Card(0, 'c', 5, true, false);
+			Card c2 = new Card(1, 's', 4, true, false);
+			Card c3 = new Card(2, 'c', 2, true, false);
+			Card c4 = new Card(3, 'c', 7, true, false);
+			Card c5 = new Card(4, 'c', 10, true, false);
 
 
 			this.cards.Add(c1);
@@ -43,7 +43,7 @@ namespace Shared.data
 
 			for(int i = 6; i <= 10; i++)
 			{
-				Card c6 = new Card(i, 'C', 10, true, false);
+				Card c6 = new Card(i, 'c', 10, true, false);
 
 				this.cards.Add(c6);
 		
@@ -51,7 +51,7 @@ namespace Shared.data
 
 			for(int i = 10; i <= 20; i++)
 			{
-				Card c7 = new Card(i, 'P', 10, false, false);
+				Card c7 = new Card(i, 's', 10, false, false);
 
 				this.cards.Add(c7);
 

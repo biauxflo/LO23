@@ -58,9 +58,11 @@ namespace Client.ihm_game.Views.Pages
 
 		private void OnRaiseClick(object sender, RoutedEventArgs e)
 		{
+			/* TODO : delete when test is finished
 			this.BT_egaler.IsEnabled = false;
 			this.BT_doubler.IsEnabled = false;
 			this.BT_seCoucher.IsEnabled = false;
+			*/
 		}
 
 	}

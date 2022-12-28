@@ -69,10 +69,9 @@ namespace Client.ihm_game.ViewModels
 			set
 			{
 				game = value;
-				OnPropertyChanged();
+				OnPropertyChanged(nameof(Game));
 			}
 		}
-
 		private Player player;
 		public Player Player
 		{
@@ -83,22 +82,10 @@ namespace Client.ihm_game.ViewModels
 				OnPropertyChanged(nameof(Player));
 			}
 		}
-
-		private List<Player> playerList;
-		public List<Player> PlayerList
-		{
-			get => playerList;
-			set
-			{
-				playerList = value;
-				OnPropertyChanged(nameof(PlayerList));
-			}
-		}
-
+
 		private LightUser lightUser;
 		private readonly IhmGameCore core;
 		public event PropertyChangedEventHandler PropertyChanged;
-
 		/** Draw phase : we store the selected cards to change */
 		private List<bool> selectedCards;
 		
@@ -193,15 +180,12 @@ namespace Client.ihm_game.ViewModels
 			CardCommand4 = new RelayCommand(OnCardClick4);
 			CardCommand5 = new RelayCommand(OnCardClick5);
 
-			this.lightUser = this.core.gameToData.whoAmi();
-
-			/** TODO : delete when the player list is ok */
-			this.player = this.ToPlayer(this.lightUser, this.game.gameOptions.StartingTokens);
-			//this.game.players.Add(this.player);
-			selectedCards = new List<bool> { false, false, false, false, false };
-			//TestCards();
-			//player.tokens = this.game.gameOptions.StartingTokens;
-
+            selectedCards = new List<bool> { false, false, false, false, false };
+            lightUser = this.core.gameToData.whoAmi();            player = ToPlayer(lightUser);
+            // bug : nothing to show. Why ? player list null when there is 1 player (ok with 2 players)
+
+            /** test rcisnero */		
+			ShowHand();
 			/* ******* */
 
 			// TODO : delete (1 line) when get actual nbPlayers from data
@@ -296,36 +280,37 @@ namespace Client.ihm_game.ViewModels
 
 		private void OnFoldClick()
 		{
-			/** --- Test rcisnero ---
-			 * Change selected cards
-			for(int i = 0; i < 5; i++)
-			{
-				if(selectedCards[i])
-				{
-					player.Card[i] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
-				}
-			}
-			*/
-
 			// Appel fonction data (Gabrielle)
 			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
-
 		}
 
 		private void OnCallClick()
-		{
+		{
 			// Apply to all buttons when is ok (fold, raise, ...)
 			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.call);
 			this.core.PlayRound(gameAction); //Attente réponse data pour définir le paramètre de type TypeAction
 		}
 
 		private void OnRaiseClick()
-		{
-			//MessageBox.Show(this.game.players.Count.ToString(), "Profil non créé", MessageBoxButton.OK);
-			// Appel fonction data (Gabrielle)
-			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
-		}
-		public void Display()
+		{
+            //MessageBox.Show(this.game.players.Count.ToString(), "Profil non créé", MessageBoxButton.OK);
+            /** --- Test rcisnero ---
+            * Change selected cards */
+            for(int i = 0; i < 5; i++)
+            {
+                if(selectedCards[i])
+                {
+                    player.Card[i] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
+                }
+            }
+            OnPropertyChanged(nameof(Player));
+
+            // Appel fonction data (Gabrielle)
+
+            //this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
+
+        }
+        public void Display()
 		{
 			//Fonctions à remplacer par les fonctions qui seront implémenter dans IHMGameCallsData
 		}
@@ -368,15 +353,18 @@ namespace Client.ihm_game.ViewModels
 				selectedCards[4] = false;
 		}
 
-		/** TODO : delete (TestCards fonction) when we get actual game from data */
-		public void TestCards()
+		/** This function converts player's hand into string path for his card images */
+		public void ShowHand()
 		{
-			this.player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card1.value + "_" + this.card1.color + ".png");
-			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card2.value + "_" + this.card2.color + ".png");
-			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card1.value + "_" + this.card1.color + ".png");
-			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card2.value + "_" + this.card2.color + ".png");
-			player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + this.card1.value + "_" + this.card1.color + ".png");
-			OnPropertyChanged(nameof(Player));
+            // TODO : delete if when players list works
+            if(game.nbPlayers != 0)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + player.hand[i].value + "_" + player.hand[i].color + ".png");
+                }     
+                OnPropertyChanged(nameof(Player));
+            }
 		}
 		// --- Fin Test rcisnero ---
 
@@ -389,7 +377,7 @@ namespace Client.ihm_game.ViewModels
 		{
 			List<Player> newList = new List<Player>();
 			LightUser lu = this.core.gameToData.whoAmi();
-			Player firstPlayer = this.ToPlayer(lu, 100);
+			Player firstPlayer = this.ToPlayer(lu/*, 100*/);
 			int i=0;
 			foreach(Player player in players)
 			{
@@ -411,12 +399,6 @@ namespace Client.ihm_game.ViewModels
 				newList.Add(players[j]);
 			}
 			return newList;
-		}
-
-		/** TODO : delete when the player list is ok */
-		public Player ToPlayer(LightUser lu, int tokens)
-		{
-			return new Player(lu, tokens);
 		}
 
 		public Player ToPlayer(LightUser lu)
