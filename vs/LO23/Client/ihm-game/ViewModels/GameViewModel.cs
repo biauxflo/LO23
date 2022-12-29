@@ -444,6 +444,7 @@ namespace Client.ihm_game.ViewModels
 			return player;
 		}
 
+		/** Transform a List of Cards to their path image */
 		public List<string> CardPath(List<Card> cards)
         {
 			List<string> tmpList = new List<string>();
