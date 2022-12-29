@@ -28,10 +28,11 @@ namespace Shared.data
 			get; set;
 		}
 		
+		/*
 		public List<string> Card
 		{
 			get; set; 
-		}
+		}*/
 
 		/*
 		public List<string> Card
@@ -72,7 +73,7 @@ namespace Shared.data
 			this.isFolded = false;
 			this.tokensBet = 0;
 			this.hand = new List<Card>();
-			this.Card = new List<string>();
+			//this.Card = new List<string>();
 			this.tokens = tokens;
 		}
 
@@ -100,16 +101,19 @@ namespace Shared.data
 				if(this.CompareCard(this.hand[i], card) == true)
 				{
 					flag = true;
+					remove = i;
 				}
 				
 			}
 
-			if(remove == 6)
+			if(remove >= 6)
 			{
 				Console.WriteLine("pas bien la vérification dans player pour la carte");
 			}
-			this.hand.RemoveAt(remove);
-
+            if(flag)
+            {
+				this.hand.RemoveAt(remove);
+			}
 		}
 
 

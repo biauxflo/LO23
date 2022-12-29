@@ -26,26 +26,18 @@ namespace Client.ihm_game.Views.Pages
             InitializeComponent();
         }
 
-		private void OnCallClick()
-		{
-			MessageBox.Show("bouton call", "bouton call", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
-
-			//BT_egaler.Visibility = Visibility.Hidden;
-			//BT_doubler.Visibility = Visibility.Hidden;
-			//BT_seCoucher.Visibility = Visibility.Hidden;
-
-			//BT_egaler.Visibility = false;
-
-		}
 		private void OnCallClick(object sender, RoutedEventArgs e)
 		{
+			/* TODO : delete when test is finished
 			this.BT_egaler.IsEnabled = false;
 			this.BT_doubler.IsEnabled = false;
 			this.BT_seCoucher.IsEnabled = false;
+			*/
 		}
 
 		private void OnFoldClick(object sender, RoutedEventArgs e)
 		{
+			/* TODO : delete when test is finished
 			this.BT_egaler.IsEnabled = false;
 			this.BT_doubler.IsEnabled = false;
 			this.BT_seCoucher.IsEnabled = false;
@@ -54,6 +46,7 @@ namespace Client.ihm_game.Views.Pages
 			this.Card3.Visibility = Visibility.Hidden;
 			this.Card4.Visibility = Visibility.Hidden;
 			this.Card5.Visibility = Visibility.Hidden;
+			*/
 		}
 
 		private void OnRaiseClick(object sender, RoutedEventArgs e)

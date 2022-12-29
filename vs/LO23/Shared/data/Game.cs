@@ -302,7 +302,7 @@ namespace Shared.data
 			int nb = listOfCards.Count;
 
 			// To remove once we have a proper constructor for game
-			this.deck = new Deck();
+			// this.deck = new Deck();
 
 			List<Card> listOfNewCards = new List<Card>();
 			for(int i = 0; i < nb; i++)

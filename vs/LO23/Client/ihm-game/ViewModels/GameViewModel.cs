@@ -72,6 +72,7 @@ namespace Client.ihm_game.ViewModels
 				OnPropertyChanged(nameof(Game));
 			}
 		}
+		// TODO : changer vers List<Player> et utiliser la methode d'Eliot (sortList)
 		private Player player;
 		public Player Player
 		{
@@ -83,7 +84,27 @@ namespace Client.ihm_game.ViewModels
 			}
 		}
 
+		private List<string> cardList;
+		public List<string> CardList
+		{
+			get => cardList;
+			set
+			{
+				cardList = value;
+				OnPropertyChanged(nameof(CardList));
+			}
+		}
+
 		private LightUser lightUser;
+		public LightUser LightUser
+        {
+			get => lightUser;
+            set
+            {
+				lightUser = value;
+				OnPropertyChanged(nameof(LightUser));
+            }
+        }
 		private readonly IhmGameCore core;
 		public event PropertyChangedEventHandler PropertyChanged;
 		/** Draw phase : we store the selected cards to change */
@@ -165,10 +186,20 @@ namespace Client.ihm_game.ViewModels
 				OnPropertyChanged();
 			}
 		}
+
+		private GameStatus gameStatus;
 		public GameViewModel(IhmGameCore core, Game game) 
 		{
 			this.core = core;
 			this.game = game;
+
+			/** 4 status, donc on va reagir d'une façon differente à chaque status :
+			 * lobby; pas demarré, player list vide,
+			 * running, à partir de 2 joueurs, le jeu commence et on affiche les cartes,
+			 * paused, ---
+			 * finished, ---
+			*/
+			this.gameStatus = game.status;
 			
 			ParamCommand = new RelayCommand(OnParamClick);
 			FoldCommand = new RelayCommand(OnFoldClick);
@@ -181,19 +212,20 @@ namespace Client.ihm_game.ViewModels
 			CardCommand5 = new RelayCommand(OnCardClick5);
 
             selectedCards = new List<bool> { false, false, false, false, false };
-            lightUser = this.core.gameToData.whoAmi();            player = ToPlayer(lightUser);
-            // bug : nothing to show. Why ? player list null when there is 1 player (ok with 2 players)
+            lightUser = this.core.gameToData.whoAmi();
+			OnPropertyChanged(nameof(LightUser));
 
-            /** test rcisnero */		
-			ShowHand();
-			/* ******* */
-
-			// TODO : delete (1 line) when get actual nbPlayers from data
-			//this.game.nbPlayers = 2;
-			//this.game.nbPlayers = 
-			// Hidde or show player info depending on the number of players in Game
-			// By default only the self player is shown
-			switch(this.game.nbPlayers)
+			if(gameStatus == GameStatus.running)
+            {
+				player = ToPlayer(lightUser);
+				cardList = CardPath(player.hand);
+				// -> A voir si on ajoute ListPlayer
+				OnPropertyChanged(nameof(CardList));
+			}
+
+			// Hidde or show player info depending on the number of players in Game
+			// By default only the self player is shown
+			switch (this.game.nbPlayers)
 			{
 				case 2:
 					visibilityPlayer2 = "Hidden";
@@ -288,28 +320,33 @@ namespace Client.ihm_game.ViewModels
 		{
 			// Apply to all buttons when is ok (fold, raise, ...)
 			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.call);
-			this.core.PlayRound(gameAction); //Attente réponse data pour définir le paramètre de type TypeAction
+			this.core.PlayRound(gameAction); 
 		}
 
 		private void OnRaiseClick()
 		{
-            //MessageBox.Show(this.game.players.Count.ToString(), "Profil non créé", MessageBoxButton.OK);
-            /** --- Test rcisnero ---
+			//MessageBox.Show(this.game.players.Count.ToString(), "Profil non créé", MessageBoxButton.OK);
+			/** --- Test rcisnero ---
             * Change selected cards */
+			List<Card> exchangeCards = new List<Card>();
+			
             for(int i = 0; i < 5; i++)
             {
                 if(selectedCards[i])
                 {
-                    player.Card[i] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
+					exchangeCards.Add(player.hand[i]);
+					//player.Card[i] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
                 }
             }
-            OnPropertyChanged(nameof(Player));
 
-            // Appel fonction data (Gabrielle)
+            
 
-            //this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
-
-        }
+			// Appel fonction data (Gabrielle)
+			// GameAction - value : bet tokens
+			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, exchangeCards, TypeAction.exchangeCards);
+			this.core.PlayRound(gameAction);
+			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
+		}
         public void Display()
 		{
 			//Fonctions à remplacer par les fonctions qui seront implémenter dans IHMGameCallsData
@@ -361,9 +398,9 @@ namespace Client.ihm_game.ViewModels
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + player.hand[i].value + "_" + player.hand[i].color + ".png");
+                    //player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + player.hand[i].value + "_" + player.hand[i].color + ".png");
                 }     
-                OnPropertyChanged(nameof(Player));
+                //OnPropertyChanged(nameof(Player));
             }
 		}
 		// --- Fin Test rcisnero ---
@@ -406,5 +443,16 @@ namespace Client.ihm_game.ViewModels
 			Player player = game.players.Find(x => x.id == lu.id);
 			return player;
 		}
+
+		public List<string> CardPath(List<Card> cards)
+        {
+			List<string> tmpList = new List<string>();
+			for(int i = 0; i < 5; i++)
+            {
+				tmpList.Add("/Client;component/ihm-game/Views/images/cards/" + cards[i].value + "_" + cards[i].color + ".png");
+            }
+			OnPropertyChanged(nameof(cardList));
+			return tmpList;
+        }
 	}
 }

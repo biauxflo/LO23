@@ -112,29 +112,32 @@
         <!-- Pour relier le contenu du texte au code, mettre le champs Text="{Binding <Game.callValue>}"   puis dans le code relier avec un setter-->
 
         <!-- Self player -->
+        <!-- Cartes -->
         <Canvas Grid.Column="5" Grid.Row="5">
             <ToggleButton Name="Card1" Style="{StaticResource Card}" Command="{Binding CardCommand1}" Canvas.Left="20" Canvas.Top="5">
-                <Image Source="{Binding Player.Card[0]}" Width="60"/>
+                <Image Source="{Binding CardList[0]}" Width="60"/>
             </ToggleButton>
             <ToggleButton Name="Card2" Style="{StaticResource Card}" Command="{Binding CardCommand2}" Canvas.Left="40" Canvas.Top="5">
-                <Image Source="{Binding Player.Card[1]}" Width="60"/>
+                <Image Source="{Binding CardList[1]}" Width="60"/>
             </ToggleButton>
             <ToggleButton Name="Card3" Style="{StaticResource Card}" Command="{Binding CardCommand3}" Canvas.Left="60" Canvas.Top="5">
-                <Image Source="{Binding Player.Card[2]}" Width="60"/>
+                <Image Source="{Binding CardList[2]}" Width="60"/>
             </ToggleButton>
             <ToggleButton Name="Card4" Style="{StaticResource Card}" Command="{Binding CardCommand4}" Canvas.Left="80" Canvas.Top="5">
-                <Image Source="{Binding Player.Card[3]}" Width="60"/>
+                <Image Source="{Binding CardList[3]}" Width="60"/>
             </ToggleButton>
             <ToggleButton Name="Card5" Style="{StaticResource Card}" Command="{Binding CardCommand5}" Canvas.Left="100" Canvas.Top="5">
-                <Image Source="{Binding Player.Card[4]}" Width="60"/>
+                <Image Source="{Binding CardList[4]}" Width="60"/>
             </ToggleButton>
         </Canvas>
 
+        <!-- User Info -->
         <TextBlock Text="{Binding Player.tokensBet}" Name="TBlock_bet2" Grid.Column="5" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Mise : " Name="TBlock_bet2_info" Grid.Column="5" Grid.Row="4" FontSize="14" VerticalAlignment="Center"/>
         <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="5" Grid.Row="4" Height="30" Margin="2.667,37,56.333,2"/>
-        <TextBlock Text="{Binding Player.username}" Name="TBlock_user2" Grid.Column="4" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="{Binding LightUser.username}" Name="TBlock_user2" Grid.Column="4" Grid.Row="5" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Text="{Binding Player.tokens}" Name="TBlock_balance2" Grid.Column="4" Grid.Row="6" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        
+
         <!-- User 2 -->
         <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="1" Grid.Row="6" Name="TB_raise" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer2}"/>
         <TextBlock Text="User 2" Name="TBlock_user1" Grid.Column="1" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer2}"/>
