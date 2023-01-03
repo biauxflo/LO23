@@ -10,6 +10,7 @@ using Shared.data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Security.RightsManagement;
 
 namespace Client.ihm_game.ViewModels
 {
@@ -33,6 +34,10 @@ namespace Client.ihm_game.ViewModels
 		}
 
 		public ICommand RaiseCommand
+		{
+			get; set;
+		}
+		public ICommand DefausserCommand
 		{
 			get; set;
 		}
@@ -205,6 +210,7 @@ namespace Client.ihm_game.ViewModels
 			FoldCommand = new RelayCommand(OnFoldClick);
 			CallCommand = new RelayCommand(OnCallClick);
 			RaiseCommand = new RelayCommand(OnRaiseClick);
+            DefausserCommand = new RelayCommand(OnDefausserClick);
 			CardCommand1 = new RelayCommand(OnCardClick1);
 			CardCommand2 = new RelayCommand(OnCardClick2);
 			CardCommand3 = new RelayCommand(OnCardClick3);
@@ -215,6 +221,8 @@ namespace Client.ihm_game.ViewModels
             lightUser = this.core.gameToData.whoAmi();
 			OnPropertyChanged(nameof(LightUser));
 
+			/* When gameStatus is "running", the player list is not null.
+			 * So, we convert a lightUser to plater and we show his cards. */
 			if(gameStatus == GameStatus.running)
             {
 				player = ToPlayer(lightUser);
@@ -318,38 +326,61 @@ namespace Client.ihm_game.ViewModels
 
 		private void OnCallClick()
 		{
-			// Apply to all buttons when is ok (fold, raise, ...)
+			// TODO : get the correct bet tokens to call
 			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.call);
 			this.core.PlayRound(gameAction); 
 		}
 
 		private void OnRaiseClick()
 		{
-			//MessageBox.Show(this.game.players.Count.ToString(), "Profil non créé", MessageBoxButton.OK);
-			/** --- Test rcisnero ---
-            * Change selected cards */
-			List<Card> exchangeCards = new List<Card>();
-			
-            for(int i = 0; i < 5; i++)
-            {
-                if(selectedCards[i])
-                {
-					exchangeCards.Add(player.hand[i]);
-					//player.Card[i] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
-                }
-            }
+			// TODO : get the correct bet tokens and double it to raise
 
-            
-
-			// Appel fonction data (Gabrielle)
-			// GameAction - value : bet tokens
-			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, exchangeCards, TypeAction.exchangeCards);
-			this.core.PlayRound(gameAction);
-			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
 		}
-        public void Display()
+		public void Display()
 		{
 			//Fonctions à remplacer par les fonctions qui seront implémenter dans IHMGameCallsData
+		}
+
+		private void OnDefausserClick()
+		{
+			//Récupération du tableau d'indices des cartes sélectionnées
+			/*
+			for(int i = 0; i < 5; i++)
+			{
+				int j = 0;
+				int[] tab = {};
+				if (selectedCards[i] == true) {
+					tab[j] = player.hand[i].index;
+					j++;
+				}
+			}
+			*/
+
+			/** --- Test rcisnero ---
+            * Change selected cards  */
+			List<Card> exchangeCards = new List<Card>();
+
+			for(int i = 0; i < 5; i++)
+			{
+				if(selectedCards[i])
+				{
+					exchangeCards.Add(player.hand[i]);
+					//player.Card[i] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
+				}
+			}
+
+			// Appel fonction data (Gabrielle)
+			// GameAction, value = bet tokens
+			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, exchangeCards, TypeAction.exchangeCards);
+			this.core.PlayRound(gameAction);
+		}
+
+		private void OnGarderMainClick()
+		{
+			MessageBox.Show("bouton garder main", "bouton garder main", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+
+			// Appel fonction data (Gabrielle)
+			//this.core.PlayRound(TypeAction.garder_main); Attente réponse data pour définir le paramètre de type TypeAction
 		}
 
 		// --- Test rcisnero ---
@@ -389,21 +420,6 @@ namespace Client.ihm_game.ViewModels
 			else
 				selectedCards[4] = false;
 		}
-
-		/** This function converts player's hand into string path for his card images */
-		public void ShowHand()
-		{
-            // TODO : delete if when players list works
-            if(game.nbPlayers != 0)
-            {
-                for (int i = 0; i < 5; i++)
-                {
-                    //player.Card.Add("/Client;component/ihm-game/Views/images/cards/" + player.hand[i].value + "_" + player.hand[i].color + ".png");
-                }     
-                //OnPropertyChanged(nameof(Player));
-            }
-		}
-		// --- Fin Test rcisnero ---
 
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{

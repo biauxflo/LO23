@@ -108,14 +108,35 @@ namespace Client.ihm_game
 		internal void UpdateGameDisplay(Game game)
 		{
 			this.gameViewModel.Game = game;
-			/*if(this.WhoAmI() == game.currentPlayerIndex)
-			{
-				((GameView)this.gamePage).BT_doubler.IsEnabled = true;
-				((GameView)this.gamePage).BT_egaler.IsEnabled = true;
-				((GameView)this.gamePage).BT_seCoucher.IsEnabled = true;
-			}*/
 
-			
+			//if(game.currentPhase.type == TypePhase.bet1 || game.currentPhase.type == TypePhase.bet2)
+			//{
+			//	if(this.WhoAmI() == game.currentPlayerIndex)
+			//	{
+			//		((GameView)this.gamePage).BT_doubler.IsEnabled = true;
+			//		((GameView)this.gamePage).BT_egaler.IsEnabled = true;
+			//		((GameView)this.gamePage).BT_seCoucher.IsEnabled = true;
+				
+			//		((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Hidden;
+			//	}
+			//}
+
+			//else
+			//{
+			//	if(game.currentPhase.type == TypePhase.draw)// = échanger ?
+			//	{
+
+			//	}
+
+			//	else
+			//	{
+			//		if (game.currentPhase.type == TypePhase.reveal)
+			//		{
+
+			//		}
+			//	}
+
+			//}
 
 
 			/**  Test :

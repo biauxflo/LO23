@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GameView">
-    
+
     <Page.Resources>
         <Style x:Key="Card" TargetType="{x:Type ToggleButton}">
             <Setter Property="Template">
@@ -108,7 +108,14 @@
         <Button Name="BT_doubler"  Grid.Column="7" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=RaiseCommand}" Click="OnRaiseClick" ClickMode="Press">
             <Image Source="/Client;component/ihm-game/Views/images/doubler.png"/>
         </Button>
-        
+
+        <Button Name="BT_defausser"  Grid.Column="6" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=DefausserCommand}" Click="OnDefausserClick" ClickMode="Press">
+            <Image Source="/Client;component/ihm-game/Views/images/defausser.png"/>
+        </Button>
+        <Button Name="BT_garderMain"  Grid.Column="8" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=GarderMainCommand}" Click="OnGarderMainClick" ClickMode="Press">
+            <Image Source="/Client;component/ihm-game/Views/images/garder_main.png"/>
+        </Button>
+
         <!-- Pour relier le contenu du texte au code, mettre le champs Text="{Binding <Game.callValue>}"   puis dans le code relier avec un setter-->
 
         <!-- Self player -->
@@ -144,14 +151,14 @@
         <TextBlock Text="Mise 2" Name="TBlock_bet1" Grid.Column="3" Grid.Row="5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer2}"/>
         <TextBlock Name="TBlock_balance1" Grid.Column="1" Grid.Row="6" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer2}"/>
         <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="3" Grid.Row="5" Height="30"  Margin="2.667,37,56.333,2" Visibility="{Binding Path=VisibilityPlayer2}"/>
-        
+
         <!-- User 3 -->
         <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="1" Grid.Row="4" Name="TB_raise3" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer3}"/>
         <TextBlock Text="User 3" Name="TBlock_user3" Grid.Column="1" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer3}"/>
         <TextBlock Text="Mise 3" Name="TBlock_bet3" Grid.Column="3" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer3}"/>
         <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="3" Grid.Row="3" Height="30" Margin="2.667,37,56.333,2" Visibility="{Binding Path=VisibilityPlayer3}"/>
         <TextBlock Name="TBlock_balance3" Grid.Column="1" Grid.Row="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer3}"/>
-        
+
         <!-- User 4 -->
         <TextBlock Text="{Binding Path=Game.gameOptions.StartingTokens}" Grid.Column="1" Grid.Row="2" Name="TB_raise4" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer4}"/>
         <TextBlock Text="Mise 4" Name="TBlock_bet4" Grid.Column="3" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer4}"/>
@@ -189,5 +196,6 @@
         <!-- Pot -->
         <TextBlock Text="{Binding Game.pot}" Name="TBlock_pot" Grid.Column="5" Grid.Row="3" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Image Source="/Client;component/ihm-game/Views/images/pot.png" Grid.Column="5" Grid.Row="3" Margin="8.667,0,19.333,10"/>
+     
     </Grid>
 </Page>
