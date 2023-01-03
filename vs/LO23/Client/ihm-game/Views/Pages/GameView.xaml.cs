@@ -58,5 +58,18 @@ namespace Client.ihm_game.Views.Pages
 			*/
 		}
 
+		private void OnDefausserClick(object sender, RoutedEventArgs e)
+		{
+			this.BT_defausser.IsEnabled = false;
+			this.BT_garderMain.IsEnabled = false;
+		}
+
+		private void OnGarderMainClick(object sender, RoutedEventArgs e)
+		{
+			this.BT_defausser.IsEnabled = false;
+			this.BT_garderMain.IsEnabled = false;
+		}
+
+
 	}
 }
