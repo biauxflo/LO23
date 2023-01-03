@@ -91,6 +91,18 @@ namespace Client.ihm_game.ViewModels
 			}
 		}
 
+		private List<Player> playerList;
+		public List<Player> PlayerList
+		{
+			get => playerList;
+			set
+			{
+				playerList = value;
+				OnPropertyChanged(nameof(PlayerList));
+			}
+		}
+
+
 		private List<string> cardList;
 		public List<string> CardList
 		{
@@ -232,8 +244,14 @@ namespace Client.ihm_game.ViewModels
             {
 				player = ToPlayer(lightUser);
 				cardList = CardPath(player.hand);
+
 				// -> A voir si on ajoute ListPlayer
+				// Fonction sort Eliot
+				playerList = sortList(game.players);
+
 				OnPropertyChanged(nameof(CardList));
+				OnPropertyChanged(nameof(PlayerList));
+				OnPropertyChanged(nameof(Player));
 			}
 
 			// Hidde or show player info depending on the number of players in Game
@@ -439,17 +457,15 @@ namespace Client.ihm_game.ViewModels
 		{
 			List<Player> newList = new List<Player>();
 			LightUser lu = this.core.gameToData.whoAmi();
-			Player firstPlayer = this.ToPlayer(lu/*, 100*/);
+			Player firstPlayer = this.ToPlayer(lu);
 			int i=0;
 			foreach(Player player in players)
-			{
-				Console.WriteLine(player);
-				i++;
+			{				
 				if(player == firstPlayer)
 				{
 					break;
 				}
-				
+				i++;
 			}
 			for(int j = i; j < players.Count; j++)
 			{
