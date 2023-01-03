@@ -23,7 +23,7 @@ namespace Server
 			/*********** End code needed for V1 - to delete later****************/
 
 
-			commServer.Run("127.0.0.1", 10000);
+			commServer.Run(Config.GetServerIp(), Config.GetServerPort());
             _ = Console.ReadLine(); // wait until press Return to close console
         }	
     }
