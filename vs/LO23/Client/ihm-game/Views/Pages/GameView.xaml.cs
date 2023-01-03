@@ -23,8 +23,10 @@ namespace Client.ihm_game.Views.Pages
     {
         public GameView()
         {
-            InitializeComponent();
-        }
+			InitializeComponent();
+			this.BT_defausser.Visibility = Visibility.Hidden;
+			this.BT_garderMain.Visibility = Visibility.Hidden;
+		}
 
 		private void OnCallClick(object sender, RoutedEventArgs e)
 		{
