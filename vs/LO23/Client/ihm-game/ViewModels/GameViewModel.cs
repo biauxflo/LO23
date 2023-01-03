@@ -322,6 +322,8 @@ namespace Client.ihm_game.ViewModels
 		{
 			// Appel fonction data (Gabrielle)
 			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
+			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.fold);
+			this.core.PlayRound(gameAction);
 		}
 
 		private void OnCallClick()
@@ -334,7 +336,8 @@ namespace Client.ihm_game.ViewModels
 		private void OnRaiseClick()
 		{
 			// TODO : get the correct bet tokens and double it to raise
-
+			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.rise);
+			this.core.PlayRound(gameAction);
 		}
 		public void Display()
 		{
@@ -377,8 +380,9 @@ namespace Client.ihm_game.ViewModels
 
 		private void OnGarderMainClick()
 		{
-			MessageBox.Show("bouton garder main", "bouton garder main", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
-
+			//MessageBox.Show("bouton garder main", "bouton garder main", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.exchangeCards);
+			this.core.PlayRound(gameAction);
 			// Appel fonction data (Gabrielle)
 			//this.core.PlayRound(TypeAction.garder_main); Attente réponse data pour définir le paramètre de type TypeAction
 		}
