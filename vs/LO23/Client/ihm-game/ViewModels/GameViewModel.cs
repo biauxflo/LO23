@@ -334,7 +334,9 @@ namespace Client.ihm_game.ViewModels
 					visibilityPlayer8 = "Hidden";
 					break;
 			}
+
 			
+
 			//Display();	
 		}
 
@@ -362,7 +364,7 @@ namespace Client.ihm_game.ViewModels
 		private void OnRaiseClick()
 		{
 			// TODO : get the correct bet tokens and double it to raise
-			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.rise);
+			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 50, new List<Card>(), TypeAction.rise);
 			this.core.PlayRound(gameAction);
 		}
 		public void Display()

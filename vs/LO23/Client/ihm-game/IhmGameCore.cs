@@ -140,6 +140,12 @@ namespace Client.ihm_game
 					((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Hidden;
 					((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Hidden;
 				}
+				else
+				{
+					((GameView)this.gamePage).BT_doubler.IsEnabled = false;
+					((GameView)this.gamePage).BT_egaler.IsEnabled = false;
+					((GameView)this.gamePage).BT_seCoucher.IsEnabled = false;
+				}
 			}
 
 			else
@@ -152,6 +158,17 @@ namespace Client.ihm_game
 					((GameView)this.gamePage).BT_doubler.Visibility = Visibility.Hidden;
 					((GameView)this.gamePage).BT_egaler.Visibility = Visibility.Hidden;
 					((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Hidden;
+
+					if(this.WhoAmI().id == game.players[game.currentPlayerIndex].id)
+					{
+						((GameView)this.gamePage).BT_defausser.IsEnabled = true;
+						((GameView)this.gamePage).BT_garderMain.IsEnabled = true;
+					}
+					else
+					{
+						((GameView)this.gamePage).BT_defausser.IsEnabled = false;
+						((GameView)this.gamePage).BT_garderMain.IsEnabled = false;
+					}
 
 				}
 
