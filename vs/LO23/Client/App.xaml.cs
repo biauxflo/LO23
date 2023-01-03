@@ -53,7 +53,7 @@ namespace Client
 			dataCore.interfaceFromGame = gameCore.DataToGame;
 			//FIXME: implement interfaces with IHM Main
 
-			commCore.Start("127.0.0.1", 10000);
+			commCore.Start(Config.GetServerIp(), Config.GetServerPort());
 
 			mainCore.Run();
 		}
