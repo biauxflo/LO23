@@ -134,7 +134,8 @@ namespace Client.ihm_game
 					((GameView)this.gamePage).BT_egaler.IsEnabled = true;
 					((GameView)this.gamePage).BT_seCoucher.IsEnabled = true;
 
-					//((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Hidden;
+					((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Hidden;
+					((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Hidden;
 				}
 			}
 
@@ -142,6 +143,12 @@ namespace Client.ihm_game
 			{
 				if(game.currentPhase.typePhase == TypePhase.draw)// = échanger ?
 				{
+					((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Visible;
+					((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Visible;
+
+					((GameView)this.gamePage).BT_doubler.Visibility = Visibility.Hidden;
+					((GameView)this.gamePage).BT_egaler.Visibility = Visibility.Hidden;
+					((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Hidden;
 
 				}
 
@@ -149,6 +156,13 @@ namespace Client.ihm_game
 				{
 					if(game.currentPhase.typePhase == TypePhase.reveal)
 					{
+
+						((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Hidden;
+						((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Hidden;
+
+						((GameView)this.gamePage).BT_doubler.Visibility = Visibility.Hidden;
+						((GameView)this.gamePage).BT_egaler.Visibility = Visibility.Hidden;
+						((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Hidden;
 
 					}
 				}
