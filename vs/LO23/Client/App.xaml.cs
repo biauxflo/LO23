@@ -50,6 +50,7 @@ namespace Client
 			dataCore.interfaceFromMain = mainCore.dataToMain;
 			mainCore.mainToGame = gameCore.MainToGame;
 			gameCore.gameToData = dataCore.implInterfaceForGame;
+			dataCore.interfaceFromGame = gameCore.DataToGame;
 			//FIXME: implement interfaces with IHM Main
 
 			commCore.Start("127.0.0.1", 10000);

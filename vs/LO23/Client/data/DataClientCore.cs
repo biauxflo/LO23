@@ -39,8 +39,11 @@ namespace Client.data
 
 		public IDataToComm interfaceFromComm { private get; set; }
 		public IDataToMain interfaceFromMain { internal get; set; }
+		public IDataToGame interfaceFromGame {internal get; set;}
+
 		public IHMMainToDataClient implInterfaceForMain { get; private set; }
 		public IHMGameToDataClient implInterfaceForGame { get; private set; }
+
 
 		public DataClientCore()
         {

@@ -62,17 +62,16 @@ namespace Shared.data
 		public Card getNextCardAvailable()
 		{
 	
-				while(this.cards[this.index].isInHand==true )
+			while(this.cards[this.index].isInHand)
 			{
-					this.index = (this.index + 1) % 52;
+				this.index = (this.index + 1) % 52;
 			}
 
+			// To remove
+			Console.WriteLine("getNextCardAvailable() -> this.index: ", this.index);
 			Card cardTmp = this.cards[this.index];
-				this.index++;// ptr on the next card potentially available
-			return cardTmp;
-
-
-			
+			this.index++;// ptr on the next card potentially available
+			return cardTmp;	
 		}
 
 		public Card giveNewCard()

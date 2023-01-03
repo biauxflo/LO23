@@ -684,8 +684,8 @@ namespace Shared.data
 		public void handleGameAction(GameAction action)
 		{
 			// Check player existence in the game
-			bool isPlayerInTheGame = this.players.Contains(action.player);
-			if (!isPlayerInTheGame)
+			Player isPlayerInTheGame = this.players.Find(player => player.id == action.player.id);
+			if (isPlayerInTheGame != null)
 			{
 				Console.WriteLine("Player is not in the game");
 			}
@@ -800,7 +800,7 @@ namespace Shared.data
 			this.pot = 0;
 			this.highestBet = 0;
 			this.nbNoRise = 0;
-			this.currentPlayerIndex = 0; // to DO : how do we choose the first player of each round
+			this.currentPlayerIndex = 0;
 			this.smallBlind = 0;
 			this.bigBlind = this.updateBlind();
 

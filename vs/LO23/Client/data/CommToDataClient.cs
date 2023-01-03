@@ -37,6 +37,7 @@ namespace Client.data
 
 		public void updateGame(Game game)
 		{
+			dataClientCore.interfaceFromGame.UpdateGameDisplay(game);
 		}
 
 		public void getProfileReturn(LightUser user)
