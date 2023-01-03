@@ -159,16 +159,12 @@ namespace Shared.data
 		//Method that distribute cards to all Players
 		public void distributeCards()
 		{
-			List<Card> cardsAvailable = this.deck.cards.Where(c => c.isInHand == false).ToList();
-
 			for(int i = 0; i < 5; i++)
 			{
 				foreach(Player player in this.players)
 				{
-					Card card = cardsAvailable[0];
-					card.isInHand = true;
+					Card card = deck.giveNewCard();
 					player.hand.Add(card);
-					cardsAvailable.RemoveAt(0);
 				}
 			}
 		}
@@ -301,10 +297,7 @@ namespace Shared.data
 		{
 			int nb = listOfCards.Count;
 
-			// To remove once we have a proper constructor for game
-			// this.deck = new Deck();
-
-			List<Card> listOfNewCards = new List<Card>();
+			// List<Card> listOfNewCards = new List<Card>();
 			for(int i = 0; i < nb; i++)
 			{
 				player.removeCardFromHand(listOfCards[i]); // we take back the cards from the player
@@ -314,7 +307,7 @@ namespace Shared.data
 			for(int i = 0; i < nb; i++)
 			{
 				Card cardTmp = this.deck.giveNewCard(); // what's the next card i can give
-				listOfNewCards.Add(cardTmp); //add to the list of new cards
+				// listOfNewCards.Add(cardTmp); //add to the list of new cards
 				player.AddCardToHand(cardTmp); // add card to player's hand
 			}
 		}
@@ -683,46 +676,50 @@ namespace Shared.data
 
 		public void handleGameAction(GameAction action)
 		{
+			Console.WriteLine("action.player.id", action.player.id);
 			// Check player existence in the game
 			Player isPlayerInTheGame = this.players.Find(player => player.id == action.player.id);
-			if (isPlayerInTheGame != null)
+			if (isPlayerInTheGame == null)
 			{
 				Console.WriteLine("Player is not in the game");
-			}
+			} else {
+				switch(action.typeAction)
+				{
+					case TypeAction.call:
+						this.call(action.player, action.value);
+						break;
 
-			switch(action.typeAction)
-			{
-				case TypeAction.call:
-					this.call(action.player, action.value);
-					break;
+					case TypeAction.rise:
+						this.rise(action.player, action.value);
+						break;
+					case TypeAction.allin:
+						this.allIn(action.player, action.value);
 
-				case TypeAction.rise:
-					this.rise(action.player, action.value);
-					break;
-				case TypeAction.allin:
-					this.allIn(action.player, action.value);
+						break;
+					case TypeAction.fold:
+						fold(action.player);
 
-					break;
-				case TypeAction.fold:
-					fold(action.player);
+						break;
+					case TypeAction.check:
+						nbNoRise++; //check means doing nothing, so not rising, so nbNoRise++
+						break;
+					case TypeAction.exchangeCards:
+						this.exchangeCards(action.player, action.listOfCards);
+						break;
+				}
 
-					break;
-				case TypeAction.check:
-					nbNoRise++; //check means doing nothing, so not rising, so nbNoRise++
-					break;
-				case TypeAction.exchangeCards:
-					this.exchangeCards(action.player, action.listOfCards);
-					break;
-			}
-
-			if(nbNoRise >= nbPlayersStillPlaying)
-				if(currentPhase.typePhase == TypePhase.reveal)
-					initRound();
+				if(nbNoRise >= nbPlayersStillPlaying)
+				{
+					if(currentPhase.typePhase == TypePhase.reveal)
+						initRound();
+					else
+						goToNextPhase();
+				}
 				else
-					goToNextPhase();
-			else
-				goToNextPlayer();
-
+				{
+					goToNextPlayer();
+				}
+			}
 		}
 
 		private void goToNextPhase()

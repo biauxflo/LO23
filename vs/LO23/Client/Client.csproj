@@ -228,10 +228,10 @@
     <Resource Include="ihm-game\Views\images\cards\13_d.png" />
     <Resource Include="ihm-game\Views\images\cards\13_h.png" />
     <Resource Include="ihm-game\Views\images\cards\13_s.png" />
-    <Resource Include="ihm-game\Views\images\cards\1_c.png" />
-    <Resource Include="ihm-game\Views\images\cards\1_d.png" />
-    <Resource Include="ihm-game\Views\images\cards\1_h.png" />
-    <Resource Include="ihm-game\Views\images\cards\1_s.png" />
+    <Resource Include="ihm-game\Views\images\cards\14_c.png" />
+    <Resource Include="ihm-game\Views\images\cards\14_d.png" />
+    <Resource Include="ihm-game\Views\images\cards\14_h.png" />
+    <Resource Include="ihm-game\Views\images\cards\14_s.png" />
     <Resource Include="ihm-game\Views\images\cards\2_c.png" />
     <Resource Include="ihm-game\Views\images\cards\2_d.png" />
     <Resource Include="ihm-game\Views\images\cards\2_h.png" />
