@@ -84,7 +84,7 @@ namespace Client.ihm_game
 		internal void GameEnded()
 		{
 			// A decommenter au moment de l'integration de la V2 avec data
-			//gameToData.LeaveGame();
+			gameToData.LeaveGame();
 			gameWindow.Hide();
 		}
 
@@ -186,7 +186,6 @@ namespace Client.ihm_game
 
 		/// Appel à data pour demander une action (call/rise/fold/allin)
 		/// <summary>
-		// TODO : replace parameter Action a with TypeAction t
 		internal void PlayRound(GameAction a)
 		{
 			this.gameToData.PlayRound(a);
@@ -195,8 +194,7 @@ namespace Client.ihm_game
 		// Call to data to get the id of the current user
 		internal LightUser WhoAmI()
 		{
-			//TODO : define WhoAmI 
-			return this.gameToData.whoAmi();//TODO : replace with : return this.gameToData.WhoAmI();
+			return this.gameToData.whoAmi();
 
 		}
 
