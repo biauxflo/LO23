@@ -83,7 +83,7 @@ namespace Shared.data
 			this.chat = new List<ChatMessage>();
 			this.deck = new Deck();
 			this.gameStarted = false;
-		
+			
 		}
 
 	/*	public void initializeGame()
@@ -716,7 +716,10 @@ namespace Shared.data
 				if(nbNoRise >= nbPlayersStillPlaying)
 				{
 					if(currentPhase.typePhase == TypePhase.reveal)
+					{
+						distributePot();
 						initRound();
+					}
 					else
 						goToNextPhase();
 				}
