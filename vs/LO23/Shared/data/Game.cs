@@ -600,8 +600,11 @@ namespace Shared.data
 		//Attribute the score of his combo to the player
 		public void attributeEachScoreToPlayerForHisCombo()
 		{
+
 			foreach(Player actualPlayer in this.players)
 			{
+        		actualPlayer.hand.Sort();
+
 				if(this.isRoyalFlush(actualPlayer.hand))
 				{
 					actualPlayer.score = 10;
@@ -678,33 +681,35 @@ namespace Shared.data
 		{
 			Console.WriteLine("action.player.id", action.player.id);
 			// Check player existence in the game
-			Player isPlayerInTheGame = this.players.Find(player => player.id == action.player.id);
-			if (isPlayerInTheGame == null)
+			Player playerInTheGame = this.players.Find(player => player.id == action.player.id);
+			if (playerInTheGame == null)
 			{
 				Console.WriteLine("Player is not in the game");
 			} else {
+
+
 				switch(action.typeAction)
 				{
 					case TypeAction.call:
-						this.call(action.player, action.value);
+						this.call(playerInTheGame, action.value);
 						break;
 
 					case TypeAction.rise:
-						this.rise(action.player, action.value);
+						this.rise(playerInTheGame, action.value);
 						break;
 					case TypeAction.allin:
-						this.allIn(action.player, action.value);
+						this.allIn(playerInTheGame, action.value);
 
 						break;
 					case TypeAction.fold:
-						fold(action.player);
+						fold(playerInTheGame);
 
 						break;
 					case TypeAction.check:
 						nbNoRise++; //check means doing nothing, so not rising, so nbNoRise++
 						break;
 					case TypeAction.exchangeCards:
-						this.exchangeCards(action.player, action.listOfCards);
+						this.exchangeCards(playerInTheGame, action.listOfCards);
 						break;
 				}
 
