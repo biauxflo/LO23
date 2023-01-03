@@ -66,7 +66,8 @@ namespace Client.ihm_game.ViewModels
 		{
 			get; set;
 		}
-
+
+
 		private Game game;
 		public Game Game
 		{
@@ -76,7 +77,8 @@ namespace Client.ihm_game.ViewModels
 				game = value;
 				OnPropertyChanged(nameof(Game));
 			}
-		}
+		}
+
 		// TODO : changer vers List<Player> et utiliser la methode d'Eliot (sortList)
 		private Player player;
 		public Player Player
@@ -88,6 +90,18 @@ namespace Client.ihm_game.ViewModels
 				OnPropertyChanged(nameof(Player));
 			}
 		}
+
+		private List<Player> playerList;
+		public List<Player> PlayerList
+		{
+			get => playerList;
+			set
+			{
+				playerList = value;
+				OnPropertyChanged(nameof(PlayerList));
+			}
+		}
+
 
 		private List<string> cardList;
 		public List<string> CardList
@@ -111,14 +125,17 @@ namespace Client.ihm_game.ViewModels
             }
         }
 		private readonly IhmGameCore core;
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		/** Draw phase : we store the selected cards to change */
-		private List<bool> selectedCards;
+		private List<bool> selectedCards;
+
 		
 		/** TODO : delete when the player list is ok */
 		private Card card1 = new Card(1, 'h', 1, true, true);
 		private Card card2 = new Card(2, 's', 10, true, true);
-		private Card card3 = new Card(3, 'c', 13, true, true);
+		private Card card3 = new Card(3, 'c', 13, true, true);
+
 		/** ------- */
 		
 		private string visibilityPlayer2;
@@ -227,8 +244,14 @@ namespace Client.ihm_game.ViewModels
             {
 				player = ToPlayer(lightUser);
 				cardList = CardPath(player.hand);
+
 				// -> A voir si on ajoute ListPlayer
+				// Fonction sort Eliot
+				playerList = sortList(game.players);
+
 				OnPropertyChanged(nameof(CardList));
+				OnPropertyChanged(nameof(PlayerList));
+				OnPropertyChanged(nameof(Player));
 			}
 
 			// Hidde or show player info depending on the number of players in Game
@@ -434,17 +457,15 @@ namespace Client.ihm_game.ViewModels
 		{
 			List<Player> newList = new List<Player>();
 			LightUser lu = this.core.gameToData.whoAmi();
-			Player firstPlayer = this.ToPlayer(lu/*, 100*/);
+			Player firstPlayer = this.ToPlayer(lu);
 			int i=0;
 			foreach(Player player in players)
-			{
-				Console.WriteLine(player);
-				i++;
+			{				
 				if(player == firstPlayer)
 				{
 					break;
 				}
-				
+				i++;
 			}
 			for(int j = i; j < players.Count; j++)
 			{
