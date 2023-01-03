@@ -59,5 +59,10 @@ namespace Client.data
 		public void addGameToListGames(LightGame game)
 		{
 		}
+
+		public void AddClientToThisGame(Game game)
+		{
+			dataClientCore.request_PlayGameToComm(game.id, dataClientCore.CurrentUser);
+		}
 	}
 }
