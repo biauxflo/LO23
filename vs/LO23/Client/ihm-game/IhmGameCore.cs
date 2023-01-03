@@ -84,7 +84,7 @@ namespace Client.ihm_game
 		internal void GameEnded()
 		{
 			// A decommenter au moment de l'integration de la V2 avec data
-			//gameToData.LeaveGame();
+			gameToData.LeaveGame();
 			gameWindow.Hide();
 		}
 
@@ -108,35 +108,67 @@ namespace Client.ihm_game
 		internal void UpdateGameDisplay(Game game)
 		{
 			this.gameViewModel.Game = game;
+			Player user = game.players.Find(x => x.id == this.WhoAmI().id);
+			if(user.isFolded)
+			{
+				((GameView)this.gamePage).Card1.Visibility = Visibility.Hidden;
+				((GameView)this.gamePage).Card2.Visibility = Visibility.Hidden;
+				((GameView)this.gamePage).Card3.Visibility = Visibility.Hidden;
+				((GameView)this.gamePage).Card4.Visibility = Visibility.Hidden;
+				((GameView)this.gamePage).Card5.Visibility = Visibility.Hidden;
+			}
+			else
+			{
+				((GameView)this.gamePage).Card1.Visibility = Visibility.Visible;
+				((GameView)this.gamePage).Card2.Visibility = Visibility.Visible;
+				((GameView)this.gamePage).Card3.Visibility = Visibility.Visible;
+				((GameView)this.gamePage).Card4.Visibility = Visibility.Visible;
+				((GameView)this.gamePage).Card5.Visibility = Visibility.Visible;
+			}
 
-			//if(game.currentPhase.type == TypePhase.bet1 || game.currentPhase.type == TypePhase.bet2)
-			//{
-			//	if(this.WhoAmI() == game.currentPlayerIndex)
-			//	{
-			//		((GameView)this.gamePage).BT_doubler.IsEnabled = true;
-			//		((GameView)this.gamePage).BT_egaler.IsEnabled = true;
-			//		((GameView)this.gamePage).BT_seCoucher.IsEnabled = true;
-				
-			//		((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Hidden;
-			//	}
-			//}
+			if(game.currentPhase.typePhase == TypePhase.bet1 || game.currentPhase.typePhase == TypePhase.bet2)
+			{
+				if(this.WhoAmI().id == game.players[game.currentPlayerIndex].id)
+				{
+					((GameView)this.gamePage).BT_doubler.IsEnabled = true;
+					((GameView)this.gamePage).BT_egaler.IsEnabled = true;
+					((GameView)this.gamePage).BT_seCoucher.IsEnabled = true;
 
-			//else
-			//{
-			//	if(game.currentPhase.type == TypePhase.draw)// = échanger ?
-			//	{
+					((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Hidden;
+					((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Hidden;
+				}
+			}
 
-			//	}
+			else
+			{
+				if(game.currentPhase.typePhase == TypePhase.draw)// = échanger ?
+				{
+					((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Visible;
+					((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Visible;
 
-			//	else
-			//	{
-			//		if (game.currentPhase.type == TypePhase.reveal)
-			//		{
+					((GameView)this.gamePage).BT_doubler.Visibility = Visibility.Hidden;
+					((GameView)this.gamePage).BT_egaler.Visibility = Visibility.Hidden;
+					((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Hidden;
 
-			//		}
-			//	}
+				}
 
-			//}
+				else
+				{
+					if(game.currentPhase.typePhase == TypePhase.reveal)
+					{
+
+						((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Hidden;
+						((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Hidden;
+
+						((GameView)this.gamePage).BT_doubler.Visibility = Visibility.Hidden;
+						((GameView)this.gamePage).BT_egaler.Visibility = Visibility.Hidden;
+						((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Hidden;
+
+					}
+				}
+
+			}
+			
 
 
 			/**  Test :
@@ -154,7 +186,6 @@ namespace Client.ihm_game
 
 		/// Appel à data pour demander une action (call/rise/fold/allin)
 		/// <summary>
-		// TODO : replace parameter Action a with TypeAction t
 		internal void PlayRound(GameAction a)
 		{
 			this.gameToData.PlayRound(a);
@@ -163,24 +194,10 @@ namespace Client.ihm_game
 		// Call to data to get the id of the current user
 		internal LightUser WhoAmI()
 		{
-			//TODO : define WhoAmI 
-			return this.gameToData.whoAmi();//TODO : replace with : return this.gameToData.WhoAmI();
+			return this.gameToData.whoAmi();
 
 		}
 
-		// <remarks>
-		// To be called at the end of data function "initializeRound()"
-		//the fold display is cancelled when a new round starts
-		// </remarks>
-		internal void NewRoundDisplay()
-		{
-			((GameView)this.gamePage).Card1.Visibility = Visibility.Visible;
-			((GameView)this.gamePage).Card2.Visibility = Visibility.Visible;
-			((GameView)this.gamePage).Card3.Visibility = Visibility.Visible;
-			((GameView)this.gamePage).Card4.Visibility = Visibility.Visible;
-			((GameView)this.gamePage).Card5.Visibility = Visibility.Visible;
-
-		}
 	}
 }
 		
