@@ -66,7 +66,8 @@ namespace Client.ihm_game.ViewModels
 		{
 			get; set;
 		}
-
+
+
 		private Game game;
 		public Game Game
 		{
@@ -76,7 +77,8 @@ namespace Client.ihm_game.ViewModels
 				game = value;
 				OnPropertyChanged(nameof(Game));
 			}
-		}
+		}
+
 		// TODO : changer vers List<Player> et utiliser la methode d'Eliot (sortList)
 		private Player player;
 		public Player Player
@@ -111,14 +113,17 @@ namespace Client.ihm_game.ViewModels
             }
         }
 		private readonly IhmGameCore core;
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		/** Draw phase : we store the selected cards to change */
-		private List<bool> selectedCards;
+		private List<bool> selectedCards;
+
 		
 		/** TODO : delete when the player list is ok */
 		private Card card1 = new Card(1, 'h', 1, true, true);
 		private Card card2 = new Card(2, 's', 10, true, true);
-		private Card card3 = new Card(3, 'c', 13, true, true);
+		private Card card3 = new Card(3, 'c', 13, true, true);
+
 		/** ------- */
 		
 		private string visibilityPlayer2;
@@ -322,6 +327,8 @@ namespace Client.ihm_game.ViewModels
 		{
 			// Appel fonction data (Gabrielle)
 			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
+			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.fold);
+			this.core.PlayRound(gameAction);
 		}
 
 		private void OnCallClick()
@@ -334,7 +341,8 @@ namespace Client.ihm_game.ViewModels
 		private void OnRaiseClick()
 		{
 			// TODO : get the correct bet tokens and double it to raise
-
+			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.rise);
+			this.core.PlayRound(gameAction);
 		}
 		public void Display()
 		{
@@ -377,8 +385,9 @@ namespace Client.ihm_game.ViewModels
 
 		private void OnGarderMainClick()
 		{
-			MessageBox.Show("bouton garder main", "bouton garder main", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
-
+			//MessageBox.Show("bouton garder main", "bouton garder main", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.exchangeCards);
+			this.core.PlayRound(gameAction);
 			// Appel fonction data (Gabrielle)
 			//this.core.PlayRound(TypeAction.garder_main); Attente réponse data pour définir le paramètre de type TypeAction
 		}
