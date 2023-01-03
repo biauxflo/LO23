@@ -104,11 +104,14 @@ namespace Client.ihm_game
 
 		}*/
 		/** ------- */
-
+		/// <summary>
+		/// Mise à jour de l'affichage du jeu 
+		/// </summary>
 		internal void UpdateGameDisplay(Game game)
 		{
 			this.gameViewModel.Game = game;
 			Player user = game.players.Find(x => x.id == this.WhoAmI().id);
+			gameViewModel.UpdateGame(game);
 			if(user.isFolded)
 			{
 				((GameView)this.gamePage).Card1.Visibility = Visibility.Hidden;

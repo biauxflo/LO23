@@ -471,5 +471,13 @@ namespace Client.ihm_game.ViewModels
 			OnPropertyChanged(nameof(cardList));
 			return tmpList;
         }
+		//Mise à jour de l'affichage du jeu
+		public void UpdateGame(Game game)
+		{
+			//Display cards
+			player = ToPlayer(lightUser);
+			cardList = CardPath(player.hand);
+			OnPropertyChanged(nameof(CardList));
+		}
 	}
 }
