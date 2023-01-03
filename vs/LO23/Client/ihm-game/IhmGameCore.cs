@@ -108,35 +108,53 @@ namespace Client.ihm_game
 		internal void UpdateGameDisplay(Game game)
 		{
 			this.gameViewModel.Game = game;
+			Player user = game.players.Find(x => x.id == this.WhoAmI().id);
+			if(user.isFolded)
+			{
+				((GameView)this.gamePage).Card1.Visibility = Visibility.Hidden;
+				((GameView)this.gamePage).Card2.Visibility = Visibility.Hidden;
+				((GameView)this.gamePage).Card3.Visibility = Visibility.Hidden;
+				((GameView)this.gamePage).Card4.Visibility = Visibility.Hidden;
+				((GameView)this.gamePage).Card5.Visibility = Visibility.Hidden;
+			}
+			else
+			{
+				((GameView)this.gamePage).Card1.Visibility = Visibility.Visible;
+				((GameView)this.gamePage).Card2.Visibility = Visibility.Visible;
+				((GameView)this.gamePage).Card3.Visibility = Visibility.Visible;
+				((GameView)this.gamePage).Card4.Visibility = Visibility.Visible;
+				((GameView)this.gamePage).Card5.Visibility = Visibility.Visible;
+			}
 
-			//if(game.currentPhase.type == TypePhase.bet1 || game.currentPhase.type == TypePhase.bet2)
-			//{
-			//	if(this.WhoAmI() == game.currentPlayerIndex)
-			//	{
-			//		((GameView)this.gamePage).BT_doubler.IsEnabled = true;
-			//		((GameView)this.gamePage).BT_egaler.IsEnabled = true;
-			//		((GameView)this.gamePage).BT_seCoucher.IsEnabled = true;
-				
-			//		((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Hidden;
-			//	}
-			//}
+			if(game.currentPhase.typePhase == TypePhase.bet1 || game.currentPhase.typePhase == TypePhase.bet2)
+			{
+				if(this.WhoAmI().id == game.players[game.currentPlayerIndex].id)
+				{
+					((GameView)this.gamePage).BT_doubler.IsEnabled = true;
+					((GameView)this.gamePage).BT_egaler.IsEnabled = true;
+					((GameView)this.gamePage).BT_seCoucher.IsEnabled = true;
 
-			//else
-			//{
-			//	if(game.currentPhase.type == TypePhase.draw)// = échanger ?
-			//	{
+					//((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Hidden;
+				}
+			}
 
-			//	}
+			else
+			{
+				if(game.currentPhase.typePhase == TypePhase.draw)// = échanger ?
+				{
 
-			//	else
-			//	{
-			//		if (game.currentPhase.type == TypePhase.reveal)
-			//		{
+				}
 
-			//		}
-			//	}
+				else
+				{
+					if(game.currentPhase.typePhase == TypePhase.reveal)
+					{
 
-			//}
+					}
+				}
+
+			}
+			
 
 
 			/**  Test :
@@ -168,19 +186,6 @@ namespace Client.ihm_game
 
 		}
 
-		// <remarks>
-		// To be called at the end of data function "initializeRound()"
-		//the fold display is cancelled when a new round starts
-		// </remarks>
-		internal void NewRoundDisplay()
-		{
-			((GameView)this.gamePage).Card1.Visibility = Visibility.Visible;
-			((GameView)this.gamePage).Card2.Visibility = Visibility.Visible;
-			((GameView)this.gamePage).Card3.Visibility = Visibility.Visible;
-			((GameView)this.gamePage).Card4.Visibility = Visibility.Visible;
-			((GameView)this.gamePage).Card5.Visibility = Visibility.Visible;
-
-		}
 	}
 }
 		
