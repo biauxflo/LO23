@@ -167,8 +167,8 @@
         <TextBlock Name="TBlock_balance4" Grid.Column="1" Grid.Row="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer4}"/>
 
         <!-- User 5 : GOOD BINDING - to copy for all the users if ok --> <!-- TB_raise vs TBlock_balance -->
-        <TextBlock Text="{Binding Game.players[0].tokens}" Grid.Column="6" Grid.Row="1" Name="TB_raise5" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer5}"/>
-        <TextBlock Text="{Binding Game.players[0].tokensBet}" Name="TBlock_bet5" Grid.Column="5" Grid.Row="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer5}"/>
+        <TextBlock Text="{Binding PlayerList[1].tokens}" Grid.Column="6" Grid.Row="1" Name="TB_raise5" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer5}"/>
+        <TextBlock Text="{Binding PlayerList[1].tokensBet}" Name="TBlock_bet5" Grid.Column="5" Grid.Row="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer5}"/>
         <Image Source="/Client;component/ihm-game/Views/images/enchere.png"  Grid.Column="5" Grid.Row="2" Height="30" Margin="2.667,37,56.333,2" Visibility="{Binding Path=VisibilityPlayer5}"/>
         <TextBlock Text="{Binding PlayerList[1].username}" Name="TBlock_user5" Grid.Column="4" Grid.Row="1" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=VisibilityPlayer5}"/>
 

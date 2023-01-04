@@ -256,81 +256,7 @@ namespace Client.ihm_game.ViewModels
 
 			// Hidde or show player info depending on the number of players in Game
 			// By default only the self player is shown
-			switch (this.game.nbPlayers)
-			{
-				case 2:
-					visibilityPlayer2 = "Hidden";
-					visibilityPlayer3 = "Hidden";
-					visibilityPlayer4 = "Hidden";
-					visibilityPlayer5 = "Visible";
-					visibilityPlayer6 = "Hidden";
-					visibilityPlayer7 = "Hidden";
-					visibilityPlayer8 = "Hidden";
-					break;
-				case 3:
-					visibilityPlayer2 = "Hidden";
-					visibilityPlayer3 = "Hidden";
-					visibilityPlayer4 = "Visible";
-					visibilityPlayer5 = "Hidden";
-					visibilityPlayer6 = "Visible";
-					visibilityPlayer7 = "Hidden";
-					visibilityPlayer8 = "Hidden";
-					break;
-				case 4:
-					visibilityPlayer2 = "Hidden";
-					visibilityPlayer3 = "Visible";
-					visibilityPlayer4 = "Hidden";
-					visibilityPlayer5 = "Visible";
-					visibilityPlayer6 = "Hidden";
-					visibilityPlayer7 = "Visible";
-					visibilityPlayer8 = "Hidden";
-					break;
-				case 5:
-					visibilityPlayer2 = "Visible";
-					visibilityPlayer3 = "Hidden";
-					visibilityPlayer4 = "Visible";
-					visibilityPlayer5 = "Hidden";
-					visibilityPlayer6 = "Visible";
-					visibilityPlayer7 = "Hidden";
-					visibilityPlayer8 = "Visible";
-					break;
-				case 6:
-					visibilityPlayer2 = "Visible";
-					visibilityPlayer3 = "Visible";
-					visibilityPlayer4 = "Hidden";
-					visibilityPlayer5 = "Visible";
-					visibilityPlayer6 = "Hidden";
-					visibilityPlayer7 = "Visible";
-					visibilityPlayer8 = "Visible";
-					break;
-				case 7:
-					visibilityPlayer2 = "Visible";
-					visibilityPlayer3 = "Visible";
-					visibilityPlayer4 = "Visible";
-					visibilityPlayer5 = "Hidden";
-					visibilityPlayer6 = "Visible";
-					visibilityPlayer7 = "Visible";
-					visibilityPlayer8 = "Visible";
-					break;
-				case 8:
-					visibilityPlayer2 = "Visible";
-					visibilityPlayer3 = "Visible";
-					visibilityPlayer4 = "Visible";
-					visibilityPlayer5 = "Visible";
-					visibilityPlayer6 = "Visible";
-					visibilityPlayer7 = "Visible";
-					visibilityPlayer8 = "Visible";
-					break;
-				default:
-					visibilityPlayer2 = "Hidden";
-					visibilityPlayer3 = "Hidden";
-					visibilityPlayer4 = "Hidden";
-					visibilityPlayer5 = "Hidden";
-					visibilityPlayer6 = "Hidden";
-					visibilityPlayer7 = "Hidden";
-					visibilityPlayer8 = "Hidden";
-					break;
-			}
+			ChangeVisibilityPlayers();
 			
 			//Display();	
 		}
@@ -499,10 +425,103 @@ namespace Client.ihm_game.ViewModels
 		//Mise à jour de l'affichage du jeu
 		public void UpdateGame(Game game)
 		{
-			//Display cards
+			//Display player
 			player = ToPlayer(lightUser);
+			OnPropertyChanged(nameof(Player));
+			//Display cards of the player
 			cardList = CardPath(player.hand);
 			OnPropertyChanged(nameof(CardList));
+			//Display info of the other players
+			this.ChangeVisibilityPlayers();
+			playerList = sortList(game.players);
+			OnPropertyChanged(nameof(PlayerList));
+		}
+		// Hidde or show player info depending on the number of players in Game
+		// By default only the self player is shown
+		public void ChangeVisibilityPlayers()
+		{
+			switch(this.game.nbPlayers)
+			{
+				case 2:
+					visibilityPlayer2 = "Hidden";
+					visibilityPlayer3 = "Hidden";
+					visibilityPlayer4 = "Hidden";
+					visibilityPlayer5 = "Visible";
+					visibilityPlayer6 = "Hidden";
+					visibilityPlayer7 = "Hidden";
+					visibilityPlayer8 = "Hidden";
+					break;
+				case 3:
+					visibilityPlayer2 = "Hidden";
+					visibilityPlayer3 = "Hidden";
+					visibilityPlayer4 = "Visible";
+					visibilityPlayer5 = "Hidden";
+					visibilityPlayer6 = "Visible";
+					visibilityPlayer7 = "Hidden";
+					visibilityPlayer8 = "Hidden";
+					break;
+				case 4:
+					visibilityPlayer2 = "Hidden";
+					visibilityPlayer3 = "Visible";
+					visibilityPlayer4 = "Hidden";
+					visibilityPlayer5 = "Visible";
+					visibilityPlayer6 = "Hidden";
+					visibilityPlayer7 = "Visible";
+					visibilityPlayer8 = "Hidden";
+					break;
+				case 5:
+					visibilityPlayer2 = "Visible";
+					visibilityPlayer3 = "Hidden";
+					visibilityPlayer4 = "Visible";
+					visibilityPlayer5 = "Hidden";
+					visibilityPlayer6 = "Visible";
+					visibilityPlayer7 = "Hidden";
+					visibilityPlayer8 = "Visible";
+					break;
+				case 6:
+					visibilityPlayer2 = "Visible";
+					visibilityPlayer3 = "Visible";
+					visibilityPlayer4 = "Hidden";
+					visibilityPlayer5 = "Visible";
+					visibilityPlayer6 = "Hidden";
+					visibilityPlayer7 = "Visible";
+					visibilityPlayer8 = "Visible";
+					break;
+				case 7:
+					visibilityPlayer2 = "Visible";
+					visibilityPlayer3 = "Visible";
+					visibilityPlayer4 = "Visible";
+					visibilityPlayer5 = "Hidden";
+					visibilityPlayer6 = "Visible";
+					visibilityPlayer7 = "Visible";
+					visibilityPlayer8 = "Visible";
+					break;
+				case 8:
+					visibilityPlayer2 = "Visible";
+					visibilityPlayer3 = "Visible";
+					visibilityPlayer4 = "Visible";
+					visibilityPlayer5 = "Visible";
+					visibilityPlayer6 = "Visible";
+					visibilityPlayer7 = "Visible";
+					visibilityPlayer8 = "Visible";
+					break;
+				default:
+					visibilityPlayer2 = "Hidden";
+					visibilityPlayer3 = "Hidden";
+					visibilityPlayer4 = "Hidden";
+					visibilityPlayer5 = "Hidden";
+					visibilityPlayer6 = "Hidden";
+					visibilityPlayer7 = "Hidden";
+					visibilityPlayer8 = "Hidden";
+					break;
+			}
+			OnPropertyChanged(nameof(VisibilityPlayer2));
+			OnPropertyChanged(nameof(VisibilityPlayer3));
+			OnPropertyChanged(nameof(VisibilityPlayer4));
+			OnPropertyChanged(nameof(VisibilityPlayer5));
+			OnPropertyChanged(nameof(VisibilityPlayer6));
+			OnPropertyChanged(nameof(VisibilityPlayer7));
+			OnPropertyChanged(nameof(VisibilityPlayer8));
 		}
 	}
 }
