@@ -234,6 +234,7 @@ namespace Client.ihm_game.ViewModels
 			CardCommand4 = new RelayCommand(OnCardClick4);
 			CardCommand5 = new RelayCommand(OnCardClick5);
 
+
             selectedCards = new List<bool> { false, false, false, false, false };
             lightUser = this.core.gameToData.whoAmi();
 			OnPropertyChanged(nameof(LightUser));
@@ -253,6 +254,7 @@ namespace Client.ihm_game.ViewModels
 				OnPropertyChanged(nameof(PlayerList));
 				OnPropertyChanged(nameof(Player));
 			}
+			//Initialize good button
 
 			// Hidde or show player info depending on the number of players in Game
 			// By default only the self player is shown
@@ -285,7 +287,7 @@ namespace Client.ihm_game.ViewModels
 		private void OnRaiseClick()
 		{
 			// TODO : get the correct bet tokens and double it to raise
-			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.rise);
+			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 50, new List<Card>(), TypeAction.rise);
 			this.core.PlayRound(gameAction);
 		}
 		public void Display()

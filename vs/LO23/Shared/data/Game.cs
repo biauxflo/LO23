@@ -83,7 +83,7 @@ namespace Shared.data
 			this.chat = new List<ChatMessage>();
 			this.deck = new Deck();
 			this.gameStarted = false;
-		
+			
 		}
 
 	/*	public void initializeGame()
@@ -169,117 +169,7 @@ namespace Shared.data
 			}
 		}
 
-		public void runGame()
-		{/*
-			int nbUser = this.lobby.Count;
-			if (nbUser < nbMinPlayers)
-			{
-				System.Threading.Thread.Sleep(5000);
-			}
-			/*
-			 * Timer timer = new System.Timers.Timer(120000);
-			timer.Start();
-			while()
-			
-			System.Threading.Thread.Sleep(2000);
-			if(nbUser > nbMaxPlayers)
-			{
-				Console.WriteLine(" trop de user dans le lobby, veuillez quitter");
-			}
-			for(int i = 0; i < nbUser; i++)
-			{	Player p =new  Player(this.lobby[i].id,this.lobby[i].username,this.lobby[i].image);
-				this.players.Add(p);
-			}
-			//this.initializeGame();
-			int nbPlayers = this.players.Count();
-			int nbRounds = 1;//remplacer avec game options
-			int roundMax = 4;
-			while(nbRounds < roundMax && nbPlayers > 2)
-			{   Phase p1 = new Phase(TypePhase.bet1);
-			{   Phase p2 = new Phase(TypePhase.draw);
-				Round r1 = new Round();
-				r1.addPhase(p1);
-				this.rounds.Add(r1);
 
-				//this.distributeCards(this.players);
-				this.paySmallBlind(players[currentPlayerIndex]);
-				currentPlayerIndex++;
-				this.payBigBlind(players[currentPlayerIndex+1]);
-				currentPlayerIndex++;
-
-				IDataToComm.notifyGameChange()
-				
-				players[currentPlayerIndex]).chooseAction();
-
-				//switch()
-
-			}
-
-			/*
-			 * Game in lobby status
-			 * 
-			 * //Waiting for players ot start game 
-			 * while nbPlayers (or players.size()) < nbPlayersMax  
-			 *		if nbPlayers > nbPlayersMin && launchGameTimer not started
-			 *			start launchGameTimer
-			 *		
-			 *		if launchGameTimer > 1minute
-			 *			break;
-			 *		else
-			 *			wait
-			 *	
-			 * //Starting game
-			 * 
-			 * initialize Game //nothing may happen, maybe just check everythign is alright and do nothing else, if the rest has already been done when players join for example
-			 * 
-			 * 
-			 * while nbRounds < roundMax && nbPlayers > 1:
-				 * currentRound = creation of a Round (corresponds to creating a round and initialising it) //shuffle deck, make players pay blind, distribute cards ->send game changes to players
-				 * put game in running status
-				 * currentRound.enterPhaseBet() //Here in the object Round is all the logic to enter in a beting phase, for example creates an object phase and add it in Round class's phases array. Declare this phase as the current one for
-				 * 
-				 * indexCurrentPlayer = 0;
-				 * 
-				 * while nbNoRise < nbPlayers // As long as not everyone did not rise, that means that not everyone has bet the same amount, menaing you can not pass to the next phase
-				 *		currentRound.currentPhase.RequestAndExecuteActionFromPlayer(players.getAt(indexCurrentPlayer)) //could be implmented differently
-				 *		indexCurrentPlayer +1 % nbPlayers
-				 *		
-				 *  currentRound.exitPhaseBet()  //Here in the object Round is all the logic to exit from a beting phase, could be nothing
-				 *	
-				 *	currentRound.enterPhaseExchange()
-				 *	for each player still active:
-				 *		currentRound.currentPhase.RequestAndExecuteActionFromPlayer(player)) //could be implemented differently
-				 *		
-				 *	currentRound.exitPhaseExchange()
-				 *	
-				 *	currentRound.enterPhaseReveal() 
-				 *	currentRound.exitPhaseReveal() 
-				 *	
-				 *	finishRound()
-				 *
-			 * finishGame()
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 */
-		}
-		/*
-		public void handleGameAction(Guid playerId, GameAction action)
-		{
-			Player player = this.players.Find(x =>
-			{
-				return x.id == playerId;
-			});
-			int value = action.value;
-			List<Card> listOfCards = action.listOfCards;
-			this.chooseAction(player, value, action, listOfCards);
-		}
-		*/
 		private void payBigBlind(Player player)
 		{
 			player.tokens -= this.bigBlind;
@@ -672,11 +562,6 @@ namespace Shared.data
 		}
 
 
-
-
-
-
-
 		public void handleGameAction(GameAction action)
 		{
 			Console.WriteLine("action.player.id", action.player.id);
@@ -686,8 +571,6 @@ namespace Shared.data
 			{
 				Console.WriteLine("Player is not in the game");
 			} else {
-
-
 				switch(action.typeAction)
 				{
 					case TypeAction.call:
@@ -716,9 +599,15 @@ namespace Shared.data
 				if(nbNoRise >= nbPlayersStillPlaying)
 				{
 					if(currentPhase.typePhase == TypePhase.reveal)
+					{
+						distributePot();
 						initRound();
+					}
 					else
+					{
 						goToNextPhase();
+						goToNextPlayer();
+					}
 				}
 				else
 				{
@@ -729,7 +618,7 @@ namespace Shared.data
 
 		private void goToNextPhase()
 		{
-			Phase newPhase = new Phase(currentPhase.typePhase++); //Hopefully it gives the next phase
+			Phase newPhase = new Phase(++currentPhase.typePhase); //Hopefully it gives the next phase
 			newCurrentPhase(newPhase);
 		}
 
