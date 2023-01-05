@@ -12,10 +12,16 @@ namespace Client
 		{
 			return Properties.Resources.ServerIp;
 		}
+
 		public static int GetServerPort()
 		{
 			int port = int.Parse(Properties.Resources.ServerPort);
 			return port;
+		}
+
+		public static string GetSyncfusionLicenceKey()
+		{
+			return Properties.Resources.SyncfusionLicenceKey;
 		}
 	}
 }
