@@ -39,6 +39,10 @@ namespace Client
 		//private MainToGame mainToGame;
         private void App_Startup(object sender, StartupEventArgs e)
         {
+			//Register Syncfusion license
+			string key = Config.GetSyncfusionLicenceKey();
+			Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(key);
+
 			gameCore = new IhmGameCore();
 			mainCore = new IhmMainCore();
 			dataCore = new DataClientCore();

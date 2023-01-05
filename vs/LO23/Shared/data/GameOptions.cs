@@ -43,10 +43,6 @@ namespace Shared.data
 			set; get;
 		}
 
-		// @pirousse: Requiered for IHM_Main
-		public GameOptions()
-		{}
-
 		public GameOptions(
 			string name,
 			int startingTokens,

@@ -23,10 +23,16 @@ namespace Client.ihm_main.ViewModels
 			set
 			{
 				username = value;
-				OnPropertyChanged();
+				OnPropertyChanged("UsernameIsEmpty");
+				OnPropertyChanged("");
 				CreationCommand.RaiseCanExecuteChanged();
 			}
 		}
+
+		/// <summary>
+		/// <see langword="true"/> si le champ username est vide, <see langword="false"/> sinon.
+		/// </summary>
+		public bool UsernameIsEmpty => Username == string.Empty;
 
 		/// <summary>
 		/// Nom de famille de l'utilisateur à créer.
@@ -61,30 +67,62 @@ namespace Client.ihm_main.ViewModels
 		/// Mot de passe de l'utilisateur à créer.
 		/// </summary>
 		private string password = string.Empty;
+		private string mask = string.Empty;
 		public string Password
 		{
-			get => password;
+			get => mask;
 			set
 			{
-				password = value;
+				if(value.Length > mask.Length)
+				{
+					password += value.Substring(mask.Length);
+				}
+				else
+				{
+					password = password.Substring(0, value.Length);
+				}
+				mask = "";
+				foreach(char c in password)
+				{
+					mask += "*";
+				}
 				OnPropertyChanged();
-				OnPropertyChanged("ConfirmationIsRight");
+				OnPropertyChanged("ConfirmationIsFalse");
+				OnPropertyChanged("PasswordIsEmpty");
 				CreationCommand.RaiseCanExecuteChanged();
 			}
 		}
 
 		/// <summary>
+		/// <see langword="true"/> si le champ password est vide, <see langword="false"/> sinon.
+		/// </summary>
+		public bool PasswordIsEmpty => Password == string.Empty;
+
+		/// <summary>
 		/// Confirmation du mot de passe de l'utilisateur à créer.
 		/// </summary>
 		private string confirmPassword = string.Empty;
+		private string confirmMask = string.Empty;
 		public string ConfirmPassword
 		{
-			get => confirmPassword;
+			get => confirmMask;
 			set
 			{
-				confirmPassword = value;
+				if(value.Length > confirmMask.Length)
+				{
+					confirmPassword += value.Substring(confirmMask.Length);
+				}
+				else
+				{
+					confirmPassword = confirmPassword.Substring(0, value.Length);
+				}
+				confirmMask = "";
+				foreach(char c in confirmPassword)
+				{
+					confirmMask += "*";
+				}
 				OnPropertyChanged();
-				OnPropertyChanged("ConfirmationIsRight");
+				OnPropertyChanged("ConfirmationIsFalse");
 				CreationCommand.RaiseCanExecuteChanged();
 			}
 		}
@@ -93,28 +131,87 @@ namespace Client.ihm_main.ViewModels
 		/// Age de l'utilisateur à créer.
 		/// </summary>
 		private int age = 0;
-		public string Age
+		public int Age
 		{
-			get => age.ToString();
+			get => age;
 			set
 			{
-				if(int.TryParse(value, out int toInt))
-				{
-					age = toInt;
-					OnPropertyChanged();
-				}
-				else
-				{
-					MessageBox.Show("La valeur d'age entrée n'est pas un nombre entier", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
-				}
+				age = value;
+				OnPropertyChanged();
+				OnPropertyChanged("AgeUnder18");
 				CreationCommand.RaiseCanExecuteChanged();
 			}
 		}
 
 		/// <summary>
-		/// <see langword="true"/> si le mot de passe et sa confirmation sont égaux, false sinon.
+		/// <see langword="true"/> si l'âge est inférieur à 18, <see langword="false"/> sinon.
 		/// </summary>
-		public bool ConfirmationIsRight => ConfirmPassword == Password;
+		public bool AgeUnder18 => Age < 18;
+
+		/// <summary>
+		/// Change la visibilité du champ de mot de passe ou non.
+		/// </summary>
+		private bool seePassword = false;
+		public bool SeePassword
+		{
+			get => seePassword;
+			set
+			{
+				seePassword = value;
+				if(value)
+				{
+					mask = password;
+				}
+				else
+				{
+					mask = "";
+					if(password != string.Empty)
+					{
+						foreach(char c in password)
+						{
+							mask += "*";
+						}
+					}
+				}
+				OnPropertyChanged();
+				OnPropertyChanged("Password");
+			}
+		}
+
+		/// <summary>
+		/// Change la visibilité du champ de confirmation de mot de passe ou non.
+		/// </summary>
+		private bool seeConfirmPassword = false;
+		public bool SeeConfirmPassword
+		{
+			get => seeConfirmPassword;
+			set
+			{
+				seeConfirmPassword = value;
+				if(value)
+				{
+					confirmMask = confirmPassword;
+				}
+				else
+				{
+					confirmMask = "";
+					if(confirmPassword != string.Empty)
+					{
+						foreach(char c in confirmPassword)
+						{
+							confirmMask += "*";
+						}
+					}
+				}
+				OnPropertyChanged();
+				OnPropertyChanged("ConfirmPassword");
+			}
+		}
+
+		/// <summary>
+		/// <see langword="true"/> si le mot de passe et sa confirmation sont égaux, <see langword="false"/> sinon.
+		/// </summary>
+		public bool ConfirmationIsFalse => confirmPassword != password;
 
 		/// <summary>
 		/// Commande du bouton "Créer".
@@ -152,7 +249,9 @@ namespace Client.ihm_main.ViewModels
 			Lastname = string.Empty;
 			Password = string.Empty;
 			ConfirmPassword = string.Empty;
-			Age = "0";
+			Age = 1;
+			SeeConfirmPassword = false;
+			SeePassword = false;
 		}
 
 		/// <summary>
@@ -161,7 +260,7 @@ namespace Client.ihm_main.ViewModels
 		/// <returns><see langword="true"/>Si on peut lancer la demande de création de partie, <see langword="false"/> sinon.</returns>
 		private bool CreationCanExecute()
 		{
-			return ConfirmationIsRight && Username != string.Empty && Age != "0" && Password != string.Empty;
+			return ConfirmationIsFalse && Username != string.Empty && Age <= 18 && Password != string.Empty;
 		}
 
 		/// <summary>
@@ -180,7 +279,7 @@ namespace Client.ihm_main.ViewModels
         private void OnCreationClick()
         {
 			// Calls the core to try the creation of this profile.
-			core.TryCreateProfile(Username, Password, Firstname, Lastname, int.Parse(Age));
+			core.TryCreateProfile(Username, Password, Firstname, Lastname, Age);
         }
     }
 }
