@@ -149,14 +149,18 @@ namespace Shared.data
 			return nextPlayerIndex;
 		}
 
-		// Sort the Hand of the player (Select Sort)
+		/// <summary>
+		/// Permet de trier la main du joueur
+		/// </summary>
 		public void sortHand(List<Card> hand)
 		{
 			List<Card> sortedHand = hand.OrderBy(card => card.value).ToList();
 			hand = sortedHand;
 		}
 
-		//Method that distribute cards to all Players
+		/// <summary>
+		/// Permet de distribuer les cartes aux joueurs
+		/// </summary>
 		public void distributeCards()
 		{
 			for(int i = 0; i < 5; i++)
@@ -202,6 +206,9 @@ namespace Shared.data
 			}
 		}
 
+		/// <summary>
+		/// Permet d'afficher les cartes
+		/// </summary>
 		public void printHand(List<Card> hand) // Sylvain's function I needed -> ATTENTION watch out ctrl c ctrl v
 		{
 			foreach(Card card in hand)
@@ -210,14 +217,18 @@ namespace Shared.data
 			}
 		}
 
-		//Flush
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un Flush
+		/// </summary>
 		public bool isFlush(List<Card> hand)
 		{
 			char firstColor = hand.First().color;
 			return hand.Where(card => card.color == firstColor).ToList().Count == 5;
 		}
 
-		//Straight
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un straight
+		/// </summary>
 		public bool isStraight(List<Card> hand)
 		{
 			int firstValue = hand.First().value;
@@ -229,47 +240,61 @@ namespace Shared.data
 
 		}
 
-		//Royal Flush
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un royal flush	
+		/// </summary>
 		public bool isRoyalFlush(List<Card> hand)
 		{
 			return hand.First().value == 10 && this.isStraight(hand) && this.isFlush(hand);
 		}
 
-		//Straight Flush
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un straight flush
+		/// </summary>
 		public bool isStraightFlush(List<Card> hand)
 		{
 			return this.isFlush(hand) && this.isStraight(hand);
 		}
 
-		//Four of a kind
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un four of a kind
+		/// </summary>
 		public bool isFourOfAKind(List<Card> hand)
 		{
 			int middleCardValue = hand[2].value;
 			return hand.Where(card => card.value == middleCardValue).ToList().Count == 4;
 		}
 
-		//Three of a kind
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un three of a kind
+		/// </summary>
 		public bool isThreeOfAKind(List<Card> hand)
 		{
 			int middleCardValue = hand[2].value;
 			return hand.Where(card => card.value == middleCardValue).ToList().Count == 3;
 		}
 
-		//Two pair
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un two pair
+		/// </summary>
 		public bool isTwoPair(List<Card> hand)
 		{
 			List<int> handValues = hand.Select(card => card.value).ToList();
 			return !isThreeOfAKind(hand) && handValues.Distinct().ToList().Count == 3;
 		}
 
-		//One pair
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un one pair
+		/// </summary>
 		public bool isPair(List<Card> hand)
 		{
 			List<int> handValues = hand.Select(card => card.value).ToList();
 			return (!isThreeOfAKind(hand) && handValues.Distinct().ToList().Count == 4) || (isThreeOfAKind(hand) && handValues.Distinct().ToList().Count == 2);
 		}
 
-		//Full house
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un full house
+		/// </summary>
 		public bool isFullHouse(List<Card> hand)
 		{
 			return isThreeOfAKind(hand) && isPair(hand);
@@ -296,7 +321,9 @@ namespace Shared.data
 
 		}
 
-		//find the winner (sort is done in the main)
+		/// <summary>
+		/// Fonction qui permet de renvoyer la liste contenant le ou les gagnants de la partie
+		/// </summary>
 		public List<Player> findWinner()
 		{
 			List<Player> listWinners = new List<Player>();
@@ -306,6 +333,10 @@ namespace Shared.data
 
 			return listWinners;
 		}
+
+		/// <summary>
+		/// Fonction qui permet de trouver le premier gagnant
+		/// </summary>
 		public Player getPlayerWinner()
 		{
 			Player winner = null;
@@ -320,6 +351,10 @@ namespace Shared.data
 			}
 			return winner;
 		}
+
+		/// <summary>
+		/// Fonction qui permet de trouver tous le ou les gagnant en cas d'égalité
+		/// </summary>
 		public List<Player> getWinner()
 		{
 			Player winner = this.getPlayerWinner();
@@ -427,7 +462,9 @@ namespace Shared.data
 			return listWinners;
 		}
 
-		//Method to find that appear only once in the list
+		/// <summary>
+		/// Fonction qui permet de trouver un élément qui apparait une fois dans une liste
+		/// </summary>
 		public List<Card> FindElementThatAppearsOnlyOnce(List<Card> list)
 		{
 			List<Card> listToReturn = new List<Card>();
@@ -442,7 +479,9 @@ namespace Shared.data
 			return listToReturn;
 		}
 
-		//Method that find the element that appears only once in a list for one pair
+		/// <summary>
+		/// Fonction qui permet de trouver les paires d'une liste
+		/// </summary>
 		public List<Card> findPair(List<Card> list)
 		{
 			List<Card> element = new List<Card>();
@@ -467,6 +506,9 @@ namespace Shared.data
 			return element;
 		}
 
+		/// <summary>
+		/// Fonction qui permet de remplacer le gagnant par un autre gagnant s'il a une meilleure main
+		/// </summary>
 		public Player replaceWinner(List<Player> listWinners, Player winner, Player actualPlayer)
 		{
 			winner = actualPlayer;
@@ -476,18 +518,25 @@ namespace Shared.data
 			return winner;
 		}
 
-		//Method that compare the value of two cards
+		/// <summary>
+		/// Fonction qui permet de comparer deux cartes
+		/// </summary>
 		public bool isBetterCardThanWinner(Card card, Card winner)
 		{
 			return card.value > winner.value;
 		}
 
+		/// <summary>
+		/// Fonction qui permet de savoir si les cartes ont la même valeur
+		/// </summary>
 		public bool isSameCard(Card card, Card winner)
 		{
 			return card.value == winner.value;
 		}
 
-		//Attribute the score of his combo to the player
+		/// <summary>
+		/// Fonction qui attribue le score à chaque joueur en fonction de sa main
+		/// </summary>
 		public void attributeEachScoreToPlayerForHisCombo()
 		{
 
@@ -538,7 +587,9 @@ namespace Shared.data
 			}
 		}
 
-		//Recursive method that compare each card of the hand of the player with the card of the winner
+		/// <summary>
+		/// Fonction récursive permettant de comparer chaque carte une à une avec avec une autre main
+		/// </summary>
 		public Player compareEachCardOfTheHandOfThePlayerWithTheCardOfTheWinner(List<Player> listWinners, Player winner, Player actualPlayer, int index)
 		{
 			if(index == -1)
