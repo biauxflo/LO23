@@ -165,21 +165,21 @@ namespace Shared.data
 
 		public void exchangeCards(Player player, List<Card> listOfCards)
 		{
-			int nb = listOfCards.Count;
-
 			// List<Card> listOfNewCards = new List<Card>();
-			for(int i = 0; i < nb; i++)
+			for(int i = 0; i < listOfCards.Count; i++)
 			{
 				player.removeCardFromHand(listOfCards[i]); // we take back the cards from the player
 			}
 			this.deck.changeStatusOfCards(listOfCards); //give back to the deck the cards
 
-			for(int i = 0; i < nb; i++)
+			for(int i = 0; i < listOfCards.Count; i++)
 			{
 				Card cardTmp = this.deck.giveNewCard(); // what's the next card i can give
 				// listOfNewCards.Add(cardTmp); //add to the list of new cards
 				player.AddCardToHand(cardTmp); // add card to player's hand
 			}
+
+			nbNoRise++;
 		}
 
 		/// <summary>
@@ -623,7 +623,7 @@ namespace Shared.data
 						break;
 				}
 
-				if(nbNoRise >= nbPlayersStillPlaying)
+				if((nbNoRise >= nbPlayersStillPlaying -1 && currentPhase.typePhase != TypePhase.draw) || (nbNoRise >= nbPlayersStillPlaying && currentPhase.typePhase == TypePhase.draw))
 				{
 					if(currentPhase.typePhase == TypePhase.reveal)
 					{
@@ -647,6 +647,7 @@ namespace Shared.data
 		{
 			Phase newPhase = new Phase(++currentPhase.typePhase); //Hopefully it gives the next phase
 			newCurrentPhase(newPhase);
+			nbNoRise = 0;
 		}
 
 		private void newCurrentPhase(Phase newPhase)
@@ -663,11 +664,18 @@ namespace Shared.data
 			}
 			else
 			{
-				player.decrementTokens(value, player.tokens);
-				player.incrementTokens(value, player.tokensBet);
+				player.decrementTokens(value);
+				player.incrementTokensBet(value);
 				this.pot += value;
-				this.highestBet += (player.tokensBet - highestBet) < 0 ? 0 : (player.tokensBet - highestBet); //the highest bet in the game is increased by how much the player has bet more than the current highestBet
-				nbNoRise = 0; //reset nb turn of no rising event
+
+
+				if((player.tokensBet - highestBet) <= 0)
+					nbNoRise++; //No rise has been done, so increasing the nbNoRise value
+				else
+				{
+					nbNoRise = 0; //reset nb turn of no rising event
+					this.highestBet += (player.tokensBet - highestBet);
+				}
 			}
 		}
 
@@ -681,8 +689,8 @@ namespace Shared.data
 		private void allIn(Player player, int value)
 		{
 			value = player.tokens;
-			player.incrementTokens(value, player.tokensBet);
-			player.decrementTokens(value, player.tokens);
+			player.incrementTokensBet(value);
+			player.decrementTokens(value);
 			this.pot += value;
 
 			if((player.tokensBet - highestBet) <= 0)
@@ -703,8 +711,8 @@ namespace Shared.data
 			}
 			else
 			{
-				player.decrementTokens(value, player.tokens);
-				player.incrementTokens(value, player.tokensBet);
+				player.decrementTokens(value);
+				player.incrementTokensBet(value);
 				this.pot += value;
 			}
 
@@ -725,6 +733,7 @@ namespace Shared.data
 			this.highestBet = 0;
 			this.nbNoRise = 0;
 			this.currentPlayerIndex = 0;
+			goToNextPlayer();
 			this.smallBlind = 0;
 			this.bigBlind = this.updateBlind();
 

@@ -139,14 +139,14 @@ namespace Shared.data
 			return (card1.color == card2.color) && (card1.index == card2.index);
 		}
 
-		public void decrementTokens(int value, int concernedTokens)
+		public void decrementTokens(int value)
 		{
-			concernedTokens -= value;
+			tokens -= value;
 		}
 
-		public void incrementTokens(int value, int concernedTokens)
+		public void incrementTokensBet(int value)
 		{
-			concernedTokens += value;
+			tokensBet += value;
 		}
 		
 		public bool reveal()// need to precise how we know how to reveal or not the cards

@@ -42,6 +42,11 @@ namespace Client.ihm_game.ViewModels
 			get; set;
 		}
 
+		public ICommand GarderMainCommand
+		{
+			get; set;
+		}
+
 		public ICommand CardCommand1
 		{
 			get; set;
@@ -228,6 +233,7 @@ namespace Client.ihm_game.ViewModels
 			CallCommand = new RelayCommand(OnCallClick);
 			RaiseCommand = new RelayCommand(OnRaiseClick);
             DefausserCommand = new RelayCommand(OnDefausserClick);
+			GarderMainCommand = new RelayCommand(OnGarderMainClick);
 			CardCommand1 = new RelayCommand(OnCardClick1);
 			CardCommand2 = new RelayCommand(OnCardClick2);
 			CardCommand3 = new RelayCommand(OnCardClick3);
@@ -259,7 +265,7 @@ namespace Client.ihm_game.ViewModels
 			// Hidde or show player info depending on the number of players in Game
 			// By default only the self player is shown
 			ChangeVisibilityPlayers();
-			
+
 			//Display();	
 		}
 
@@ -273,21 +279,21 @@ namespace Client.ihm_game.ViewModels
 		{
 			// Appel fonction data (Gabrielle)
 			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
-			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.fold);
+			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.fold);
 			this.core.PlayRound(gameAction);
 		}
 
 		private void OnCallClick()
 		{
 			// TODO : get the correct bet tokens to call
-			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.call);
+			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.call);
 			this.core.PlayRound(gameAction); 
 		}
 
 		private void OnRaiseClick()
 		{
 			// TODO : get the correct bet tokens and double it to raise
-			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 50, new List<Card>(), TypeAction.rise);
+			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, 50, new List<Card>(), TypeAction.rise);
 			this.core.PlayRound(gameAction);
 		}
 		public void Display()
@@ -325,14 +331,14 @@ namespace Client.ihm_game.ViewModels
 
 			// Appel fonction data (Gabrielle)
 			// GameAction, value = bet tokens
-			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, exchangeCards, TypeAction.exchangeCards);
+			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, 0, exchangeCards, TypeAction.exchangeCards);
 			this.core.PlayRound(gameAction);
 		}
 
 		private void OnGarderMainClick()
 		{
 			//MessageBox.Show("bouton garder main", "bouton garder main", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
-			GameAction gameAction = new GameAction(new Guid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.exchangeCards);
+			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.exchangeCards);
 			this.core.PlayRound(gameAction);
 			// Appel fonction data (Gabrielle)
 			//this.core.PlayRound(TypeAction.garder_main); Attente réponse data pour définir le paramètre de type TypeAction

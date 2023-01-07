@@ -50,6 +50,7 @@ namespace Client.ihm_game
 			gamePage.DataContext = gameViewModel;
 
 			gameWindowViewModel.ActivePage = gamePage;
+
 			gameWindow.Show();
 		}
 
@@ -131,14 +132,18 @@ namespace Client.ihm_game
 
 			if(game.currentPhase.typePhase == TypePhase.bet1 || game.currentPhase.typePhase == TypePhase.bet2)
 			{
+				((GameView)this.gamePage).BT_doubler.Visibility = Visibility.Visible;
+				((GameView)this.gamePage).BT_egaler.Visibility = Visibility.Visible;
+				((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Visible;
+
+				((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Hidden;
+				((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Hidden;
+
 				if(this.WhoAmI().id == game.players[game.currentPlayerIndex].id)
 				{
 					((GameView)this.gamePage).BT_doubler.IsEnabled = true;
 					((GameView)this.gamePage).BT_egaler.IsEnabled = true;
 					((GameView)this.gamePage).BT_seCoucher.IsEnabled = true;
-
-					((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Hidden;
-					((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Hidden;
 				}
 				else
 				{
@@ -150,7 +155,7 @@ namespace Client.ihm_game
 
 			else
 			{
-				if(game.currentPhase.typePhase == TypePhase.draw)// = échanger ?
+				if(game.currentPhase.typePhase == TypePhase.draw)// = échanger
 				{
 					((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Visible;
 					((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Visible;
