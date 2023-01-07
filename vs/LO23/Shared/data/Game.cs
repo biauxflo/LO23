@@ -65,7 +65,7 @@ namespace Shared.data
 		{
 			get; set;
 		}
-		public Game()// nina changed to public to test
+		public Game()
 		{
 		}
 
@@ -86,29 +86,6 @@ namespace Shared.data
 			
 		}
 
-	/*	public void initializeGame()
-		{
-			this.gameStarted = true;
-			foreach(LightUser user in this.lobby)
-			{
-				Player p = new Player(user.id, user.username, user.image);
-				this.players.Add(p);
-			}
-			Phase p1 = new Phase(TypePhase.bet1);
-			Round r1 = new Round();
-			r1.addPhase(p1);
-			this.rounds.Add(r1);
-			this.currentPhase = r1.phases[0];
-			this.distributeCards();
-			foreach(Player player in this.players)
-			{
-				this.payBigBlind(player);
-
-			}
-			this.currentPlayerIndex = 0;
-
-		}
-	*/
 		public static LightGame ToLightGame(Game game)
 		{
 			return new LightGame(game.id, game.gameOptions);
@@ -134,7 +111,7 @@ namespace Shared.data
 		{
 			lobby.Add(user);
 
-			if(lobby.Count >= Constants.NB_PLAYERS_MIN)
+			if(lobby.Count >= gameOptions.NbPlayersMin || lobby.Count >= Constants.NB_PLAYERS_MAX)
 			{
 				initGame(); //Creating players, giving cards and tokens, starting game
 			}
@@ -172,7 +149,6 @@ namespace Shared.data
 				}
 			}
 		}
-
 
 		private void payBigBlind(Player player)
 		{
@@ -690,7 +666,7 @@ namespace Shared.data
 				player.decrementTokens(value, player.tokens);
 				player.incrementTokens(value, player.tokensBet);
 				this.pot += value;
-				this.highestBet = value;
+				this.highestBet += (player.tokensBet - highestBet) < 0 ? 0 : (player.tokensBet - highestBet); //the highest bet in the game is increased by how much the player has bet more than the current highestBet
 				nbNoRise = 0; //reset nb turn of no rising event
 			}
 		}
@@ -706,15 +682,21 @@ namespace Shared.data
 		{
 			value = player.tokens;
 			player.incrementTokens(value, player.tokensBet);
-			player.decrementTokens(0, player.tokens);
+			player.decrementTokens(value, player.tokens);
 			this.pot += value;
-			this.highestBet = value;
-			nbNoRise = 0; //reset nb turn of no rising event
+
+			if((player.tokensBet - highestBet) <= 0)
+				nbNoRise++; //No rise has been done, so increasing the nbNoRise value
+			else
+			{
+				nbNoRise = 0; //reset nb turn of no rising event
+				this.highestBet += (player.tokensBet - highestBet);
+			}
 		}
 
 		private void call(Player player, int value)
 		{
-			value = this.highestBet;
+			value = this.highestBet - player.tokensBet;
 			if(player.tokens < value)
 			{
 				Console.WriteLine("Player doesn't have enough tokens to bet that amount.");
