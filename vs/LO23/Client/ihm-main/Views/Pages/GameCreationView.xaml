@@ -75,6 +75,7 @@
                                            ShowSpinButton="True"
                                            ScrollInterval="1"
                                            MinValue="2"
+                                           Value="4"
                                            MaxValue="8"/>
             </syncfusion:SfTextInputLayout>
         </StackPanel>
@@ -94,6 +95,7 @@
                                            ShowSpinButton="True"
                                            ScrollInterval="100"
                                            MinValue="500"
+                                           Value="2000"
                                            MaxValue="50000"
                                            />
             </syncfusion:SfTextInputLayout>
