@@ -462,46 +462,46 @@ namespace Client.ihm_game.ViewModels
 					visibilityPlayer2 = "Hidden";
 					visibilityPlayer3 = "Hidden";
 					visibilityPlayer4 = "Visible";
-					visibilityPlayer5 = "Hidden";
-					visibilityPlayer6 = "Visible";
+					visibilityPlayer5 = "Visible";
+					visibilityPlayer6 = "Hidden";
 					visibilityPlayer7 = "Hidden";
 					visibilityPlayer8 = "Hidden";
 					break;
 				case 4:
 					visibilityPlayer2 = "Hidden";
-					visibilityPlayer3 = "Visible";
-					visibilityPlayer4 = "Hidden";
+					visibilityPlayer3 = "Hidden";
+					visibilityPlayer4 = "Visible";
 					visibilityPlayer5 = "Visible";
-					visibilityPlayer6 = "Hidden";
-					visibilityPlayer7 = "Visible";
+					visibilityPlayer6 = "Visible";
+					visibilityPlayer7 = "Hidden";
 					visibilityPlayer8 = "Hidden";
 					break;
 				case 5:
-					visibilityPlayer2 = "Visible";
-					visibilityPlayer3 = "Hidden";
+					visibilityPlayer2 = "Hidden";
+					visibilityPlayer3 = "Visible";
 					visibilityPlayer4 = "Visible";
-					visibilityPlayer5 = "Hidden";
+					visibilityPlayer5 = "Visible";
 					visibilityPlayer6 = "Visible";
 					visibilityPlayer7 = "Hidden";
-					visibilityPlayer8 = "Visible";
+					visibilityPlayer8 = "Hidden";
 					break;
 				case 6:
-					visibilityPlayer2 = "Visible";
+					visibilityPlayer2 = "Hidden";
 					visibilityPlayer3 = "Visible";
-					visibilityPlayer4 = "Hidden";
+					visibilityPlayer4 = "Visible";
 					visibilityPlayer5 = "Visible";
-					visibilityPlayer6 = "Hidden";
+					visibilityPlayer6 = "Visible";
 					visibilityPlayer7 = "Visible";
-					visibilityPlayer8 = "Visible";
+					visibilityPlayer8 = "Hidden";
 					break;
 				case 7:
 					visibilityPlayer2 = "Visible";
 					visibilityPlayer3 = "Visible";
 					visibilityPlayer4 = "Visible";
-					visibilityPlayer5 = "Hidden";
+					visibilityPlayer5 = "Visible";
 					visibilityPlayer6 = "Visible";
 					visibilityPlayer7 = "Visible";
-					visibilityPlayer8 = "Visible";
+					visibilityPlayer8 = "Hidden";
 					break;
 				case 8:
 					visibilityPlayer2 = "Visible";
