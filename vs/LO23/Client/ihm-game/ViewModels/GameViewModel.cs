@@ -422,9 +422,9 @@ namespace Client.ihm_game.ViewModels
 		public List<string> CardPath(List<Card> cards)
         {
 			List<string> tmpList = new List<string>();
-			for(int i = 0; i < 5; i++)
+			foreach(Card card in cards)
             {
-				tmpList.Add("/Client;component/ihm-game/Views/images/cards/" + cards[i].value + "_" + cards[i].color + ".png");
+				tmpList.Add("/Client;component/ihm-game/Views/images/cards/" + card.value + "_" + card.color + ".png");
             }
 			OnPropertyChanged(nameof(cardList));
 			return tmpList;

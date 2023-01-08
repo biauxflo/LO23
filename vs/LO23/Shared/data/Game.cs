@@ -636,7 +636,15 @@ namespace Shared.data
 
 		private void goToNextPhase()
 		{
-			Phase newPhase = new Phase(++currentPhase.typePhase); //Hopefully it gives the next phase
+			Phase newPhase;
+			if(nbPlayersStillPlaying == 1)
+			{
+				newPhase = new Phase(TypePhase.reveal); //Only one player left, so reveal phase
+			}
+			else
+			{
+				newPhase = new Phase(++currentPhase.typePhase); //it gives the next phase
+			}
 			newCurrentPhase(newPhase);
 			nbNoRise = 0;
 
@@ -685,6 +693,7 @@ namespace Shared.data
 
 		public void fold(Player player)
 		{
+			deck.changeStatusOfCards(player.hand);
 			player.removeAllCards(); // we take back the cards from the player
 			player.isFolded = true;
 
