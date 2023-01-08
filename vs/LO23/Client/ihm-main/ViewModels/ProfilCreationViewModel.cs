@@ -260,7 +260,7 @@ namespace Client.ihm_main.ViewModels
 		/// <returns><see langword="true"/>Si on peut lancer la demande de création de partie, <see langword="false"/> sinon.</returns>
 		private bool CreationCanExecute()
 		{
-			return ConfirmationIsFalse && Username != string.Empty && Age <= 18 && Password != string.Empty;
+			return !ConfirmationIsFalse && Username != string.Empty && Age >= 18 && Password != string.Empty;
 		}
 
 		/// <summary>
