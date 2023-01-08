@@ -292,8 +292,7 @@ namespace Client.ihm_game.ViewModels
 
 		private void OnRaiseClick()
 		{
-			// TODO : get the correct bet tokens and double it to raise
-			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, 50, new List<Card>(), TypeAction.rise);
+			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, this.player.tokensBet, new List<Card>(), TypeAction.rise);
 			this.core.PlayRound(gameAction);
 		}
 		public void Display()

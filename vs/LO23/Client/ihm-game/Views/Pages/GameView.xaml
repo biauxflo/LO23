@@ -5,6 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.ihm_game.Views.Pages"
       mc:Ignorable="d" 
+      xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+      xmlns:inputLayout="clr-namespace:Syncfusion.UI.Xaml.TextInputLayout;assembly=Syncfusion.SfTextInputLayout.WPF"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GameView">
 
@@ -94,28 +96,25 @@
         <Image Source="/Client;component/ihm-game/Views/images/main_verso.png"  Grid.Column="8" Grid.Row="5" Visibility="{Binding Path=VisibilityPlayer8}"/>
 
         <!-- Action buttons -->
-        <Button Name="BT_seCoucher"  Grid.Column="1" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=FoldCommand}" Click="OnFoldClick" ClickMode="Press">
-            <Image Source="/Client;component/ihm-game/Views/images/coucher.png"/>
-        </Button>
+        <Button Name="BT_seCoucher"  Grid.Column="1" Grid.Row="7"  BorderThickness="1" Background="#1adf70" Content="Se coucher" Command="{Binding Path=FoldCommand}" Click="OnFoldClick" ClickMode="Press" Margin="10" FontSize="10"></Button>
 
-        <Button Name="BT_egaler"  Grid.Column="4" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=CallCommand}" Click="OnCallClick" ClickMode="Press">
-            <Image Source="/Client;component/ihm-game/Views/images/egaler.png"/>
-        </Button>
-        <Viewbox Grid.Column="4" Grid.Row="7" StretchDirection="DownOnly">
-            <TextBlock Text="{Binding Game.highestBet}" Name="TBlock_call" Background="Transparent" MaxHeight="50" MaxWidth="50"/>
+        <Button Name="BT_egaler"  Grid.Column="4" Grid.Row="7"  BorderThickness="1" Background="#1adf70" Content="Egaler" Command="{Binding Path=CallCommand}" Click="OnCallClick" ClickMode="Press" Margin="10" FontSize="10"></Button>
+        <Viewbox Grid.Column="4" Grid.Row="7" StretchDirection="DownOnly" VerticalAlignment="Bottom" Margin="10">
+            <TextBlock Text="{Binding Game.highestBet}" Name="TBlock_call" Background="Transparent" MaxHeight="50" MaxWidth="50" VerticalAlignment="Bottom"/>
         </Viewbox>
-
-        <Button Name="BT_doubler"  Grid.Column="7" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=RaiseCommand}" Click="OnRaiseClick" ClickMode="Press">
-            <Image Source="/Client;component/ihm-game/Views/images/doubler.png"/>
-        </Button>
-
-        <Button Name="BT_defausser"  Grid.Column="6" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=DefausserCommand}" Click="OnDefausserClick" ClickMode="Press">
-            <Image Source="/Client;component/ihm-game/Views/images/defausser.png"/>
-        </Button>
-        <Button Name="BT_garderMain"  Grid.Column="8" Grid.Row="7"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=GarderMainCommand}" Click="OnGarderMainClick" ClickMode="Press">
-            <Image Source="/Client;component/ihm-game/Views/images/garder_main.png"/>
-        </Button>
-
+        <StackPanel Grid.Row="7" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center" Name="IntTB_Bet">
+            <inputLayout:SfTextInputLayout ContainerType="Filled">
+                <syncfusion:IntegerTextBox Text="{Binding Player.tokensBet}"
+                                       MinValue="0"
+                                       MaxValue="{Binding Player.tokens}"
+                                       ScrollInterval="5"
+                                       ShowSpinButton="True"/>
+            </inputLayout:SfTextInputLayout>
+        </StackPanel>
+        <Button Name="BT_doubler"  Grid.Column="7" Grid.Row="7"  BorderThickness="1" Background="#1adf70" Content="Miser" FontSize="10" Command="{Binding Path=RaiseCommand}" Click="OnRaiseClick" ClickMode="Press" Margin="10"></Button>
+        <Button Name="BT_defausser"  Grid.Column="6" Grid.Row="7"  BorderThickness="1" Background="#1adf70" Content="Défausser" FontSize="10" Command="{Binding Path=DefausserCommand}" Click="OnDefausserClick" ClickMode="Press" Margin="10"></Button>
+        <Button Name="BT_garderMain"  Grid.Column="8" Grid.Row="7"  BorderThickness="1" Background="#1adf70" Content="Garder main" FontSize="10" Command="{Binding Path=GarderMainCommand}" Click="OnGarderMainClick" ClickMode="Press" Margin="10"></Button>
+        
         <!-- Pour relier le contenu du texte au code, mettre le champs Text="{Binding <Game.callValue>}"   puis dans le code relier avec un setter-->
 
         <!-- Self player -->

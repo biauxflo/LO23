@@ -133,7 +133,9 @@ namespace Client.ihm_game
 			if(game.currentPhase.typePhase == TypePhase.bet1 || game.currentPhase.typePhase == TypePhase.bet2)
 			{
 				((GameView)this.gamePage).BT_doubler.Visibility = Visibility.Visible;
+				((GameView)this.gamePage).IntTB_Bet.Visibility = Visibility.Visible;
 				((GameView)this.gamePage).BT_egaler.Visibility = Visibility.Visible;
+				((GameView)this.gamePage).TBlock_call.Visibility = Visibility.Visible;
 				((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Visible;
 
 				((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Hidden;
@@ -142,12 +144,14 @@ namespace Client.ihm_game
 				if(this.WhoAmI().id == game.players[game.currentPlayerIndex].id)
 				{
 					((GameView)this.gamePage).BT_doubler.IsEnabled = true;
+					((GameView)this.gamePage).IntTB_Bet.IsEnabled = true;
 					((GameView)this.gamePage).BT_egaler.IsEnabled = true;
 					((GameView)this.gamePage).BT_seCoucher.IsEnabled = true;
 				}
 				else
 				{
 					((GameView)this.gamePage).BT_doubler.IsEnabled = false;
+					((GameView)this.gamePage).IntTB_Bet.IsEnabled = false;
 					((GameView)this.gamePage).BT_egaler.IsEnabled = false;
 					((GameView)this.gamePage).BT_seCoucher.IsEnabled = false;
 				}
@@ -161,7 +165,9 @@ namespace Client.ihm_game
 					((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Visible;
 
 					((GameView)this.gamePage).BT_doubler.Visibility = Visibility.Hidden;
+					((GameView)this.gamePage).IntTB_Bet.Visibility = Visibility.Hidden;
 					((GameView)this.gamePage).BT_egaler.Visibility = Visibility.Hidden;
+					((GameView)this.gamePage).TBlock_call.Visibility = Visibility.Hidden;
 					((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Hidden;
 
 					if(this.WhoAmI().id == game.players[game.currentPlayerIndex].id)
@@ -186,7 +192,9 @@ namespace Client.ihm_game
 						((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Hidden;
 
 						((GameView)this.gamePage).BT_doubler.Visibility = Visibility.Hidden;
+						((GameView)this.gamePage).IntTB_Bet.Visibility = Visibility.Hidden;
 						((GameView)this.gamePage).BT_egaler.Visibility = Visibility.Hidden;
+						((GameView)this.gamePage).TBlock_call.Visibility = Visibility.Hidden;
 						((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Hidden;
 
 					}
