@@ -623,18 +623,9 @@ namespace Shared.data
 						break;
 				}
 
-				if((nbNoRise >= nbPlayersStillPlaying -1 && currentPhase.typePhase != TypePhase.draw) || (nbNoRise >= nbPlayersStillPlaying && currentPhase.typePhase == TypePhase.draw))
+				if(nbNoRise >= nbPlayersStillPlaying)
 				{
-					if(currentPhase.typePhase == TypePhase.reveal)
-					{
-						distributePot();
-						initRound();
-					}
-					else
-					{
-						goToNextPhase();
-						goToNextPlayer();
-					}
+					goToNextPhase();
 				}
 				else
 				{
@@ -648,6 +639,17 @@ namespace Shared.data
 			Phase newPhase = new Phase(++currentPhase.typePhase); //Hopefully it gives the next phase
 			newCurrentPhase(newPhase);
 			nbNoRise = 0;
+
+			if(currentPhase.typePhase == TypePhase.reveal) // if the phase we went to is the reveal phase, we distribute pot and start another round
+			{
+				distributePot();
+				initRound();
+			}
+			else
+			{
+				goToNextPlayer();
+			}
+
 		}
 
 		private void newCurrentPhase(Phase newPhase)
@@ -661,6 +663,8 @@ namespace Shared.data
 			if(player.tokens < value)
 			{
 				Console.WriteLine("Player doesn't have enough tokens to bet that amount.");
+				throw new Exception();
+
 			}
 			else
 			{
@@ -682,6 +686,7 @@ namespace Shared.data
 		public void fold(Player player)
 		{
 			player.removeAllCards(); // we take back the cards from the player
+			player.isFolded = true;
 
 			nbPlayersStillPlaying--;
 		}
@@ -708,6 +713,7 @@ namespace Shared.data
 			if(player.tokens < value)
 			{
 				Console.WriteLine("Player doesn't have enough tokens to bet that amount.");
+				throw new Exception();
 			}
 			else
 			{
@@ -724,10 +730,11 @@ namespace Shared.data
 			nbPlayersStillPlaying = 0;
 			foreach(Player player in this.players)
 			{
-				player.isFolded = false;
-				player.removeAllCards();
+				player.resetPlayerForNextRound();
 				nbPlayersStillPlaying++;
 			}
+
+			deck.changeStatusOfCards(deck.cards);
 
 			this.pot = 0;
 			this.highestBet = 0;

@@ -96,32 +96,34 @@ namespace Shared.data
 			int remove = 0;//index of the card to remove in player's hand
 			bool flag =false;
 
-			for(int i = 0; i < this.hand.Count; i++)
+			int i = 0;
+			while(!flag && i < this.hand.Count)
 			{   
 				if(this.CompareCard(this.hand[i], card) == true)
 				{
 					flag = true;
 					remove = i;
 				}
-				
+
+				i++;				
 			}
 
-			if(remove >= 6)
+			if(flag)
 			{
-				Console.WriteLine("pas bien la vérification dans player pour la carte");
-			}
-            if(flag)
-            {
 				this.hand.RemoveAt(remove);
+			}
+			else
+			{
+				throw new Exception();
 			}
 		}
 
 
 		public void removeAllCards()
 		{
-			foreach(Card card in this.hand)
+			while(hand.Count > 0)
 			{
-				this.removeCardFromHand(card);
+				this.removeCardFromHand(hand[0])
 			}
 		}
 		public void AddCardToHand(Card card)
