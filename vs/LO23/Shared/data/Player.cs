@@ -123,7 +123,7 @@ namespace Shared.data
 		{
 			while(hand.Count > 0)
 			{
-				this.removeCardFromHand(hand[0])
+				this.removeCardFromHand(hand[0]);
 			}
 		}
 		public void AddCardToHand(Card card)

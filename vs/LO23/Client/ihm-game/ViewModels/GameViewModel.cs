@@ -129,6 +129,16 @@ namespace Client.ihm_game.ViewModels
 				OnPropertyChanged(nameof(LightUser));
             }
         }
+		private int bet;
+		public int Bet
+		{
+			get => bet;
+			set
+			{
+				bet = value;
+				OnPropertyChanged(nameof(Bet));
+			}
+		}
 		private readonly IhmGameCore core;
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -292,7 +302,7 @@ namespace Client.ihm_game.ViewModels
 
 		private void OnRaiseClick()
 		{
-			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, this.player.tokensBet, new List<Card>(), TypeAction.rise);
+			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, this.bet, new List<Card>(), TypeAction.rise);
 			this.core.PlayRound(gameAction);
 		}
 		public void Display()
