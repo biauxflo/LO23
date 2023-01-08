@@ -155,6 +155,11 @@ namespace Client.ihm_game
 					((GameView)this.gamePage).BT_egaler.IsEnabled = false;
 					((GameView)this.gamePage).BT_seCoucher.IsEnabled = false;
 				}
+
+				if(game.players.Count(p => !p.isFolded) <= 1)
+				{
+					((GameView)this.gamePage).BT_seCoucher.IsEnabled = false;
+				}
 			}
 
 			else

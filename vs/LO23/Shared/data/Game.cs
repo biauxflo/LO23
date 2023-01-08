@@ -515,8 +515,7 @@ namespace Shared.data
 		/// </summary>
 		public void attributeEachScoreToPlayerForHisCombo()
 		{
-
-			foreach(Player actualPlayer in this.players)
+			foreach(Player actualPlayer in this.players.Where(p => !p.isFolded ))
 			{
         		actualPlayer.hand.Sort();
 
