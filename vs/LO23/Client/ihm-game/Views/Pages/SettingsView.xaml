@@ -21,11 +21,14 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <Button Name="BT_RetourPartie"  Grid.Row="1" Grid.Column="1" Background="#d9d9d9" Content="Retour partie" Command="{Binding Path=BackToPlayCommand}" FontSize="23"></Button>
-        <Button Name="BT_SauvegardePartie"  Grid.Row="3" Grid.Column="1" Background="#d9d9d9" Content="Sauvegarder partie" Command="{Binding Path=SaveCommand}" FontSize="23"></Button>
-        <Button Name="BT_Quitter"  Grid.Row="5" Grid.Column="1" Background="#d9d9d9" Content="Quitter" Command="{Binding Path=QuitCommand}" FontSize="23"></Button>
+        <Button Name="BT_DevenirSpectateur"  Grid.Row="3" Grid.Column="1" Background="#d9d9d9" Content="Devenir spectateur" Command="{Binding Path=BecomingSpectatorCommand}" FontSize="23"></Button>
+        <Button Name="BT_SauvegardePartie"  Grid.Row="5" Grid.Column="1" Background="#d9d9d9" Content="Sauvegarder partie" Command="{Binding Path=SaveCommand}" FontSize="23"></Button>
+        <Button Name="BT_Quitter"  Grid.Row="7" Grid.Column="1" Background="#d9d9d9" Content="Quitter" Command="{Binding Path=QuitCommand}" FontSize="23"></Button>
 
     </Grid>
 </Page>

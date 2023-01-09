@@ -589,7 +589,9 @@ namespace Shared.data
 
 		public void handleGameAction(GameAction action)
 		{
-			Console.WriteLine("action.player.id", action.player.id);
+
+			bool isTurnEvent = true; //THis is used to indicate whether the action received is related to a turn action (therefore should go perform action specific to a turn completing event, like going to next player)
+
 			// Check player existence in the game
 			Player playerInTheGame = this.players.Find(player => player.id == action.player.id);
 			if (playerInTheGame == null)
@@ -619,17 +621,41 @@ namespace Shared.data
 					case TypeAction.exchangeCards:
 						this.exchangeCards(playerInTheGame, action.listOfCards);
 						break;
+					
+					case TypeAction.becomingSpectator:
+						fromPlayerToSpectator(action.player);
+						isTurnEvent = false;
+						break;
 				}
 
-				if(nbNoRise >= nbPlayersStillPlaying)
-				{
-					goToNextPhase();
-				}
-				else
-				{
-					goToNextPlayer();
-				}
+				if(isTurnEvent)
+					if(nbNoRise >= nbPlayersStillPlaying)
+					{
+						goToNextPhase();
+					}
+					else
+					{
+						goToNextPlayer();
+					}
 			}
+		}
+
+		private void fromPlayerToSpectator(Player player)
+		{
+			Player currentPlaying = players[currentPlayerIndex].id == player.id ? players[currentPlayerIndex+1] : players[currentPlayerIndex];
+
+			spectators.Add(lobby.Find(lu => lu.id == player.id));
+			players.Remove(players.Find(p => p.id == player.id));
+			
+			nbPlayers--;
+			nbPlayersStillPlaying--;
+
+			currentPlayerIndex = players.FindIndex(p => p.id == currentPlaying.id); //Update currentPlayerIndex cause we removed players from list
+		}
+
+		private void updateIndexCurrentPlayer()
+		{
+			currentPlayerIndex = currentPlayerIndex % players.Count;
 		}
 
 		private void goToNextPhase()
@@ -655,7 +681,6 @@ namespace Shared.data
 			{
 				goToNextPlayer();
 			}
-
 		}
 
 		private void newCurrentPhase(Phase newPhase)
@@ -670,7 +695,6 @@ namespace Shared.data
 			{
 				Console.WriteLine("Player doesn't have enough tokens to bet that amount.");
 				throw new Exception();
-
 			}
 			else
 			{
@@ -741,7 +765,8 @@ namespace Shared.data
 				if(players.Count >= Constants.NB_PLAYERS_MAX)
 					break;
 
-				if(players.Count(pl => pl.id == lu.id) == 0)
+				//if the user is in lobby but not in the players list nor in the spectators => user is waiting to play
+				if(players.Count(pl => pl.id == lu.id) == 0 && spectators.Count(sp => sp.id == lu.id) == 0)
 				{
 					players.Add(new Player(lu, gameOptions.StartingTokens));
 					this.nbPlayers += 1;
