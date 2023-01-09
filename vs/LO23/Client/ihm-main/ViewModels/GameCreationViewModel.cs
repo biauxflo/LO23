@@ -24,7 +24,7 @@ namespace Client.ihm_main.ViewModels
         /// <summary>
 		/// Partie en cours de création.
 		/// </summary>
-		private GameOptions gameInCreation = new GameOptions(String.Empty, 2000, true, true, 100, 4, 0, 10,10);
+		private GameOptions gameInCreation = new GameOptions(string.Empty, 2000, true, true, 100, 4, 0, 10,10);
 		/// <summary>
 		/// Partie en cours de création.
 		/// </summary>
@@ -35,6 +35,7 @@ namespace Client.ihm_main.ViewModels
             {
                 gameInCreation = value;
 				OnPropertyChanged();
+				CreationCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -46,7 +47,7 @@ namespace Client.ihm_main.ViewModels
         /// <summary>
         /// Commande liée au bouton de creation.
         /// </summary>
-        public ICommand CreationCommand { get; set; }
+        public RelayCommand CreationCommand { get; set; }
 
         /// <summary>
         /// Commande liée au bouton "Annuler".
@@ -65,11 +66,12 @@ namespace Client.ihm_main.ViewModels
         {
             Games = new ObservableCollection<Game>();
 
-            CreationCommand = new RelayCommand(OnCreationClick, true);
+            CreationCommand = new RelayCommand(OnCreationClick, CanCreateGame);
             CancelCommand = new RelayCommand(OnCancelClick, true);
 
             this.core = core;
         }
+
 		/// <summary>
 		/// créer la méthode OnPropertyChanges pour créer un événement.
 		/// Le nom du membre appelant sera utilisé comme paramètre
@@ -84,7 +86,7 @@ namespace Client.ihm_main.ViewModels
 		/// </summary>
 		private void OnCancelClick()
     {
-			GameInCreation = new GameOptions(String.Empty, 2000, true, true, 100, 4, 0, 10,10);
+			GameInCreation = new GameOptions(string.Empty, 2000, true, true, 100, 4, 0, 10, 10);
             core.BackToHomePage();
         }
 
@@ -95,5 +97,14 @@ namespace Client.ihm_main.ViewModels
         {
 			core.TryCreateNewGame(GameInCreation);
         }
-    }
+		
+		/// <summary>
+		/// Permet de savoir si on peut créer la partie.
+		/// </summary>
+		/// <returns><see langword="true"/> si on peut créer la partie, <see langword="false"/> sinon.</returns>
+		private bool CanCreateGame()
+		{
+			return GameInCreation.Name != string.Empty;
+		}
+	}
 }

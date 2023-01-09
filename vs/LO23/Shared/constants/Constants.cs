@@ -10,6 +10,6 @@ namespace Shared.constants
 	{
 		public const string USER_STORAGE_PATH = @"C:\\Windows\\Temp\\users.json";
 
-		public const int NB_PLAYERS_MIN = 2;
+		public const int NB_PLAYERS_MAX = 8;
 	}
 }

@@ -15,14 +15,7 @@ namespace Shared.data
 	// TODO : Classes observables ? Methode "ObservableObject" pour réutiliser l'interface INotifyPropertyChanged
 	public class Player : LightUser
     {
-		public Guid id
-		{
-			get; 
-		}
-		private string username;
-		private string image;
-
-		public event PropertyChangedEventHandler PropertyChanged;
+		//public event PropertyChangedEventHandler PropertyChanged;
 
 		public string role { get; set; }
         public bool isFolded { get; set; }
@@ -35,41 +28,52 @@ namespace Shared.data
 			get; set;
 		}
 		
-		private List<string> cardImage;
+		/*
+		public List<string> Card
+		{
+			get; set; 
+		}*/
+
+		/*
 		public List<string> Card
 		{
 			get => cardImage;
 			set
 			{
 				cardImage = value;
-				OnPropertyChanged(nameof(Card));
+				//OnPropertyChanged(nameof(Card));
 			}
-		}
+		}*/
+
 		/// <summary>
 		/// créer la méthode OnPropertyChanges pour créer un événement.
 		/// Le nom du membre appelant sera utilisé comme paramètre
 		/// </summary>
+		/*
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+			PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
 		}
-/*
-		public Player(int tokens)
-        {
-            this.role = PlayerRole.nothing.ToString();
-            this.isFolded = false;
-            this.tokens = tokens;
-            this.tokensBet = 0;
-            this.hand = new List<Card>();
-        }
-*/
+		/*
+				public Player(int tokens)
+				{
+					this.role = PlayerRole.nothing.ToString();
+					this.isFolded = false;
+					this.tokens = tokens;
+					this.tokensBet = 0;
+					this.hand = new List<Card>();
+				}
+		*/
+		public Player() 
+		{
+		}
 		public Player(LightUser lu, int tokens) : base(lu)
 		{
 			this.role = PlayerRole.nothing.ToString();
 			this.isFolded = false;
 			this.tokensBet = 0;
 			this.hand = new List<Card>();
-
+			//this.Card = new List<string>();
 			this.tokens = tokens;
 		}
 
@@ -92,29 +96,34 @@ namespace Shared.data
 			int remove = 0;//index of the card to remove in player's hand
 			bool flag =false;
 
-			for(int i = 0; i < this.hand.Count; i++)
+			int i = 0;
+			while(!flag && i < this.hand.Count)
 			{   
 				if(this.CompareCard(this.hand[i], card) == true)
 				{
 					flag = true;
+					remove = i;
 				}
-				
+
+				i++;				
 			}
 
-			if(remove == 6)
+			if(flag)
 			{
-				Console.WriteLine("pas bien la vérification dans player pour la carte");
+				this.hand.RemoveAt(remove);
 			}
-			this.hand.RemoveAt(remove);
-
+			else
+			{
+				throw new Exception();
+			}
 		}
 
 
 		public void removeAllCards()
 		{
-			foreach(Card card in this.hand)
+			while(hand.Count > 0)
 			{
-				this.removeCardFromHand(card);
+				this.removeCardFromHand(hand[0]);
 			}
 		}
 		public void AddCardToHand(Card card)
@@ -132,14 +141,14 @@ namespace Shared.data
 			return (card1.color == card2.color) && (card1.index == card2.index);
 		}
 
-		public void decrementTokens(int value, int concernedTokens)
+		public void decrementTokens(int value)
 		{
-			concernedTokens -= value;
+			tokens -= value;
 		}
 
-		public void incrementTokens(int value, int concernedTokens)
+		public void incrementTokensBet(int value)
 		{
-			concernedTokens += value;
+			tokensBet += value;
 		}
 		
 		public bool reveal()// need to precise how we know how to reveal or not the cards
