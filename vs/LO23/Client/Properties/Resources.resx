@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,18 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ServerIp" xml:space="preserve">
+    <value>127.0.0.1</value>
+  </data>
+  <data name="ServerPort" xml:space="preserve">
+    <value>10000</value>
+  </data>
+  <data name="SyncfusionLicenceKey" xml:space="preserve">
+    <value>Mgo+DSMBaFt/QHRqVVhkXlpGaVxdX2NLfUN/T2ZQdVp0ZCQ7a15RRnVfQ11mSH5Rd0VjX39Xcg==;Mgo+DSMBPh8sVXJ0S0J+XE9AdFRAQmBWfFN0RnNQdVt5flFCcC0sT3RfQF5jSH5Wd0VhWH9ednZWRA==;ORg4AjUWIQA/Gnt2VVhkQlFacl1JX3xKYVF2R2BJdlR1fV9CZEwgOX1dQl9gSX9Tc0RjW35ecHJWTmE=;ODgyODQ5QDMyMzAyZTM0MmUzMFI0Q2JGNVdiTzBtSG1rc0dscG5kTk94aVFxVU5aaVlkaWc4ZFpNWGl0N0E9;ODgyODUwQDMyMzAyZTM0MmUzMFJqcjNxakJvS2JBaE5LWkFFM3RQNHBYbFJFUGV4K2RVajE4c240Tm9oUDg9;NRAiBiAaIQQuGjN/V0Z+WE9EaFtAVmFWfUx0RWFab1d6cVxMZFhBNQtUQF1hSn5SdkBiWX1fcHRSR2hd;ODgyODUyQDMyMzAyZTM0MmUzMExBTEpJRXRRY200bnYvb1o2dVkrbzh3eHFjUDdNcGZLMlZvcWtkcGFPWjg9;ODgyODUzQDMyMzAyZTM0MmUzMGE1em5aeWJMeG5JdWdUMENtaFNPWmdKUUtTWFY1R2d6OTEyY1RCaGI3dTQ9;Mgo+DSMBMAY9C3t2VVhkQlFacl1JX3xKYVF2R2BJdlR1fV9CZEwgOX1dQl9gSX9Tc0RjW35ecHNcQGE=;ODgyODU1QDMyMzAyZTM0MmUzMG5KazhUU1ZlaVZ2emdWcWdQcDVUelRQVXhVR0JVU0cvOTNjbTd4NzgrN1U9;ODgyODU2QDMyMzAyZTM0MmUzMFZUM2dndm9WMWlxTlZ4cThTQXQrcG43eXAzemNjVFZlZTJMVHBmREhwajQ9;ODgyODU3QDMyMzAyZTM0MmUzMExBTEpJRXRRY200bnYvb1o2dVkrbzh3eHFjUDdNcGZLMlZvcWtkcGFPWjg9</value>
+  </data>
 </root>

@@ -14,5 +14,9 @@ namespace Shared.data
         {
             this.phases = new List<Phase>();
         }
+		public void addPhase(Phase phase)
+		{
+			this.phases.Add(phase);
+		}
     }
 }

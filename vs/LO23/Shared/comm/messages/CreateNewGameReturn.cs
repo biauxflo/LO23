@@ -17,7 +17,7 @@ namespace Shared.comm.messages
 		}
 		public override void Handle(ICommToDataClient commToData)
 		{
-			commToData.setGame(this.game);
+			commToData.AddClientToThisGame(game);
 		}
 	}
 }
