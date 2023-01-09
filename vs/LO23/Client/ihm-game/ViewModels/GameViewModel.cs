@@ -84,7 +84,6 @@ namespace Client.ihm_game.ViewModels
 			}
 		}
 
-		// TODO : changer vers List<Player> et utiliser la methode d'Eliot (sortList)
 		private Player player;
 		public Player Player
 		{
@@ -147,6 +146,16 @@ namespace Client.ihm_game.ViewModels
 			{
 				minRise = value;
 				OnPropertyChanged(nameof(MinRise));
+			}
+		}
+		private int nbPlayers;
+		public int NbPlayers
+		{
+			get => nbPlayers;
+			set
+			{
+				nbPlayers = value;
+				OnPropertyChanged(nameof(NbPlayers));
 			}
 		}
 		private readonly IhmGameCore core;
@@ -272,18 +281,13 @@ namespace Client.ihm_game.ViewModels
             {
 				cardList = CardPath(player.hand);
 
-				// -> A voir si on ajoute ListPlayer
-				// Fonction sort Eliot
-				playerList = sortList(game.players);
+				playerList = game.players.FindAll(pl => pl.id != player.id);
 
 				OnPropertyChanged(nameof(CardList));
 				OnPropertyChanged(nameof(PlayerList));
 				OnPropertyChanged(nameof(Player));
 			}
-			//Initialize good button
 
-			// Hidde or show player info depending on the number of players in Game
-			// By default only the self player is shown
 			ChangeVisibilityPlayers();
 
 			//Display();	
@@ -292,7 +296,7 @@ namespace Client.ihm_game.ViewModels
 		// fonction lié au bouton de paramètre
 		private void OnParamClick()
 		{
-			core.GoToSettingsPage();
+			core.GoToSettingsPage(this.game);
 		}
 
 		private void OnFoldClick()
@@ -406,32 +410,11 @@ namespace Client.ihm_game.ViewModels
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 
-		public List<Player> sortList(List<Player> players)
-		{
-			List<Player> newList = new List<Player>();
-			LightUser lu = this.core.gameToData.whoAmi();
-			Player firstPlayer = this.ToPlayer(lu);
-			int i=0;
-			foreach(Player player in players)
-			{				
-				if(player == firstPlayer)
-				{
-					break;
-				}
-				i++;
-			}
-			for(int j = i; j < players.Count; j++)
-			{
-				newList.Add(players[j]);
-
-			}
-			for(int j = 0; j < i; j++)
-			{
-				newList.Add(players[j]);
-			}
-			return newList;
-		}
-
+		/// <summary>
+		/// Converti LightUser en Player
+		/// </summary>
+		/// <param name="lu"></param>
+		/// <returns></returns>
 		public Player ToPlayer(LightUser lu)
 		{
 			Player player = game.players.Find(x => x.id == lu.id);
@@ -449,10 +432,14 @@ namespace Client.ihm_game.ViewModels
 			OnPropertyChanged(nameof(cardList));
 			return tmpList;
         }
-		//Mise à jour de l'affichage du jeu
+		/// <summary>
+		/// Mise à jour de l'affichage du jeu
+		/// </summary>
 		public void UpdateGame(Game game)
 		{
 			player = ToPlayer(lightUser);
+			nbPlayers = game.nbPlayers;
+			OnPropertyChanged(nameof(NbPlayers));
 			if(player != null)
 			{
 				//Display player
@@ -460,6 +447,7 @@ namespace Client.ihm_game.ViewModels
 				//Display cards of the player
 				cardList = CardPath(player.hand);
 				OnPropertyChanged(nameof(CardList));
+				//Put the correct minimum rise
 				this.minRise = game.highestBet - player.tokensBet;
 				this.bet = this.minRise;
 				OnPropertyChanged(nameof(Bet));
@@ -467,14 +455,21 @@ namespace Client.ihm_game.ViewModels
 			}
 			//Display info of the other players
 			this.ChangeVisibilityPlayers();
-			playerList = sortList(game.players);
+			playerList = game.players.FindAll(pl => pl.id != lightUser.id);
 			OnPropertyChanged(nameof(PlayerList));
 		}
-		// Hidde or show player info depending on the number of players in Game
-		// By default only the self player is shown
+		/// <summary>
+		/// Hidde or show player info depending on the number of players in Game
+		/// By default only the self player is shown
+		/// </summary>
 		public void ChangeVisibilityPlayers()
 		{
-			switch(this.game.nbPlayers)
+			int nbPlayers = this.game.nbPlayers;
+			if(this.player == null)
+			{
+				nbPlayers++; //if spectator then should see the other players
+			}
+			switch(nbPlayers)
 			{
 				case 2:
 					visibilityPlayer2 = "Hidden";

@@ -101,14 +101,11 @@ namespace Client.ihm_game
 							((GameView)this.gamePage).BT_defausser.IsEnabled = false;
 							((GameView)this.gamePage).BT_garderMain.IsEnabled = false;
 						}
-
 					}
-
 					else
 					{
 						if(game.currentPhase.typePhase == TypePhase.reveal)
 						{
-
 							((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Hidden;
 							((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Hidden;
 
@@ -139,13 +136,12 @@ namespace Client.ihm_game
 		{
 			gameWindowViewModel.ActivePage = gamePage;
 		}
-
 		/// <summary>
 		/// Met la page active sur la page de paramètre.
 		/// </summary>
-		internal void GoToSettingsPage()
+		internal void GoToSettingsPage(Game game)
 		{
-			settingsViewModel = new SettingsViewModel(this);
+			settingsViewModel = new SettingsViewModel(this, game);
 			settingsPage.DataContext = settingsViewModel;
 			gameWindowViewModel.ActivePage = settingsPage;
 		}
@@ -162,7 +158,6 @@ namespace Client.ihm_game
 		/// </summary>
 		internal void GameEnded()
 		{
-			// A decommenter au moment de l'integration de la V2 avec data
 			gameToData.LeaveGame();
 			gameWindow.Hide();
 		}
@@ -172,17 +167,6 @@ namespace Client.ihm_game
 
 		}
 
-		/** TODO : delete when we get actual game from data */
-		/**internal Game testNewGame()
-		{
-			GameOptions gameOptions = new GameOptions("name", 102, true, true, 5, 4, 1, 10);
-			Guid guid = Guid.NewGuid();
-			Game game = new Game(guid, gameOptions);
-			game.pot = 250;
-			return game;
-
-		}*/
-		/** ------- */
 		/// <summary>
 		/// Mise à jour de l'affichage du jeu 
 		/// </summary>
@@ -242,7 +226,6 @@ namespace Client.ihm_game
 					((GameView)this.gamePage).BT_seCoucher.IsEnabled = false;
 				}
 			}
-
 			else
 			{
 				if(game.currentPhase.typePhase == TypePhase.draw)// = échanger
@@ -266,9 +249,7 @@ namespace Client.ihm_game
 						((GameView)this.gamePage).BT_defausser.IsEnabled = false;
 						((GameView)this.gamePage).BT_garderMain.IsEnabled = false;
 					}
-
 				}
-
 				else
 				{
 					if(game.currentPhase.typePhase == TypePhase.reveal)
@@ -282,10 +263,8 @@ namespace Client.ihm_game
 						((GameView)this.gamePage).BT_egaler.Visibility = Visibility.Hidden;
 						((GameView)this.gamePage).TBlock_call.Visibility = Visibility.Hidden;
 						((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Hidden;
-
 					}
 				}
-
 			}
 		}
 

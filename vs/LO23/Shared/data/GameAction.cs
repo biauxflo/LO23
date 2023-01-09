@@ -13,7 +13,8 @@ namespace Shared.data
         allin,
         fold, 
 		check,
-		exchangeCards
+		exchangeCards,
+		becomingSpectator
     }
 
     public class GameAction
