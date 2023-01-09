@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace Client.ihm_game.Views.Pages
 {
 	/// <summary>
-	/// Logique d'interaction pour ChatView.xaml
+	/// Logique d'interaction pour chatViewxaml.xaml
 	/// </summary>
-	public partial class ChatView : Page
+	public partial class chatViewxaml : Page
 	{
-		public ChatView()
+		public chatViewxaml()
 		{
 			InitializeComponent();
+		}
+
+		private void serverPort_TextChanged(object sender, TextChangedEventArgs e)
+		{
+
 		}
 	}
 }
