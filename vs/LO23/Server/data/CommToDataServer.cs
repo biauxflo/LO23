@@ -1,3 +1,4 @@
+using Shared.constants;
 using Shared.data;
 using System;
 using System.Collections.Generic;
@@ -50,7 +51,7 @@ namespace Server.Data
         {
 			Game game = data_Server_Ctrl.games.Find(x => x.id == gameId);
 
-			if(game.lobby.Count < game.gameOptions.NbPlayersMax)
+			if(game.lobby.Count < Constants.NB_PLAYERS_MAX)
 			{
 				game.addUser(user);
 				return game;

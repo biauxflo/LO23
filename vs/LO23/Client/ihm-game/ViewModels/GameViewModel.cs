@@ -267,9 +267,9 @@ namespace Client.ihm_game.ViewModels
 
 			/* When gameStatus is "running", the player list is not null.
 			 * So, we convert a lightUser to plater and we show his cards. */
-			if(gameStatus == GameStatus.running)
+			player = ToPlayer(lightUser);
+			if(player != null)
             {
-				player = ToPlayer(lightUser);
 				cardList = CardPath(player.hand);
 
 				// -> A voir si on ajoute ListPlayer
@@ -452,20 +452,23 @@ namespace Client.ihm_game.ViewModels
 		//Mise à jour de l'affichage du jeu
 		public void UpdateGame(Game game)
 		{
-			//Display player
 			player = ToPlayer(lightUser);
-			OnPropertyChanged(nameof(Player));
-			//Display cards of the player
-			cardList = CardPath(player.hand);
-			OnPropertyChanged(nameof(CardList));
+			if(player != null)
+			{
+				//Display player
+				OnPropertyChanged(nameof(Player));
+				//Display cards of the player
+				cardList = CardPath(player.hand);
+				OnPropertyChanged(nameof(CardList));
+				this.minRise = game.highestBet - player.tokensBet;
+				this.bet = this.minRise;
+				OnPropertyChanged(nameof(Bet));
+				OnPropertyChanged(nameof(MinRise));
+			}
 			//Display info of the other players
 			this.ChangeVisibilityPlayers();
 			playerList = sortList(game.players);
 			OnPropertyChanged(nameof(PlayerList));
-			this.minRise = game.highestBet - player.tokensBet;
-			this.bet = this.minRise;
-			OnPropertyChanged(nameof(Bet));
-			OnPropertyChanged(nameof(MinRise));
 		}
 		// Hidde or show player info depending on the number of players in Game
 		// By default only the self player is shown

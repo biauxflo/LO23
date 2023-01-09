@@ -95,13 +95,7 @@ namespace Shared.data
 
 		public void initGame()
 		{
-			foreach(LightUser lu in lobby) //Creation of players - tokens distribution
-			{
-				players.Add(new Player(lu, gameOptions.StartingTokens));
-				this.nbPlayers += 1;
-				this.nbPlayersStillPlaying += 1;
-			}
-
+			this.currentPlayerIndex = 0;
 			initRound();
 			status = GameStatus.running;
 			gameStarted = true;
@@ -110,10 +104,10 @@ namespace Shared.data
 
 
 		public void addUser(LightUser user)
-		{
+		{  
 			lobby.Add(user);
 
-			if(lobby.Count >= gameOptions.NbPlayersMin || lobby.Count >= Constants.NB_PLAYERS_MAX)
+			if(!this.gameStarted && (lobby.Count >= gameOptions.NbPlayersMin || lobby.Count >= Constants.NB_PLAYERS_MAX))
 			{
 				initGame(); //Creating players, giving cards and tokens, starting game
 			}
@@ -124,6 +118,9 @@ namespace Shared.data
 		{
 			int nextPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
 			this.currentPlayerIndex = nextPlayerIndex;
+
+			if(players[nextPlayerIndex].isFolded)
+				nextPlayerIndex = goToNextPlayer();
 
 			return nextPlayerIndex;
 		}
@@ -738,6 +735,19 @@ namespace Shared.data
 		public void initRound()
 		{
 			nbPlayersStillPlaying = 0;
+
+			foreach(LightUser lu in lobby) //Creation of players - tokens distribution
+			{
+				if(players.Count >= Constants.NB_PLAYERS_MAX)
+					break;
+
+				if(players.Count(pl => pl.id == lu.id) == 0)
+				{
+					players.Add(new Player(lu, gameOptions.StartingTokens));
+					this.nbPlayers += 1;
+				}
+			}
+			
 			foreach(Player player in this.players)
 			{
 				player.resetPlayerForNextRound();
@@ -749,7 +759,6 @@ namespace Shared.data
 			this.pot = 0;
 			this.highestBet = 0;
 			this.nbNoRise = 0;
-			this.currentPlayerIndex = 0;
 			goToNextPlayer();
 			this.smallBlind = 0;
 			this.bigBlind = this.updateBlind();

@@ -78,6 +78,49 @@ namespace Client.ihm_game
 						((GameView)this.gamePage).BT_seCoucher.IsEnabled = false;
 					}
 				}
+				else
+				{
+					if(game.currentPhase.typePhase == TypePhase.draw)// = échanger
+					{
+						((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Visible;
+						((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Visible;
+
+						((GameView)this.gamePage).BT_doubler.Visibility = Visibility.Hidden;
+						((GameView)this.gamePage).IntTB_Bet.Visibility = Visibility.Hidden;
+						((GameView)this.gamePage).BT_egaler.Visibility = Visibility.Hidden;
+						((GameView)this.gamePage).TBlock_call.Visibility = Visibility.Hidden;
+						((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Hidden;
+
+						if(this.WhoAmI().id == game.players[game.currentPlayerIndex].id)
+						{
+							((GameView)this.gamePage).BT_defausser.IsEnabled = true;
+							((GameView)this.gamePage).BT_garderMain.IsEnabled = true;
+						}
+						else
+						{
+							((GameView)this.gamePage).BT_defausser.IsEnabled = false;
+							((GameView)this.gamePage).BT_garderMain.IsEnabled = false;
+						}
+
+					}
+
+					else
+					{
+						if(game.currentPhase.typePhase == TypePhase.reveal)
+						{
+
+							((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Hidden;
+							((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Hidden;
+
+							((GameView)this.gamePage).BT_doubler.Visibility = Visibility.Hidden;
+							((GameView)this.gamePage).IntTB_Bet.Visibility = Visibility.Hidden;
+							((GameView)this.gamePage).BT_egaler.Visibility = Visibility.Hidden;
+							((GameView)this.gamePage).TBlock_call.Visibility = Visibility.Hidden;
+							((GameView)this.gamePage).BT_seCoucher.Visibility = Visibility.Hidden;
+
+						}
+					}
+				}
 			}
 			else
 			{
@@ -86,7 +129,6 @@ namespace Client.ihm_game
 				((GameView)this.gamePage).BT_seCoucher.IsEnabled = false;
 				((GameView)this.gamePage).TBlock_call.IsEnabled = false;
 			}
-				
 			gameWindow.Show();
 		}
 
@@ -147,23 +189,26 @@ namespace Client.ihm_game
 		internal void UpdateGameDisplay(Game game)
 		{
 			this.gameViewModel.Game = game;
-			Player user = game.players.Find(x => x.id == this.WhoAmI().id);
+			Player player = game.players.Find(x => x.id == this.WhoAmI().id);
 			gameViewModel.UpdateGame(game);
-			if(user.isFolded)
+			if(player != null)
 			{
-				((GameView)this.gamePage).Card1.Visibility = Visibility.Hidden;
-				((GameView)this.gamePage).Card2.Visibility = Visibility.Hidden;
-				((GameView)this.gamePage).Card3.Visibility = Visibility.Hidden;
-				((GameView)this.gamePage).Card4.Visibility = Visibility.Hidden;
-				((GameView)this.gamePage).Card5.Visibility = Visibility.Hidden;
-			}
-			else
-			{
-				((GameView)this.gamePage).Card1.Visibility = Visibility.Visible;
-				((GameView)this.gamePage).Card2.Visibility = Visibility.Visible;
-				((GameView)this.gamePage).Card3.Visibility = Visibility.Visible;
-				((GameView)this.gamePage).Card4.Visibility = Visibility.Visible;
-				((GameView)this.gamePage).Card5.Visibility = Visibility.Visible;
+				if(player.isFolded)
+				{
+					((GameView)this.gamePage).Card1.Visibility = Visibility.Hidden;
+					((GameView)this.gamePage).Card2.Visibility = Visibility.Hidden;
+					((GameView)this.gamePage).Card3.Visibility = Visibility.Hidden;
+					((GameView)this.gamePage).Card4.Visibility = Visibility.Hidden;
+					((GameView)this.gamePage).Card5.Visibility = Visibility.Hidden;
+				}
+				else
+				{
+					((GameView)this.gamePage).Card1.Visibility = Visibility.Visible;
+					((GameView)this.gamePage).Card2.Visibility = Visibility.Visible;
+					((GameView)this.gamePage).Card3.Visibility = Visibility.Visible;
+					((GameView)this.gamePage).Card4.Visibility = Visibility.Visible;
+					((GameView)this.gamePage).Card5.Visibility = Visibility.Visible;
+				}
 			}
 
 			if(game.currentPhase.typePhase == TypePhase.bet1 || game.currentPhase.typePhase == TypePhase.bet2)
