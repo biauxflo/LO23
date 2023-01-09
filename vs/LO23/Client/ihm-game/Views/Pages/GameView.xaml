@@ -105,7 +105,7 @@
         <StackPanel Grid.Row="7" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center" Name="IntTB_Bet">
             <inputLayout:SfTextInputLayout ContainerType="Filled">
                 <syncfusion:IntegerTextBox Text="{Binding Bet}"
-                                       MinValue="0"
+                                       MinValue="{Binding MinRise}"
                                        MaxValue="{Binding Player.tokens}"
                                        ScrollInterval="5"
                                        ShowSpinButton="True"/>

@@ -139,6 +139,16 @@ namespace Client.ihm_game.ViewModels
 				OnPropertyChanged(nameof(Bet));
 			}
 		}
+		private int minRise;
+		public int MinRise
+		{
+			get => minRise;
+			set
+			{
+				minRise = value;
+				OnPropertyChanged(nameof(MinRise));
+			}
+		}
 		private readonly IhmGameCore core;
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -452,6 +462,10 @@ namespace Client.ihm_game.ViewModels
 			this.ChangeVisibilityPlayers();
 			playerList = sortList(game.players);
 			OnPropertyChanged(nameof(PlayerList));
+			this.minRise = game.highestBet - player.tokensBet;
+			this.bet = this.minRise;
+			OnPropertyChanged(nameof(Bet));
+			OnPropertyChanged(nameof(MinRise));
 		}
 		// Hidde or show player info depending on the number of players in Game
 		// By default only the self player is shown
