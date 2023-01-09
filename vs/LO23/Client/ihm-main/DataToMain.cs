@@ -41,7 +41,7 @@ namespace Client.ihm_main
             core.GameLaunched(game);
         }
 
-		public void ProfileCreationSuceed()
+		public void ProfileCreationSucceed()
 		{
 			core.ProfileCreationSuceed();
 		}

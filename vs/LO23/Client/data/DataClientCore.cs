@@ -10,7 +10,7 @@ namespace Client.data
 {
 	public class DataClientCore
 	{
-		private List<LightUser> users = new List<LightUser>();
+		private List<LightUser> users = new List<LightUser>(); //List of connected users sent from server
 		public List<LightUser> Users
 		{
 			get => users;
@@ -20,7 +20,8 @@ namespace Client.data
 				//interfaceFromMain.UserListUpdated(users); //TODO: Not yet implemented - Waiting for v2
 			}
 		}
-		private List<LightGame> games = new List<LightGame>();
+
+		private List<LightGame> games = new List<LightGame>(); //List of games sent from server
 		public List<LightGame> Games
 		{
 			get => games;
@@ -31,18 +32,24 @@ namespace Client.data
 			}
 		}
 
+		public User CurrentUser { get; set; } //The current user connected on this client
 
 		public CommToDataClient implInterfaceForComm { get; private set; }
 		public Game joinedGame { get; set; }
 
 		public IDataToComm interfaceFromComm { private get; set; }
 		public IDataToMain interfaceFromMain { internal get; set; }
+		public IDataToGame interfaceFromGame {internal get; set;}
+
 		public IHMMainToDataClient implInterfaceForMain { get; private set; }
+		public IHMGameToDataClient implInterfaceForGame { get; private set; }
+
 
 		public DataClientCore()
         {
             this.implInterfaceForComm = new CommToDataClient(this);
 			this.implInterfaceForMain = new IHMMainToDataClient(this);
+			this.implInterfaceForGame = new IHMGameToDataClient(this);
 		}
 
         public void request_PlayGameToComm(Guid gameId, LightUser lightUser)
@@ -74,5 +81,25 @@ namespace Client.data
         {
             interfaceFromMain.ConnectionFailed(error);
         }
+
+		internal void SendProfileCreatioFailedToMain(string error)
+		{
+			interfaceFromMain.ProfileCreatioFailed(error);
+		}
+
+		internal void SendProfileCreationSucceedToMain()
+		{
+			interfaceFromMain.ProfileCreationSucceed();
+		}
+
+		public void request_PlayRoundToComm(GameAction action)
+		{
+			interfaceFromComm.requestPlayRound(action);
+		}
+
+		public void request_LeaveGame(Guid gameId, Guid lightUser)
+		{
+			interfaceFromComm.requestLeaveGame(gameId,lightUser);
+		}
 	}
 }

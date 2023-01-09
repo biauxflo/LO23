@@ -51,10 +51,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="comm\messages\AddPlayerToGameReturn.cs" />
+    <Compile Include="comm\messages\AddSpectatorToGameReturn.cs" />
+    <Compile Include="comm\messages\NewGameMessage.cs" />
+    <Compile Include="comm\messages\GetProfile.cs" />
+    <Compile Include="comm\messages\NotifyNewChatMessage.cs" />
+    <Compile Include="comm\messages\RequestPlayRoundMessage.cs" />
+    <Compile Include="comm\messages\RequestLeaveGameMessage.cs" />
+    <Compile Include="comm\messages\NotifyGameChangeMessage.cs" />
     <Compile Include="comm\messages\CreateNewGame.cs" />
     <Compile Include="comm\messages\CreateNewGameReturn.cs" />
     <Compile Include="comm\messages\NotifyUserChangeMessage.cs" />
     <Compile Include="comm\messages\RequestPlayGame.cs" />
+    <Compile Include="comm\messages\RequestStopGame.cs" />
+    <Compile Include="comm\messages\RequestWatchGame.cs" />
+    <Compile Include="comm\messages\SendChatMessage.cs" />
+    <Compile Include="comm\messages\UnregisterUser.cs" />
+    <Compile Include="comm\messages\UnregisterUserReturn.cs" />
     <Compile Include="comm\TcpClientHandler.cs" />
     <Compile Include="constants\Constants.cs" />
     <Compile Include="data\Game.cs" />
@@ -74,6 +86,7 @@
     <Compile Include="comm\messages\RegisterUserReturnMessage.cs" />
     <Compile Include="comm\MessageToClient.cs" />
     <Compile Include="comm\MessageToServer.cs" />
+    <Compile Include="comm\messages\GetProfileReturn.cs" />
     <Compile Include="interfaces\IDataToComm.cs" />
     <Compile Include="interfaces\IDataToGame.cs" />
     <Compile Include="interfaces\IGameToData.cs" />
@@ -81,7 +94,7 @@
     <Compile Include="interfaces\IMainToGame.cs" />
     <Compile Include="interfaces\ICommToDataClient.cs" />
     <Compile Include="interfaces\ICommToDataServer.cs" />
-    <Compile Include="interfaces\IDataClientToMain.cs" />
+    <Compile Include="interfaces\IMainToDataClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

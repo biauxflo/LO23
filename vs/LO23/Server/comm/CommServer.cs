@@ -1,4 +1,5 @@
 ﻿using Shared.comm;
+using Shared.data;
 using Shared.interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace Server.comm
 {
+	/// <summary>
+	/// Server that handle several clients and manages communication.
+	/// </summary>
 	public class CommServer
 	{
 		/// <summary>Interface fournie par DataServer</summary>
@@ -20,13 +24,18 @@ namespace Server.comm
 		private TcpListener newClientListener = default;
 
 		/// <summary>Ensemble des clients connectés.</summary>
-		private readonly Dictionary<string, TcpClientHandler<MessageToClient, MessageToServer>> 
+		private readonly Dictionary<string, TcpClientHandler<MessageToClient, MessageToServer>>
 			tcpClientHandlers = new Dictionary<string, TcpClientHandler<MessageToClient, MessageToServer>>();
+
+		/// <summary>Ensemble des clients identifiés.</summary>
+		private readonly Dictionary<Guid, string> tcpClientIds = new Dictionary<Guid, string>();
 
 
 		/// <summary>
-		/// Initie l'écoute.
+		/// Starts to listen to new clients.
 		/// </summary>
+		/// <param name="ip">Ip</param>
+		/// <param name="port">Port</param>
 		public void Run(string ip, int port)
 		{
 			//setup server
@@ -51,30 +60,71 @@ namespace Server.comm
 			}
 		}
 
+		/// <summary>
+		/// Handles a received message.
+		/// </summary>
+		/// <param name="msg">Message received</param>
+		/// <param name="id">Client id</param>
 		private void OnReceiveFrom(MessageToServer msg, string id)
 		{
+			if(typeof(AnnounceUserMessage) == msg.GetType())
+			{
+
+				this.tcpClientIds[((AnnounceUserMessage)msg).user.id] = id;
+			}
 			msg.Handle(
 				id, 
 				this.CommToDataServer, 
 				this.SendTo,
-				this.BroadcastExceptTo
+				this.BroadcastExceptTo,
+				this.BroadcastOnGame
 			);
 		}
 
+		/// <summary>
+		/// Sends a message to a client.
+		/// </summary>
+		/// <param name="msg">Message to send</param>
+		/// <param name="id">Client id</param>
 		public void SendTo(MessageToClient msg, string id)
 		{
 			this.tcpClientHandlers[id].Send(msg);
 		}
 
+		/// <summary>
+		/// Sends a message to all clients except one.
+		/// </summary>
+		/// <param name="msg">Message to send</param>
+		/// <param name="exceptId">Id of one client who won't receive the message</param>
 		public void BroadcastExceptTo(MessageToClient msg, string exceptId)
 		{
 			foreach(KeyValuePair<string, TcpClientHandler<MessageToClient, MessageToServer>> client in this.tcpClientHandlers)
 			{
-				if(client.Key == exceptId) break;
+				if(client.Key == exceptId)
+					break;
 				client.Value.Send(msg);
 			}
 		}
-		
+
+		/// <summary>
+		/// Sends a message to all clients from a game.
+		/// This sends the message to all clients in the Loby
+		/// </summary>
+		/// <param name="msg">Message to send</param>
+		/// <param name="game">Game which contains the clients who will receive the message</param>
+		/// <param name="exceptId">Id of one client who won't receive the message</param>
+		public void BroadcastOnGame(MessageToClient msg, Game game, string exceptId)
+		{
+			foreach(LightUser user in game.lobby)
+			{
+				string clientId = this.tcpClientIds[user.id];
+				if(clientId != exceptId)
+				{
+					this.tcpClientHandlers[clientId].Send(msg);
+				}
+			}
+		}
+
 		// TODO : clean stop or destroy
 	}
 }
