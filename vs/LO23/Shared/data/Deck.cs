@@ -21,72 +21,43 @@ namespace Shared.data
 		{
 			Random rand = new Random();
 			cards = cards.OrderBy(a => rand.Next()).ToList();
+			index = 0;
 		}
 
 		public void generate52Cards() //Can also just be the reset() function
 		{
-			//TODO
-			//Implemente
-			Card c1 = new Card(0, 'C', 5, true, false);
-			Card c2 = new Card(1, 'P', 4, true, false);
-			Card c3 = new Card(2, 'C', 2, true, false);
-			Card c4 = new Card(3, 'C', 7, true, false);
-			Card c5 = new Card(4, 'C', 10, true, false);
-
-
-			this.cards.Add(c1);
-			this.cards.Add(c2);
-			this.cards.Add(c3);
-			this.cards.Add(c4);
-			this.cards.Add(c5);
-
-
-			for(int i = 6; i <= 10; i++)
+			int i = 0;
+			foreach(char color in Card.colors)
 			{
-				Card c6 = new Card(i, 'C', 10, true, false);
-
-				this.cards.Add(c6);
-		
+				foreach(int value in Card.values)
+				{
+					this.cards.Add(new Card(i, color, value, false, true));
+					i++;
+				}
 			}
 
-			for(int i = 10; i <= 20; i++)
-			{
-				Card c7 = new Card(i, 'P', 10, false, false);
-
-				this.cards.Add(c7);
-
-			}
-
-
+			Console.WriteLine("Number of cards in deck: ", cards.Count);
 		}
 		public Card getNextCardAvailable()
 		{
 	
-				while(this.cards[this.index].isInHand==true )
+			while(this.cards[this.index].isInHand)
 			{
-					this.index = (this.index + 1) % 52;
+				this.index = (this.index + 1) % cards.Count;
 			}
 
 			Card cardTmp = this.cards[this.index];
-				this.index++;// ptr on the next card potentially available
-			return cardTmp;
+			this.index++;// ptr on the next card potentially available
 
-
-			
+			return cardTmp;	
 		}
 
 		public Card giveNewCard()
 		{
-
 			Card card = this.getNextCardAvailable();
-		
-
 			card.isInHand = true;
 		
-
-
 			return card;
-
 		}
 		public void changeStatusOfCards(List<Card> listOfCards)
 		{	

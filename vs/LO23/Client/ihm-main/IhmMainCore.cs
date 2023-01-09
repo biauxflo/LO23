@@ -29,9 +29,9 @@ namespace Client.ihm_main
 		/// </summary>
 		private readonly Page connectionPage = new ConnectionView();
 
-        /// <summary>
+		/// <summary>
 		/// View Model de la page de connexion.
-        /// </summary>
+		/// </summary>
 		private readonly ConnectionViewModel connectionViewModel;
 
 		/// <summary>
@@ -193,7 +193,8 @@ namespace Client.ihm_main
 		internal void GameLaunched(Game game)
 		{
 			// TODO : FIX
-			//mainWindow.Hide
+			BackToHomePage();
+			mainWindow.Hide();
 			LaunchGame(game);
 		}
 

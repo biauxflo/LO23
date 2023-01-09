@@ -30,7 +30,9 @@ namespace Shared.comm.messages
 		{
 			Game game = commToDataServer.addUserToGame(this.user, this.gameId);
 			sendTo(new AddPlayerToGameReturn(game), id);
-			broadcastOnGame(new NotifyGameChangeMessage(game), game, id);
+			
+			if(game.gameStarted)
+				broadcastOnGame(new NotifyGameChangeMessage(game), game, id);
 		}
 	}
 }

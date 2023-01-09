@@ -29,7 +29,7 @@ namespace Shared.comm.messages
 			Game game = commToDataServer.createNewGame(this.gameOptions);
 			(List<LightUser>, List<LightGame>) usersAndGames = commToDataServer.getUsersAndGames();
 			sendTo(new CreateNewGameReturn(game), id);
-			broadcastExceptTo(new NewGameMessage(usersAndGames.Item1, usersAndGames.Item2), id);
+			broadcastExceptTo(new NewGameMessage(usersAndGames.Item1, usersAndGames.Item2), "");
 		}
 	}
 }

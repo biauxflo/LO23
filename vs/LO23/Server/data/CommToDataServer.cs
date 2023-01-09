@@ -1,3 +1,4 @@
+using Shared.constants;
 using Shared.data;
 using System;
 using System.Collections.Generic;
@@ -48,21 +49,15 @@ namespace Server.Data
 
         public Game addUserToGame(LightUser user, Guid gameId)
         {
-            //TODO
-			//WARNING
-			// Verifier que �a fonctionne => L'utilisateur ajoute � la Game devrait se retrouver dans l'objet Game qui fait partie de listGames dans Data_Server_ctrl.
-			//Or ici on fait (je pense) une copie de cet objet la, et on ajoute le user � la copie de la game. 
-			//A verifier
 			Game game = data_Server_Ctrl.games.Find(x => x.id == gameId);
 
-			if(game.lobby.Count < game.gameOptions.NbPlayersMax)
+			if(game.lobby.Count < Constants.NB_PLAYERS_MAX)
 			{
 				game.addUser(user);
 				return game;
 			}
 			else
 				return null;
-            
         }
 
         public CommToDataServer getCommCallsDataServerImpl()
@@ -141,6 +136,10 @@ namespace Server.Data
 			player.tokens = 0;
 			game.fold(player);
 			game.players.Remove(player);
+			if(game.nbPlayers >= 1)
+			{
+				game.nbPlayers -= 1;
+			}
 			List<Guid> playersId = game.players.ConvertAll(new Converter<Player, Guid>(x => x.id));
 
 			return (game, playersId);

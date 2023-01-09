@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.Properties {
+namespace Server.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Client.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Client.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Server.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -75,15 +75,6 @@ namespace Client.Properties {
         internal static string ServerPort {
             get {
                 return ResourceManager.GetString("ServerPort", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Mgo+DSMBaFt/QHRqVVhkXlpGaVxdX2NLfUN/T2ZQdVp0ZCQ7a15RRnVfQ11mSH5Rd0VjX39Xcg==;Mgo+DSMBPh8sVXJ0S0J+XE9AdFRAQmBWfFN0RnNQdVt5flFCcC0sT3RfQF5jSH5Wd0VhWH9ednZWRA==;ORg4AjUWIQA/Gnt2VVhkQlFacl1JX3xKYVF2R2BJdlR1fV9CZEwgOX1dQl9gSX9Tc0RjW35ecHJWTmE=;ODgyODQ5QDMyMzAyZTM0MmUzMFI0Q2JGNVdiTzBtSG1rc0dscG5kTk94aVFxVU5aaVlkaWc4ZFpNWGl0N0E9;ODgyODUwQDMyMzAyZTM0MmUzMFJqcjNxakJvS2JBaE5LWkFFM3RQNHBYbFJFUGV4K2RVajE4c240Tm9oUDg9;NRAiBiAaIQQuGjN/V0Z+WE9EaFtAVmFWfUx0RWFab1d6cVxMZFhBNQtUQF1hSn5SdkBiWX1fcHRSR2hd;ODgyODUyQDMyMzAyZTM0Mm [le reste de la chaîne a été tronqué]&quot;;.
-        /// </summary>
-        internal static string SyncfusionLicenceKey {
-            get {
-                return ResourceManager.GetString("SyncfusionLicenceKey", resourceCulture);
             }
         }
     }
