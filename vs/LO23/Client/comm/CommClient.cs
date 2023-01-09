@@ -12,7 +12,7 @@ using System.Windows;
 namespace Client.comm
 {
 	/// <summary>
-	/// Client that connects to a server and manage messages.
+	/// Client permettant de se connecter au serveur et de gérer les messages.
 	/// </summary>
 	public class CommClient
 	{
@@ -58,18 +58,18 @@ namespace Client.comm
 		}
 
 		/// <summary>
-		/// Handles a received message.
+		/// Gère les messages reçus
 		/// </summary>
-		/// <param name="msg">Recevied message</param>
+		/// <param name="msg">Message reçu</param>
 		private void OnReceive(MessageToClient msg)
 		{
 			Application.Current.Dispatcher.Invoke(() => msg.Handle(this.CommToData));
 		}
 
 		/// <summary>
-		/// Sends a message to the server.
+		/// Envoie un message au serveur
 		/// </summary>
-		/// <param name="msg">Message to send</param>
+		/// <param name="msg">Message à envoyer</param>
 		public void Send(MessageToServer msg)
 		{
 			this.handler.Send(msg);

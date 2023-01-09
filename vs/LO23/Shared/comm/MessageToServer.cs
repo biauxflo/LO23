@@ -5,17 +5,20 @@ using Shared.data;
 namespace Shared.comm
 {
 	/// <summary>
-	/// Message send from the server to the client.
+	///  Message envoyé du client au serveur. Le message est créé sur le client.
 	/// </summary>
 	public abstract class MessageToServer
 	{
 		/// <summary>
-		/// Handles the message. This has to be overridden by children classes.
+		/// Gère le message.
+		/// Cette méthode est exécutée sur le serveur.
+		/// Les classes filles doivent surcharger cette méthode.
 		/// </summary>
-		/// <param name="id">Id of the client</param>
-		/// <param name="commToDataServer">Interface which has to be used to process</param>
-		/// <param name="sendTo">Action used to send response</param>
-		/// <param name="broadcastExceptTo">Action used to notify other clients</param>
+		/// <param name="id">identifiant de l'expéditeurt</param>
+		/// <param name="commToDataServer">Interface de data</param>
+		/// <param name="sendTo">Méthode pour envoyer un message à un utilisateur</param>
+		/// <param name="broadcastExceptTo">Méthode pour envoyer un message à un tous les utilisateurs sauf un</param>
+		/// <param name="broadcastOnGame">Méthode pour envoyer un message à un tous les utilisateurs d'une partie sauf un</param>
 		public abstract void Handle(
 			string id,
 			ICommToDataServer commToDataServer,

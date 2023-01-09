@@ -3,14 +3,16 @@ using Shared.interfaces;
 namespace Shared.comm
 {
 	/// <summary>
-	/// Message send from the client to the server.
+	/// Message envoyé du serveur au client. Le message est créé sur le serveur.
 	/// </summary>
 	public abstract class MessageToClient
 	{
 		/// <summary>
-		/// Handles the message. This has to be overridden by children classes.
+		/// Gère le message.
+		/// Cette méthode est exécutée sur la machine du client.
+		/// Les classes filles doivent surcharger cette méthode.
 		/// </summary>
-		/// <param name="commToData">Interface which has to be used to process</param>
+		/// <param name="commToData">Interface de data</param>
 		public abstract void Handle(ICommToDataClient commToData);
 	}
 }

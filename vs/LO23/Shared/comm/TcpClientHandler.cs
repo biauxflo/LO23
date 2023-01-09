@@ -14,16 +14,17 @@ using System.Threading.Tasks;
 namespace Shared.comm
 {
 	/// <summary>
-	/// Handles a connection between two distant TCP clients.
+	/// Gère une connexion TCP entre deux machines.
 	/// </summary>
-	/// <typeparam name="SendType">Type of messages to send</typeparam>
-	/// <typeparam name="ReceiveType">Type of messages to receive</typeparam>
+	/// <typeparam name="SendType">Type de message à envoyer (voir MessageToClient et MessageToServer)</typeparam>
+	/// <typeparam name="ReceiveType">Type de messages à recevoir (voir MessageToClient et MessageToServer)</typeparam>
 	public class TcpClientHandler<SendType, ReceiveType>
 	{
 		readonly TcpClient client;
 		readonly Thread thread;
 		readonly Action<ReceiveType> handler;
 		readonly string debugId;
+
 		public TcpClientHandler(TcpClient client, Action<ReceiveType> handler, string debugId=null)
 		{
 			this.client = client;
@@ -35,12 +36,13 @@ namespace Shared.comm
 		}
 
 		/// <summary>
-		/// Starts to listen to all messages and calls the handler when receiving messages.
+		/// Débute l'écoute et la gestion de messages.
 		/// </summary>
 		private void Listener()
 		{
 			try
 			{
+				//Read message from JSON
 				JsonSerializer serializer = new JsonSerializer
 				{
 					TypeNameHandling = TypeNameHandling.All,
@@ -54,18 +56,17 @@ namespace Shared.comm
 				{
 					StringBuilder sb = new StringBuilder();
 					int bytesRead = 0;
-
+					//read all data
 					do
 					{
 						bytesRead = nwStream.Read(buffer, 0, this.client.ReceiveBufferSize);
 						_ = sb.Append(Encoding.UTF8.GetString(buffer, 0, bytesRead));
 					} while(nwStream.DataAvailable);
 
-
 					JsonTextReader reader = new JsonTextReader(new StringReader(sb.ToString())){
 						SupportMultipleContent = true
 					};
-
+					//Deserialize the JSON to create message object
 					while(reader.Read())
 					{
 						ReceiveType msg = serializer.Deserialize<ReceiveType>(reader);
@@ -86,14 +87,14 @@ namespace Shared.comm
 		}
 
 		/// <summary>
-		/// Sends a message to the other TCP client.
+		/// Envoie un message à l'autre machine.
 		/// </summary>
-		/// <param name="msg">Message to send</param>
+		/// <param name="msg">Message à envoyer</param>
 		public void Send(SendType msg)
 		{
 			try
 			{
-
+				//Serialize message into JSON
 				string data = JsonConvert.SerializeObject(
 					msg, Formatting.None,
 					new JsonSerializerSettings
@@ -101,11 +102,11 @@ namespace Shared.comm
 						TypeNameHandling = TypeNameHandling.All
 					}
 				);
-
+				//Send data to the other computer
 				NetworkStream nwStream = this.client.GetStream();
 				byte[] bytesToSend = Encoding.UTF8.GetBytes(data);
 				nwStream.Write(bytesToSend, 0, bytesToSend.Length);
-
+				//Notify that the message was sent
 				Console.WriteLine(this.debugId == null ?
 					string.Format("<- (out) {0} [{1}]", msg.GetType(), bytesToSend.Length) :
 					string.Format("<- (out to {2}) {0} [{1}]", msg.GetType(), bytesToSend.Length, this.debugId)
