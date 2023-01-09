@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Server.comm
 {
 	/// <summary>
-	/// Server that handle several clients and manages communication.
+	/// Server gérant la communication avec les clients.
 	/// </summary>
 	public class CommServer
 	{
@@ -32,7 +32,7 @@ namespace Server.comm
 
 
 		/// <summary>
-		/// Starts to listen to new clients.
+		/// Débute l'écoute de nouveaux clients afin qu'ils puissent se connecter.
 		/// </summary>
 		/// <param name="ip">Ip</param>
 		/// <param name="port">Port</param>
@@ -61,10 +61,10 @@ namespace Server.comm
 		}
 
 		/// <summary>
-		/// Handles a received message.
+		/// Gère la réception des messages
 		/// </summary>
-		/// <param name="msg">Message received</param>
-		/// <param name="id">Client id</param>
+		/// <param name="msg">Message reçu</param>
+		/// <param name="id">Identifiant du client expéditeur</param>
 		private void OnReceiveFrom(MessageToServer msg, string id)
 		{
 			if(typeof(AnnounceUserMessage) == msg.GetType())
@@ -82,20 +82,20 @@ namespace Server.comm
 		}
 
 		/// <summary>
-		/// Sends a message to a client.
+		///Envoie un message à un client.
 		/// </summary>
-		/// <param name="msg">Message to send</param>
-		/// <param name="id">Client id</param>
+		/// <param name="msg">Message à envoyer</param>
+		/// <param name="id">Identifiant du destinataire</param>
 		public void SendTo(MessageToClient msg, string id)
 		{
 			this.tcpClientHandlers[id].Send(msg);
 		}
 
 		/// <summary>
-		/// Sends a message to all clients except one.
+		/// Envoie un message à tous les clients sauf un.
 		/// </summary>
-		/// <param name="msg">Message to send</param>
-		/// <param name="exceptId">Id of one client who won't receive the message</param>
+		/// <param name="msg">Message à envoyer</param>
+		/// <param name="exceptId">Identifiant du client à éviter (laisser "" pour envoyer à tous les clients)</param>
 		public void BroadcastExceptTo(MessageToClient msg, string exceptId)
 		{
 			foreach(KeyValuePair<string, TcpClientHandler<MessageToClient, MessageToServer>> client in this.tcpClientHandlers)
@@ -107,12 +107,12 @@ namespace Server.comm
 		}
 
 		/// <summary>
-		/// Sends a message to all clients from a game.
-		/// This sends the message to all clients in the Loby
+		/// Envoi un message à tous les utilisateurs connectés à la partie donnée sauf un.
+		/// Envoie le message à tous les utilisateurs présents dans la propriété loby du jeu.
 		/// </summary>
-		/// <param name="msg">Message to send</param>
-		/// <param name="game">Game which contains the clients who will receive the message</param>
-		/// <param name="exceptId">Id of one client who won't receive the message</param>
+		/// <param name="msg">Message à envoyer</param>
+		/// <param name="game">Jeu contenant les utilisateurs à qui envoyer le message.</param>
+		/// <param name="exceptId">Identifiant du client à éviter (laisser "" pour envoyer à tous les clients)</param>
 		public void BroadcastOnGame(MessageToClient msg, Game game, string exceptId)
 		{
 			foreach(LightUser user in game.lobby)
