@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.ihm_main.Views.Pages"
-      mc:Ignorable="d"
+      mc:Ignorable="d" 
       xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
       xmlns:syncfusionskin ="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
       syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=FluentDark}"
@@ -131,7 +131,7 @@
                 <CheckBox Padding="3"
                           IsChecked="{Binding SeePassword}"/>
                 <TextBlock Text="Afficher le mot de passe"/>
-            </StackPanel>
+        </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="8"
                     Grid.Column="4"
@@ -155,7 +155,7 @@
                 <CheckBox Padding="3"
                           IsChecked="{Binding SeeConfirmPassword}"/>
                 <TextBlock Text="Afficher le mot de passe"/>
-            </StackPanel>
+        </StackPanel>
         </StackPanel>
         <Button Grid.Row="10"
                 Grid.Column="2"

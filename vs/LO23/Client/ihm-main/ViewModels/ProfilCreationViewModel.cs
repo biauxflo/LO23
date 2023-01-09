@@ -168,12 +168,12 @@ namespace Client.ihm_main.ViewModels
 					if(password != string.Empty)
 					{
 						foreach(char c in password)
-						{
+				{
 							mask += "*";
 						}
 					}
 				}
-				OnPropertyChanged();
+					OnPropertyChanged();
 				OnPropertyChanged("Password");
 			}
 		}
