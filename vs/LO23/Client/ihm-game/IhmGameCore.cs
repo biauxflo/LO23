@@ -51,6 +51,13 @@ namespace Client.ihm_game
 
 			gameWindowViewModel.ActivePage = gamePage;
 
+			// display the correct buttons at the initialisation of the game and all buttons are disable by default
+			((GameView)this.gamePage).BT_defausser.Visibility = Visibility.Hidden;
+			((GameView)this.gamePage).BT_garderMain.Visibility = Visibility.Hidden;
+			((GameView)this.gamePage).BT_doubler.IsEnabled = false;
+			((GameView)this.gamePage).BT_egaler.IsEnabled = false;
+			((GameView)this.gamePage).BT_seCoucher.IsEnabled = false;
+			((GameView)this.gamePage).TBlock_call.IsEnabled = false;
 			gameWindow.Show();
 		}
 

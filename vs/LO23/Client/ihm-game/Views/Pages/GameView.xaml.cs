@@ -24,40 +24,18 @@ namespace Client.ihm_game.Views.Pages
         public GameView()
         {
 			InitializeComponent();
-			this.BT_defausser.Visibility = Visibility.Hidden;
-			this.BT_garderMain.Visibility = Visibility.Hidden;
 		}
 
 		private void OnCallClick(object sender, RoutedEventArgs e)
 		{
-			/* TODO : delete when test is finished
-			this.BT_egaler.IsEnabled = false;
-			this.BT_doubler.IsEnabled = false;
-			this.BT_seCoucher.IsEnabled = false;
-			*/
 		}
 
 		private void OnFoldClick(object sender, RoutedEventArgs e)
 		{
-			/* TODO : delete when test is finished
-			this.BT_egaler.IsEnabled = false;
-			this.BT_doubler.IsEnabled = false;
-			this.BT_seCoucher.IsEnabled = false;
-			this.Card1.Visibility= Visibility.Hidden;
-			this.Card2.Visibility = Visibility.Hidden;
-			this.Card3.Visibility = Visibility.Hidden;
-			this.Card4.Visibility = Visibility.Hidden;
-			this.Card5.Visibility = Visibility.Hidden;
-			*/
 		}
 
 		private void OnRaiseClick(object sender, RoutedEventArgs e)
 		{
-			/* TODO : delete when test is finished
-			this.BT_egaler.IsEnabled = false;
-			this.BT_doubler.IsEnabled = false;
-			this.BT_seCoucher.IsEnabled = false;
-			*/
 		}
 
 		private void OnDefausserClick(object sender, RoutedEventArgs e)
@@ -71,7 +49,5 @@ namespace Client.ihm_game.Views.Pages
 			this.BT_defausser.IsEnabled = false;
 			this.BT_garderMain.IsEnabled = false;
 		}
-
-
 	}
 }
