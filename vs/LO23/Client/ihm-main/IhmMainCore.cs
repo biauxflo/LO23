@@ -58,6 +58,10 @@ namespace Client.ihm_main
 
 		private ProfilCreationViewModel profilCreationViewModel;
 
+		private Page titleBar = new TitleBarView();
+
+		private readonly TitleBarViewModel titleBarViewModel;
+
 		#endregion
 
 		#region Used Interfaces 
@@ -75,6 +79,7 @@ namespace Client.ihm_main
 			connectionViewModel = new ConnectionViewModel(this);
 			homeViewModel = new HomeViewModel(this);
 			profilCreationViewModel = new ProfilCreationViewModel(this);
+			titleBarViewModel = new TitleBarViewModel(this);
 
 			// Instanciation of shared interfaces.
 			dataToMain = new DataToMain(this);
@@ -85,9 +90,11 @@ namespace Client.ihm_main
 			gameCreationPage.DataContext = gameCreationViewModel;
 			homePage.DataContext = homeViewModel;
 			profileCreationPage.DataContext = profilCreationViewModel;
+			titleBar.DataContext = titleBarViewModel;
 
 			// Active page on the window
 			mainWindowViewModel.ActivePage = connectionPage;
+			mainWindowViewModel.TitleBar = titleBar;
 		}
 
 
@@ -97,6 +104,7 @@ namespace Client.ihm_main
 		internal void Disconnect()
 		{
 			mainWindowViewModel.ActivePage = connectionPage;
+			mainWindowViewModel.IsTitleBarVisible = false;
 		}
 
 
@@ -114,6 +122,11 @@ namespace Client.ihm_main
 		internal void ShowProfileCreationPage()
 		{
 			mainWindowViewModel.ActivePage = profileCreationPage;
+		}
+
+		internal void ShowProfilePage()
+		{
+			throw new NotImplementedException();
 		}
 
 		/// <summary>
@@ -140,7 +153,9 @@ namespace Client.ihm_main
 		internal void ConnectionSucceed(LightUser user)
 		{
 			homeViewModel.ConnectedUser = user;
+			connectionViewModel.Reset();
 			mainWindowViewModel.ActivePage = homePage;
+			mainWindowViewModel.IsTitleBarVisible = true;
 		}
 
 		/// <summary>
