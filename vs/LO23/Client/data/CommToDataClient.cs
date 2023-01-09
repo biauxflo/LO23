@@ -37,6 +37,7 @@ namespace Client.data
 
 		public void updateGame(Game game)
 		{
+			dataClientCore.interfaceFromGame.UpdateGameDisplay(game);
 		}
 
 		public void getProfileReturn(LightUser user)
@@ -57,6 +58,11 @@ namespace Client.data
 
 		public void addGameToListGames(LightGame game)
 		{
+		}
+
+		public void AddClientToThisGame(Game game)
+		{
+			dataClientCore.request_PlayGameToComm(game.id, dataClientCore.CurrentUser);
 		}
 	}
 }

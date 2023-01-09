@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace Client.data
 {
-	public class IHMGameToDataClient : Shared.interfaces.IGameToData
+	public class IHMGameToDataClient : IGameToData
 	{
 		DataClientCore data_client_ctrl;
 		public IHMGameToDataClient(DataClientCore data_client_ctrl)
@@ -18,33 +18,35 @@ namespace Client.data
 			this.data_client_ctrl = data_client_ctrl;
 		}
 
-		void IGameToData.leaveGame(Guid gameId, Guid lightUser)
+		public void LeaveGame()
 		{
-			data_client_ctrl.request_LeaveGame(gameId, lightUser);
+			//data_client_ctrl.request_LeaveGame(gameId, lightUser);
+			throw new NotImplementedException();
 		}
 
-		void IGameToData.playRound(GameAction action)
+		public void PlayRound(GameAction action)
 		{
 			data_client_ctrl.request_PlayRoundToComm(action);
 		}
 
-		void IGameToData.saveGame()
+		public void SaveGame()
 		{
 			throw new NotImplementedException();
 		}
 
-		void IGameToData.sendMessage(ChatMessage message)
+		public void SendMessage(ChatMessage message)
 		{
 			throw new NotImplementedException();
 		}
 
-		void IGameToData.stopGame()
+		public void StopGame()
 		{
 			throw new NotImplementedException();
 		}
 
-		LightUser IGameToData.whoAmi()
+		public LightUser whoAmi()
 		{
+			LightUser user = data_client_ctrl.CurrentUser; 
 			return User.ToLightUser(data_client_ctrl.CurrentUser);
 		}
 	}

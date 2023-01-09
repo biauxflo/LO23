@@ -23,7 +23,7 @@ namespace Shared.comm.messages
 		/// </summary>
 		public override void Handle(ICommToDataClient commToData)
 		{
-			//commToData.setGamesAndUsers(this.lightUsers, this.lightGames);
+			commToData.setGamesAndUsers(this.lightUsers, this.lightGames);
 		}
 	}
 }

@@ -4,7 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.ihm_main.Views.Pages"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
+      xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+      xmlns:syncfusionskin ="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+      syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=FluentDark}"
       Title="GameInProcessView">
     <Grid>
         <Grid.RowDefinitions>
@@ -17,12 +20,35 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="3"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Text="Parties en cours" FontSize="30" FontWeight="Bold" TextAlignment="Center"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center">
-            <Button x:Name="BT_CreateGame" Content="Créer une partie" Background="Gray" Width="200" Margin="10 10 70 10" Command="{Binding GameCreationCommand}"/>
-            <Button x:Name="BT_ReviseBackup" Content="Revisionner une sauvegarde" Background="Gray" Width="200" Margin="70 10 10 10"/>
-        </StackPanel>
-        <ScrollViewer Grid.Row="5" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="1"
+                   Grid.Column="2"
+                   Grid.ColumnSpan="3"
+                   Text="Parties en cours" 
+                   FontSize="30" 
+                   FontWeight="Bold" 
+                   TextAlignment="Center"/>
+        <Button Grid.Row="3"
+                Grid.Column="2"
+                Content="Créer une partie" 
+                Command="{Binding GameCreationCommand}"/>
+        <Button Grid.Row="3"
+                Grid.Column="4"
+                Content="Revisionner une sauvegarde"/>
+        <ScrollViewer Grid.Row="5" 
+                      Grid.Column="2"
+                      Grid.ColumnSpan="3"
+                      HorizontalScrollBarVisibility="Disabled" 
+                      VerticalScrollBarVisibility="Auto">
+            
             <ItemsControl ItemsSource="{Binding Path=Games}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -32,10 +58,14 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="auto">
-                            <Button Margin="5" Width="auto" Command="{Binding DataContext.GameLaunchingCommand, RelativeSource={RelativeSource AncestorType={x:Type ScrollViewer}}}" CommandParameter="{Binding .}">
+                            <Button Margin="5"
+                                    Width="auto"
+                                    Command="{Binding DataContext.GameLaunchingCommand, RelativeSource={RelativeSource AncestorType={x:Type ScrollViewer}}}"
+                                    CommandParameter="{Binding .}">
                                 <Button.Content>
                                     <StackPanel>
-                                        <TextBlock Text="{Binding gameOptions.Name}" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding gameOptions.Name}"
+                                                   HorizontalAlignment="Center"/>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Nombres de joueurs : "/>
                                             <TextBlock Text="{Binding gameOptions.NbPlayersMax}"/>

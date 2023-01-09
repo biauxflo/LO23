@@ -33,19 +33,21 @@ namespace Client.comm
 			throw new NotImplementedException();
 		}
 
-		void IDataToComm.requestStopGame(Guid gameId, Guid playerId)
+		void IDataToComm.requestStopGame(Guid gameId)
 		{
 			throw new NotImplementedException();
 		}
 
 		void IDataToComm.requestLeaveGame(Guid gameId, Guid playerId)
 		{
-			throw new NotImplementedException();
+			RequestLeaveGameMessage msg = new RequestLeaveGameMessage(playerId, gameId);
+			this.send(msg);
 		}
 
 		void IDataToComm.requestPlayRound(GameAction gameAction)
 		{
-			throw new NotImplementedException();
+			RequestPlayRoundMessage msg = new RequestPlayRoundMessage(gameAction);
+			this.send(msg);
 		}
 
 		void IDataToComm.requestWatchGame(Guid gameId, Guid playerId)

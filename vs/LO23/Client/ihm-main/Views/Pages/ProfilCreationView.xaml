@@ -4,16 +4,20 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client.ihm_main.Views.Pages"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
+      xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+      xmlns:syncfusionskin ="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+      syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=FluentDark}"
+      xmlns:inputLayout="clr-namespace:Syncfusion.UI.Xaml.TextInputLayout;assembly=Syncfusion.SfTextInputLayout.WPF"
       Title="Créer un profil">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="3"/>
-            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="3"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -32,49 +36,132 @@
             <RowDefinition Height="3"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3"
+        <TextBlock Grid.Row="2"
+                   Grid.Column="2"
+                   Grid.ColumnSpan="3"
                    Text=" Créer un profil"
                    HorizontalAlignment="Center"
                    FontSize="42"/>
-        <StackPanel Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center">
-            <TextBlock Text="Pseudonyme" FontSize="24" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Username, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="50" Width="250"/>
+        <StackPanel Grid.Row="4" 
+                    Grid.Column="2" 
+                    HorizontalAlignment="Center" Width="200">
+            <TextBlock Text="Pseudonyme"
+                       FontSize="18"
+                       Padding="3"
+                       HorizontalAlignment="Center"/>
+            <inputLayout:SfTextInputLayout Width="200"
+                                           ContainerType="Filled"
+                                           HasError="{Binding UsernameIsEmpty}"
+                                           ErrorText="Champ vide">
+                <syncfusion:SfTextBoxExt Text="{Binding Username, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                     TextWrapping="NoWrap"
+                                     AcceptsReturn="False"
+                                     AcceptsTab="False"
+                                     Watermark="Login"/>
+            </inputLayout:SfTextInputLayout>
         </StackPanel>
-        <StackPanel Grid.Row="4" Grid.Column="4" HorizontalAlignment="Center">
-            <TextBlock Text="Age" FontSize="24" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Age}" Height="50" Width="250"/>
+        <StackPanel Grid.Row="4"
+                    Grid.Column="4"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Age"
+                       FontSize="18"
+                       HorizontalAlignment="Center" 
+                       Padding="3"/>
+            <inputLayout:SfTextInputLayout Width="200"
+                                           ContainerType="Filled"
+                                           HasError="{Binding AgeUnder18}"
+                                           ErrorText="Le profil doit être majeur">
+                <syncfusion:IntegerTextBox Text="{Binding Age}"
+                                       MinValue="1"
+                                       MaxValue="125"
+                                       ScrollInterval="1"
+                                       ShowSpinButton="True"/>
+            </inputLayout:SfTextInputLayout>
         </StackPanel>
-        <StackPanel Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center">
-            <TextBlock Text="Prénom" FontSize="24" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Firstname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="50" Width="250"/>
+        <StackPanel Grid.Row="6"
+                    Grid.Column="2"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Prénom"
+                       FontSize="18"
+                       Padding="3"
+                       HorizontalAlignment="Center"/>
+            <inputLayout:SfTextInputLayout Width="200"
+                                           ContainerType="Filled">
+                <syncfusion:SfTextBoxExt Text="{Binding Firstname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                     TextWrapping="NoWrap"
+                                     AcceptsReturn="False"
+                                     AcceptsTab="False"
+                                     Watermark="Prénom"/>
+            </inputLayout:SfTextInputLayout>
         </StackPanel>
-        <StackPanel Grid.Row="6" Grid.Column="4" HorizontalAlignment="Center">
-            <TextBlock Text="Nom de famille" FontSize="24" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Lastname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="50" Width="250"/>
+        <StackPanel Grid.Row="6" 
+                    Grid.Column="4" 
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Nom de famille" 
+                       FontSize="18" 
+                       Padding="3"
+                       HorizontalAlignment="Center"/>
+            <inputLayout:SfTextInputLayout Width="200"
+                                           ContainerType="Filled">
+                <syncfusion:SfTextBoxExt Text="{Binding Lastname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                         TextWrapping="NoWrap"
+                                         AcceptsReturn="False"
+                                         AcceptsTab="False"
+                                         Watermark="Nom de famille"/>
+            </inputLayout:SfTextInputLayout>
         </StackPanel>
-        <StackPanel Grid.Row="8" Grid.Column="2" HorizontalAlignment="Center">
-            <TextBlock Text="Mot de passe" FontSize="24" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Password, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="50" Width="250"/>
+        <StackPanel Grid.Row="8"
+                    Grid.Column="2"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Mot de passe"
+                       FontSize="18"
+                       Padding="3"
+                       HorizontalAlignment="Center"/>
+            <inputLayout:SfTextInputLayout Width="200"
+                                           ContainerType="Filled"
+                                           HasError="{Binding PasswordIsEmpty}"
+                                           ErrorText="Champ vide">
+                <syncfusion:SfTextBoxExt Text="{Binding Password, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                     TextWrapping="NoWrap"
+                                     AcceptsReturn="False"
+                                     AcceptsTab="False"
+                                     Watermark="Mot de passe"/>
+            </inputLayout:SfTextInputLayout>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Padding="3"
+                          IsChecked="{Binding SeePassword}"/>
+                <TextBlock Text="Afficher le mot de passe"/>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="8" Grid.Column="4" HorizontalAlignment="Center">
-            <TextBlock Text="Confirmation du mot de passe" FontSize="24" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding ConfirmPassword, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="50" Width="250">
-                <TextBox.Style>
-                    <Style TargetType="TextBox">
-                        <Setter Property="Background" Value="White"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ConfirmationIsRight}" Value="False">
-                                <Setter Property="Background" Value="Red"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>    
-                </TextBox.Style>
-            </TextBox>
+        <StackPanel Grid.Row="8"
+                    Grid.Column="4"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Confirmation"
+                       FontSize="18"
+                       Padding="3"
+                       HorizontalAlignment="Center"/>
+            <inputLayout:SfTextInputLayout Width="200"
+                                           ContainerType="Filled"
+                                           HasError="{Binding ConfirmationIsFalse}"
+                                           ErrorText="Confirmation fausse">
+                <syncfusion:SfTextBoxExt Text="{Binding ConfirmPassword, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                         TextWrapping="NoWrap"
+                                         AcceptsReturn="False"
+                                         AcceptsTab="False"
+                                         Watermark="Confirmation">
+                </syncfusion:SfTextBoxExt>
+            </inputLayout:SfTextInputLayout>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Padding="3"
+                          IsChecked="{Binding SeeConfirmPassword}"/>
+                <TextBlock Text="Afficher le mot de passe"/>
+            </StackPanel>
         </StackPanel>
-        <Button Grid.Row="10" Grid.Column="2" Width="250"
+        <Button Grid.Row="10"
+                Grid.Column="2"
                 Content="Créer le profil"
                 Command="{Binding CreationCommand}"/>
-        <Button Grid.Row="10" Grid.Column="4" Width="250"
+        <Button Grid.Row="10" Grid.Column="4"
                 Content="Annuler"
                 Command="{Binding CancelCommand}"/>
     </Grid>

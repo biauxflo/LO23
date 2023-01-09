@@ -18,20 +18,43 @@ namespace Shared.data
 
     public class GameAction
     {
-        public int id { get; set; }
-        public TypeAction typeAction { get; set; }
-        public int value { get; set; }
-		public List<Card> cards
+		public GameAction()
+		{
+		}
+
+		public Guid id
 		{
 			get; set;
 		}
 
-		public GameAction(int id, TypeAction typeAction, int value, List<Card> cards)
+		public Guid gameId
+		{
+			get; set;
+		}
+
+		public Player player
+		{
+			get; set;
+		}
+		public int value
+		{
+			get; set;
+		}
+		public List<Card> listOfCards
+		{
+			get; set;
+		}
+
+        public TypeAction typeAction { get; set; }
+
+		public GameAction(Guid id, Guid gameId, Player player, int value,  List<Card> listOfCards, TypeAction typeAction)
 		{
 			this.id = id;
-			this.typeAction = typeAction;
+			this.gameId = gameId;
+			this.player = player;
 			this.value = value;
-			this.cards = cards;
+			this.listOfCards = listOfCards;
+			this.typeAction = typeAction;
 		}
 	}
 

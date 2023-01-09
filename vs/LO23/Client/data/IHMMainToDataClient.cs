@@ -17,8 +17,8 @@ public class IHMMainToDataClient : Shared.interfaces.IMainToDataClient
         this.data_client_ctrl = data_client_ctrl;
     }
 
-    public void authenticate(string login, string password)
-    {
+	public void authenticate(string login, string password)
+	{
 		try
 		{
 			JArray listUsersJSON = JSONHelper.getJSONFromFile(Constants.USER_STORAGE_PATH);
@@ -27,11 +27,12 @@ public class IHMMainToDataClient : Shared.interfaces.IMainToDataClient
 
 			this.authenticate(user);
 		}
-		catch (Exception e)
+		catch(Exception e)
 		{
 			this.data_client_ctrl.SendConnectionFailedToMain("BadCredentials");
 		}
-    }
+	}
+
 
 	private void authenticate(User user)
 	{
@@ -39,7 +40,7 @@ public class IHMMainToDataClient : Shared.interfaces.IMainToDataClient
 		{
 			this.data_client_ctrl.ask_announceUser(User.ToLightUser(user));
 			this.data_client_ctrl.CurrentUser = user;
-			this.data_client_ctrl.SendConnectionSucceedToMain(user);
+			this.data_client_ctrl.SendConnectionSucceedToMain(User.ToLightUser(user));
 		}
 		else
 		{
@@ -47,23 +48,8 @@ public class IHMMainToDataClient : Shared.interfaces.IMainToDataClient
 		}
 	}
 
-	public void createNewGame(GameOptions options)
-    {
-		this.data_client_ctrl.sendCreateNewGame(options);
-			if(user != null)
-			{
-				data_client_ctrl.ask_announceUser(User.ToLightUser(user));
-                data_client_ctrl.SendConnectionSucceedToMain(user);
-			} else {
-                data_client_ctrl.SendConnectionFailedToMain("BadCredentials");
-            }
-		} catch (Exception e)
-		{
-			data_client_ctrl.SendConnectionFailedToMain("BadCredentials");
-		}
-    }
 
-    public void createNewGame(GameOptions options)
+	public void createNewGame(GameOptions options)
     {
 		data_client_ctrl.sendCreateNewGame(options);
     }
@@ -83,7 +69,13 @@ public class IHMMainToDataClient : Shared.interfaces.IMainToDataClient
         data_client_ctrl.request_PlayGameToComm(gameId, lightUser);
     }
 
-    public void registerProfile(User user)
+	public void registerProfile(string username, string password, string firstname, string lastname, int age)
+	{
+		User user = new User(Guid.NewGuid(), username, "", password, true, firstname, lastname, age);
+		registerProfile(user);
+	}
+
+	public void registerProfile(User user)
     {
 		if(File.Exists(Constants.USER_STORAGE_PATH))
 		{
@@ -96,14 +88,15 @@ public class IHMMainToDataClient : Shared.interfaces.IMainToDataClient
 				// We check if the user already exists locally
 				if(users.Exists(u => u.username == user.username || u.id == user.id))
 				{
-					this.data_client_ctrl.SendConnectionFailedToMain("PlayerAlreadyExists");
+					this.data_client_ctrl.SendProfileCreatioFailedToMain("PlayerAlreadyExists");
 				}
 				else
 				{
 					// If not, we add the user
 					users.Add(user);
 					JSONHelper.writeUsersListToJSONFile(users);
-					this.authenticate(user);
+					this.data_client_ctrl.SendProfileCreationSucceedToMain();
+					//this.authenticate(user);
 				}
 			}
 			catch(Exception e)
@@ -119,12 +112,12 @@ public class IHMMainToDataClient : Shared.interfaces.IMainToDataClient
 				user
 			};
 			JSONHelper.writeUsersListToJSONFile(users);
-			this.authenticate(user);
+			this.data_client_ctrl.SendProfileCreationSucceedToMain();
+			//this.authenticate(user);
 		}
-
 	}
 
-    public List<LightGame> requestSavedGames()
+	public List<LightGame> requestSavedGames()
     {
         throw new NotImplementedException();
     }
