@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Shared.data {
-
-    public class User : LightUser
+	/// <summary>
+	/// Classe <c>User</c> Modélise un utilisateur ('user' en anglais), hérite de la classe LightUser
+	/// </summary>
+	public class User : LightUser
     {
         public string password { get; set; }
         public bool status { get; set; }
@@ -18,7 +20,17 @@ namespace Shared.data {
         public User()
         {
         }
-
+		/// <summary>
+		/// Permet de construire un User
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="username"></param>
+		/// <param name="image"></param>
+		/// <param name="password"></param>
+		/// <param name="status"></param>
+		/// <param name="firstname"></param>
+		/// <param name="lastname"></param>
+		/// <param name="age"></param>
         public User(
             Guid id,
             string username,
@@ -37,7 +49,11 @@ namespace Shared.data {
             this.age = age;
         }
 
-
+		/// <summary>
+		/// Permet de convertir un User en LightUser
+		/// </summary>
+		/// <param name="user"></param>
+		/// <returns></returns>
 		public static LightUser ToLightUser(User user)
 		{
 			return new LightUser(user.id, user.username, user.image);

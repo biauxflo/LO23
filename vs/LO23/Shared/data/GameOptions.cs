@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shared.data
 {
+	/// <summary>
+	/// Classe <c>GameOptions</c> Classe modélisant les GameOptions
+	/// </summary>
 	public class GameOptions
 	{
 		public int StartingTokens
@@ -42,7 +45,18 @@ namespace Shared.data
 		public int NbPlayersMin {
 			set; get;
 		}
-
+		/// <summary>
+		/// Constructeur permettant de créer une instance de GameOptions
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="startingTokens"></param>
+		/// <param name="canSpecJoin"></param>
+		/// <param name="canSpecChat"></param>
+		/// <param name="nbRoundMax"></param>
+		/// <param name="nbPlayersMax"></param>
+		/// <param name="nbPlayersMin"></param>
+		/// <param name="startingBigBlind"></param>
+		/// <param name="bigBlindValue"></param>
 		public GameOptions(
 			string name,
 			int startingTokens,

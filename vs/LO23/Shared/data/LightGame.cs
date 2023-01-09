@@ -7,6 +7,9 @@ using Shared.constants;
 
 namespace Shared.data
 {
+	/// <summary>
+	/// Précise les différentes valeurs pouvant être prises par GameStatus
+	/// </summary>
    public enum GameStatus
     {
         lobby,
@@ -14,8 +17,10 @@ namespace Shared.data
         paused,
         finished,
     }
-
-   public class LightGame
+	/// <summary>
+	/// Classe <c>LightGame</c> Classe modélisant LightGame
+	/// </summary>
+	public class LightGame
     {
         public Guid id { get; set; }
         public GameStatus status { get; set; }
@@ -26,7 +31,11 @@ namespace Shared.data
 		public GameOptions gameOptions {get; private set;} //Options de la game à sa création
 
 		protected LightGame(){}
-
+		/// <summary>
+		/// Constructeur permettant de créer une instance de LightGame
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="options"></param>
 		public LightGame(Guid id, GameOptions options)
         {
             this.id = id;
