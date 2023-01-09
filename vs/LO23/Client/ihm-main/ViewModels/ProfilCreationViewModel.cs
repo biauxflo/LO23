@@ -279,7 +279,7 @@ namespace Client.ihm_main.ViewModels
         private void OnCreationClick()
         {
 			// Calls the core to try the creation of this profile.
-			core.TryCreateProfile(Username, Password, Firstname, Lastname, Age);
+			core.TryCreateProfile(Username, password, Firstname, Lastname, Age);
         }
     }
 }
