@@ -22,11 +22,12 @@ namespace Shared.comm.messages
 			string id,
 			ICommToDataServer commToDataServer,
 			Action<MessageToClient, string> sendTo,
-			Action<MessageToClient, string> broadcastExceptTo
+			Action<MessageToClient, string> broadcastExceptTo,
+			Action<MessageToClient, Game, string> broadcastOnGame
 			)
 		{
 			Game game = commToDataServer.applyActionToPlayer(this.gameAction);
-			broadcastExceptTo(new NotifyGameChangeMessage(game), id);
+			broadcastOnGame(new NotifyGameChangeMessage(game), game, "");
 		}
 	}
 }

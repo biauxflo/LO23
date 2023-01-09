@@ -10,9 +10,9 @@ namespace Shared.data {
     {
         public string password { get; set; }
         public bool status { get; set; }
-        public string firstname { get; private set; }   // Once created the user should not be able to change his firstname
-        public string lastname { get; private set; }    // Once created the user should not be able to change his lastname
-        public int age { get; private set; }    // Once created the user should not be able to change his age
+        public string firstname { get; set; }   // Once created the user should not be able to change his firstname
+        public string lastname { get; set; }    // Once created the user should not be able to change his lastname
+        public int age { get; set; }    // Once created the user should not be able to change his age
 
 
         public User()

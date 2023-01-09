@@ -39,6 +39,10 @@ namespace Client
 		//private MainToGame mainToGame;
         private void App_Startup(object sender, StartupEventArgs e)
         {
+			//Register Syncfusion license
+			string key = Config.GetSyncfusionLicenceKey();
+			Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(key);
+
 			gameCore = new IhmGameCore();
 			mainCore = new IhmMainCore();
 			dataCore = new DataClientCore();
@@ -49,20 +53,11 @@ namespace Client
 			dataCore.interfaceFromComm = commCore.DataToComm;
 			dataCore.interfaceFromMain = mainCore.dataToMain;
 			mainCore.mainToGame = gameCore.MainToGame;
-			//gameCore.gameToData = dataCore.implInterfaceForGame;
+			gameCore.gameToData = dataCore.implInterfaceForGame;
+			dataCore.interfaceFromGame = gameCore.DataToGame;
 			//FIXME: implement interfaces with IHM Main
 
-			commCore.Start("127.0.0.1", 10000);
-
-			/************** Start code needed for V1 - To delete later **************/
-			Guid userGuid = new Guid();
-			List<User> users = new List<User>
-			{
-				new User(userGuid, "username", "image", "password", true, "firstname", "lastname", 10)
-			};
-			JSONHelper.writeUsersListToJSONFile(users);
-			/************** End code needed for V1 - To delete later **************/
-
+			commCore.Start(Config.GetServerIp(), Config.GetServerPort());
 
 			mainCore.Run();
 		}

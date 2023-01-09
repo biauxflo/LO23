@@ -7,14 +7,9 @@ namespace Client.ihm_main.Views.Pages
     /// </summary>
     public partial class ConnectionView : Page
     {
-        public ConnectionView()
+		public ConnectionView()
         {
             InitializeComponent();
-        }
-
-        private void TB_Login_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-    }
+		}
+	}
 }

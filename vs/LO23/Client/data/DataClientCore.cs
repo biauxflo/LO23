@@ -39,12 +39,17 @@ namespace Client.data
 
 		public IDataToComm interfaceFromComm { private get; set; }
 		public IDataToMain interfaceFromMain { internal get; set; }
+		public IDataToGame interfaceFromGame {internal get; set;}
+
 		public IHMMainToDataClient implInterfaceForMain { get; private set; }
+		public IHMGameToDataClient implInterfaceForGame { get; private set; }
+
 
 		public DataClientCore()
         {
             this.implInterfaceForComm = new CommToDataClient(this);
 			this.implInterfaceForMain = new IHMMainToDataClient(this);
+			this.implInterfaceForGame = new IHMGameToDataClient(this);
 		}
 
         public void request_PlayGameToComm(Guid gameId, LightUser lightUser)
@@ -76,5 +81,25 @@ namespace Client.data
         {
             interfaceFromMain.ConnectionFailed(error);
         }
+
+		internal void SendProfileCreatioFailedToMain(string error)
+		{
+			interfaceFromMain.ProfileCreatioFailed(error);
+		}
+
+		internal void SendProfileCreationSucceedToMain()
+		{
+			interfaceFromMain.ProfileCreationSucceed();
+		}
+
+		public void request_PlayRoundToComm(GameAction action)
+		{
+			interfaceFromComm.requestPlayRound(action);
+		}
+
+		public void request_LeaveGame(Guid gameId, Guid lightUser)
+		{
+			interfaceFromComm.requestLeaveGame(gameId,lightUser);
+		}
 	}
 }

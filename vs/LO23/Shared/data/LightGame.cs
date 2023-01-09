@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shared.constants;
 
 namespace Shared.data
 {
@@ -17,7 +18,7 @@ namespace Shared.data
    public class LightGame
     {
         public Guid id { get; set; }
-        public string status { get; set; }
+        public GameStatus status { get; set; }
         public int indexRound { get; set; }
         public List<Player> players { get; set; }
         public List<LightUser> spectators { get; set; }
@@ -30,16 +31,11 @@ namespace Shared.data
         {
             this.id = id;
 			this.gameOptions = options;
-            this.status = GameStatus.lobby.ToString();
+            this.status = GameStatus.lobby;
             this.indexRound = 0;
             this.players = new List<Player>();
             this.spectators = new List<LightUser>();
             this.lobby = new List<LightUser>();
-        }
-
-        public void addUser(LightUser user)
-        {
-            lobby.Add(user);
         }
     }
 }

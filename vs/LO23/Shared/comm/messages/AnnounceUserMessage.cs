@@ -23,7 +23,8 @@ namespace Shared.comm
 			string id,
 			ICommToDataServer commToDataServer,
 			Action<MessageToClient, string> sendTo,
-			Action<MessageToClient, string> broadcastExceptTo
+			Action<MessageToClient, string> broadcastExceptTo,
+			Action<MessageToClient, Game, string> broadcastOnGame
 		)
 		{
 			Console.WriteLine(this.user.username);

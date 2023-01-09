@@ -32,7 +32,7 @@ namespace Shared.interfaces
         void GameLaunched(Game game);
 
         /// <summary>
-        /// Indique qu'une demande de création de partie n'a pas pu être créée.
+        /// Indique qu'une demande de création de partie a echouée.
         /// </summary>
         /// <param name="error">Erreur lors de la création.</param>
         void GameCreationFailed(string error);
@@ -40,7 +40,7 @@ namespace Shared.interfaces
 		/// <summary>
 		/// Indique qu'une demande de création de profil a réussie.
 		/// </summary>
-		void ProfileCreationSuceed();
+		void ProfileCreationSucceed();
 
 		/// <summary>
 		/// Indique qu'une demande de création de profil a échouée.

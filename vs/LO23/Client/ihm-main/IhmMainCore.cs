@@ -58,13 +58,17 @@ namespace Client.ihm_main
 
 		private ProfilCreationViewModel profilCreationViewModel;
 
-		#endregion
+		//private Page profileCreationPage = new ProfilCreationView();
+
+		//private ProfilCreationViewModel profilCreationViewModel;
+
+#endregion
 
 		#region Interfaces des autres modules
 
 		internal IMainToGame mainToGame;
 
-		internal IDataClientToMain mainToData;
+		internal IMainToDataClient mainToData;
 
 		#endregion
 
@@ -98,6 +102,7 @@ namespace Client.ihm_main
 		{
 			mainWindowViewModel.ActivePage = connectionPage;
 		}
+
 
 		/// <summary>
 		/// Met la page active sur la page de création de partie.
@@ -188,7 +193,8 @@ namespace Client.ihm_main
 		internal void GameLaunched(Game game)
 		{
 			// TODO : FIX
-			//mainWindow.Hide
+			BackToHomePage();
+			mainWindow.Hide();
 			LaunchGame(game);
 		}
 
@@ -240,7 +246,7 @@ namespace Client.ihm_main
 		/// <param name="age">Age du profil à créer.</param>
 		internal void TryCreateProfile(string username, string password, string firstname, string lastname, int age)
 		{
-			// TODO : call data
+			mainToData.registerProfile(username, password, firstname, lastname, age);
 		}
 
 		/// <summary>

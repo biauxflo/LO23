@@ -20,12 +20,13 @@ namespace Client.data
 
 		public void LeaveGame()
 		{
+			//data_client_ctrl.request_LeaveGame(gameId, lightUser);
 			throw new NotImplementedException();
 		}
 
-		public void PlayRound(Action action)
+		public void PlayRound(GameAction action)
 		{
-			throw new NotImplementedException();
+			data_client_ctrl.request_PlayRoundToComm(action);
 		}
 
 		public void SaveGame()
@@ -45,6 +46,7 @@ namespace Client.data
 
 		public LightUser whoAmi()
 		{
+			LightUser user = data_client_ctrl.CurrentUser; 
 			return User.ToLightUser(data_client_ctrl.CurrentUser);
 		}
 	}

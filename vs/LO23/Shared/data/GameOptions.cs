@@ -39,10 +39,9 @@ namespace Shared.data
 		public string Name {
 			set; get;
 		}
-
-		// @pirousse: Requiered for IHM_Main
-		public GameOptions()
-		{}
+		public int NbPlayersMin {
+			set; get;
+		}
 
 		public GameOptions(
 			string name,
@@ -51,6 +50,7 @@ namespace Shared.data
 			bool canSpecChat,
 			int nbRoundMax,
 			int nbPlayersMax,
+			int nbPlayersMin,
 			int startingBigBlind,
 			int bigBlindValue
 		)
@@ -61,6 +61,7 @@ namespace Shared.data
 			this.CanSpecChat = canSpecChat;
 			this.NbRoundMax = nbRoundMax;
 			this.NbPlayersMax = nbPlayersMax;
+			this.NbPlayersMin = nbPlayersMax; //For now on, because no possibility to have a range of players between nbPlayerMin and nbPlayerMax
 			this.StartingBigBlind = startingBigBlind;
 			this.BigBlindValue = bigBlindValue;
 		}

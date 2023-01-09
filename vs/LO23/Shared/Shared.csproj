@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="comm\messages\AddPlayerToGameReturn.cs" />
     <Compile Include="comm\messages\AddSpectatorToGameReturn.cs" />
+    <Compile Include="comm\messages\NewGameMessage.cs" />
     <Compile Include="comm\messages\GetProfile.cs" />
     <Compile Include="comm\messages\NotifyNewChatMessage.cs" />
     <Compile Include="comm\messages\RequestPlayRoundMessage.cs" />
