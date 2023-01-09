@@ -38,10 +38,12 @@ namespace Client.data
 		public Game joinedGame { get; set; }
 
 		public IDataToComm interfaceFromComm { private get; set; }
-
 		public IDataToMain interfaceFromMain { internal get; set; }
+		public IDataToGame interfaceFromGame {internal get; set;}
+
 		public IHMMainToDataClient implInterfaceForMain { get; private set; }
 		public IHMGameToDataClient implInterfaceForGame { get; private set; }
+
 
 		public DataClientCore()
         {
@@ -79,6 +81,17 @@ namespace Client.data
         {
             interfaceFromMain.ConnectionFailed(error);
         }
+
+		internal void SendProfileCreatioFailedToMain(string error)
+		{
+			interfaceFromMain.ProfileCreatioFailed(error);
+		}
+
+		internal void SendProfileCreationSucceedToMain()
+		{
+			interfaceFromMain.ProfileCreationSucceed();
+		}
+
 		public void request_PlayRoundToComm(GameAction action)
 		{
 			interfaceFromComm.requestPlayRound(action);

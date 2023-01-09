@@ -15,10 +15,10 @@ namespace Shared.interfaces
 
 		void SaveGame();
 
-		void leaveGame(Guid gameId, Guid lightUser);
-
-		void playRound(GameAction action);
+		void LeaveGame();
 		
 		LightUser whoAmi();
+
+		void PlayRound(GameAction action);
 	}
 }

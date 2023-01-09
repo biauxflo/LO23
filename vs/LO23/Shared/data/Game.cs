@@ -1,3 +1,4 @@
+using Shared.constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Shared.data
 {
 	public class Game : LightGame
 	{
+
+		private int nbPlayersStillPlaying;
 		public List<Round> rounds
 		{
 			get; set;
@@ -62,7 +65,7 @@ namespace Shared.data
 		{
 			get; set;
 		}
-		public Game()// nina changed to public to test
+		public Game()
 		{
 		}
 
@@ -79,31 +82,9 @@ namespace Shared.data
 			this.nbNoRise = 0;
 			this.chat = new List<ChatMessage>();
 			this.deck = new Deck();
+			this.status = GameStatus.lobby;
 			this.gameStarted = false;
-		
-		}
-
-		public void initializeGame()
-		{
-			this.gameStarted = true;
-			foreach(LightUser user in this.lobby)
-			{
-				Player p = new Player(user.id, user.username, user.image);
-				this.players.Add(p);
-			}
-			Phase p1 = new Phase(TypePhase.bet1);
-			Round r1 = new Round();
-			r1.addPhase(p1);
-			this.rounds.Add(r1);
-			this.currentPhase = r1.phases[0];
-			this.distributeCards();
-			foreach(Player player in this.players)
-			{
-				this.payBigBlind(player);
-
-			}
-			this.currentPlayerIndex = 0;
-
+			
 		}
 
 		public static LightGame ToLightGame(Game game)
@@ -111,147 +92,61 @@ namespace Shared.data
 			return new LightGame(game.id, game.gameOptions);
 		}
 
+
+		public void initGame()
+		{
+			this.currentPlayerIndex = 0;
+			initRound();
+			status = GameStatus.running;
+			gameStarted = true;
+
+		}
+
+
+		public void addUser(LightUser user)
+		{  
+			lobby.Add(user);
+
+			if(!this.gameStarted && (lobby.Count >= gameOptions.NbPlayersMin || lobby.Count >= Constants.NB_PLAYERS_MAX))
+			{
+				initGame(); //Creating players, giving cards and tokens, starting game
+			}
+		}
+
+
 		public int goToNextPlayer()
 		{
 			int nextPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
 			this.currentPlayerIndex = nextPlayerIndex;
 
+			if(players[nextPlayerIndex].isFolded)
+				nextPlayerIndex = goToNextPlayer();
+
 			return nextPlayerIndex;
 		}
 
-		// Sort the Hand of the player (Select Sort)
+		/// <summary>
+		/// Permet de trier la main du joueur
+		/// </summary>
 		public void sortHand(List<Card> hand)
 		{
 			List<Card> sortedHand = hand.OrderBy(card => card.value).ToList();
 			hand = sortedHand;
 		}
 
-		//Method that distribute cards to all Players
+		/// <summary>
+		/// Permet de distribuer les cartes aux joueurs
+		/// </summary>
 		public void distributeCards()
 		{
-			List<Card> cardsAvailable = this.deck.cards.Where(c => c.isInHand == false).ToList();
-
 			for(int i = 0; i < 5; i++)
 			{
 				foreach(Player player in this.players)
 				{
-					Card card = cardsAvailable[0];
-					card.isInHand = true;
+					Card card = deck.giveNewCard();
 					player.hand.Add(card);
-					cardsAvailable.RemoveAt(0);
 				}
 			}
-		}
-
-		public void runGame()
-		{/*
-			int nbUser = this.lobby.Count;
-			if (nbUser < nbMinPlayers)
-			{
-				System.Threading.Thread.Sleep(5000);
-			}
-			/*
-			 * Timer timer = new System.Timers.Timer(120000);
-			timer.Start();
-			while()
-			
-			System.Threading.Thread.Sleep(2000);
-			if(nbUser > nbMaxPlayers)
-			{
-				Console.WriteLine(" trop de user dans le lobby, veuillez quitter");
-			}
-			for(int i = 0; i < nbUser; i++)
-			{	Player p =new  Player(this.lobby[i].id,this.lobby[i].username,this.lobby[i].image);
-				this.players.Add(p);
-			}
-			//this.initializeGame();
-			int nbPlayers = this.players.Count();
-			int nbRounds = 1;//remplacer avec game options
-			int roundMax = 4;
-			while(nbRounds < roundMax && nbPlayers > 2)
-			{   Phase p1 = new Phase(TypePhase.bet1);
-			{   Phase p2 = new Phase(TypePhase.draw);
-				Round r1 = new Round();
-				r1.addPhase(p1);
-				this.rounds.Add(r1);
-
-				//this.distributeCards(this.players);
-				this.paySmallBlind(players[currentPlayerIndex]);
-				currentPlayerIndex++;
-				this.payBigBlind(players[currentPlayerIndex+1]);
-				currentPlayerIndex++;
-
-				IDataToComm.notifyGameChange()
-				
-				players[currentPlayerIndex]).chooseAction();
-
-				//switch()
-
-			}
-
-			/*
-			 * Game in lobby status
-			 * 
-			 * //Waiting for players ot start game 
-			 * while nbPlayers (or players.size()) < nbPlayersMax  
-			 *		if nbPlayers > nbPlayersMin && launchGameTimer not started
-			 *			start launchGameTimer
-			 *		
-			 *		if launchGameTimer > 1minute
-			 *			break;
-			 *		else
-			 *			wait
-			 *	
-			 * //Starting game
-			 * 
-			 * initialize Game //nothing may happen, maybe just check everythign is alright and do nothing else, if the rest has already been done when players join for example
-			 * 
-			 * 
-			 * while nbRounds < roundMax && nbPlayers > 1:
-				 * currentRound = creation of a Round (corresponds to creating a round and initialising it) //shuffle deck, make players pay blind, distribute cards ->send game changes to players
-				 * put game in running status
-				 * currentRound.enterPhaseBet() //Here in the object Round is all the logic to enter in a beting phase, for example creates an object phase and add it in Round class's phases array. Declare this phase as the current one for
-				 * 
-				 * indexCurrentPlayer = 0;
-				 * 
-				 * while nbNoRise < nbPlayers // As long as not everyone did not rise, that means that not everyone has bet the same amount, menaing you can not pass to the next phase
-				 *		currentRound.currentPhase.RequestAndExecuteActionFromPlayer(players.getAt(indexCurrentPlayer)) //could be implmented differently
-				 *		indexCurrentPlayer +1 % nbPlayers
-				 *		
-				 *  currentRound.exitPhaseBet()  //Here in the object Round is all the logic to exit from a beting phase, could be nothing
-				 *	
-				 *	currentRound.enterPhaseExchange()
-				 *	for each player still active:
-				 *		currentRound.currentPhase.RequestAndExecuteActionFromPlayer(player)) //could be implemented differently
-				 *		
-				 *	currentRound.exitPhaseExchange()
-				 *	
-				 *	currentRound.enterPhaseReveal() 
-				 *	currentRound.exitPhaseReveal() 
-				 *	
-				 *	finishRound()
-				 *
-			 * finishGame()
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 */
-		}
-
-		public void handleGameAction(Guid playerId, GameAction action)
-		{
-			Player player = this.players.Find(x =>
-			{
-				return x.id == playerId;
-			});
-			int value = action.value;
-			List<Card> listOfCards = action.cards;
-			this.chooseAction(player, value, action, listOfCards);
 		}
 
 		private void payBigBlind(Player player)
@@ -269,29 +164,26 @@ namespace Shared.data
 
 		public void exchangeCards(Player player, List<Card> listOfCards)
 		{
-			int nb = listOfCards.Count;
-
-			// To remove once we have a proper constructor for game
-			this.deck = new Deck();
-
-			List<Card> listOfNewCards = new List<Card>();
-			for(int i = 0; i < nb; i++)
+			// List<Card> listOfNewCards = new List<Card>();
+			for(int i = 0; i < listOfCards.Count; i++)
 			{
 				player.removeCardFromHand(listOfCards[i]); // we take back the cards from the player
 			}
 			this.deck.changeStatusOfCards(listOfCards); //give back to the deck the cards
 
-			for(int i = 0; i < nb; i++)
+			for(int i = 0; i < listOfCards.Count; i++)
 			{
-
 				Card cardTmp = this.deck.giveNewCard(); // what's the next card i can give
-				listOfNewCards.Add(cardTmp); //add to the list of new cards
+				// listOfNewCards.Add(cardTmp); //add to the list of new cards
 				player.AddCardToHand(cardTmp); // add card to player's hand
-
-
 			}
+
+			nbNoRise++;
 		}
 
+		/// <summary>
+		/// Permet d'afficher les cartes
+		/// </summary>
 		public void printHand(List<Card> hand) // Sylvain's function I needed -> ATTENTION watch out ctrl c ctrl v
 		{
 			foreach(Card card in hand)
@@ -300,14 +192,18 @@ namespace Shared.data
 			}
 		}
 
-		//Flush
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un Flush
+		/// </summary>
 		public bool isFlush(List<Card> hand)
 		{
 			char firstColor = hand.First().color;
 			return hand.Where(card => card.color == firstColor).ToList().Count == 5;
 		}
 
-		//Straight
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un straight
+		/// </summary>
 		public bool isStraight(List<Card> hand)
 		{
 			int firstValue = hand.First().value;
@@ -319,47 +215,61 @@ namespace Shared.data
 
 		}
 
-		//Royal Flush
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un royal flush	
+		/// </summary>
 		public bool isRoyalFlush(List<Card> hand)
 		{
 			return hand.First().value == 10 && this.isStraight(hand) && this.isFlush(hand);
 		}
 
-		//Straight Flush
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un straight flush
+		/// </summary>
 		public bool isStraightFlush(List<Card> hand)
 		{
 			return this.isFlush(hand) && this.isStraight(hand);
 		}
 
-		//Four of a kind
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un four of a kind
+		/// </summary>
 		public bool isFourOfAKind(List<Card> hand)
 		{
 			int middleCardValue = hand[2].value;
 			return hand.Where(card => card.value == middleCardValue).ToList().Count == 4;
 		}
 
-		//Three of a kind
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un three of a kind
+		/// </summary>
 		public bool isThreeOfAKind(List<Card> hand)
 		{
 			int middleCardValue = hand[2].value;
 			return hand.Where(card => card.value == middleCardValue).ToList().Count == 3;
 		}
 
-		//Two pair
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un two pair
+		/// </summary>
 		public bool isTwoPair(List<Card> hand)
 		{
 			List<int> handValues = hand.Select(card => card.value).ToList();
 			return !isThreeOfAKind(hand) && handValues.Distinct().ToList().Count == 3;
 		}
 
-		//One pair
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un one pair
+		/// </summary>
 		public bool isPair(List<Card> hand)
 		{
 			List<int> handValues = hand.Select(card => card.value).ToList();
 			return (!isThreeOfAKind(hand) && handValues.Distinct().ToList().Count == 4) || (isThreeOfAKind(hand) && handValues.Distinct().ToList().Count == 2);
 		}
 
-		//Full house
+		/// <summary>
+		/// Fonction qui permet de savoir si c'est un full house
+		/// </summary>
 		public bool isFullHouse(List<Card> hand)
 		{
 			return isThreeOfAKind(hand) && isPair(hand);
@@ -386,7 +296,9 @@ namespace Shared.data
 
 		}
 
-		//find the winner (sort is done in the main)
+		/// <summary>
+		/// Fonction qui permet de renvoyer la liste contenant le ou les gagnants de la partie
+		/// </summary>
 		public List<Player> findWinner()
 		{
 			List<Player> listWinners = new List<Player>();
@@ -396,6 +308,10 @@ namespace Shared.data
 
 			return listWinners;
 		}
+
+		/// <summary>
+		/// Fonction qui permet de trouver le premier gagnant
+		/// </summary>
 		public Player getPlayerWinner()
 		{
 			Player winner = null;
@@ -410,6 +326,10 @@ namespace Shared.data
 			}
 			return winner;
 		}
+
+		/// <summary>
+		/// Fonction qui permet de trouver tous le ou les gagnant en cas d'égalité
+		/// </summary>
 		public List<Player> getWinner()
 		{
 			Player winner = this.getPlayerWinner();
@@ -517,7 +437,9 @@ namespace Shared.data
 			return listWinners;
 		}
 
-		//Method to find that appear only once in the list
+		/// <summary>
+		/// Fonction qui permet de trouver un élément qui apparait une fois dans une liste
+		/// </summary>
 		public List<Card> FindElementThatAppearsOnlyOnce(List<Card> list)
 		{
 			List<Card> listToReturn = new List<Card>();
@@ -532,7 +454,9 @@ namespace Shared.data
 			return listToReturn;
 		}
 
-		//Method that find the element that appears only once in a list for one pair
+		/// <summary>
+		/// Fonction qui permet de trouver les paires d'une liste
+		/// </summary>
 		public List<Card> findPair(List<Card> list)
 		{
 			List<Card> element = new List<Card>();
@@ -557,6 +481,9 @@ namespace Shared.data
 			return element;
 		}
 
+		/// <summary>
+		/// Fonction qui permet de remplacer le gagnant par un autre gagnant s'il a une meilleure main
+		/// </summary>
 		public Player replaceWinner(List<Player> listWinners, Player winner, Player actualPlayer)
 		{
 			winner = actualPlayer;
@@ -566,22 +493,31 @@ namespace Shared.data
 			return winner;
 		}
 
-		//Method that compare the value of two cards
+		/// <summary>
+		/// Fonction qui permet de comparer deux cartes
+		/// </summary>
 		public bool isBetterCardThanWinner(Card card, Card winner)
 		{
 			return card.value > winner.value;
 		}
 
+		/// <summary>
+		/// Fonction qui permet de savoir si les cartes ont la même valeur
+		/// </summary>
 		public bool isSameCard(Card card, Card winner)
 		{
 			return card.value == winner.value;
 		}
 
-		//Attribute the score of his combo to the player
+		/// <summary>
+		/// Fonction qui attribue le score à chaque joueur en fonction de sa main
+		/// </summary>
 		public void attributeEachScoreToPlayerForHisCombo()
 		{
-			foreach(Player actualPlayer in this.players)
+			foreach(Player actualPlayer in this.players.Where(p => !p.isFolded ))
 			{
+        		actualPlayer.hand.Sort();
+
 				if(this.isRoyalFlush(actualPlayer.hand))
 				{
 					actualPlayer.score = 10;
@@ -625,7 +561,9 @@ namespace Shared.data
 			}
 		}
 
-		//Recursive method that compare each card of the hand of the player with the card of the winner
+		/// <summary>
+		/// Fonction récursive permettant de comparer chaque carte une à une avec avec une autre main
+		/// </summary>
 		public Player compareEachCardOfTheHandOfThePlayerWithTheCardOfTheWinner(List<Player> listWinners, Player winner, Player actualPlayer, int index)
 		{
 			if(index == -1)
@@ -648,51 +586,82 @@ namespace Shared.data
 			return null;
 		}
 
-		public void chooseAction(Player player, int value, GameAction action, List<Card> listOfCards)
+
+		public void handleGameAction(GameAction action)
 		{
+			Console.WriteLine("action.player.id", action.player.id);
 			// Check player existence in the game
-			bool isPlayerInTheGame = this.players.Contains(player);
-			if(!isPlayerInTheGame)
+			Player playerInTheGame = this.players.Find(player => player.id == action.player.id);
+			if (playerInTheGame == null)
 			{
 				Console.WriteLine("Player is not in the game");
+			} else {
+				switch(action.typeAction)
+				{
+					case TypeAction.call:
+						this.call(playerInTheGame, action.value);
+						break;
+
+					case TypeAction.rise:
+						this.rise(playerInTheGame, action.value);
+						break;
+					case TypeAction.allin:
+						this.allIn(playerInTheGame, action.value);
+
+						break;
+					case TypeAction.fold:
+						fold(playerInTheGame);
+
+						break;
+					case TypeAction.check:
+						nbNoRise++; //check means doing nothing, so not rising, so nbNoRise++
+						break;
+					case TypeAction.exchangeCards:
+						this.exchangeCards(playerInTheGame, action.listOfCards);
+						break;
+				}
+
+				if(nbNoRise >= nbPlayersStillPlaying)
+				{
+					goToNextPhase();
+				}
+				else
+				{
+					goToNextPlayer();
+				}
 			}
-
-			switch(action.typeAction)
-			{
-				case TypeAction.call:
-					this.call(player, value);
-					break;
-
-				case TypeAction.rise:
-					this.rise(player, value);
-					break;
-				case TypeAction.allin:
-					this.allIn(player, value);
-
-					break;
-				case TypeAction.fold:
-					this.fold(player, listOfCards);
-
-					break;
-				case TypeAction.check:
-					this.bet(player, value);
-					// TODO: check means not betting, BUT while still being in the game 
-					// check only possible if nobody has bet during the current Round
-					break;
-				case TypeAction.exchangeCards:
-					this.exchangeCards(player, listOfCards);
-					break;
-			}
-			// TODO: increment the current player index here 
 		}
 
-		private void bet(Player player, int value)
+		private void goToNextPhase()
 		{
-			player.tokensBet = value;
-			if(player.tokensBet == this.highestBet)
+			Phase newPhase;
+			if(nbPlayersStillPlaying == 1)
 			{
-				_ = this.goToNextPlayer();
+				newPhase = new Phase(TypePhase.reveal); //Only one player left, so reveal phase
 			}
+			else
+			{
+				newPhase = new Phase(++currentPhase.typePhase); //it gives the next phase
+			}
+			newCurrentPhase(newPhase);
+			nbNoRise = 0;
+
+			if(currentPhase.typePhase == TypePhase.reveal) // if the phase we went to is the reveal phase, we distribute pot and start another round
+			{
+				distributePot();
+				initRound();
+			}
+			else
+			{
+				goToNextPlayer();
+			}
+
+		}
+
+		private void newCurrentPhase(Phase newPhase)
+		{
+			currentPhase = newPhase;
+			rounds[rounds.Count - 1].addPhase(newPhase); //Adding newPhase to current round (which is the last one in the rounds list)
 		}
 
 		private void rise(Player player, int value)
@@ -700,75 +669,108 @@ namespace Shared.data
 			if(player.tokens < value)
 			{
 				Console.WriteLine("Player doesn't have enough tokens to bet that amount.");
+				throw new Exception();
+
 			}
 			else
 			{
-				player.decrementTokens(value, player.tokens);
-				player.incrementTokens(value, player.tokensBet);
+				player.decrementTokens(value);
+				player.incrementTokensBet(value);
 				this.pot += value;
-				this.highestBet = value;
 
+
+				if((player.tokensBet - highestBet) <= 0)
+					nbNoRise++; //No rise has been done, so increasing the nbNoRise value
+				else
+				{
+					nbNoRise = 0; //reset nb turn of no rising event
+					this.highestBet += (player.tokensBet - highestBet);
+				}
 			}
 		}
 
-		public void fold(Player player, List<Card> listOfCards)
+		public void fold(Player player)
 		{
-			// To remove once we have a proper constructor for game, same as for exchangeCards
-			this.deck = new Deck();
-
-			for(int card = 0; card < player.hand.Count; card++)
-			{
-				player.removeCardFromHand(listOfCards[card]); // we take back the cards from the player
-			}
-			this.deck.giveBackCards(listOfCards); //give back to the deck the cards
+			deck.changeStatusOfCards(player.hand);
+			player.removeAllCards(); // we take back the cards from the player
 			player.isFolded = true;
+
+			nbPlayersStillPlaying--;
 		}
 
 		private void allIn(Player player, int value)
 		{
 			value = player.tokens;
-			player.incrementTokens(value, player.tokensBet);
-			player.decrementTokens(0, player.tokens);
+			player.incrementTokensBet(value);
+			player.decrementTokens(value);
 			this.pot += value;
-			this.highestBet = value;
+
+			if((player.tokensBet - highestBet) <= 0)
+				nbNoRise++; //No rise has been done, so increasing the nbNoRise value
+			else
+			{
+				nbNoRise = 0; //reset nb turn of no rising event
+				this.highestBet += (player.tokensBet - highestBet);
+			}
 		}
 
 		private void call(Player player, int value)
 		{
-			value = this.highestBet;
+			value = this.highestBet - player.tokensBet;
 			if(player.tokens < value)
 			{
 				Console.WriteLine("Player doesn't have enough tokens to bet that amount.");
+				throw new Exception();
 			}
 			else
 			{
-				player.decrementTokens(value, player.tokens);
-				player.incrementTokens(value, player.tokensBet);
+				player.decrementTokens(value);
+				player.incrementTokensBet(value);
 				this.pot += value;
 			}
+
+			nbNoRise++;
 		}
 
-		public void resetRound()
+		public void initRound()
 		{
+			nbPlayersStillPlaying = 0;
+
+			foreach(LightUser lu in lobby) //Creation of players - tokens distribution
+			{
+				if(players.Count >= Constants.NB_PLAYERS_MAX)
+					break;
+
+				if(players.Count(pl => pl.id == lu.id) == 0)
+				{
+					players.Add(new Player(lu, gameOptions.StartingTokens));
+					this.nbPlayers += 1;
+				}
+			}
+			
 			foreach(Player player in this.players)
 			{
 				player.resetPlayerForNextRound();
-				this.deck.changeStatusCards(player.hand);
+				nbPlayersStillPlaying++;
 			}
-			this.deck.changeStatusOfCards(this.deck.cards);
-			// to do: mix the cards
+
+			deck.changeStatusOfCards(deck.cards);
+
 			this.pot = 0;
 			this.highestBet = 0;
 			this.nbNoRise = 0;
-			this.currentPlayerIndex = 0; // to DO : how do we choose the first player of each round
+			goToNextPlayer();
 			this.smallBlind = 0;
 			this.bigBlind = this.updateBlind();
-			Phase p = new Phase(TypePhase.bet1);
-			this.currentPhase = p;
+
 			Round r = new Round();
-			r.addPhase(p);
-			this.rounds.Add(r);
-			this.distributeCards();
+			rounds.Add(r);
+
+			Phase p = new Phase(TypePhase.bet1);
+			newCurrentPhase(p);
+
+			deck.shuffleCards();
+			distributeCards();
 		}
 
 		public int updateBlind()
@@ -784,6 +786,8 @@ namespace Shared.data
 			{
 				revealedCards = player.hand;
 			}
+
+			nbNoRise++;
 			return revealedCards;
 		}
 	}
