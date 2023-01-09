@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Client.ihm_main.Views.Pages;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 
@@ -31,10 +32,21 @@ namespace Client.ihm_main.ViewModels
                 OnPropertyChanged();
             }
         }
-		/// <summary>
-		/// Page à afficher au sein de la fenêtre.
-		/// </summary>
-		public MainWindowViewModel()
+
+		private bool isTitleBarVisible;
+		public bool IsTitleBarVisible
+		{
+			get => isTitleBarVisible;
+			set
+			{
+				isTitleBarVisible = value;
+				OnPropertyChanged();
+			}
+		}
+
+        public Page TitleBar { get; set; }
+
+        public MainWindowViewModel()
         {
         }
 		/// <summary>
