@@ -82,6 +82,7 @@ namespace Shared.data
 			this.nbNoRise = 0;
 			this.chat = new List<ChatMessage>();
 			this.deck = new Deck();
+			this.status = GameStatus.lobby;
 			this.gameStarted = false;
 			
 		}
@@ -103,6 +104,7 @@ namespace Shared.data
 
 			initRound();
 			status = GameStatus.running;
+			gameStarted = true;
 
 		}
 

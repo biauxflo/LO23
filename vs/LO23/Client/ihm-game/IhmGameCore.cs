@@ -206,15 +206,6 @@ namespace Client.ihm_game
 				}
 
 			}
-			
-
-
-			/**  Test :
-			Game gamme = testNewGame();
-			this.gameViewModel.Game = gamme;
-			*/
-			//if data send gamePublic
-			// replace Game attribute by game attribute
 		}
 
 		internal void StartReplayDisplay(Game game)

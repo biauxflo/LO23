@@ -48,11 +48,6 @@ namespace Server.Data
 
         public Game addUserToGame(LightUser user, Guid gameId)
         {
-            //TODO
-			//WARNING
-			// Verifier que �a fonctionne => L'utilisateur ajoute � la Game devrait se retrouver dans l'objet Game qui fait partie de listGames dans Data_Server_ctrl.
-			//Or ici on fait (je pense) une copie de cet objet la, et on ajoute le user � la copie de la game. 
-			//A verifier
 			Game game = data_Server_Ctrl.games.Find(x => x.id == gameId);
 
 			if(game.lobby.Count < game.gameOptions.NbPlayersMax)
@@ -62,7 +57,6 @@ namespace Server.Data
 			}
 			else
 				return null;
-            
         }
 
         public CommToDataServer getCommCallsDataServerImpl()
