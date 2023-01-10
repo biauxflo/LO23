@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Shared.data;
-using System.Runtime.CompilerServices;
 using Shared.constants;
 
 namespace Shared.helpers
@@ -23,7 +19,7 @@ namespace Shared.helpers
 					JObject object1 = JObject.Parse(File.ReadAllText(path));
 					JArray array1 = (JArray)object1["users"];
 					return array1;
-				} catch (Exception e)
+				} catch(Exception)
 				{
 					throw new Exception("FailedToParseFileToJSON");
 				}

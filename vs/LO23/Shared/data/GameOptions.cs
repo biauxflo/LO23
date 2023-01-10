@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shared.data
+﻿namespace Shared.data
 {
 	/// <summary>
 	/// Classe <c>GameOptions</c> Classe modélisant les GameOptions

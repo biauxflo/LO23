@@ -8,7 +8,7 @@ namespace Shared.data
 	public class ChatMessage
     {
         public DateTime date { get; private set; }
-        public string sender { get; private set; } // username sera passé en paramètre
+        public string sender { get; private set; } 
         public string text { get; private set; }
         public int idGame { get; private set; }
 		/// <summary>
