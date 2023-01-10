@@ -34,6 +34,9 @@ namespace Client.ihm_main.ViewModels
         }
 
 		private bool isTitleBarVisible;
+		/// <summary>
+		/// <see langword="true"/> si la barre de titre doit être affichée, <see langword="false"/> sinon.
+		/// </summary>
 		public bool IsTitleBarVisible
 		{
 			get => isTitleBarVisible;
@@ -44,11 +47,37 @@ namespace Client.ihm_main.ViewModels
 			}
 		}
 
+		/// <summary>
+		/// Barre de titre de l'application.
+		/// </summary>
         public Page TitleBar { get; set; }
 
-        public MainWindowViewModel()
+		private bool isContactsMenuVisible;
+		/// <summary>
+		/// <see langword="true"/> si la barre des contacts doit être affichée, <see langword="false"/> sinon.
+		/// </summary>
+		public bool IsContactsMenuVisible
+		{
+			get => isContactsMenuVisible;
+			set
+			{
+				isContactsMenuVisible = value;
+				OnPropertyChanged();
+			}
+		}
+
+		/// <summary>
+		/// Barre des contacts de l'application.
+		/// </summary>
+		public Page ContactsMenu
+		{
+			get; set;
+		}
+
+		public MainWindowViewModel()
         {
         }
+
 		/// <summary>
 		/// créer la méthode OnPropertyChanges pour créer un événement.
 		/// Le nom du membre appelant sera utilisé comme paramètre

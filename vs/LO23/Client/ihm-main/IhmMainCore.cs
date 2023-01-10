@@ -54,12 +54,24 @@ namespace Client.ihm_main
 		/// </summary>
 		private readonly HomeViewModel homeViewModel;
 
+		/// <summary>
+		/// Page de creation de profil.
+		/// </summary>
 		private Page profileCreationPage = new ProfilCreationView();
 
+		/// <summary>
+		/// View Model de la page de création de profil.
+		/// </summary>
 		private ProfilCreationViewModel profilCreationViewModel;
 
+		/// <summary>
+		/// Barre de titre de l'application.
+		/// </summary>
 		private Page titleBar = new TitleBarView();
 
+		/// <summary>
+		/// View Model de la barre de titre de l'application.
+		/// </summary>
 		private readonly TitleBarViewModel titleBarViewModel;
 
         /// <summary>
@@ -71,6 +83,26 @@ namespace Client.ihm_main
         /// View Model de la page de chargement de sauvegardes.
         /// </summary>
         private readonly LoadingSaveViewModel loadingSaveViewModel;
+
+		/// <summary>
+		/// Page de modification de profil.
+		/// </summary>
+		private readonly Page profileModificationView = new ProfilModificationView();
+
+		/// <summary>
+		/// View Model de la page de modification de profil.
+		/// </summary>
+		private readonly ProfilModificationViewModel profilModificationViewModel;
+
+		/// <summary>
+		/// Menu des contacts en ligne.
+		/// </summary>
+		private Page contactsMenu = new ContactsView();
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private readonly ContactsViewModel contactsMenuViewModel;
 
         #endregion
 
@@ -91,6 +123,8 @@ namespace Client.ihm_main
 			profilCreationViewModel = new ProfilCreationViewModel(this);
 			titleBarViewModel = new TitleBarViewModel(this);
 			loadingSaveViewModel = new LoadingSaveViewModel(this);
+			profilModificationViewModel = new ProfilModificationViewModel(this);
+			contactsMenuViewModel = new ContactsViewModel();
 
 			// Instanciation of shared interfaces.
 			dataToMain = new DataToMain(this);
@@ -103,10 +137,13 @@ namespace Client.ihm_main
 			profileCreationPage.DataContext = profilCreationViewModel;
 			titleBar.DataContext = titleBarViewModel;
 			loadingSavePage.DataContext = loadingSaveViewModel;
+			profileModificationView.DataContext = profilModificationViewModel;
+			contactsMenu.DataContext = contactsMenuViewModel;
 
 			// Active page on the window
 			mainWindowViewModel.ActivePage = connectionPage;
 			mainWindowViewModel.TitleBar = titleBar;
+			mainWindowViewModel.ContactsMenu = contactsMenu;
 		}
 
 
@@ -117,6 +154,8 @@ namespace Client.ihm_main
 		{
 			mainWindowViewModel.ActivePage = connectionPage;
 			mainWindowViewModel.IsTitleBarVisible = false;
+			titleBarViewModel.Username = string.Empty;
+			mainWindowViewModel.IsContactsMenuVisible = false;
 		}
 
 		/// <summary>
@@ -125,6 +164,7 @@ namespace Client.ihm_main
 		internal void OpenGameCreationPage()
 		{
 			mainWindowViewModel.ActivePage = gameCreationPage;
+			mainWindowViewModel.IsContactsMenuVisible = false;
 		}
 
 		/// <summary>
@@ -135,14 +175,13 @@ namespace Client.ihm_main
 			mainWindowViewModel.ActivePage = profileCreationPage;
 		}
 
-		internal void ShowProfilePage()
-		{
-			throw new NotImplementedException();
-		}
-
+		/// <summary>
+		/// Met la page active sur la page de chargement des sauvegardes.
+		/// </summary>
 		internal void OpenLoadingSavePage()
 		{
 			mainWindowViewModel.ActivePage = loadingSavePage;
+			mainWindowViewModel.IsContactsMenuVisible = false;
 		}
 
 		/// <summary>
@@ -151,6 +190,7 @@ namespace Client.ihm_main
 		internal void BackToHomePage()
 		{
 			mainWindowViewModel.ActivePage = homePage;
+			mainWindowViewModel.IsContactsMenuVisible = true;
 		}
 
 		/// <summary>
@@ -172,6 +212,26 @@ namespace Client.ihm_main
 			connectionViewModel.Reset();
 			mainWindowViewModel.ActivePage = homePage;
 			mainWindowViewModel.IsTitleBarVisible = true;
+			titleBarViewModel.Username = user.username;
+			mainWindowViewModel.IsContactsMenuVisible = true;
+		}
+
+		/// <summary>
+		/// Informe l'utilisateur que la connexion a échoué.
+		/// </summary>
+		internal void UserInfoGetFailed(string error)
+		{
+			MessageBox.Show(mainWindow, error, "Erreur", MessageBoxButton.OK);
+		}
+
+		/// <summary>
+		/// Informe de la récupération des informations de l'utilisateur et affiche la page de modification de profil.
+		/// </summary>
+		/// <param name="user">Utilisateur connecté.</param>
+		internal void UserInfoGetSucceed(User user)
+		{
+			profilModificationViewModel.ConnectedUser = user;
+			mainWindowViewModel.ActivePage = profileModificationView;
 		}
 
 		/// <summary>
@@ -219,7 +279,6 @@ namespace Client.ihm_main
 		/// <param name="game">Partie à afficher.</param>
 		internal void GameLaunched(Game game)
 		{
-			// TODO : FIX
 			BackToHomePage();
 			mainWindow.Hide();
 			LaunchGame(game);
@@ -264,6 +323,17 @@ namespace Client.ihm_main
 		}
 
 		/// <summary>
+		/// Demande la connexion à une partie en tant que spectateur.
+		/// </summary>
+		/// <param name="id">Id de la partie à laquelle on veut se connecter.</param>
+		/// <param name="user">Utilisateur voulant se connecter à la partie.</param>
+		internal void TrySpectateGame(Guid id, LightUser user)
+		{
+			// TODO : lien Data
+			MessageBox.Show(mainWindow, "La fonction n'est pas encore implémantée", "W.I.P", MessageBoxButton.OK, MessageBoxImage.None);
+		}
+
+		/// <summary>
 		/// Demande la création d'un nouveau profil avec les arguments donnés.
 		/// </summary>
 		/// <param name="username">Nom d'utilisateur du profil à créer.</param>
@@ -274,6 +344,28 @@ namespace Client.ihm_main
 		internal void TryCreateProfile(string username, string password, string firstname, string lastname, int age)
 		{
 			mainToData.registerProfile(username, password, firstname, lastname, age);
+		}
+
+		/// <summary>
+		/// Demande une modification de profil à data
+		/// </summary>
+		/// <param name="newUsername">Nouveau nom d'utilisateur ou <see langword="null"/></param>
+		/// <param name="newPassword">Nouveau mot de passe ou <see langword="null"/></param>
+		/// <param name="id">Id de l'utilisateur connecté</param>
+		internal void TryModifyProfile(string newUsername, string newPassword, Guid id)
+		{
+			// TODO : call data
+			MessageBox.Show(mainWindow, "La fonction n'est pas encore implémantée", "W.I.P", MessageBoxButton.OK, MessageBoxImage.None);
+		}
+
+		/// <summary>
+		/// Demande les informations sur l'utilisateur connecté à Data.
+		/// </summary>
+		internal void TryGetUserInfo()
+		{
+			LightUser connectedUser = homeViewModel.ConnectedUser;
+			// TODO : call data for User from LightUser
+			MessageBox.Show(mainWindow, "La fonction n'est pas encore implémantée", "W.I.P", MessageBoxButton.OK, MessageBoxImage.None);
 		}
 
 		/// <summary>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Client.ihm_main.ViewModels
@@ -22,6 +23,9 @@ namespace Client.ihm_main.ViewModels
 			set;
 		}
 
+		/// <summary>
+		/// Joueurs de la sauvegarde selectionnée.
+		/// </summary>
 		public ObservableCollection<Player> Players
 		{
 			get;
@@ -29,8 +33,9 @@ namespace Client.ihm_main.ViewModels
 		}
 
 		private Game selectedGame;
-
-
+		/// <summary>
+		/// Partie selectionnée dans l'interface de gauche.
+		/// </summary>
 		public Game SelectedSave
 		{
 			get => selectedGame;
@@ -137,7 +142,11 @@ namespace Client.ihm_main.ViewModels
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
-
+		
+		/// <summary>
+		/// Action liée à la selection d'une sauvegarde dans la partie de gauche.
+		/// </summary>
+		/// <param name="obj">Sauvegarde sélectionnée.</param>
 		private void OnSaveSelected(object obj)
 		{
 			if(obj != null && obj.GetType() == typeof(Game))
@@ -146,6 +155,10 @@ namespace Client.ihm_main.ViewModels
 			}
 		}
 
+		/// <summary>
+		/// Vérifie qu'une sauvegarde est selectionnée.
+		/// </summary>
+		/// <returns><see langword="true"/> si une sauvegarde est sélectionnée dans la partie de gauche, <see langword="false"/> sinon.</returns>
 		private bool IsSaveSelected()
 		{
 			return SelectedSave != null;
@@ -157,15 +170,26 @@ namespace Client.ihm_main.ViewModels
 		/// <param name="obj">Sauvegarde à lancer.</param>
 		private void LoadingGame()
 		{
+			Window view = App.Current.MainWindow;
+			MessageBox.Show(view, "La fonction n'est pas encore implémantée", "W.I.P", MessageBoxButton.OK, MessageBoxImage.None);
 			// TODO : Call IHM-Game
 		}
 
+		/// <summary>
+		/// Renvoie à la page d'acceuil.
+		/// </summary>
 		private void OnBackClick()
 		{
 			core.BackToHomePage();
 		}
+		
+		/// <summary>
+		/// Demande la suppression de la sauvegarde actuelle.
+		/// </summary>
 		private void OnDeleteClick()
 		{
+			Window view = App.Current.MainWindow;
+			MessageBox.Show(view, "La fonction n'est pas encore implémantée", "W.I.P", MessageBoxButton.OK, MessageBoxImage.None);
 			// TODO : Call Data
 		}
 	}

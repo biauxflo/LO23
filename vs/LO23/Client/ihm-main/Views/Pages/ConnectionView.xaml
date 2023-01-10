@@ -103,6 +103,7 @@
                 Grid.ColumnSpan="3"
                 Background="Transparent" 
                 BorderThickness="0"  
-                Content="Importer un profil"/>
+                Content="Importer un profil"
+                Command="{Binding ImportProfileCommand}"/>
     </Grid>
 </Page>

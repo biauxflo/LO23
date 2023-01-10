@@ -25,6 +25,13 @@
         <Rectangle Fill="LightGray"
                    Grid.Column="0"
                    Grid.ColumnSpan="7"/>
+        <TextBlock Text="{Binding Username, StringFormat='Bienvenue {0}'}"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="7"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="Black"
+                   FontSize="15"/>
         <syncfusion:ButtonAdv SizeMode="Small"
                               SmallIcon="../images/home_icon.png"
                               Background="Transparent"

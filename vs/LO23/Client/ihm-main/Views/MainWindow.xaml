@@ -19,14 +19,22 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Frame Content="{Binding Path=TitleBar}" 
                Visibility="{Binding IsTitleBarVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                Grid.Row="0"
-               Grid.Column="0"/>
+               Grid.Column="0"
+               Grid.ColumnSpan="2"/>
         <Frame Content="{Binding Path=ActivePage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                Grid.Row="1"
                Grid.Column="0"
+               Grid.ColumnSpan="2"
+               NavigationUIVisibility="Hidden"/>
+        <Frame Content="{Binding Path=ContactsMenu}"
+               Visibility="{Binding IsContactsMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+               Grid.Row="1"
+               Grid.Column="1"
                NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
