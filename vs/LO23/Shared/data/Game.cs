@@ -642,7 +642,7 @@ namespace Shared.data
 
 		private void fromPlayerToSpectator(Player player)
 		{
-			Player currentPlaying = players[currentPlayerIndex].id == player.id ? players[currentPlayerIndex+1] : players[currentPlayerIndex];
+			Player currentPlaying = players[currentPlayerIndex].id == player.id ? players[(currentPlayerIndex+1)%players.Count] : players[currentPlayerIndex];
 
 			spectators.Add(lobby.Find(lu => lu.id == player.id));
 			players.Remove(players.Find(p => p.id == player.id));
