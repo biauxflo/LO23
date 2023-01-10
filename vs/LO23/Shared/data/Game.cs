@@ -694,7 +694,6 @@ namespace Shared.data
 			if(player.tokens < value)
 			{
 				Console.WriteLine("Player doesn't have enough tokens to bet that amount.");
-				throw new Exception();
 			}
 			else
 			{
@@ -744,7 +743,6 @@ namespace Shared.data
 			if(player.tokens < value)
 			{
 				Console.WriteLine("Player doesn't have enough tokens to bet that amount.");
-				throw new Exception();
 			}
 			else
 			{
