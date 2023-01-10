@@ -5,68 +5,40 @@ using System.Runtime.CompilerServices;
 
 namespace Shared.data
 {
+	/// <summary>
+	/// Enumère les différents rôles
+	/// </summary>
     public enum PlayerRole
     {
         smallBlind,
         bigBlind,
         nothing,
     }
-
-	// TODO : Classes observables ? Methode "ObservableObject" pour réutiliser l'interface INotifyPropertyChanged
+	/// <summary>
+	/// Classe <c>PLayer</c> Classe modélisant un Player. C'est une classe qui hérite de LightUser
+	/// </summary>
 	public class Player : LightUser
     {
-		//public event PropertyChangedEventHandler PropertyChanged;
 
 		public string role { get; set; }
         public bool isFolded { get; set; }
         public int tokens { get; set; }
         public int tokensBet { get; set; }
-        public List<Card> hand { get; set; } //Doit referencer les objets cartes contenus dans l'objet Deck
+        public List<Card> hand { get; set; } // Must reference the Cards objects contained in the object Deck
 
 		public int score
 		{
 			get; set;
 		}
 		
-		/*
-		public List<string> Card
-		{
-			get; set; 
-		}*/
-
-		/*
-		public List<string> Card
-		{
-			get => cardImage;
-			set
-			{
-				cardImage = value;
-				//OnPropertyChanged(nameof(Card));
-			}
-		}*/
-
-		/// <summary>
-		/// créer la méthode OnPropertyChanges pour créer un événement.
-		/// Le nom du membre appelant sera utilisé comme paramètre
-		/// </summary>
-		/*
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-		/*
-				public Player(int tokens)
-				{
-					this.role = PlayerRole.nothing.ToString();
-					this.isFolded = false;
-					this.tokens = tokens;
-					this.tokensBet = 0;
-					this.hand = new List<Card>();
-				}
-		*/
 		public Player() 
 		{
 		}
+		/// <summary>
+		/// Constructeur de Player
+		/// </summary>
+		/// <param name="lu"></param>
+		/// <param name="tokens"></param>
 		public Player(LightUser lu, int tokens) : base(lu)
 		{
 			this.role = PlayerRole.nothing.ToString();
@@ -76,21 +48,11 @@ namespace Shared.data
 			//this.Card = new List<string>();
 			this.tokens = tokens;
 		}
-
-	/*	public Player(Guid id, string username, string image)
-		{
-			this.id = id;
-			this.username = username;
-			this.image = image;
-			this.role = PlayerRole.nothing.ToString();
-			this.isFolded = false;
-			this.tokens = tokens;
-			this.tokensBet = 0;
-			this.hand = new List<Card>();
-
-			this.tokens = 1000;
-		}
-	*/
+		/// <summary>
+		/// Permet de retirer la carte transmise en paramètre de la main du joueur concerné
+		/// </summary>
+		/// <param name="card"></param>
+		/// <exception cref="Exception"></exception>
 		public void removeCardFromHand(Card card)
 		{   
 			int remove = 0;//index of the card to remove in player's hand
@@ -118,7 +80,9 @@ namespace Shared.data
 			}
 		}
 
-
+		/// <summary>
+		/// Retire toutes les cartes présentes dans la main du joueur
+		/// </summary>
 		public void removeAllCards()
 		{
 			while(hand.Count > 0)
@@ -126,6 +90,10 @@ namespace Shared.data
 				this.removeCardFromHand(hand[0]);
 			}
 		}
+		/// <summary>
+		/// Ajoute la carte transmise en paramètre dans la main du joueur
+		/// </summary>
+		/// <param name="card"></param>
 		public void AddCardToHand(Card card)
 		{
 
@@ -135,26 +103,43 @@ namespace Shared.data
 			}
 
 		}
-
+		/// <summary>
+		/// Compare les deux cartes transmises en paramètre
+		/// </summary>
+		/// <param name="card1"></param>
+		/// <param name="card2"></param>
+		/// <returns></returns>
 		public bool CompareCard(Card card1, Card card2)
 		{
 			return (card1.color == card2.color) && (card1.index == card2.index);
 		}
-
+		/// <summary>
+		/// Décrémente les tokens de la valeur entière transmise en paramètre
+		/// </summary>
+		/// <param name="value"></param>
 		public void decrementTokens(int value)
 		{
 			tokens -= value;
 		}
-
+		/// <summary>
+		/// Incrémente les tokens de la valeur entière transmise en paramètre
+		/// </summary>
+		/// <param name="value"></param>
 		public void incrementTokensBet(int value)
 		{
 			tokensBet += value;
 		}
-		
-		public bool reveal()// need to precise how we know how to reveal or not the cards
+		/// <summary>
+		/// Révèle les cartes du joueur
+		/// </summary>
+		/// <returns></returns>
+		public bool reveal()
 		{
 			return true;
 		}
+		/// <summary>
+		/// Permet de réinitialiser le joueur avec les valeurs par défaut, afin de jouer le prochain tour
+		/// </summary>
 		public void resetPlayerForNextRound()
 		{
 			this.score = 0;

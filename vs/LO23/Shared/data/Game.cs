@@ -8,18 +8,20 @@ using System.Xml.Schema;
 
 namespace Shared.data
 {
+	/// <summary>
+	/// Classe <c>Game</c> Classe modélisant une partie, hérite de LightGame
+	/// </summary>
 	public class Game : LightGame
 	{
-
 		private int nbPlayersStillPlaying;
 		public List<Round> rounds
 		{
 			get; set;
-		} //Un round est un enchainement de phases de jeu => Il va de la distribution des cartes jusqu'au reveal des cartes et répartition des gains
+		} 
 		public int turn
 		{
 			set; get;
-		} //Un turn correspond au tour de jeu d'un joueur
+		} 
 		public int smallBlind
 		{
 			set; get;
@@ -31,23 +33,23 @@ namespace Shared.data
 		public int currentPlayerIndex
 		{
 			set; get;
-		} //Le joueur qui doit jouer actuellement
+		} 
 		public Phase currentPhase
 		{
 			set; get;
-		} //La phase actuelle (phase de mise, de pari, ou de révélation des cartes)
+		}
 		public int pot
 		{
 			set; get;
-		} //L'ensemble des jetons misés
+		} 
 		public int highestBet
 		{
 			set; get;
-		} //Le nombre de jetons misés par un joueur le plus important 
+		} 
 		public int nbNoRise
 		{
 			set; get;
-		} //Nombre de turn depuis le début de la phase courante qui n'ont pas rise (augmenter le pari minimum nécessaire) => Sert à déduire la fin d'une phase
+		} 
 		public List<ChatMessage> chat
 		{
 			set; get;
@@ -59,16 +61,22 @@ namespace Shared.data
 		public Deck deck
 		{
 			get; private set;
-		} //L'ensemble des cartes dans le jeu, qu'elles soient en main, dans la pioche ou la défausse
+		} 
 
 		public bool gameStarted
 		{
 			get; set;
 		}
+
 		public Game()
 		{
 		}
 
+		/// <summary>
+		/// Constructeur permettant de créer une instance de game
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="options"></param>
 		public Game(Guid id, GameOptions options) : base(id, options)
 		{
 			this.rounds = new List<Round>();
@@ -86,13 +94,20 @@ namespace Shared.data
 			this.gameStarted = false;
 			
 		}
-
+		/// <summary>
+		/// Permet de construire une LightGame à partir d'une instance de Game
+		/// </summary>
+		/// <param name="game"></param>
+		/// <returns></returns>
 		public static LightGame ToLightGame(Game game)
 		{
 			return new LightGame(game.id, game.gameOptions);
 		}
 
-
+		/// <summary>
+		/// Méthode permettant d'initialiser une partie : fixe l'attribut currentPlayerIndex à 0, appelle la méthode initRound() pour lancer un nouveau tour, 
+		/// change le statut de la partie à running, et fixe gameStarted à true pour indiquer que la partie a commencé
+		/// </summary>
 		public void initGame()
 		{
 			this.currentPlayerIndex = 0;
@@ -102,7 +117,10 @@ namespace Shared.data
 
 		}
 
-
+		/// <summary>
+		/// Permet d'ajouter un utilisateur dans le lobby de la partie : 
+		/// </summary>
+		/// <param name="user"></param>
 		public void addUser(LightUser user)
 		{  
 			lobby.Add(user);
@@ -113,7 +131,10 @@ namespace Shared.data
 			}
 		}
 
-
+		/// <summary>
+		/// Permet de passer au joueur suivant dans la partie en cours
+		/// </summary>
+		/// <returns></returns>
 		public int goToNextPlayer()
 		{
 			int nextPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
@@ -148,43 +169,51 @@ namespace Shared.data
 				}
 			}
 		}
-
+		/// <summary>
+		/// Permet d'ajouter les tokens du joueur concerné dans la grosse blind
+		/// </summary>
+		/// <param name="player"></param>
 		private void payBigBlind(Player player)
 		{
 			player.tokens -= this.bigBlind;
 			this.pot += this.bigBlind;
 		}
-
+		/// <summary>
+		/// Permet d'ajouter les tokens du joueur concerné dans la petite blind
+		/// </summary>
+		/// <param name="player"></param>
 		private void paySmallBlind(Player player)
 		{
 			player.tokens -= this.smallBlind;
 			this.pot += this.smallBlind;
 
 		}
-
+		/// <summary>
+		/// Cette méthode permet à un joueur d'échanger une ou plusieurs de ses cartes avec une ou plusieurs cartes du deck
+		/// </summary>
+		/// <param name="player"></param>
+		/// <param name="listOfCards"></param>
 		public void exchangeCards(Player player, List<Card> listOfCards)
 		{
-			// List<Card> listOfNewCards = new List<Card>();
 			for(int i = 0; i < listOfCards.Count; i++)
 			{
-				player.removeCardFromHand(listOfCards[i]); // we take back the cards from the player
+				player.removeCardFromHand(listOfCards[i]); 
 			}
-			this.deck.changeStatusOfCards(listOfCards); //give back to the deck the cards
+			this.deck.changeStatusOfCards(listOfCards); // gives the cards back to the deck 
 
 			for(int i = 0; i < listOfCards.Count; i++)
 			{
 				Card cardTmp = this.deck.giveNewCard(); // what's the next card i can give
-				// listOfNewCards.Add(cardTmp); //add to the list of new cards
-				player.AddCardToHand(cardTmp); // add card to player's hand
+				player.AddCardToHand(cardTmp); 
 			}
 
 			nbNoRise++;
 		}
 
 		/// <summary>
-		/// Permet d'afficher les cartes
+		/// Permet d'afficher les cartes 
 		/// </summary>
-		public void printHand(List<Card> hand) // Sylvain's function I needed -> ATTENTION watch out ctrl c ctrl v
+		public void printHand(List<Card> hand)
 		{
 			foreach(Card card in hand)
 			{
@@ -193,7 +222,7 @@ namespace Shared.data
 		}
 
 		/// <summary>
-		/// Fonction qui permet de savoir si c'est un Flush
+		/// Fonction qui permet de savoir si la main du joueur est un Flush ou non
 		/// </summary>
 		public bool isFlush(List<Card> hand)
 		{
@@ -202,7 +231,7 @@ namespace Shared.data
 		}
 
 		/// <summary>
-		/// Fonction qui permet de savoir si c'est un straight
+		/// Fonction qui permet de savoir si c'est une quinte ('straight' en anglais)
 		/// </summary>
 		public bool isStraight(List<Card> hand)
 		{
@@ -216,7 +245,7 @@ namespace Shared.data
 		}
 
 		/// <summary>
-		/// Fonction qui permet de savoir si c'est un royal flush	
+		/// Fonction qui permet de savoir si c'est un 'royal flush'	
 		/// </summary>
 		public bool isRoyalFlush(List<Card> hand)
 		{
@@ -224,7 +253,7 @@ namespace Shared.data
 		}
 
 		/// <summary>
-		/// Fonction qui permet de savoir si c'est un straight flush
+		/// Fonction qui permet de savoir si c'est un 'straight flush'
 		/// </summary>
 		public bool isStraightFlush(List<Card> hand)
 		{
@@ -232,7 +261,7 @@ namespace Shared.data
 		}
 
 		/// <summary>
-		/// Fonction qui permet de savoir si c'est un four of a kind
+		/// Fonction qui permet de savoir si c'est un 'four of a kind'
 		/// </summary>
 		public bool isFourOfAKind(List<Card> hand)
 		{
@@ -241,7 +270,7 @@ namespace Shared.data
 		}
 
 		/// <summary>
-		/// Fonction qui permet de savoir si c'est un three of a kind
+		/// Fonction qui permet de savoir si c'est un 'three of a kind'
 		/// </summary>
 		public bool isThreeOfAKind(List<Card> hand)
 		{
@@ -274,6 +303,9 @@ namespace Shared.data
 		{
 			return isThreeOfAKind(hand) && isPair(hand);
 		}
+		/// <summary>
+		/// Permet de distribuer le pot
+		/// </summary>
 		public void distributePot()
 		{
 			List<Player> listWinners = this.findWinner();
@@ -586,7 +618,10 @@ namespace Shared.data
 			return null;
 		}
 
-
+		/// <summary>
+		/// En fonction du typeAction associé à la GameAction transmise, détermine quelle action réaliser
+		/// </summary>
+		/// <param name="action"></param>
 		public void handleGameAction(GameAction action)
 		{
 			Console.WriteLine("action.player.id", action.player.id);
@@ -631,7 +666,9 @@ namespace Shared.data
 				}
 			}
 		}
-
+		/// <summary>
+		/// Permet de passer à la phase de jeu suivante
+		/// </summary>
 		private void goToNextPhase()
 		{
 			Phase newPhase;
@@ -657,13 +694,21 @@ namespace Shared.data
 			}
 
 		}
-
+		/// <summary>
+		/// Permet de créer une instance de phase identique à la phase actuelle
+		/// </summary>
+		/// <param name="newPhase"></param>
 		private void newCurrentPhase(Phase newPhase)
 		{
 			currentPhase = newPhase;
 			rounds[rounds.Count - 1].addPhase(newPhase); //Adding newPhase to current round (which is the last one in the rounds list)
 		}
-
+		/// <summary>
+		/// Permet de miser un certain nombre de tokens
+		/// </summary>
+		/// <param name="player"></param>
+		/// <param name="value"></param>
+		/// <exception cref="Exception"></exception>
 		private void rise(Player player, int value)
 		{
 			if(player.tokens < value)
@@ -688,7 +733,10 @@ namespace Shared.data
 				}
 			}
 		}
-
+		/// <summary>
+		/// Permet à un joueur de se coucher, et donc abandonner le tour en cours
+		/// </summary>
+		/// <param name="player"></param>
 		public void fold(Player player)
 		{
 			deck.changeStatusOfCards(player.hand);
@@ -713,7 +761,12 @@ namespace Shared.data
 				this.highestBet += (player.tokensBet - highestBet);
 			}
 		}
-
+		/// <summary>
+		/// Permet à un joueur de miser la même somme que le joueur le précédant dans ce tour
+		/// </summary>
+		/// <param name="player"></param>
+		/// <param name="value"></param>
+		/// <exception cref="Exception"></exception>
 		private void call(Player player, int value)
 		{
 			value = this.highestBet - player.tokensBet;
@@ -731,7 +784,9 @@ namespace Shared.data
 
 			nbNoRise++;
 		}
-
+		/// <summary>
+		/// Permet d'initialiser un Round
+		/// </summary>
 		public void initRound()
 		{
 			nbPlayersStillPlaying = 0;
@@ -772,13 +827,20 @@ namespace Shared.data
 			deck.shuffleCards();
 			distributeCards();
 		}
-
+		/// <summary>
+		/// Permet de mettre à jour la grosse blind
+		/// </summary>
+		/// <returns></returns>
 		public int updateBlind()
 		{
 			this.bigBlind *= 2; //to verify
 			return this.bigBlind;
 		}
-
+		/// <summary>
+		/// Permet de révéler les cartes de l'instance de Player lui ayant été transmise
+		/// </summary>
+		/// <param name="player"></param>
+		/// <returns></returns>
 		public List<Card> revealCardsOfPlayer(Player player)
 		{
 			List<Card> revealedCards = new List<Card>();
