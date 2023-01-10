@@ -10,7 +10,6 @@ namespace Shared.data
 {
 	public class Game : LightGame
 	{
-
 		private int nbPlayersStillPlaying;
 		public List<Round> rounds
 		{
@@ -65,6 +64,12 @@ namespace Shared.data
 		{
 			get; set;
 		}
+
+		public bool hadNoTokens
+		{
+			get; set;
+		}
+
 		public Game()
 		{
 		}
@@ -84,6 +89,7 @@ namespace Shared.data
 			this.deck = new Deck();
 			this.status = GameStatus.lobby;
 			this.gameStarted = false;
+			hadNoTokens = false;
 			
 		}
 
@@ -628,14 +634,16 @@ namespace Shared.data
 						break;
 				}
 
-				if(isTurnEvent)
+				if(isTurnEvent && !hadNoTokens)
 					if(nbNoRise >= nbPlayersStillPlaying)
 					{
 						goToNextPhase();
+						hadNoTokens = false;
 					}
 					else
 					{
 						goToNextPlayer();
+						hadNoTokens = false;
 					}
 			}
 		}
@@ -694,12 +702,14 @@ namespace Shared.data
 			if(player.tokens < value)
 			{
 				Console.WriteLine("Player doesn't have enough tokens to bet that amount.");
+				hadNoTokens = true;
 			}
 			else
 			{
 				player.decrementTokens(value);
 				player.incrementTokensBet(value);
 				this.pot += value;
+				hadNoTokens = false;
 
 
 				if((player.tokensBet - highestBet) <= 0)
@@ -743,12 +753,14 @@ namespace Shared.data
 			if(player.tokens < value)
 			{
 				Console.WriteLine("Player doesn't have enough tokens to bet that amount.");
+				hadNoTokens = true;
 			}
 			else
 			{
 				player.decrementTokens(value);
 				player.incrementTokensBet(value);
 				this.pot += value;
+				hadNoTokens = false;
 			}
 
 			nbNoRise++;
@@ -757,6 +769,7 @@ namespace Shared.data
 		public void initRound()
 		{
 			nbPlayersStillPlaying = 0;
+			hadNoTokens = false;
 
 			foreach(LightUser lu in lobby) //Creation of players - tokens distribution
 			{
