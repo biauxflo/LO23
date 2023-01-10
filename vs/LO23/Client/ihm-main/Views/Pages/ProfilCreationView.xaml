@@ -41,12 +41,13 @@
                    Grid.ColumnSpan="3"
                    Text=" Créer un profil"
                    HorizontalAlignment="Center"
-                   FontSize="42"/>
+                   FontSize="30"
+                   FontWeight="Bold"/>
         <StackPanel Grid.Row="4" 
                     Grid.Column="2" 
                     HorizontalAlignment="Center" Width="200">
             <TextBlock Text="Pseudonyme"
-                       FontSize="18"
+                       FontSize="15"
                        Padding="3"
                        HorizontalAlignment="Center"/>
             <inputLayout:SfTextInputLayout Width="200"
@@ -64,7 +65,7 @@
                     Grid.Column="4"
                     HorizontalAlignment="Center">
             <TextBlock Text="Age"
-                       FontSize="18"
+                       FontSize="15"
                        HorizontalAlignment="Center" 
                        Padding="3"/>
             <inputLayout:SfTextInputLayout Width="200"
@@ -82,7 +83,7 @@
                     Grid.Column="2"
                     HorizontalAlignment="Center">
             <TextBlock Text="Prénom"
-                       FontSize="18"
+                       FontSize="15"
                        Padding="3"
                        HorizontalAlignment="Center"/>
             <inputLayout:SfTextInputLayout Width="200"
@@ -98,7 +99,7 @@
                     Grid.Column="4" 
                     HorizontalAlignment="Center">
             <TextBlock Text="Nom de famille" 
-                       FontSize="18" 
+                       FontSize="15" 
                        Padding="3"
                        HorizontalAlignment="Center"/>
             <inputLayout:SfTextInputLayout Width="200"
@@ -114,7 +115,7 @@
                     Grid.Column="2"
                     HorizontalAlignment="Center">
             <TextBlock Text="Mot de passe"
-                       FontSize="18"
+                       FontSize="15"
                        Padding="3"
                        HorizontalAlignment="Center"/>
             <inputLayout:SfTextInputLayout Width="200"
@@ -130,14 +131,14 @@
             <StackPanel Orientation="Horizontal">
                 <CheckBox Padding="3"
                           IsChecked="{Binding SeePassword}"/>
-                <TextBlock Text="Afficher le mot de passe"/>
+                <TextBlock Text="Afficher le mot de passe" FontSize="15"/>
         </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="8"
                     Grid.Column="4"
                     HorizontalAlignment="Center">
             <TextBlock Text="Confirmation"
-                       FontSize="18"
+                       FontSize="15"
                        Padding="3"
                        HorizontalAlignment="Center"/>
             <inputLayout:SfTextInputLayout Width="200"
@@ -154,7 +155,7 @@
             <StackPanel Orientation="Horizontal">
                 <CheckBox Padding="3"
                           IsChecked="{Binding SeeConfirmPassword}"/>
-                <TextBlock Text="Afficher le mot de passe"/>
+                <TextBlock Text="Afficher le mot de passe" FontSize="15"/>
         </StackPanel>
         </StackPanel>
         <Button Grid.Row="10"

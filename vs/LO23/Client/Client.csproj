@@ -181,6 +181,7 @@
     <Compile Include="ihm-main\ViewModels\ConnectionViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\GameCreationViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\HomeViewModel.cs" />
+    <Compile Include="ihm-main\ViewModels\LoadingSaveViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\TitleBarViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\ProfilCreationViewModel.cs" />
@@ -219,6 +220,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ihm-main\Views\Pages\LoadingSaveView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ihm-main\Views\Pages\ConnectionView.xaml.cs">
@@ -239,6 +244,9 @@
     </Compile>
     <Compile Include="ihm-main\Views\Pages\TitleBarView.xaml.cs">
       <DependentUpon>TitleBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ihm-main\Views\Pages\LoadingSaveView.xaml.cs">
+      <DependentUpon>LoadingSaveView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
