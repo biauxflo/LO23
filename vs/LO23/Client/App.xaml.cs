@@ -43,8 +43,8 @@ namespace Client
 			string key = Config.GetSyncfusionLicenceKey();
 			Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(key);
 
-			gameCore = new IhmGameCore();
 			mainCore = new IhmMainCore();
+			gameCore = new IhmGameCore();
 			dataCore = new DataClientCore();
             commCore = new CommClient();
 

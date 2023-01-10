@@ -5,9 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-	    xmlns:syncfusionskin ="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+        xmlns:syncfusionskin ="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="Poker"
         syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=FluentDark}">
-    <Frame Content="{Binding Path=ActivePage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" NavigationUIVisibility="Hidden"/>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Frame Content="{Binding Path=TitleBar}" 
+               Visibility="{Binding IsTitleBarVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+               Grid.Row="0"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"/>
+        <Frame Content="{Binding Path=ActivePage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+               Grid.Row="1"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
+               NavigationUIVisibility="Hidden"/>
+        <Frame Content="{Binding Path=ContactsMenu}"
+               Visibility="{Binding IsContactsMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+               Grid.Row="1"
+               Grid.Column="1"
+               NavigationUIVisibility="Hidden"/>
+    </Grid>
 </Window>

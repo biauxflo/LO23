@@ -3,15 +3,35 @@ using System.Windows;
 using System.Windows.Input;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Shared.data;
 
 namespace Client.ihm_main.ViewModels
 {
-    internal class ProfilCreationViewModel : INotifyPropertyChanged
+    internal class ProfilModificationViewModel : INotifyPropertyChanged
     {
 		/// <summary>
 		/// Controleur du module IHM-Main.
 		/// </summary>
 		private readonly IhmMainCore core;
+
+		private User connectedUser;
+		/// <summary>
+		/// Utilisateur connecté à l'application.
+		/// </summary>
+		public User ConnectedUser
+		{
+			get => connectedUser;
+			set
+			{
+				connectedUser = value;
+
+				Username = value.username;
+				Age = value.age;
+				Firstname = value.firstname;
+				Lastname = value.lastname;
+				Password = value.password;
+			}
+		}
 
 		/// <summary>
 		/// Pseudonyme de l'utilisateur à créer.
@@ -25,7 +45,7 @@ namespace Client.ihm_main.ViewModels
 				username = value;
 				OnPropertyChanged("UsernameIsEmpty");
 				OnPropertyChanged("");
-				CreationCommand.RaiseCanExecuteChanged();
+				ModificationCommand.RaiseCanExecuteChanged();
 			}
 		}
 
@@ -89,7 +109,7 @@ namespace Client.ihm_main.ViewModels
 				OnPropertyChanged();
 				OnPropertyChanged("ConfirmationIsFalse");
 				OnPropertyChanged("PasswordIsEmpty");
-				CreationCommand.RaiseCanExecuteChanged();
+				ModificationCommand.RaiseCanExecuteChanged();
 			}
 		}
 
@@ -123,7 +143,7 @@ namespace Client.ihm_main.ViewModels
 				}
 				OnPropertyChanged();
 				OnPropertyChanged("ConfirmationIsFalse");
-				CreationCommand.RaiseCanExecuteChanged();
+				ModificationCommand.RaiseCanExecuteChanged();
 			}
 		}
 
@@ -137,16 +157,8 @@ namespace Client.ihm_main.ViewModels
 			set
 			{
 				age = value;
-				OnPropertyChanged();
-				OnPropertyChanged("AgeUnder18");
-				CreationCommand.RaiseCanExecuteChanged();
 			}
 		}
-
-		/// <summary>
-		/// <see langword="true"/> si l'âge est inférieur à 18, <see langword="false"/> sinon.
-		/// </summary>
-		public bool AgeUnder18 => Age < 18;
 
 		/// <summary>
 		/// Change la visibilité du champ de mot de passe ou non.
@@ -173,7 +185,7 @@ namespace Client.ihm_main.ViewModels
 						}
 					}
 				}
-					OnPropertyChanged();
+				OnPropertyChanged();
 				OnPropertyChanged("Password");
 			}
 		}
@@ -216,7 +228,7 @@ namespace Client.ihm_main.ViewModels
 		/// <summary>
 		/// Commande du bouton "Créer".
 		/// </summary>
-		public RelayCommand CreationCommand { get; set; }
+		public RelayCommand ModificationCommand { get; set; }
 
 		/// <summary>
 		/// Commande du bouton "Annuler"
@@ -225,10 +237,10 @@ namespace Client.ihm_main.ViewModels
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public ProfilCreationViewModel(IhmMainCore core)
+		public ProfilModificationViewModel(IhmMainCore core)
         {
 			// Bind command to Execute and CanExecute
-            CreationCommand = new RelayCommand(OnCreationClick, CreationCanExecute);
+            ModificationCommand = new RelayCommand(OnModification, !ConfirmationIsFalse);
             CancelCommand = new RelayCommand(OnCancelClick, true);
 
             this.core = core;
@@ -255,31 +267,22 @@ namespace Client.ihm_main.ViewModels
 		}
 
 		/// <summary>
-		/// Calcule si une demande de création de partie peut-être demandée.
-		/// </summary>
-		/// <returns><see langword="true"/>Si on peut lancer la demande de création de partie, <see langword="false"/> sinon.</returns>
-		private bool CreationCanExecute()
-		{
-			return !ConfirmationIsFalse && Username != string.Empty && Age >= 18 && Password != string.Empty;
-		}
-
-		/// <summary>
 		/// Logique lors de l'annulation d'une création de profil.
 		/// </summary>
 		private void OnCancelClick()
         {
 			// Calls the core to go back to connection page.
-            core.Disconnect();
+            core.BackToHomePage();
 			this.Reset();
         }
 
 		/// <summary>
 		/// Logique de création d'un profil.
 		/// </summary>
-        private void OnCreationClick()
+        private void OnModification()
         {
 			// Calls the core to try the creation of this profile.
-			core.TryCreateProfile(Username, password, Firstname, Lastname, Age);
+			core.TryModifyProfile(Username, password = null, ConnectedUser.id);
         }
     }
 }

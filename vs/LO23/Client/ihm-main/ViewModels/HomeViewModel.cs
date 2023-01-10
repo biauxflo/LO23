@@ -63,10 +63,20 @@ namespace Client.ihm_main.ViewModels
         public ICommand GameLaunchingCommand { get; set; }
 
 		/// <summary>
-		/// Déclarer l'événement
+		/// Commande liée au bouton de lancement d'une partie.
 		/// </summary>
+		public ICommand GameSpectatingCommand { get; set; }
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		/// <summary>
+		/// Commande liée au bouton pour revoir une sauvegarde
+		/// </summary>
+		public ICommand LoadingSaveCommand { get; set; }
+
+        /// <summary>
+        /// Déclarer l'événement
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
 
 		/// <summary>
 		/// Page à afficher au sein de la fenêtre.
@@ -75,9 +85,12 @@ namespace Client.ihm_main.ViewModels
         {
             GameCreationCommand = new RelayCommand(CreateNewGame, true);
             GameLaunchingCommand = new RelayCommand<object>(LaunchGame, true);
+            LoadingSaveCommand = new RelayCommand(LoadSave, true);
+			GameSpectatingCommand = new RelayCommand<object>(SpectateGame, true);
 
-            this.core = core;
+			this.core = core;
         }
+
 		/// <summary>
 		/// créer la méthode OnPropertyChanges pour créer un événement.
 		/// Le nom du membre appelant sera utilisé comme paramètre
@@ -111,5 +124,30 @@ namespace Client.ihm_main.ViewModels
         {
             core.OpenGameCreationPage();
         }
-    }
+
+        ///<summary>
+        /// Ouvre la page de gestion de sauvegarde.
+        /// </summary>
+        private void LoadSave()
+        {
+            core.OpenLoadingSavePage();
+        }
+
+		/// <summary>
+		/// Demande la possibilité de spectate une partie en cours.
+		/// </summary>
+		/// <param name="obj">La partie voulue.</param>
+		private void SpectateGame(object obj)
+		{
+			if(obj.GetType() != typeof(LightGame))
+			{
+				return;
+			}
+			else
+			{
+				LightGame game = (LightGame)obj;
+				core.TrySpectateGame(game.id, ConnectedUser);
+			}
+		}
+	}
 }

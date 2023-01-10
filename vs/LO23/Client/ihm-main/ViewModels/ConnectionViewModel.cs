@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Microsoft.Win32;
 
 namespace Client.ihm_main.ViewModels
 {
@@ -126,6 +127,14 @@ namespace Client.ihm_main.ViewModels
 			get; set;
 		}
 
+		/// <summary>
+		/// Commande liée au bouton "Importer un profil".
+		/// </summary>
+		public ICommand ImportProfileCommand
+		{
+			get;set;
+		}
+
 		public ConnectionViewModel(IhmMainCore core)
 		{
 			this.core = core;
@@ -133,6 +142,7 @@ namespace Client.ihm_main.ViewModels
 			ConnectionCommand = new RelayCommand(OnConnectionClick, CanConnect);
 			QuitCommand = new RelayCommand(OnQuitClick, true);
 			CreateProfileCommand = new RelayCommand(OnProfileCreationClick, true);
+			ImportProfileCommand = new RelayCommand(OnImportClick, true);
 		}
 
 		/// <summary>
@@ -176,6 +186,18 @@ namespace Client.ihm_main.ViewModels
 		private bool CanConnect()
 		{
 			return password != string.Empty && Username != string.Empty;
+		}
+
+		/// <summary>
+		/// Ouvre une fenetre de selection de fichier puis l'envoie à Data.
+		/// </summary>
+		private void OnImportClick()
+		{
+			OpenFileDialog fileDialog = new OpenFileDialog();
+			fileDialog.ShowDialog();
+			Window view = Application.Current.MainWindow;
+			MessageBox.Show(view, "La fonction n'est pas encore implémantée", "W.I.P", MessageBoxButton.OK, MessageBoxImage.None);
+			// TODO : Call Data.
 		}
 
 		/// <summary>

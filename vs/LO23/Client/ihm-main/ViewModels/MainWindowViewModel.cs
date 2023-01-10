@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Client.ihm_main.Views.Pages;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 
@@ -31,12 +32,52 @@ namespace Client.ihm_main.ViewModels
                 OnPropertyChanged();
             }
         }
+
+		private bool isTitleBarVisible;
 		/// <summary>
-		/// Page à afficher au sein de la fenêtre.
+		/// <see langword="true"/> si la barre de titre doit être affichée, <see langword="false"/> sinon.
 		/// </summary>
+		public bool IsTitleBarVisible
+		{
+			get => isTitleBarVisible;
+			set
+			{
+				isTitleBarVisible = value;
+				OnPropertyChanged();
+			}
+		}
+
+		/// <summary>
+		/// Barre de titre de l'application.
+		/// </summary>
+        public Page TitleBar { get; set; }
+
+		private bool isContactsMenuVisible;
+		/// <summary>
+		/// <see langword="true"/> si la barre des contacts doit être affichée, <see langword="false"/> sinon.
+		/// </summary>
+		public bool IsContactsMenuVisible
+		{
+			get => isContactsMenuVisible;
+			set
+			{
+				isContactsMenuVisible = value;
+				OnPropertyChanged();
+			}
+		}
+
+		/// <summary>
+		/// Barre des contacts de l'application.
+		/// </summary>
+		public Page ContactsMenu
+		{
+			get; set;
+		}
+
 		public MainWindowViewModel()
         {
         }
+
 		/// <summary>
 		/// créer la méthode OnPropertyChanges pour créer un événement.
 		/// Le nom du membre appelant sera utilisé comme paramètre
