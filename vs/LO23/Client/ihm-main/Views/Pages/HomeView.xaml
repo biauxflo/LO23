@@ -9,6 +9,9 @@
       xmlns:syncfusionskin ="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
       syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=FluentDark}"
       Title="GameInProcessView">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3"/>
@@ -42,14 +45,20 @@
                 Command="{Binding GameCreationCommand}"/>
         <Button Grid.Row="3"
                 Grid.Column="4"
+                Command="{Binding LoadingSaveCommand}"
                 Content="Revisionner une sauvegarde"/>
         <ScrollViewer Grid.Row="5" 
                       Grid.Column="2"
                       Grid.ColumnSpan="3"
                       HorizontalScrollBarVisibility="Disabled" 
                       VerticalScrollBarVisibility="Auto">
-            
+
             <ItemsControl ItemsSource="{Binding Path=Games}">
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="FrameworkElement.Margin" Value="5"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="2"/>
@@ -57,21 +66,45 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Width="auto">
-                            <Button Margin="5"
-                                    Width="auto"
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="3"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="3"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle Fill="Gray" RadiusX="5" RadiusY="5"
+                                       Grid.Column="0" Grid.ColumnSpan="5"
+                                       Grid.Row="0" Grid.RowSpan="5"/>      
+                            <StackPanel Grid.Row="1"
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="3">
+                                <TextBlock Text="{Binding gameOptions.Name}"
+                                                   HorizontalAlignment="Center"
+                                           Foreground="White"/>
+                                <TextBlock Text="{Binding NbPlayersAtm, StringFormat='Nombres de joueurs : {0}'}"
+                                           Foreground="White"/>
+                            </StackPanel>
+                            <Button Grid.Column="1"
+                                    Grid.Row="3"
+                                    Content="Regarder"
+                                    Visibility="{Binding gameOptions.CanSpecJoin, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    Command="{Binding DataContext.GameSpectatingCommand, RelativeSource={RelativeSource AncestorType={x:Type ScrollViewer}}}"
+                                    CommandParameter="{Binding .}">
+                            </Button>
+                            <Button Grid.Column="3"
+                                    Grid.Row="3"
+                                    Content="Rejoindre"
                                     Command="{Binding DataContext.GameLaunchingCommand, RelativeSource={RelativeSource AncestorType={x:Type ScrollViewer}}}"
                                     CommandParameter="{Binding .}">
-                                <Button.Content>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding gameOptions.Name}"
-                                                   HorizontalAlignment="Center"/>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Nombres de joueurs : "/>
-                                            <TextBlock Text="{Binding gameOptions.NbPlayersMax}"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Button.Content>
                             </Button>
                         </Grid>
                     </DataTemplate>

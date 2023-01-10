@@ -179,9 +179,13 @@
     <Compile Include="ihm-main\DataToMain.cs" />
     <Compile Include="ihm-main\IhmMainCore.cs" />
     <Compile Include="ihm-main\ViewModels\ConnectionViewModel.cs" />
+    <Compile Include="ihm-main\ViewModels\ContactsViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\GameCreationViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\HomeViewModel.cs" />
+    <Compile Include="ihm-main\ViewModels\LoadingSaveViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ihm-main\ViewModels\ProfilModificationViewModel.cs" />
+    <Compile Include="ihm-main\ViewModels\TitleBarViewModel.cs" />
     <Compile Include="ihm-main\ViewModels\ProfilCreationViewModel.cs" />
     <Compile Include="ihm-main\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -202,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ihm-main\Views\Pages\ContactsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ihm-main\Views\Pages\GameCreationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -210,14 +218,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ihm-main\Views\Pages\ProfilModificationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ihm-main\Views\Pages\ProfilCreationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ihm-main\Views\Pages\TitleBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ihm-main\Views\Pages\LoadingSaveView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ihm-main\Views\Pages\ConnectionView.xaml.cs">
       <DependentUpon>ConnectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ihm-main\Views\Pages\ContactsView.xaml.cs">
+      <DependentUpon>ContactsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ihm-main\Views\Pages\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
@@ -229,8 +252,17 @@
       <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ihm-main\Views\Pages\ProfilModificationView.xaml.cs">
+      <DependentUpon>ProfilModificationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ihm-main\Views\Pages\ProfilCreationView.xaml.cs">
       <DependentUpon>ProfilCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ihm-main\Views\Pages\TitleBarView.xaml.cs">
+      <DependentUpon>TitleBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ihm-main\Views\Pages\LoadingSaveView.xaml.cs">
+      <DependentUpon>LoadingSaveView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -343,6 +375,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ihm-game\Views\images\defausser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ihm-main\Views\images\profil_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ihm-main\Views\images\disconnexion_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ihm-main\Views\images\home_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

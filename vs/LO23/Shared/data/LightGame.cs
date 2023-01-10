@@ -24,6 +24,11 @@ namespace Shared.data
         public List<LightUser> spectators { get; set; }
         public List<LightUser> lobby { get; set; }
 		public GameOptions gameOptions {get; private set;} //Options de la game à sa création
+		
+		/// <summary>
+		/// Nombres de joueurs dans le tableau players. Utile pour IHM-Main
+		/// </summary>
+		public int NbPlayersAtm => players.Count;
 
 		protected LightGame(){}
 
