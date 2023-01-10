@@ -635,6 +635,7 @@ namespace Shared.data
 				}
 
 				if(isTurnEvent && !hadNoTokens)
+				{
 					if(nbNoRise >= nbPlayersStillPlaying)
 					{
 						goToNextPhase();
@@ -645,6 +646,11 @@ namespace Shared.data
 						goToNextPlayer();
 						hadNoTokens = false;
 					}
+				}
+				else
+				{
+					hadNoTokens = false;
+				}
 			}
 		}
 
