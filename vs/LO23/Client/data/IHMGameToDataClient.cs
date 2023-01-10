@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using Client.data;
 using Shared.data;
 using Shared.interfaces;
-using Shared.helpers;
-using Shared.constants;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 
 namespace Client.data
 {

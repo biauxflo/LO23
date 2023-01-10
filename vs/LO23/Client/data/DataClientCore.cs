@@ -1,7 +1,6 @@
 ﻿using Shared.data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shared.interfaces;
@@ -17,7 +16,6 @@ namespace Client.data
 			set
 			{
 				users = value;
-				//interfaceFromMain.UserListUpdated(users); //TODO: Not yet implemented - Waiting for v2
 			}
 		}
 

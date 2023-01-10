@@ -1,8 +1,6 @@
 ﻿using Shared.data;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using Shared.interfaces;
 
 namespace Client.data
 {
@@ -14,7 +12,6 @@ namespace Client.data
 			this.dataClientCore = data_Client_Ctrl;
         }
 
-		// @pirousse: setGame creating/joining game
         public void setGame(Game game)
         {
             dataClientCore.joinedGame = game;
