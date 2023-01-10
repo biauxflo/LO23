@@ -31,20 +31,23 @@
                               BorderThickness="0" 
                               Command="{Binding HomeCommand}"
                               Grid.Column="1"
-                              Padding="5"/>
+                              Padding="5"
+                              ToolTip="Retour à la page principale"/>
         <syncfusion:ButtonAdv SizeMode="Small"
                               SmallIcon="../images/profil_icon.png"
                               Background="Transparent"
                               BorderThickness="0" 
                               Command="{Binding ProfileCheckCommand}"
                               Grid.Column="3"
-                              Padding="5"/>
+                              Padding="5"
+                              ToolTip="Voir/Modifier votre profil"/>
         <syncfusion:ButtonAdv SizeMode="Small"
                               SmallIcon="../images/disconnexion_icon.png"
                               Background="Transparent"
                               BorderThickness="0" 
                               Command="{Binding DisconnectCommand}"
                               Grid.Column="5"
-                              Padding="5"/>
+                              Padding="5"
+                              ToolTip="Se déconnecter"/>
     </Grid>
 </Page>

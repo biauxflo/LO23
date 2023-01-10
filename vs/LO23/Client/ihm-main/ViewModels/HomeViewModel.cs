@@ -62,11 +62,16 @@ namespace Client.ihm_main.ViewModels
         /// </summary>
         public ICommand GameLaunchingCommand { get; set; }
 
-		/// <summary>
-		/// Déclarer l'événement
-		/// </summary>
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// Déclarer l'événement
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Commande liée au bouton pour revoir une sauvegarde
+        /// </summary>
+        public ICommand LoadingSaveCommand { get; set; }
 
 		/// <summary>
 		/// Page à afficher au sein de la fenêtre.
@@ -75,9 +80,11 @@ namespace Client.ihm_main.ViewModels
         {
             GameCreationCommand = new RelayCommand(CreateNewGame, true);
             GameLaunchingCommand = new RelayCommand<object>(LaunchGame, true);
+            LoadingSaveCommand = new RelayCommand(LoadSave, true);
 
             this.core = core;
         }
+		
 		/// <summary>
 		/// créer la méthode OnPropertyChanges pour créer un événement.
 		/// Le nom du membre appelant sera utilisé comme paramètre
@@ -110,6 +117,14 @@ namespace Client.ihm_main.ViewModels
         private void CreateNewGame()
         {
             core.OpenGameCreationPage();
+        }
+
+        ///<summary>
+        /// Ouvre la page de gestion de sauvegarde.
+        /// </summary>
+        private void LoadSave()
+        {
+            core.OpenLoadingSavePage();
         }
     }
 }

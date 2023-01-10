@@ -42,6 +42,7 @@
                 Command="{Binding GameCreationCommand}"/>
         <Button Grid.Row="3"
                 Grid.Column="4"
+                Command="{Binding LoadingSaveCommand}"
                 Content="Revisionner une sauvegarde"/>
         <ScrollViewer Grid.Row="5" 
                       Grid.Column="2"

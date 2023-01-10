@@ -62,7 +62,17 @@ namespace Client.ihm_main
 
 		private readonly TitleBarViewModel titleBarViewModel;
 
-		#endregion
+        /// <summary>
+        /// Page de chargement de sauvegardes.
+        /// </summary>
+        private readonly Page loadingSavePage = new LoadingView();
+
+        /// <summary>
+        /// View Model de la page de chargement de sauvegardes.
+        /// </summary>
+        private readonly LoadingSaveViewModel loadingSaveViewModel;
+
+        #endregion
 
 		#region Used Interfaces 
 
@@ -80,6 +90,7 @@ namespace Client.ihm_main
 			homeViewModel = new HomeViewModel(this);
 			profilCreationViewModel = new ProfilCreationViewModel(this);
 			titleBarViewModel = new TitleBarViewModel(this);
+			loadingSaveViewModel = new LoadingSaveViewModel(this);
 
 			// Instanciation of shared interfaces.
 			dataToMain = new DataToMain(this);
@@ -91,6 +102,7 @@ namespace Client.ihm_main
 			homePage.DataContext = homeViewModel;
 			profileCreationPage.DataContext = profilCreationViewModel;
 			titleBar.DataContext = titleBarViewModel;
+			loadingSavePage.DataContext = loadingSaveViewModel;
 
 			// Active page on the window
 			mainWindowViewModel.ActivePage = connectionPage;
@@ -106,7 +118,6 @@ namespace Client.ihm_main
 			mainWindowViewModel.ActivePage = connectionPage;
 			mainWindowViewModel.IsTitleBarVisible = false;
 		}
-
 
 		/// <summary>
 		/// Met la page active sur la page de création de partie.
@@ -127,6 +138,11 @@ namespace Client.ihm_main
 		internal void ShowProfilePage()
 		{
 			throw new NotImplementedException();
+		}
+
+		internal void OpenLoadingSavePage()
+		{
+			mainWindowViewModel.ActivePage = loadingSavePage;
 		}
 
 		/// <summary>
