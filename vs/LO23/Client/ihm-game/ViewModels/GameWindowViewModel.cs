@@ -1,6 +1,5 @@
 ﻿
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
@@ -16,6 +15,9 @@ namespace Client.ihm_game.ViewModels
 
 		private readonly IhmGameCore core;
 
+		/// <summary>
+		/// Property qui prend comme valeur la page active (GameView ou SettingsView)
+		/// </summary>
 		public Page ActivePage
         {
             get => activePage;

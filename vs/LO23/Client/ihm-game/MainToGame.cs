@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shared.data;
+﻿using Shared.data;
 using Shared.interfaces;
 
 namespace Client.ihm_game
