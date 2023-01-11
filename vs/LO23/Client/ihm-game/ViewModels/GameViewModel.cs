@@ -1,23 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
 using Shared.data;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Security.RightsManagement;
 
 namespace Client.ihm_game.ViewModels
 {
 	internal class GameViewModel : INotifyPropertyChanged
 	{
-		// pour ajouter un bouton, dans le xaml section bouton-> Command="{Binding Path=ParamCommand}"
-		// exemple: <Button Name="BT_parameter"  Grid.Row="0" Grid.Column="0"  BorderThickness="0" Background="#a2aebb" Command="{Binding Path=ParamCommand}">
+		#region Button and card commands
 		public ICommand ParamCommand
 		{
 			get; set;
@@ -72,6 +65,9 @@ namespace Client.ihm_game.ViewModels
 			get; set;
 		}
 
+		#endregion
+
+		#region Properties
 
 		private Game game;
 		public Game Game
@@ -158,20 +154,13 @@ namespace Client.ihm_game.ViewModels
 				OnPropertyChanged(nameof(NbPlayers));
 			}
 		}
-		private readonly IhmGameCore core;
+
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		/** Draw phase : we store the selected cards to change */
-		private List<bool> selectedCards;
+		#endregion
 
-		
-		/** TODO : delete when the player list is ok */
-		private Card card1 = new Card(1, 'h', 1, true, true);
-		private Card card2 = new Card(2, 's', 10, true, true);
-		private Card card3 = new Card(3, 'c', 13, true, true);
+		#region Visibility Properties
 
-		/** ------- */
-		
 		private string visibilityPlayer2;
 		public string VisibilityPlayer2
 		{
@@ -243,19 +232,21 @@ namespace Client.ihm_game.ViewModels
 			}
 		}
 
-		private GameStatus gameStatus;
+		#endregion
+
+		/** Draw phase : we store the selected cards to change */
+		private List<bool> selectedCards;
+		private readonly IhmGameCore core;
+
+		/// <summary>
+		/// Constructeur de la classe GameViewModel.
+		/// </summary>
+		/// <param name="core">Recupéré de IHMGameCore</param>
+		/// <param name="game">Recupéré de Data</param>
 		public GameViewModel(IhmGameCore core, Game game) 
 		{
 			this.core = core;
 			this.game = game;
-
-			/** 4 status, donc on va reagir d'une façon differente à chaque status :
-			 * lobby; pas demarré, player list vide,
-			 * running, à partir de 2 joueurs, le jeu commence et on affiche les cartes,
-			 * paused, ---
-			 * finished, ---
-			*/
-			this.gameStatus = game.status;
 			
 			ParamCommand = new RelayCommand(OnParamClick);
 			FoldCommand = new RelayCommand(OnFoldClick);
@@ -274,8 +265,6 @@ namespace Client.ihm_game.ViewModels
             lightUser = this.core.gameToData.whoAmi();
 			OnPropertyChanged(nameof(LightUser));
 
-			/* When gameStatus is "running", the player list is not null.
-			 * So, we convert a lightUser to plater and we show his cards. */
 			player = ToPlayer(lightUser);
 			if(player != null)
             {
@@ -289,27 +278,25 @@ namespace Client.ihm_game.ViewModels
 			}
 
 			ChangeVisibilityPlayers();
-
-			//Display();	
 		}
 
-		// fonction lié au bouton de paramètre
+		/// <summary>
+		/// On affiche la page de configuration (devenir spectateur, quitter la partie, etc)
+		/// </summary>
 		private void OnParamClick()
 		{
 			core.GoToSettingsPage(this.game);
 		}
 
+		#region Action Buttons
 		private void OnFoldClick()
 		{
-			// Appel fonction data (Gabrielle)
-			//this.core.PlayRound(TypeAction.rise); Attente réponse data pour définir le paramètre de type TypeAction
 			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.fold);
 			this.core.PlayRound(gameAction);
 		}
 
 		private void OnCallClick()
 		{
-			// TODO : get the correct bet tokens to call
 			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.call);
 			this.core.PlayRound(gameAction); 
 		}
@@ -319,28 +306,14 @@ namespace Client.ihm_game.ViewModels
 			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, this.bet, new List<Card>(), TypeAction.rise);
 			this.core.PlayRound(gameAction);
 		}
-		public void Display()
-		{
-			//Fonctions à remplacer par les fonctions qui seront implémenter dans IHMGameCallsData
-		}
 
+		#endregion
+
+		/// <summary>
+		/// Fonction pour échanger les cartes, on recupère la liste selectedCards et on envoie l'action et la liste vers Data
+		/// </summary>
 		private void OnDefausserClick()
 		{
-			//Récupération du tableau d'indices des cartes sélectionnées
-			/*
-			for(int i = 0; i < 5; i++)
-			{
-				int j = 0;
-				int[] tab = {};
-				if (selectedCards[i] == true) {
-					tab[j] = player.hand[i].index;
-					j++;
-				}
-			}
-			*/
-
-			/** --- Test rcisnero ---
-            * Change selected cards  */
 			List<Card> exchangeCards = new List<Card>();
 
 			for(int i = 0; i < 5; i++)
@@ -348,27 +321,20 @@ namespace Client.ihm_game.ViewModels
 				if(selectedCards[i])
 				{
 					exchangeCards.Add(player.hand[i]);
-					//player.Card[i] = "/Client;component/ihm-game/Views/images/cards/" + this.card3.value + "_" + this.card3.color + ".png";
 				}
 			}
 
-			// Appel fonction data (Gabrielle)
-			// GameAction, value = bet tokens
 			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, 0, exchangeCards, TypeAction.exchangeCards);
 			this.core.PlayRound(gameAction);
 		}
 
 		private void OnGarderMainClick()
 		{
-			//MessageBox.Show("bouton garder main", "bouton garder main", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
 			GameAction gameAction = new GameAction(Guid.NewGuid(), this.game.id, this.player, 0, new List<Card>(), TypeAction.exchangeCards);
 			this.core.PlayRound(gameAction);
-			// Appel fonction data (Gabrielle)
-			//this.core.PlayRound(TypeAction.garder_main); Attente réponse data pour définir le paramètre de type TypeAction
 		}
 
-		// --- Test rcisnero ---
-		// TODO : add togglebutton bindings with selectedCards parameter
+		#region Selected Cards functions
 		private void OnCardClick1()
 		{
 			if(!selectedCards[0]) 
@@ -405,6 +371,8 @@ namespace Client.ihm_game.ViewModels
 				selectedCards[4] = false;
 		}
 
+		#endregion
+
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
@@ -414,14 +382,18 @@ namespace Client.ihm_game.ViewModels
 		/// Converti LightUser en Player
 		/// </summary>
 		/// <param name="lu"></param>
-		/// <returns></returns>
+		/// <returns>Objet de type Player</returns>
 		public Player ToPlayer(LightUser lu)
 		{
 			Player player = game.players.Find(x => x.id == lu.id);
 			return player;
 		}
-
-		/** Transform a List of Cards to their path image */
+		
+		/// <summary>
+		/// On recupère une liste de cartes et on le transforme vers une liste de string avec le chemin d'accès à l'image de la carte
+		/// </summary>
+		/// <param name="cards"></param>
+		/// <returns></returns>
 		public List<string> CardPath(List<Card> cards)
         {
 			List<string> tmpList = new List<string>();
@@ -459,8 +431,7 @@ namespace Client.ihm_game.ViewModels
 			OnPropertyChanged(nameof(PlayerList));
 		}
 		/// <summary>
-		/// Hidde or show player info depending on the number of players in Game
-		/// By default only the self player is shown
+		/// On affiche l'information des joueurs selon le nombre de joueurs dans la partie.
 		/// </summary>
 		public void ChangeVisibilityPlayers()
 		{

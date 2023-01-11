@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Client.ihm_game.ViewModels;
 using Client.ihm_game.Views;
 using Client.ihm_game.Views.Pages;
@@ -15,8 +11,6 @@ namespace Client.ihm_game
 {
 	internal class IhmGameCore
 	{
-
-		// interface et page avec viewModel 
 		private GameWindow gameWindow;
 
 		private GameWindowViewModel gameWindowViewModel;
@@ -44,6 +38,10 @@ namespace Client.ihm_game
 			this.DataToGame = new DataToGame(this);
 		}
 
+		/// <summary>
+		/// Methode appelée par IHM Main quand on crée ou rejoint une nouvelle partie
+		/// </summary>
+		/// <param name="game"></param>
 		internal void LaunchGame(Game game)
 		{
 			gameViewModel = new GameViewModel(this, game);
@@ -136,6 +134,7 @@ namespace Client.ihm_game
 		{
 			gameWindowViewModel.ActivePage = gamePage;
 		}
+
 		/// <summary>
 		/// Met la page active sur la page de paramètre.
 		/// </summary>
@@ -145,6 +144,7 @@ namespace Client.ihm_game
 			settingsPage.DataContext = settingsViewModel;
 			gameWindowViewModel.ActivePage = settingsPage;
 		}
+
 		/// <summary>
 		/// Appel à data pour sauvegarder la partie
 		/// </summary>
@@ -152,6 +152,7 @@ namespace Client.ihm_game
 		{
 			gameToData.SaveGame();
 		}
+
 		/// <summary>
 		/// Appel à data pour quitter la partie
 		/// Cache la fenêtre de jeu
@@ -273,14 +274,17 @@ namespace Client.ihm_game
 
 		}
 
-		/// Appel à data pour demander une action (call/rise/fold/allin)
 		/// <summary>
+		/// Appel à data pour demander une action (call/rise/fold/allin)
+		/// </summary>
 		internal void PlayRound(GameAction a)
 		{
 			this.gameToData.PlayRound(a);
 		}
+
+		/// <summary>
+		/// Appel à data pour demander le id de notre utilisateur
 		/// </summary>
-		// Call to data to get the id of the current user
 		internal LightUser WhoAmI()
 		{
 			return this.gameToData.whoAmi();
@@ -289,4 +293,3 @@ namespace Client.ihm_game
 
 	}
 }
-		

@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
 using Shared.data;
-using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 
@@ -79,11 +75,15 @@ namespace Client.ihm_game.ViewModels
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
-		// fonction liée au bouton Retour Partie pour quitter les paramètres
+
+		/// <summary>
+		/// fonction liée au bouton Retour Partie pour quitter les paramètres
+		/// </summary>
 		private void OnBackToPlayClick()
 		{
 			core.BackToGamePage();
 		}
+
 		/// <summary>
 		/// Fonction pour devenir spectateur
 		/// </summary>
@@ -93,7 +93,10 @@ namespace Client.ihm_game.ViewModels
 			this.core.PlayRound(gameAction);
 			core.BackToGamePage();
 		}
-		// fonction liée au bouton Sauvegarder la partie
+
+		/// <summary>
+		/// fonction liée au bouton Sauvegarder la partie
+		/// </summary>
 		private void OnSaveClick()
 		{
 			// Demande la confirmation avant de sauvegarder le jeu.
@@ -103,6 +106,7 @@ namespace Client.ihm_game.ViewModels
 				core.SaveGame();
 			}
 		}
+
 		/// <summary>
 		/// fonction liée au bouton Quitter
 		/// </summary>
@@ -118,6 +122,7 @@ namespace Client.ihm_game.ViewModels
 				core.GameEnded();
 			}
 		}
+
 		public Player ToPlayer(LightUser lu)
 		{
 			Player player = game.players.Find(x => x.id == lu.id);
