@@ -1,0 +1,129 @@
+﻿<Page x:Class="Client.ihm_main.Views.Pages.GameCreationView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client.ihm_main.Views.Pages"
+      xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+      xmlns:syncfusionskin ="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+      Title="CreerPartie"
+      syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=FluentDark}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock FontSize="30"
+                   FontWeight="Bold"
+                   Grid.Row="2"
+                   Grid.Column="2"
+                   Grid.ColumnSpan="3"
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center" 
+                   Text="Créer une partie"/>
+        <StackPanel Grid.Row="4" 
+                    Grid.Column="2"
+                    Grid.ColumnSpan="3">
+            <TextBlock Text="Nom de la partie"
+                       FontSize="15"
+                       Padding="3"/>
+            <syncfusion:SfTextInputLayout ContainerType="Filled">
+                <syncfusion:SfTextBoxExt Height="25" 
+                                         Text="{Binding GameInCreation.Name, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                                         TextWrapping="NoWrap"
+                                         AcceptsReturn="False"
+                                         AcceptsTab="False"
+                                         Watermark="Nom de la partie"/>   
+            </syncfusion:SfTextInputLayout>
+        </StackPanel>
+        <StackPanel Grid.Row="6" 
+                    Grid.Column="2"
+                    Grid.ColumnSpan="3">
+            <TextBlock Text="Nombre de joueurs"
+                       FontSize="15"
+                       Padding="3"/>
+            <syncfusion:SfTextInputLayout ContainerType="Filled">
+                <syncfusion:IntegerTextBox Height="25" 
+                                           ToolTip="Nombre de joueurs" 
+                                           Text="{Binding GameInCreation.NbPlayersMax}"
+                                           TextWrapping="NoWrap"
+                                           AcceptsReturn="False"
+                                           AcceptsTab="False"
+                                           ShowSpinButton="True"
+                                           ScrollInterval="1"
+                                           MinValue="2"
+                                           Value="4"
+                                           MaxValue="8"/>
+            </syncfusion:SfTextInputLayout>
+        </StackPanel>
+        <StackPanel Grid.Row="8" 
+                    Grid.Column="2"
+                    Grid.ColumnSpan="3">
+            <TextBlock Text="Nombre de jetons"
+                       FontSize="15"
+                       Padding="3"/>
+            <syncfusion:SfTextInputLayout ContainerType="Filled">
+                <syncfusion:IntegerTextBox Height="25" 
+                                           ToolTip="Nombre de Jetons" 
+                                           Text="{Binding GameInCreation.StartingTokens}"
+                                           TextWrapping="NoWrap"
+                                           AcceptsReturn="False"
+                                           AcceptsTab="False"
+                                           ShowSpinButton="True"
+                                           ScrollInterval="100"
+                                           MinValue="500"
+                                           Value="2000"
+                                           MaxValue="50000"
+                                           />
+            </syncfusion:SfTextInputLayout>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="10" 
+                    Grid.Column="2">
+            <CheckBox ToolTip="Les spectateurs peuvent-ils rejoindre la partie ?" 
+                        IsChecked="{Binding GameInCreation.CanSpecJoin}"/>
+            <TextBlock Text="Spectateurs" 
+                        FontSize="15" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="10" 
+                    Grid.Column="4">
+            <CheckBox ToolTip="Les spectateurs peuvent-ils chatter durant la partie ?" 
+                        IsChecked="{Binding GameInCreation.CanSpecChat}"/>
+            <TextBlock Text="Chat entre spectateurs" 
+                        FontSize="15" />
+        </StackPanel>
+        <Button Grid.Column="2" 
+                Grid.Row="12" 
+                Content="Annuler" 
+                Command="{Binding Path=CancelCommand}"/>
+        <Button Grid.Column="4" 
+                Grid.Row="12"
+                Content="Valider" 
+                Command="{Binding Path=CreationCommand}"/>
+    </Grid>
+</Page>
